@@ -63,10 +63,10 @@ body {
 
 .bottom-avatar-menu-box {
   position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 14px;
-  height: 14px;
+  bottom: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background-color: #fff;
   border: 1.25px solid var(--background);
