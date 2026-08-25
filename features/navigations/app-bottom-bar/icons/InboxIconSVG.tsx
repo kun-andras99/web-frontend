@@ -1,12 +1,13 @@
+import { BOTTOM_ICON_COLORS } from "@/features/navigations/app-bottom-bar/icons/icons.data";
 import { BottomTabIconSVGProps } from "@/features/navigations/app-bottom-bar/icons/icons.props";
 import { useId } from "react";
 
 export function InboxIconSVG({
   size = 28,
-  startColor = "#A9A9A9",
-  stopColor = "#4D4D4D",
-  backgroundStartColor = "#DEDEDE",
-  backgroundStopColor = "#808080",
+   startColor = BOTTOM_ICON_COLORS.startColor,
+    stopColor = BOTTOM_ICON_COLORS.stopColor,
+    backgroundStartColor = BOTTOM_ICON_COLORS.backgroundStartColor,
+    backgroundStopColor = BOTTOM_ICON_COLORS.backgroundStopColor,
   strokeWidth = 1.25,
 }: BottomTabIconSVGProps) {
   const id = useId().replace(/:/g, "");

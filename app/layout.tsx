@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-    const showFastLinks = true;
+    const showFastLinks = false;
     
   return (
     <html
