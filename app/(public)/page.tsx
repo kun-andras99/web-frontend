@@ -1,58 +1,9 @@
+import LovePageScreen from "@/app/_screens/LovePageScreen";
 
 export default function Home() {
   return (
     <div>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>ez a szöveg</p>
-     <p>js</p>
+     <LovePageScreen />
     </div>
   );
 }

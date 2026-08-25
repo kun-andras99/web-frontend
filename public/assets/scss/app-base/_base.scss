@@ -13,6 +13,12 @@ body {
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
-        padding-top: 64px;
+        // padding-top: 64px;
     }
+}
+
+.fast-links {
+    background-color: #202020;
+    display: flex;
+    gap: 15px;
 }

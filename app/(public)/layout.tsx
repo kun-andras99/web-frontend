@@ -1,5 +1,4 @@
 import AppBottomBar from "@/features/navigations/app-bottom-bar";
-import AppTopBar from "@/features/navigations/app-top-bar";
 import { ReactNode } from "react";
 
 export default function PublicLayout({
@@ -9,7 +8,7 @@ export default function PublicLayout({
  }) {
     return (
         <div className="test">
-            <AppTopBar />
+            {/* <AppTopBar /> */}
             <main>
             {children}
             </main>
