@@ -1,5 +1,5 @@
-import React from "react";
+"use client";
 
 export default function MatchScreen() {
-  return <div>MatchScreen</div>;
+    return <div>MatchScreen</div>;
 }
