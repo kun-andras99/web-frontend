@@ -82,7 +82,7 @@ export const manageUsers: ManageUsers[] = [
         gender: "male",
         birth: new Date("1993-03-25"),
         avatar: "https://randomuser.me/api/portraits/men/9.jpg",
-        relations: [ManageUsersFilter.FAVORITES, ManageUsersFilter.BLOCKED],
+        relations: [ManageUsersFilter.BLOCKED],
     },
     {
         id: 10,
@@ -399,7 +399,7 @@ export const manageUsers: ManageUsers[] = [
         gender: "female",
         birth: new Date("1984-12-10"),
         avatar: "https://randomuser.me/api/portraits/women/19.jpg",
-        relations: [ManageUsersFilter.FAVORITES, ManageUsersFilter.BLOCKED],
+        relations: [ManageUsersFilter.BLOCKED],
     },
     {
         id: 45,

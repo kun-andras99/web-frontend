@@ -1,0 +1,22 @@
+.manage-users-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-block: 15px 15px;
+    width: calc(100% - 20px);
+    left: 10px;
+    .user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        height: auto;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
