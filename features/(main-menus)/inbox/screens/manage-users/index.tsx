@@ -1,11 +1,11 @@
 "use client";
 
-import FilterBox from "@/features/inbox/components/FilterBox";
-import LoadManageUsersBox from "@/features/inbox/components/LoadManageUsersBox";
-import { useFilteredManageUsers } from "@/features/inbox/hooks/useFilteredManageUsers";
-import { useManageUsersFilter } from "@/features/inbox/hooks/useManageUsersFilter";
-import { ManageUsersFilter } from "@/features/inbox/types/manage-users-filter.types";
-import { ManageUsers } from "@/features/inbox/types/manage-users.types";
+import FilterBox from "@/features/(main-menus)/inbox/components/FilterBox";
+import LoadManageUsersBox from "@/features/(main-menus)/inbox/components/LoadManageUsersBox";
+import { useFilteredManageUsers } from "@/features/(main-menus)/inbox/hooks/useFilteredManageUsers";
+import { useManageUsersFilter } from "@/features/(main-menus)/inbox/hooks/useManageUsersFilter";
+import { ManageUsersFilter } from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
+import { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
 
 interface ManageUsersScreenProps {
     manageUsers: ManageUsers[];

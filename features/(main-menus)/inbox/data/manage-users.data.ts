@@ -1,6 +1,6 @@
-import { ManageUsersFilter } from "@/features/inbox/types/manage-users-filter.types";
+import { ManageUsersFilter } from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
 
-import type { ManageUsers } from "@/features/inbox/types/manage-users.types";
+import type { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
 
 export const manageUsers: ManageUsers[] = [
     {

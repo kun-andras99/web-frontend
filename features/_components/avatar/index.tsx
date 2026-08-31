@@ -15,7 +15,7 @@ export default function UserAvatar({
 }: UserAvatarProps) {
     return (
         <div
-            className={`relative overflow-hidden ${className}`}
+            className={className}
             style={{
                 width: size,
                 height: size,

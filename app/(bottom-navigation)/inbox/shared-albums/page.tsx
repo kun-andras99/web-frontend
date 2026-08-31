@@ -1,9 +1,5 @@
-
+import SharedAlbumsScreen from "@/features/(main-menus)/inbox/screens/shared-albums";
 
 export default function SharedAlbumsPage() {
-    return (
-        <div>
-            <h1>Page</h1>
-        </div>
-    )
+    return <SharedAlbumsScreen />;
 }

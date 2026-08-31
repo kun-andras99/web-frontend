@@ -3,9 +3,9 @@ import { useMemo } from "react";
 import {
     ManageUsersFilter,
     type ManageUsersFilter as ManageUsersFilterType,
-} from "@/features/inbox/types/manage-users-filter.types";
+} from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
 
-import type { ManageUsers } from "@/features/inbox/types/manage-users.types";
+import type { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
 
 interface UseFilteredManageUsersParams {
     manageUsers: ManageUsers[];

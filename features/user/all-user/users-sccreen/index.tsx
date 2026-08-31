@@ -52,7 +52,7 @@ export default function UsersScreen() {
     }
 
     return (
-        <main className="bottom-page">
+        <main className="blogs-page">
             <div className="grid grid-cols-3 gap-[1px]">
                 {/* {users.map((user) => {
                     return (

@@ -1,6 +1,6 @@
-import UserAvatar from "@/features/_components/user/avatar";
-import { ManageUsersRelation } from "@/features/inbox/types/manage-users-filter.types";
-import { ManageUsers } from "@/features/inbox/types/manage-users.types";
+import { ManageUsersRelation } from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
+import { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
+import UserAvatar from "@/features/_components/avatar";
 
 interface LoadManageUsersBoxProps {
     manageUsers: ManageUsers[];

@@ -1,4 +1,4 @@
-import type { Message } from "@/features/inbox/types/message.types";
+import type { Message } from "@/features/(main-menus)/inbox/types/message.types";
 
 interface LoadMessagesBoxProps {
     messages: Message[];

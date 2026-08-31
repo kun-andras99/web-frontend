@@ -1,4 +1,5 @@
+import MatchScreen from "@/features/(main-menus)/love/screens/match";
 
 export default function ExploreMatchPage() {
-  return <div className="h-full">match</div>;
+    return <MatchScreen />;
 }

@@ -1,4 +1,5 @@
+import EyeCandyScreen from "@/features/(main-menus)/love/screens/eye-candy";
 
 export default function ExploreEyeCandyPage() {
-  return <div className="h-full">eye candy</div>;
+    return <EyeCandyScreen />;
 }

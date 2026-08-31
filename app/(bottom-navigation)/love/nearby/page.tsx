@@ -1,5 +1,5 @@
-import UsersScreen from "@/features/user/all-user/users-sccreen";
+import UsersNearbyScreen from "@/features/(main-menus)/love/screens/users-nearby";
 
 export default function ExploreNearbyPage() {
-    return <UsersScreen />;
+    return <UsersNearbyScreen />;
 }

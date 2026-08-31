@@ -1,11 +1,11 @@
 "use client";
 
-import FilterMessageBox from "@/features/inbox/components/FilterBox";
-import LoadMessagesBox from "@/features/inbox/components/LoadMessagesBox";
-import { useFilteredMessages } from "@/features/inbox/hooks/useFilteredMessages";
-import { useMessageFilter } from "@/features/inbox/hooks/useMessageFilter";
-import { MessageFilter } from "@/features/inbox/types/message-filter.types";
-import { Message } from "@/features/inbox/types/message.types";
+import FilterMessageBox from "@/features/(main-menus)/inbox/components/FilterBox";
+import LoadMessagesBox from "@/features/(main-menus)/inbox/components/LoadMessagesBox";
+import { useFilteredMessages } from "@/features/(main-menus)/inbox/hooks/useFilteredMessages";
+import { useMessageFilter } from "@/features/(main-menus)/inbox/hooks/useMessageFilter";
+import { MessageFilter } from "@/features/(main-menus)/inbox/types/message-filter.types";
+import { Message } from "@/features/(main-menus)/inbox/types/message.types";
 
 interface MessagesScreenProps {
     messages: Message[];

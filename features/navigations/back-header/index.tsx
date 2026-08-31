@@ -1,12 +1,12 @@
 // components/Header.tsx
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
 import {
     DEFAULT_FALLBACK,
     getParentRoute,
     isDynamicEntryRoute,
-} from "../../../lib/route-hierarchy";
+} from "@/lib/route/route-hierarchy";
+import { usePathname, useRouter } from "next/navigation";
 
 interface HeaderProps {
     title: string;
