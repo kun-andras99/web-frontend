@@ -15,7 +15,7 @@ export default function UserAvatar({
 }: UserAvatarProps) {
     return (
         <div
-            className={className}
+            className={`relative ${className}`}
             style={{
                 width: size,
                 height: size,
