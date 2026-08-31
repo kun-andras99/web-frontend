@@ -1,22 +1,40 @@
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 
-export interface TopTab<TId extends string = string> {
-  id: TId;
-  label: string;
-  href: string;
-  icon?: ReactNode;
-  disabled?: boolean;
+export interface TopTabIconProps {
+    startColor?: string;
+    stopColor?: string;
 }
 
-export interface TopTabConfig<TId extends string = string> {
-  tabs: readonly TopTab<TId>[];
-  defaultTab?: TId;
-  swipe?: boolean;
-  swipeThreshold?: number;
-  animated?: boolean;
+export interface TopTabScreen {
+    id: number;
+    name: string;
+    title: string;
+    fromUrl?: string;
+    url?: string;
+    icon?: ReactElement<TopTabIconProps>;
 }
 
-export interface TopTabState<TId extends string = string> {
-  activeTab: TId;
-  activeIndex: number;
+export interface TopTabRoute {
+    screens: TopTabScreen[];
+}
+
+export interface TopBarAction {
+    id: string;
+    icon: ReactNode;
+    /** Accessibilis név (aria-label) — kötelező, kép nélkül is legyen értelme */
+    label: string;
+    badge?: number;
+    onClick?: () => void;
+    /** Ha meg van adva, az akció Link-ként navigál onClick helyett */
+    href?: string;
+}
+
+export interface AppTopBarProps {
+    title?: ReactNode;
+    showBackButton?: boolean;
+    onBack?: () => void;
+    actions?: TopBarAction[];
+    /** Teljesen felülírja a bal oldalt (vissza gomb + cím helyett) */
+    leftSlot?: ReactNode;
+    className?: string;
 }

@@ -1,83 +1,51 @@
-"use client";
+import { useMemo, useState } from "react";
 
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import type { TopTabScreen } from "../types/top-tab.types";
 
-import type { TopTab } from "../types/top-tab.types";
-
-interface UseTopTabsOptions<TId extends string> {
-  tabs: readonly TopTab<TId>[];
+interface UseTopTabResult {
+    tab: string;
+    changeTab: (newTab: string) => void;
+    currentIndex: number;
+    canGoPrev: boolean;
+    canGoNext: boolean;
+    prevTab: string | undefined;
+    nextTab: string | undefined;
+    goToRelativeTab: (direction: number) => void;
 }
-export function useTopTabs<TId extends string>({
-  tabs,
-}: UseTopTabsOptions<TId>) {
-  const router = useRouter();
-  const pathname = usePathname();
 
-  const activeIndex = useMemo(() => {
-    const index = tabs.findIndex((tab) => {
-      return pathname === tab.href;
-    });
+export default function useTopTab(screens: TopTabScreen[]): UseTopTabResult {
+    const [tab, setTab] = useState(screens[0].id.toString());
 
-    return index >= 0 ? index : 0;
-  }, [pathname, tabs]);
+    const currentIndex = useMemo(
+        () => screens.findIndex((item) => item.id.toString() === tab),
+        [screens, tab],
+    );
 
-  const activeTab = tabs[activeIndex]?.id;
+    const canGoPrev = currentIndex > 0;
+    const canGoNext = currentIndex < screens.length - 1;
 
-  const navigateTo = useCallback(
-    (index: number) => {
-      const tab = tabs[index];
+    const prevTab = screens[currentIndex - 1]?.id.toString();
+    const nextTab = screens[currentIndex + 1]?.id.toString();
 
-      if (!tab || tab.disabled) {
-        return;
-      }
+    const changeTab = (newTab: string) => {
+        if (newTab === tab) return;
+        setTab(newTab);
+    };
 
-      if (pathname === tab.href) {
-        return;
-      }
+    const goToRelativeTab = (direction: number) => {
+        const nextIndex = currentIndex + direction;
+        if (nextIndex < 0 || nextIndex >= screens.length) return;
+        changeTab(screens[nextIndex].id.toString());
+    };
 
-      router.push(tab.href);
-    },
-    [pathname, router, tabs],
-  );
-
-  const selectTab = useCallback(
-    (id: TId) => {
-      const index = tabs.findIndex((tab) => tab.id === id);
-
-      if (index === -1) {
-        return;
-      }
-
-      navigateTo(index);
-    },
-    [navigateTo, tabs],
-  );
-
-  const next = useCallback(() => {
-    if (activeIndex >= tabs.length - 1) {
-      return;
-    }
-
-    navigateTo(activeIndex + 1);
-  }, [activeIndex, navigateTo, tabs.length]);
-
-  const previous = useCallback(() => {
-    if (activeIndex <= 0) {
-      return;
-    }
-
-    navigateTo(activeIndex - 1);
-  }, [activeIndex, navigateTo]);
-
-  return {
-    tabs,
-    activeTab,
-    activeIndex,
-    pathname,
-    selectTab,
-    navigateTo,
-    next,
-    previous,
-  };
+    return {
+        tab,
+        changeTab,
+        currentIndex,
+        canGoPrev,
+        canGoNext,
+        prevTab,
+        nextTab,
+        goToRelativeTab,
+    };
 }

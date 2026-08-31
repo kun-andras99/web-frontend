@@ -1,36 +1,41 @@
-import CommunityIconSVG from "@/features/navigations/app-bottom-bar/icons/CommunityIconSVG";
-import CruiseIconSVG from "@/features/navigations/app-bottom-bar/icons/CruiseIconSVG";
-import ExtraIconSVG from "@/features/navigations/app-bottom-bar/icons/ExtraIconSVG";
-import HeartIconSVG from "@/features/navigations/app-bottom-bar/icons/HeartIconSVG";
-import InboxIconSVG from "@/features/navigations/app-bottom-bar/icons/InboxIconSVG";
-import Image from "next/image";
+"use client";
+import { appBottomBarRoutes } from "@/features/navigations/app-bottom-bar/constants/app-bottom-bar.constants";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function AppBottomBar() {
-  return <div  className="bottom-bar">
-    <div>
-        <ExtraIconSVG />
-    </div>
-    <div>
-        <CommunityIconSVG />
-    </div>
-    <div>
-        <CruiseIconSVG />
-    </div>
-    <div>
-        <HeartIconSVG />
-    </div>
-    <div>
-        <InboxIconSVG />
-    </div>
-    <div className="bottom-avatar-container">
-        <Image
-        className="bottom-avatar-pic"
-      src="/assets/images/user-blank-1.png"
-      alt="Profile"
-      width={34}
-      height={34}
-    />
-    <div className="bottom-avatar-menu-box"></div>
-    </div>
-  </div>;
+    const pathname = usePathname();
+    return (
+        <div className="bottom-bar">
+            {appBottomBarRoutes.map((route) => {
+                const isActive =
+                    pathname === route.url ||
+                    pathname.startsWith(`${route.url}/`);
+
+                return (
+                    <Link
+                        key={route.id}
+                        href={route.url}
+                        className={` flex h-full flex-1 flex-col items-center justify-center gap-1 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"} `}>
+                        <div
+                            className={` flex h-6 w-6 items-center justify-center `}>
+                            {isActive ? route.activeIcon : route.icon}
+                        </div>
+                        {/* <span className="text-xs font-medium">
+                            {route.title}
+                        </span> */}
+                    </Link>
+                );
+            })}
+            {/* <div className="bottom-avatar-container">
+                <Image
+                    className="bottom-avatar-pic"
+                    src="/assets/images/user-blank-1.png"
+                    alt="Profile"
+                    width={34}
+                    height={34}
+                />
+            </div> */}
+        </div>
+    );
 }

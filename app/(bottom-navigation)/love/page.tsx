@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
+import { redirect } from "next/navigation";
 
-export default function LovePage({children}: {children: ReactNode}) {
-  return <div>{children}</div>;
+export default function LovePage() {
+    redirect("/love/nearby");
 }

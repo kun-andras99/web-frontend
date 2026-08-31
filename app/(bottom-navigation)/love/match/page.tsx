@@ -1,4 +1,4 @@
 
 export default function ExploreMatchPage() {
-  return <div>match</div>;
+  return <div className="h-full">match</div>;
 }

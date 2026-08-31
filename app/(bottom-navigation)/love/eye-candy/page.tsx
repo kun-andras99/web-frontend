@@ -1,4 +1,4 @@
 
 export default function ExploreEyeCandyPage() {
-  return <div>eye candy</div>;
+  return <div className="h-full">eye candy</div>;
 }

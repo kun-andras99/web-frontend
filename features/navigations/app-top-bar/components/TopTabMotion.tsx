@@ -1,11 +1,11 @@
 "use client";
 
+import useTopTabSwipe from "@/features/navigations/app-top-bar/hooks/useTopTabSwipe";
 import { motion } from "framer-motion";
 import type {
     ReactNode
 } from "react";
 
-import { useTopTabSwipe } from "../hooks/useTopTabSwipe";
 
 interface TopTabMotionProps {
   children: ReactNode;
@@ -28,9 +28,7 @@ export function TopTabMotion({
   threshold = 80,
 }: TopTabMotionProps) {
   const { handleDragEnd } = useTopTabSwipe({
-    activeIndex,
-    tabCount,
-    onNext,
+    currentIndex,
     onPrevious,
     threshold,
   });

@@ -2,7 +2,7 @@ import { BOTTOM_ICON_COLORS } from "@/features/navigations/app-bottom-bar/icons/
 import { BottomTabIconSVGProps } from "@/features/navigations/app-bottom-bar/icons/icons.props";
 import { useId } from "react";
 
-export function CruiseIcon({
+export function CruiseIconSVG({
   size = 28,
    startColor = BOTTOM_ICON_COLORS.startColor,
   stopColor = BOTTOM_ICON_COLORS.stopColor,
@@ -73,4 +73,4 @@ export function CruiseIcon({
   );
 }
 
-export default CruiseIcon;
+export default CruiseIconSVG;

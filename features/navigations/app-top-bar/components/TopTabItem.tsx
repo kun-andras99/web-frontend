@@ -1,57 +1,25 @@
-"use client";
+import { cloneElement } from "react";
 
-import Link from "next/link";
+import { TopTabScreen } from "@/features/navigations/app-top-bar/types/top-tab.types";
 
-import type { TopTab } from "../types/top-tab.types";
-
-interface TopTabItemProps<TId extends string> {
-  tab: TopTab<TId>;
-  active: boolean;
+interface TopTabItemProps {
+    item: TopTabScreen;
+    isActive: boolean;
 }
 
-export function TopTabItem<TId extends string>({
-  tab,
-  active,
-}: TopTabItemProps<TId>) {
-  return (
-    <Link
-      href={tab.href}
-      aria-current={active ? "page" : undefined}
-      aria-disabled={tab.disabled}
-      className={[
-        "relative flex h-12 flex-1 items-center justify-center",
-        "select-none",
-        "transition-colors duration-200",
-        active
-          ? "text-foreground"
-          : "text-muted-foreground",
-        tab.disabled && "pointer-events-none opacity-50",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-    >
-      {tab.icon && (
-        <span className="mr-2">
-          {tab.icon}
-        </span>
-      )}
-
-      <span>{tab.label}</span>
-
-      {active && (
-        <span
-          className="
-            absolute
-            inset-x-0
-            bottom-0
-            mx-auto
-            h-0.5
-            w-8
-            rounded-full
-            bg-foreground
-          "
-        />
-      )}
-    </Link>
-  );
+export default function TopTabItem({ item, isActive }: TopTabItemProps) {
+    return (
+        <div>
+            <div className="icon-drop">
+                {item.icon &&
+                    cloneElement(item.icon, {
+                        startColor: isActive ? "#00bdff" : "#e0e0e0",
+                        stopColor: isActive ? "#00bdff" : "#e0e0e0",
+                    })}
+            </div>
+            {isActive && (
+                <span className="whitespace-nowrap">{item.title}</span>
+            )}
+        </div>
+    );
 }
