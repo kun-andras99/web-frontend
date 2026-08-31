@@ -58,12 +58,23 @@ export class InMemoryTable<T extends BaseEntity> {
         rows: T[],
         { skip = 0, take = 20 }: PaginationParams = {},
     ): Promise<PaginatedResult<T>> {
+        const total = rows.length;
+
+        const items = rows.slice(skip, skip + take);
+
+        const page = Math.floor(skip / take) + 1;
+
+        const totalPages = total === 0 ? 0 : Math.ceil(total / take);
+
+        const hasMore = skip + items.length < total;
+
         return {
-            items: rows.slice(skip, skip + take),
-            total: rows.length,
-            skip,
-            take,
-            hasMore: skip + take < rows.length,
+            items,
+            total,
+            hasMore,
+            page,
+            limit: take,
+            totalPages,
         };
     }
 

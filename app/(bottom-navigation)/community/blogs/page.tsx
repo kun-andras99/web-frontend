@@ -1,7 +1,8 @@
-import BlogsPage from "@/features/blog/components/BlogsPage";
+// import BlogsPage from "@/features/blog/components/BlogsPage";
 
 export default function BlogPage() {
     return (
+        <>Blog oldal</>
         // <div className="blogs-page">
         //     <div className="pagination">
         //         <div className="btn back"></div>
@@ -82,6 +83,6 @@ export default function BlogPage() {
         //         <div className="btn prev"></div>
         //     </div>
         // </div>
-        <BlogsPage />
+        // <BlogsPage />
     );
 }

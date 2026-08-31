@@ -1,14 +1,12 @@
 "use client";
 
 import UsersScreenSkeleton from "@/features/user/all-user/users-sccreen/skeleton";
-import { UserListResponse } from "@/lib/db/types/user.types";
-import Image from "next/image";
-import Link from "next/link";
+import { UserListItem, UserListResponse } from "@/lib/db/types/user.types";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function UsersScreen() {
-    const [users, setUsers] = useState<UserListResponse | null>(null);
+    const [users, setUsers] = useState<UserListItem[]>([]);
 
     const [loading, setLoading] = useState(true);
 
@@ -56,7 +54,7 @@ export default function UsersScreen() {
     return (
         <main className="blogs-page">
             <div className="grid grid-cols-3 gap-[1px]">
-                {users.map((user) => {
+                {/* {users.map((user) => {
                     return (
                         <Link
                             key={user.id}
@@ -75,7 +73,7 @@ export default function UsersScreen() {
                             </div>
                         </Link>
                     );
-                })}
+                })} */}
             </div>
             {/* <div className="users-list">
                 {users.map((user: User) => {
