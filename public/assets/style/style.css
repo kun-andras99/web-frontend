@@ -9,13 +9,12 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0b0d;
-    --foreground: #fbfbfb;
-    --border-color: #212124;
-  }
+.dark {
+  --background: #0b0b0d;
+  --foreground: #fbfbfb;
+  --border-color: #212124;
 }
+
 @media (prefers-color-scheme: light) {
   :root {
     --background: #fbfbfb;
@@ -339,21 +338,9 @@ body {
       justify-content: space-around;
 }
 
-.top-filter {
-  position: fixed;
-  top: 56px;
-  left: 0;
-  width: 100%;
-  height: 32px;
-  background: var(--background);
-  border-bottom: 0.05rem solid var(--border-color);
-}
-
-.blogs-page {
+.bottom-page {
   -webkit-margin-before: 70px;
           margin-block-start: 70px;
-  -webkit-margin-after: 20px;
-          margin-block-end: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -361,9 +348,37 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 20px;
 }
-.blogs-page .pagination {
+
+.filter-message-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 10px;
+  gap: 10px;
+  background: #191919;
+}
+.filter-message-box button {
+  font-size: 15px;
+  padding: 3px 12px;
+  border-radius: 20;
+  font-weight: 500;
+  letter-spacing: 0.275px;
+  background: transparent;
+  color: #a5a5a5;
+  cursor: pointer;
+}
+.filter-message-box button[data-active=true] {
+  background: #43441b;
+  color: #edeea7;
+}
+
+.messages-list .message {
+  width: 100%;
+  height: 70px;
+}
+
+.pagination {
   width: 100%;
   height: 42px;
   display: -webkit-box;
@@ -377,7 +392,7 @@ body {
           justify-content: center;
   gap: 30px;
 }
-.blogs-page .pagination .btn {
+.pagination .btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -390,24 +405,25 @@ body {
   width: 26px;
   height: 26px;
 }
-.blogs-page .pagination .back,
-.blogs-page .pagination .prev {
+.pagination .back,
+.pagination .prev {
   width: 32px;
   height: 32px;
   background: #454545;
   border-radius: 10px;
 }
-.blogs-page .pagination .numbers {
+.pagination .numbers {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   font-size: 15px;
 }
-.blogs-page .pagination .numbers .btn {
+.pagination .numbers .btn {
   width: 34px;
   height: 34px;
 }
-.blogs-page .blogs-container {
+
+.blogs-container {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -418,7 +434,7 @@ body {
           flex-direction: column;
   gap: 25px;
 }
-.blogs-page .blogs-container .blog {
+.blogs-container .blog {
   width: calc(100% - 24px);
   margin-left: 12px;
   border-radius: 10px;
@@ -426,7 +442,7 @@ body {
           box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.75);
   letter-spacing: 0.275px;
 }
-.blogs-page .blogs-container .blog .title-container .stats {
+.blogs-container .blog .title-container .stats {
   width: 100%;
   background: #242424;
   padding: 6px 16px 6px 16px;
@@ -438,7 +454,7 @@ body {
           justify-content: space-between;
   font-size: 15px;
 }
-.blogs-page .blogs-container .blog .title-container .stats .author {
+.blogs-container .blog .title-container .stats .author {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -447,17 +463,17 @@ body {
           align-items: center;
   gap: 10px;
 }
-.blogs-page .blogs-container .blog .title-container .stats .author div {
+.blogs-container .blog .title-container .stats .author div {
   width: 4px;
   height: 4px;
   background: #a0a0a0;
   border-radius: 2px;
 }
-.blogs-page .blogs-container .blog .title-container .stats .author .time {
+.blogs-container .blog .title-container .stats .author .time {
   font-size: 13px;
   color: #c0c0c0;
 }
-.blogs-page .blogs-container .blog .title-container .title {
+.blogs-container .blog .title-container .title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -470,11 +486,11 @@ body {
   border-left: 0.07rem solid #242424;
   padding: 10px 12px 10px 12px;
 }
-.blogs-page .blogs-container .blog .title-container .title span {
+.blogs-container .blog .title-container .title span {
   font-size: 16px;
   font-weight: 600;
 }
-.blogs-page .blogs-container .blog .title-container .tags {
+.blogs-container .blog .title-container .tags {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -483,7 +499,7 @@ body {
   border-left: 0.07rem solid #242424;
   padding: 14px 12px 0 12px;
 }
-.blogs-page .blogs-container .blog .title-container .tags span {
+.blogs-container .blog .title-container .tags span {
   padding: 3px 6px;
   background-color: #202020;
   color: #a0a0a0;
@@ -493,7 +509,7 @@ body {
           box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.45), 0px 0px 4px 1px rgba(0, 0, 0, 0.3), 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
   text-shadow: 0px 0px 3px rgb(0, 0, 0);
 }
-.blogs-page .blogs-container .blog .content {
+.blogs-container .blog .content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -507,4 +523,18 @@ body {
   padding: 10px 12px 10px 12px;
   font-size: 14px;
   color: #b0b0b0;
+}
+
+@-webkit-keyframes shimmer {
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
 }

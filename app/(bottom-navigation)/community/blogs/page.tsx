@@ -3,7 +3,7 @@
 export default function BlogPage() {
     return (
         <>Blog oldal</>
-        // <div className="blogs-page">
+        // <div className="bottom-page">
         //     <div className="pagination">
         //         <div className="btn back"></div>
         //         <div className="numbers">

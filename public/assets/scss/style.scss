@@ -8,6 +8,6 @@
 @use "./navigations/top-bar";
 @use "./navigations/bottom-bar";
 
-@use "./ui/filters";
-
+@use "./pages/base-page";
+@use "./pages/messages-page";
 @use "./pages/blogs-page";

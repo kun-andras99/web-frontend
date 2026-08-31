@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function UsersScreenSkeleton() {
     return (
-        <main className="blogs-page">
+        <main className="bottom-page">
             <div className="grid grid-cols-3 gap-[1px]">
                 {Array.from({ length: 50 }).map((_, index) => (
                     <div
