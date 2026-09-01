@@ -17,6 +17,9 @@ export async function getUserByName(username: string): Promise<User | null> {
 
 export async function getAllUsers(): Promise<User[] | null> {
     return prisma.user.findMany({
+        include: {
+            userData: true,
+        },
         orderBy: {
             createdAt: "desc",
         },

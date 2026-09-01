@@ -1,60 +1,17 @@
 "use client";
 
-import { UserListItem, UserListResponse } from "@/lib/db/types/user.types";
-import { notFound } from "next/navigation";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { User } from "../../../../../prisma/generated/prisma/client";
 
-export default function UsersNearbyScreen() {
-    const [users, setUsers] = useState<UserListItem[]>([]);
+interface UsersNearbyScreenProps {
+    users: User[];
+}
 
-    const [loading, setLoading] = useState(true);
-
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const loadUser = async () => {
-            try {
-                const response = await fetch(`/api/users`);
-
-                if (response.status === 404) {
-                    setError("User not found");
-                    return;
-                }
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user");
-                }
-
-                const data: UserListResponse = await response.json();
-
-                setUsers(data.data.user);
-            } catch (error) {
-                console.error(error);
-
-                setError("Nem sikerült betölteni a felhasználót.");
-            } finally {
-                setTimeout(() => {
-                    setLoading(false);
-                }, 1000);
-            }
-        };
-
-        loadUser();
-    }, []);
-
-    if (loading) {
-        // return <UsersScreenSkeleton />;
-        return "felhasználók betöltése";
-    }
-
-    if (error || !users) {
-        notFound();
-    }
-
+export default function UsersNearbyScreen({ users }: UsersNearbyScreenProps) {
     return (
         <main className="bottom-page">
             <div className="grid grid-cols-3 gap-[1px]">
-                {/* {users.map((user) => {
+                {users.map((user) => {
                     return (
                         <Link
                             key={user.id}
@@ -63,41 +20,12 @@ export default function UsersNearbyScreen() {
                             <div
                                 key={user.id}
                                 className="relative aspect-square overflow-hidden">
-                                <Image
-                                    src={user.avatar}
-                                    alt={user.nickname}
-                                    fill
-                                    className="object-cover"
-                                    sizes="33.33vw"
-                                />
+                                {user.username}
                             </div>
                         </Link>
                     );
-                })} */}
-            </div>
-            {/* <div className="users-list">
-                {users.map((user: User) => {
-                    return (
-                        <>
-                            <p>
-                                <Link
-                                    key={user.id}
-                                    href={`/profile/${user.id}`}
-                                    className="user-item">
-                                    <Image
-                                        src={user.avatar}
-                                        alt={``}
-                                        width={40}
-                                        height={40}
-                                    />
-                                    {user.username} - {user.nickname} -{" "}
-                                    {user.gender}
-                                </Link>
-                            </p>
-                        </>
-                    );
                 })}
-            </div> */}
+            </div>
         </main>
     );
 }
