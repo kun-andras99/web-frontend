@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Gyors ismertető
 
-## Getting Started
+Randi applikáció mely bármely nemű és beállítottságú embereknek nyújt különböző ismerkedési, kapcsolatfelvételi lehetőséget.
 
-First, run the development server:
+Szeretnéd magad megismertetni sok felhasználóval? Csatlakozz globális elérhetőségi állapotban! amennyiben nem érzed magad elég bátornak, lehetőséget adunk neked szavazat (eye-candy) és/vagy match-elés elérésre is.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> Extrém tartalmak máshol...
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Célunk a felhasználók lekötése nem csak a megszokott match és swipe rendszerrel, ezért újdonságokat készítettünk:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- csoportok
+  -
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- városok
+  -
 
-## Learn More
+- blog
+  -
 
-To learn more about Next.js, take a look at the following resources:
+- térkép
+  -
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- extra:
+  -
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `épp most` - right now
 
-## Deploy on Vercel
+globális jelenlegi megjelenítés, gyors kalandok teremtésére.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `forró ajánlatok` - hot offers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+külön elérés fizetős partnereinknek, nem csak fizetős partnereknek is!
+
+- `árverezés` - auction
+
+saját használt intim együttlétnél szexuális vágy kielégítésére alkalmas ruhák, használható tárgyak.
