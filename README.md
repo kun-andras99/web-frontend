@@ -1,3 +1,5 @@
+weboldal vercel app [ezen a linken](https://date-frontend-six.vercel.app) érhető el, ajánlott mobilról vagy mobilos nézetben böngészni.
+
 ## Gyors ismertető
 
 Randi applikáció mely bármely nemű és beállítottságú embereknek nyújt különböző ismerkedési, kapcsolatfelvételi lehetőséget.
@@ -6,7 +8,7 @@ Szeretnéd magad megismertetni sok felhasználóval? Csatlakozz globális elérh
 
 > Extrém tartalmak máshol...
 
-Célunk a felhasználók lekötése nem csak a megszokott match és swipe rendszerrel, ezért újdonságokat készítettünk:
+Célunk a felhasználók lekötése nem csak a megszokott match és swipe működési rendszerrel, ezért újdonságokat készítettünk:
 
 - csoportok
   -
