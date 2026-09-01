@@ -1,4 +1,4 @@
-import { BaseEntity, CreateInput, UpdateInput } from "./common.types";
+import { UserData } from "../../../prisma/generated/prisma/browser";
 import {
     Gender,
     GenderInterest,
@@ -8,21 +8,20 @@ import {
     UserRole,
 } from "./enums";
 
-export interface User extends BaseEntity {
+export interface User {
     id: number;
     username: string;
-    nickname: string;
-    avatar: string;
+    avatarUrl: string;
     role: UserRole;
-    gender: Gender;
-    sexuality: Sexuality;
     relationshipStatus: RelationshipStatus;
-    lookingFor: LookingFor[];
     interestedIn: GenderInterest[];
+    lookingFor: LookingFor[];
+    userData: UserData;
+    isVerified: boolean;
+    isActive: boolean;
+    lat: number | null;
+    lng: number | null;
 }
-
-export type CreateUserInput = CreateInput<User>;
-export type UpdateUserInput = UpdateInput<User>;
 
 /**
  * findMany szűrők — tudatosan úgy néznek ki, mint egy Prisma `where`,
@@ -37,6 +36,7 @@ export interface UserFilter {
     lookingFor?: LookingFor[];
     /** true, ha a user interestedIn listája TARTALMAZ bármelyiket ezek közül */
     interestedIn?: GenderInterest[];
+    userData: UserData;
     /** case-insensitive részleges egyezés username/nickname mezőkön */
     search?: string;
 }

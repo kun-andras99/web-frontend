@@ -117,7 +117,7 @@ model User {
   ownedGroups    Group[]         @relation("OwnedGroups")
   groups         Group[]
   groupMembers   GroupMember[]   @relation("GroupMembers")
-  userPreference UserPreference[]
+  userPreference UserPreference?
 }
 
 

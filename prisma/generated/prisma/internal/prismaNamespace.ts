@@ -400,6 +400,8 @@ export const ModelName = {
   User: 'User',
   UserData: 'UserData',
   UserPreference: 'UserPreference',
+  UserLookingFor: 'UserLookingFor',
+  UserGenderInterest: 'UserGenderInterest',
   GalleryFolder: 'GalleryFolder',
   FolderPermission: 'FolderPermission',
   GalleryImage: 'GalleryImage',
@@ -422,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userData" | "userPreference" | "galleryFolder" | "folderPermission" | "galleryImage" | "imageLike" | "imageView" | "group" | "groupMember"
+    modelProps: "user" | "userData" | "userPreference" | "userLookingFor" | "userGenderInterest" | "galleryFolder" | "folderPermission" | "galleryImage" | "imageLike" | "imageView" | "group" | "groupMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -645,6 +647,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserPreferenceCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserPreferenceCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserLookingFor: {
+      payload: Prisma.$UserLookingForPayload<ExtArgs>
+      fields: Prisma.UserLookingForFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserLookingForFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserLookingForFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>
+        }
+        findFirst: {
+          args: Prisma.UserLookingForFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserLookingForFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>
+        }
+        findMany: {
+          args: Prisma.UserLookingForFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>[]
+        }
+        create: {
+          args: Prisma.UserLookingForCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>
+        }
+        createMany: {
+          args: Prisma.UserLookingForCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserLookingForCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>[]
+        }
+        delete: {
+          args: Prisma.UserLookingForDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>
+        }
+        update: {
+          args: Prisma.UserLookingForUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserLookingForDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserLookingForUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserLookingForUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserLookingForUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserLookingForPayload>
+        }
+        aggregate: {
+          args: Prisma.UserLookingForAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserLookingFor>
+        }
+        groupBy: {
+          args: Prisma.UserLookingForGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserLookingForGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserLookingForCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserLookingForCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserGenderInterest: {
+      payload: Prisma.$UserGenderInterestPayload<ExtArgs>
+      fields: Prisma.UserGenderInterestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserGenderInterestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserGenderInterestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>
+        }
+        findFirst: {
+          args: Prisma.UserGenderInterestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserGenderInterestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>
+        }
+        findMany: {
+          args: Prisma.UserGenderInterestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>[]
+        }
+        create: {
+          args: Prisma.UserGenderInterestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>
+        }
+        createMany: {
+          args: Prisma.UserGenderInterestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserGenderInterestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>[]
+        }
+        delete: {
+          args: Prisma.UserGenderInterestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>
+        }
+        update: {
+          args: Prisma.UserGenderInterestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserGenderInterestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserGenderInterestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserGenderInterestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserGenderInterestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserGenderInterestPayload>
+        }
+        aggregate: {
+          args: Prisma.UserGenderInterestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserGenderInterest>
+        }
+        groupBy: {
+          args: Prisma.UserGenderInterestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserGenderInterestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserGenderInterestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserGenderInterestCountAggregateOutputType> | number
         }
       }
     }
@@ -1215,9 +1365,7 @@ export const UserScalarFieldEnum = {
   lat: 'lat',
   lng: 'lng',
   role: 'role',
-  relationshipStatus: 'relationshipStatus',
-  lookingFor: 'lookingFor',
-  interestedIn: 'interestedIn'
+  relationshipStatus: 'relationshipStatus'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1254,14 +1402,30 @@ export const UserPreferenceScalarFieldEnum = {
   minHeightCm: 'minHeightCm',
   maxHeightCm: 'maxHeightCm',
   maxDistanceKm: 'maxDistanceKm',
-  preferredGender: 'preferredGender',
-  relationshipGoal: 'relationshipGoal',
   verifiedOnly: 'verifiedOnly',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserPreferenceScalarFieldEnum = (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
+
+
+export const UserLookingForScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserLookingForScalarFieldEnum = (typeof UserLookingForScalarFieldEnum)[keyof typeof UserLookingForScalarFieldEnum]
+
+
+export const UserGenderInterestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserGenderInterestScalarFieldEnum = (typeof UserGenderInterestScalarFieldEnum)[keyof typeof UserGenderInterestScalarFieldEnum]
 
 
 export const GalleryFolderScalarFieldEnum = {
@@ -1422,20 +1586,6 @@ export type EnumRelationshipStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
- * Reference to a field of type 'LookingFor'
- */
-export type EnumLookingForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LookingFor'>
-    
-
-
-/**
- * Reference to a field of type 'GenderInterest'
- */
-export type EnumGenderInterestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderInterest'>
-    
-
-
-/**
  * Reference to a field of type 'Gender'
  */
 export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
@@ -1446,6 +1596,20 @@ export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Sexuality'
  */
 export type EnumSexualityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sexuality'>
+    
+
+
+/**
+ * Reference to a field of type 'LookingFor'
+ */
+export type EnumLookingForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LookingFor'>
+    
+
+
+/**
+ * Reference to a field of type 'GenderInterest'
+ */
+export type EnumGenderInterestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderInterest'>
     
 
 
@@ -1609,6 +1773,8 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userData?: Prisma.UserDataOmit
   userPreference?: Prisma.UserPreferenceOmit
+  userLookingFor?: Prisma.UserLookingForOmit
+  userGenderInterest?: Prisma.UserGenderInterestOmit
   galleryFolder?: Prisma.GalleryFolderOmit
   folderPermission?: Prisma.FolderPermissionOmit
   galleryImage?: Prisma.GalleryImageOmit

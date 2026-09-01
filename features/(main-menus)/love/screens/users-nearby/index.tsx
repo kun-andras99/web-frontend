@@ -1,7 +1,7 @@
 "use client";
 
+import { User } from "@/lib/db";
 import Link from "next/link";
-import { User } from "../../../../../prisma/generated/prisma/client";
 
 interface UsersNearbyScreenProps {
     users: User[];

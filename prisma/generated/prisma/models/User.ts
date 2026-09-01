@@ -52,8 +52,6 @@ export type UserMinAggregateOutputType = {
   lng: number | null
   role: $Enums.UserRole | null
   relationshipStatus: $Enums.RelationshipStatus | null
-  lookingFor: $Enums.LookingFor | null
-  interestedIn: $Enums.GenderInterest | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -70,8 +68,6 @@ export type UserMaxAggregateOutputType = {
   lng: number | null
   role: $Enums.UserRole | null
   relationshipStatus: $Enums.RelationshipStatus | null
-  lookingFor: $Enums.LookingFor | null
-  interestedIn: $Enums.GenderInterest | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -88,8 +84,6 @@ export type UserCountAggregateOutputType = {
   lng: number
   role: number
   relationshipStatus: number
-  lookingFor: number
-  interestedIn: number
   _all: number
 }
 
@@ -120,8 +114,6 @@ export type UserMinAggregateInputType = {
   lng?: true
   role?: true
   relationshipStatus?: true
-  lookingFor?: true
-  interestedIn?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -138,8 +130,6 @@ export type UserMaxAggregateInputType = {
   lng?: true
   role?: true
   relationshipStatus?: true
-  lookingFor?: true
-  interestedIn?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -156,8 +146,6 @@ export type UserCountAggregateInputType = {
   lng?: true
   role?: true
   relationshipStatus?: true
-  lookingFor?: true
-  interestedIn?: true
   _all?: true
 }
 
@@ -261,8 +249,6 @@ export type UserGroupByOutputType = {
   lng: number | null
   role: $Enums.UserRole
   relationshipStatus: $Enums.RelationshipStatus | null
-  lookingFor: $Enums.LookingFor | null
-  interestedIn: $Enums.GenderInterest | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -302,8 +288,8 @@ export type UserWhereInput = {
   lng?: Prisma.FloatNullableFilter<"User"> | number | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   relationshipStatus?: Prisma.EnumRelationshipStatusNullableFilter<"User"> | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.EnumLookingForNullableFilter<"User"> | $Enums.LookingFor | null
-  interestedIn?: Prisma.EnumGenderInterestNullableFilter<"User"> | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForListRelationFilter
+  interestedIn?: Prisma.UserGenderInterestListRelationFilter
   userData?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
   folders?: Prisma.GalleryFolderListRelationFilter
   images?: Prisma.GalleryImageListRelationFilter
@@ -329,8 +315,8 @@ export type UserOrderByWithRelationInput = {
   lng?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   relationshipStatus?: Prisma.SortOrderInput | Prisma.SortOrder
-  lookingFor?: Prisma.SortOrderInput | Prisma.SortOrder
-  interestedIn?: Prisma.SortOrderInput | Prisma.SortOrder
+  lookingFor?: Prisma.UserLookingForOrderByRelationAggregateInput
+  interestedIn?: Prisma.UserGenderInterestOrderByRelationAggregateInput
   userData?: Prisma.UserDataOrderByWithRelationInput
   folders?: Prisma.GalleryFolderOrderByRelationAggregateInput
   images?: Prisma.GalleryImageOrderByRelationAggregateInput
@@ -359,8 +345,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lng?: Prisma.FloatNullableFilter<"User"> | number | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   relationshipStatus?: Prisma.EnumRelationshipStatusNullableFilter<"User"> | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.EnumLookingForNullableFilter<"User"> | $Enums.LookingFor | null
-  interestedIn?: Prisma.EnumGenderInterestNullableFilter<"User"> | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForListRelationFilter
+  interestedIn?: Prisma.UserGenderInterestListRelationFilter
   userData?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
   folders?: Prisma.GalleryFolderListRelationFilter
   images?: Prisma.GalleryImageListRelationFilter
@@ -386,8 +372,6 @@ export type UserOrderByWithAggregationInput = {
   lng?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   relationshipStatus?: Prisma.SortOrderInput | Prisma.SortOrder
-  lookingFor?: Prisma.SortOrderInput | Prisma.SortOrder
-  interestedIn?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -412,8 +396,6 @@ export type UserScalarWhereWithAggregatesInput = {
   lng?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   relationshipStatus?: Prisma.EnumRelationshipStatusNullableWithAggregatesFilter<"User"> | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.EnumLookingForNullableWithAggregatesFilter<"User"> | $Enums.LookingFor | null
-  interestedIn?: Prisma.EnumGenderInterestNullableWithAggregatesFilter<"User"> | $Enums.GenderInterest | null
 }
 
 export type UserCreateInput = {
@@ -429,8 +411,8 @@ export type UserCreateInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -456,8 +438,8 @@ export type UserUncheckedCreateInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -482,8 +464,8 @@ export type UserUpdateInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -509,8 +491,8 @@ export type UserUncheckedUpdateInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -536,8 +518,6 @@ export type UserCreateManyInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -553,8 +533,6 @@ export type UserUpdateManyMutationInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -571,8 +549,6 @@ export type UserUncheckedUpdateManyInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -589,8 +565,6 @@ export type UserCountOrderByAggregateInput = {
   lng?: Prisma.SortOrder
   role?: Prisma.SortOrder
   relationshipStatus?: Prisma.SortOrder
-  lookingFor?: Prisma.SortOrder
-  interestedIn?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -613,8 +587,6 @@ export type UserMaxOrderByAggregateInput = {
   lng?: Prisma.SortOrder
   role?: Prisma.SortOrder
   relationshipStatus?: Prisma.SortOrder
-  lookingFor?: Prisma.SortOrder
-  interestedIn?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -631,8 +603,6 @@ export type UserMinOrderByAggregateInput = {
   lng?: Prisma.SortOrder
   role?: Prisma.SortOrder
   relationshipStatus?: Prisma.SortOrder
-  lookingFor?: Prisma.SortOrder
-  interestedIn?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -683,14 +653,6 @@ export type NullableEnumRelationshipStatusFieldUpdateOperationsInput = {
   set?: $Enums.RelationshipStatus | null
 }
 
-export type NullableEnumLookingForFieldUpdateOperationsInput = {
-  set?: $Enums.LookingFor | null
-}
-
-export type NullableEnumGenderInterestFieldUpdateOperationsInput = {
-  set?: $Enums.GenderInterest | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -725,6 +687,34 @@ export type UserUpdateOneRequiredWithoutUserPreferenceNestedInput = {
   upsert?: Prisma.UserUpsertWithoutUserPreferenceInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserPreferenceInput, Prisma.UserUpdateWithoutUserPreferenceInput>, Prisma.UserUncheckedUpdateWithoutUserPreferenceInput>
+}
+
+export type UserCreateNestedOneWithoutLookingForInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLookingForInput, Prisma.UserUncheckedCreateWithoutLookingForInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLookingForInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutLookingForNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLookingForInput, Prisma.UserUncheckedCreateWithoutLookingForInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLookingForInput
+  upsert?: Prisma.UserUpsertWithoutLookingForInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLookingForInput, Prisma.UserUpdateWithoutLookingForInput>, Prisma.UserUncheckedUpdateWithoutLookingForInput>
+}
+
+export type UserCreateNestedOneWithoutInterestedInInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterestedInInput, Prisma.UserUncheckedCreateWithoutInterestedInInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterestedInInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInterestedInNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterestedInInput, Prisma.UserUncheckedCreateWithoutInterestedInInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterestedInInput
+  upsert?: Prisma.UserUpsertWithoutInterestedInInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInterestedInInput, Prisma.UserUpdateWithoutInterestedInInput>, Prisma.UserUncheckedUpdateWithoutInterestedInInput>
 }
 
 export type UserCreateNestedOneWithoutFoldersInput = {
@@ -840,8 +830,8 @@ export type UserCreateWithoutUserDataInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
   likes?: Prisma.ImageLikeCreateNestedManyWithoutUserInput
@@ -866,8 +856,8 @@ export type UserUncheckedCreateWithoutUserDataInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
   likes?: Prisma.ImageLikeUncheckedCreateNestedManyWithoutUserInput
@@ -907,8 +897,8 @@ export type UserUpdateWithoutUserDataInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
   likes?: Prisma.ImageLikeUpdateManyWithoutUserNestedInput
@@ -933,8 +923,8 @@ export type UserUncheckedUpdateWithoutUserDataInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
   likes?: Prisma.ImageLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -958,8 +948,8 @@ export type UserCreateWithoutUserPreferenceInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -984,8 +974,8 @@ export type UserUncheckedCreateWithoutUserPreferenceInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -1025,8 +1015,8 @@ export type UserUpdateWithoutUserPreferenceInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -1051,8 +1041,8 @@ export type UserUncheckedUpdateWithoutUserPreferenceInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -1061,6 +1051,242 @@ export type UserUncheckedUpdateWithoutUserPreferenceInput = {
   ownedGroups?: Prisma.GroupUncheckedUpdateManyWithoutOwnerNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutUserNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutLookingForInput = {
+  avatarUrl?: string | null
+  username: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isVerified?: boolean
+  isActive?: boolean
+  lat?: number | null
+  lng?: number | null
+  role?: $Enums.UserRole
+  relationshipStatus?: $Enums.RelationshipStatus | null
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
+  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
+  folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
+  images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
+  likes?: Prisma.ImageLikeCreateNestedManyWithoutUserInput
+  permissions?: Prisma.FolderPermissionCreateNestedManyWithoutUserInput
+  ownedGroups?: Prisma.GroupCreateNestedManyWithoutOwnerInput
+  groups?: Prisma.GroupCreateNestedManyWithoutUserInput
+  groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
+  userPreference?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutLookingForInput = {
+  id?: number
+  avatarUrl?: string | null
+  username: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isVerified?: boolean
+  isActive?: boolean
+  lat?: number | null
+  lng?: number | null
+  role?: $Enums.UserRole
+  relationshipStatus?: $Enums.RelationshipStatus | null
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
+  userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
+  folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
+  images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
+  likes?: Prisma.ImageLikeUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.FolderPermissionUncheckedCreateNestedManyWithoutUserInput
+  ownedGroups?: Prisma.GroupUncheckedCreateNestedManyWithoutOwnerInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutUserInput
+  groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
+  userPreference?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutLookingForInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutLookingForInput, Prisma.UserUncheckedCreateWithoutLookingForInput>
+}
+
+export type UserUpsertWithoutLookingForInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutLookingForInput, Prisma.UserUncheckedUpdateWithoutLookingForInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutLookingForInput, Prisma.UserUncheckedCreateWithoutLookingForInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutLookingForInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutLookingForInput, Prisma.UserUncheckedUpdateWithoutLookingForInput>
+}
+
+export type UserUpdateWithoutLookingForInput = {
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
+  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
+  folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
+  images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
+  likes?: Prisma.ImageLikeUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.FolderPermissionUpdateManyWithoutUserNestedInput
+  ownedGroups?: Prisma.GroupUpdateManyWithoutOwnerNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutUserNestedInput
+  groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
+  userPreference?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutLookingForInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
+  userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
+  folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
+  images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
+  likes?: Prisma.ImageLikeUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.FolderPermissionUncheckedUpdateManyWithoutUserNestedInput
+  ownedGroups?: Prisma.GroupUncheckedUpdateManyWithoutOwnerNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutUserNestedInput
+  groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
+  userPreference?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutInterestedInInput = {
+  avatarUrl?: string | null
+  username: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isVerified?: boolean
+  isActive?: boolean
+  lat?: number | null
+  lng?: number | null
+  role?: $Enums.UserRole
+  relationshipStatus?: $Enums.RelationshipStatus | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
+  folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
+  images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
+  likes?: Prisma.ImageLikeCreateNestedManyWithoutUserInput
+  permissions?: Prisma.FolderPermissionCreateNestedManyWithoutUserInput
+  ownedGroups?: Prisma.GroupCreateNestedManyWithoutOwnerInput
+  groups?: Prisma.GroupCreateNestedManyWithoutUserInput
+  groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
+  userPreference?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutInterestedInInput = {
+  id?: number
+  avatarUrl?: string | null
+  username: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isVerified?: boolean
+  isActive?: boolean
+  lat?: number | null
+  lng?: number | null
+  role?: $Enums.UserRole
+  relationshipStatus?: $Enums.RelationshipStatus | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
+  folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
+  images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
+  likes?: Prisma.ImageLikeUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.FolderPermissionUncheckedCreateNestedManyWithoutUserInput
+  ownedGroups?: Prisma.GroupUncheckedCreateNestedManyWithoutOwnerInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutUserInput
+  groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
+  userPreference?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutInterestedInInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterestedInInput, Prisma.UserUncheckedCreateWithoutInterestedInInput>
+}
+
+export type UserUpsertWithoutInterestedInInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInterestedInInput, Prisma.UserUncheckedUpdateWithoutInterestedInInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterestedInInput, Prisma.UserUncheckedCreateWithoutInterestedInInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInterestedInInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInterestedInInput, Prisma.UserUncheckedUpdateWithoutInterestedInInput>
+}
+
+export type UserUpdateWithoutInterestedInInput = {
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
+  folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
+  images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
+  likes?: Prisma.ImageLikeUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.FolderPermissionUpdateManyWithoutUserNestedInput
+  ownedGroups?: Prisma.GroupUpdateManyWithoutOwnerNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutUserNestedInput
+  groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
+  userPreference?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInterestedInInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
+  folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
+  images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
+  likes?: Prisma.ImageLikeUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.FolderPermissionUncheckedUpdateManyWithoutUserNestedInput
+  ownedGroups?: Prisma.GroupUncheckedUpdateManyWithoutOwnerNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutUserNestedInput
+  groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
+  userPreference?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFoldersInput = {
@@ -1076,8 +1302,8 @@ export type UserCreateWithoutFoldersInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
   likes?: Prisma.ImageLikeCreateNestedManyWithoutUserInput
@@ -1102,8 +1328,8 @@ export type UserUncheckedCreateWithoutFoldersInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
   likes?: Prisma.ImageLikeUncheckedCreateNestedManyWithoutUserInput
@@ -1143,8 +1369,8 @@ export type UserUpdateWithoutFoldersInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
   likes?: Prisma.ImageLikeUpdateManyWithoutUserNestedInput
@@ -1169,8 +1395,8 @@ export type UserUncheckedUpdateWithoutFoldersInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
   likes?: Prisma.ImageLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1194,8 +1420,8 @@ export type UserCreateWithoutPermissionsInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -1220,8 +1446,8 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -1261,8 +1487,8 @@ export type UserUpdateWithoutPermissionsInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -1287,8 +1513,8 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -1312,8 +1538,8 @@ export type UserCreateWithoutImagesInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   likes?: Prisma.ImageLikeCreateNestedManyWithoutUserInput
@@ -1338,8 +1564,8 @@ export type UserUncheckedCreateWithoutImagesInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   likes?: Prisma.ImageLikeUncheckedCreateNestedManyWithoutUserInput
@@ -1379,8 +1605,8 @@ export type UserUpdateWithoutImagesInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   likes?: Prisma.ImageLikeUpdateManyWithoutUserNestedInput
@@ -1405,8 +1631,8 @@ export type UserUncheckedUpdateWithoutImagesInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   likes?: Prisma.ImageLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1430,8 +1656,8 @@ export type UserCreateWithoutLikesInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -1456,8 +1682,8 @@ export type UserUncheckedCreateWithoutLikesInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -1497,8 +1723,8 @@ export type UserUpdateWithoutLikesInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -1523,8 +1749,8 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -1548,8 +1774,8 @@ export type UserCreateWithoutOwnedGroupsInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -1574,8 +1800,8 @@ export type UserUncheckedCreateWithoutOwnedGroupsInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -1604,8 +1830,8 @@ export type UserCreateWithoutGroupsInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -1630,8 +1856,8 @@ export type UserUncheckedCreateWithoutGroupsInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -1671,8 +1897,8 @@ export type UserUpdateWithoutOwnedGroupsInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -1697,8 +1923,8 @@ export type UserUncheckedUpdateWithoutOwnedGroupsInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -1733,8 +1959,8 @@ export type UserUpdateWithoutGroupsInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -1759,8 +1985,8 @@ export type UserUncheckedUpdateWithoutGroupsInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -1784,8 +2010,8 @@ export type UserCreateWithoutGroupMembersInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageCreateNestedManyWithoutUserInput
@@ -1810,8 +2036,8 @@ export type UserUncheckedCreateWithoutGroupMembersInput = {
   lng?: number | null
   role?: $Enums.UserRole
   relationshipStatus?: $Enums.RelationshipStatus | null
-  lookingFor?: $Enums.LookingFor | null
-  interestedIn?: $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedCreateNestedManyWithoutUserInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   folders?: Prisma.GalleryFolderUncheckedCreateNestedManyWithoutUserInput
   images?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutUserInput
@@ -1851,8 +2077,8 @@ export type UserUpdateWithoutGroupMembersInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUpdateManyWithoutUserNestedInput
@@ -1877,8 +2103,8 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   relationshipStatus?: Prisma.NullableEnumRelationshipStatusFieldUpdateOperationsInput | $Enums.RelationshipStatus | null
-  lookingFor?: Prisma.NullableEnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor | null
-  interestedIn?: Prisma.NullableEnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest | null
+  lookingFor?: Prisma.UserLookingForUncheckedUpdateManyWithoutUserNestedInput
+  interestedIn?: Prisma.UserGenderInterestUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   folders?: Prisma.GalleryFolderUncheckedUpdateManyWithoutUserNestedInput
   images?: Prisma.GalleryImageUncheckedUpdateManyWithoutUserNestedInput
@@ -1895,6 +2121,8 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
  */
 
 export type UserCountOutputType = {
+  lookingFor: number
+  interestedIn: number
   folders: number
   images: number
   likes: number
@@ -1905,6 +2133,8 @@ export type UserCountOutputType = {
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  lookingFor?: boolean | UserCountOutputTypeCountLookingForArgs
+  interestedIn?: boolean | UserCountOutputTypeCountInterestedInArgs
   folders?: boolean | UserCountOutputTypeCountFoldersArgs
   images?: boolean | UserCountOutputTypeCountImagesArgs
   likes?: boolean | UserCountOutputTypeCountLikesArgs
@@ -1922,6 +2152,20 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountLookingForArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserLookingForWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInterestedInArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserGenderInterestWhereInput
 }
 
 /**
@@ -1988,8 +2232,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lng?: boolean
   role?: boolean
   relationshipStatus?: boolean
-  lookingFor?: boolean
-  interestedIn?: boolean
+  lookingFor?: boolean | Prisma.User$lookingForArgs<ExtArgs>
+  interestedIn?: boolean | Prisma.User$interestedInArgs<ExtArgs>
   userData?: boolean | Prisma.User$userDataArgs<ExtArgs>
   folders?: boolean | Prisma.User$foldersArgs<ExtArgs>
   images?: boolean | Prisma.User$imagesArgs<ExtArgs>
@@ -2016,8 +2260,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lng?: boolean
   role?: boolean
   relationshipStatus?: boolean
-  lookingFor?: boolean
-  interestedIn?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2034,8 +2276,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lng?: boolean
   role?: boolean
   relationshipStatus?: boolean
-  lookingFor?: boolean
-  interestedIn?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -2052,12 +2292,12 @@ export type UserSelectScalar = {
   lng?: boolean
   role?: boolean
   relationshipStatus?: boolean
-  lookingFor?: boolean
-  interestedIn?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "avatarUrl" | "username" | "email" | "password" | "createdAt" | "updatedAt" | "isVerified" | "isActive" | "lat" | "lng" | "role" | "relationshipStatus" | "lookingFor" | "interestedIn", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "avatarUrl" | "username" | "email" | "password" | "createdAt" | "updatedAt" | "isVerified" | "isActive" | "lat" | "lng" | "role" | "relationshipStatus", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  lookingFor?: boolean | Prisma.User$lookingForArgs<ExtArgs>
+  interestedIn?: boolean | Prisma.User$interestedInArgs<ExtArgs>
   userData?: boolean | Prisma.User$userDataArgs<ExtArgs>
   folders?: boolean | Prisma.User$foldersArgs<ExtArgs>
   images?: boolean | Prisma.User$imagesArgs<ExtArgs>
@@ -2075,6 +2315,8 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    lookingFor: Prisma.$UserLookingForPayload<ExtArgs>[]
+    interestedIn: Prisma.$UserGenderInterestPayload<ExtArgs>[]
     userData: Prisma.$UserDataPayload<ExtArgs> | null
     folders: Prisma.$GalleryFolderPayload<ExtArgs>[]
     images: Prisma.$GalleryImagePayload<ExtArgs>[]
@@ -2099,8 +2341,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lng: number | null
     role: $Enums.UserRole
     relationshipStatus: $Enums.RelationshipStatus | null
-    lookingFor: $Enums.LookingFor | null
-    interestedIn: $Enums.GenderInterest | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2495,6 +2735,8 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  lookingFor<T extends Prisma.User$lookingForArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lookingForArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLookingForPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interestedIn<T extends Prisma.User$interestedInArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$interestedInArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserGenderInterestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userData<T extends Prisma.User$userDataArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userDataArgs<ExtArgs>>): Prisma.Prisma__UserDataClient<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   folders<T extends Prisma.User$foldersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$foldersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryFolderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   images<T extends Prisma.User$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2546,8 +2788,6 @@ export interface UserFieldRefs {
   readonly lng: Prisma.FieldRef<"User", 'Float'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly relationshipStatus: Prisma.FieldRef<"User", 'RelationshipStatus'>
-  readonly lookingFor: Prisma.FieldRef<"User", 'LookingFor'>
-  readonly interestedIn: Prisma.FieldRef<"User", 'GenderInterest'>
 }
     
 
@@ -2936,6 +3176,54 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.lookingFor
+ */
+export type User$lookingForArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserLookingFor
+   */
+  select?: Prisma.UserLookingForSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserLookingFor
+   */
+  omit?: Prisma.UserLookingForOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserLookingForInclude<ExtArgs> | null
+  where?: Prisma.UserLookingForWhereInput
+  orderBy?: Prisma.UserLookingForOrderByWithRelationInput | Prisma.UserLookingForOrderByWithRelationInput[]
+  cursor?: Prisma.UserLookingForWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserLookingForScalarFieldEnum | Prisma.UserLookingForScalarFieldEnum[]
+}
+
+/**
+ * User.interestedIn
+ */
+export type User$interestedInArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserGenderInterest
+   */
+  select?: Prisma.UserGenderInterestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserGenderInterest
+   */
+  omit?: Prisma.UserGenderInterestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserGenderInterestInclude<ExtArgs> | null
+  where?: Prisma.UserGenderInterestWhereInput
+  orderBy?: Prisma.UserGenderInterestOrderByWithRelationInput | Prisma.UserGenderInterestOrderByWithRelationInput[]
+  cursor?: Prisma.UserGenderInterestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserGenderInterestScalarFieldEnum | Prisma.UserGenderInterestScalarFieldEnum[]
 }
 
 /**

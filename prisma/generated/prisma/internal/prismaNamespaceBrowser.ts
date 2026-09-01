@@ -54,6 +54,8 @@ export const ModelName = {
   User: 'User',
   UserData: 'UserData',
   UserPreference: 'UserPreference',
+  UserLookingFor: 'UserLookingFor',
+  UserGenderInterest: 'UserGenderInterest',
   GalleryFolder: 'GalleryFolder',
   FolderPermission: 'FolderPermission',
   GalleryImage: 'GalleryImage',
@@ -89,9 +91,7 @@ export const UserScalarFieldEnum = {
   lat: 'lat',
   lng: 'lng',
   role: 'role',
-  relationshipStatus: 'relationshipStatus',
-  lookingFor: 'lookingFor',
-  interestedIn: 'interestedIn'
+  relationshipStatus: 'relationshipStatus'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -128,14 +128,30 @@ export const UserPreferenceScalarFieldEnum = {
   minHeightCm: 'minHeightCm',
   maxHeightCm: 'maxHeightCm',
   maxDistanceKm: 'maxDistanceKm',
-  preferredGender: 'preferredGender',
-  relationshipGoal: 'relationshipGoal',
   verifiedOnly: 'verifiedOnly',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserPreferenceScalarFieldEnum = (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
+
+
+export const UserLookingForScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserLookingForScalarFieldEnum = (typeof UserLookingForScalarFieldEnum)[keyof typeof UserLookingForScalarFieldEnum]
+
+
+export const UserGenderInterestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserGenderInterestScalarFieldEnum = (typeof UserGenderInterestScalarFieldEnum)[keyof typeof UserGenderInterestScalarFieldEnum]
 
 
 export const GalleryFolderScalarFieldEnum = {

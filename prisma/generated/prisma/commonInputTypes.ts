@@ -94,20 +94,6 @@ export type EnumRelationshipStatusNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumRelationshipStatusNullableFilter<$PrismaModel> | $Enums.RelationshipStatus | null
 }
 
-export type EnumLookingForNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.LookingFor | Prisma.EnumLookingForFieldRefInput<$PrismaModel> | null
-  in?: $Enums.LookingFor[] | null
-  notIn?: $Enums.LookingFor[] | null
-  not?: Prisma.NestedEnumLookingForNullableFilter<$PrismaModel> | $Enums.LookingFor | null
-}
-
-export type EnumGenderInterestNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel> | null
-  in?: $Enums.GenderInterest[] | null
-  notIn?: $Enums.GenderInterest[] | null
-  not?: Prisma.NestedEnumGenderInterestNullableFilter<$PrismaModel> | $Enums.GenderInterest | null
-}
-
 export type SortOrderInput = {
   sort: Prisma.SortOrder
   nulls?: Prisma.NullsOrder
@@ -221,26 +207,6 @@ export type EnumRelationshipStatusNullableWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumRelationshipStatusNullableFilter<$PrismaModel>
 }
 
-export type EnumLookingForNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.LookingFor | Prisma.EnumLookingForFieldRefInput<$PrismaModel> | null
-  in?: $Enums.LookingFor[] | null
-  notIn?: $Enums.LookingFor[] | null
-  not?: Prisma.NestedEnumLookingForNullableWithAggregatesFilter<$PrismaModel> | $Enums.LookingFor | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumLookingForNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumLookingForNullableFilter<$PrismaModel>
-}
-
-export type EnumGenderInterestNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel> | null
-  in?: $Enums.GenderInterest[] | null
-  notIn?: $Enums.GenderInterest[] | null
-  not?: Prisma.NestedEnumGenderInterestNullableWithAggregatesFilter<$PrismaModel> | $Enums.GenderInterest | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumGenderInterestNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumGenderInterestNullableFilter<$PrismaModel>
-}
-
 export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | null
@@ -302,28 +268,11 @@ export type EnumSexualityNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumSexualityNullableFilter<$PrismaModel>
 }
 
-export type EnumGenderInterestFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
-  in?: $Enums.GenderInterest[]
-  notIn?: $Enums.GenderInterest[]
-  not?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel> | $Enums.GenderInterest
-}
-
 export type EnumLookingForFilter<$PrismaModel = never> = {
   equals?: $Enums.LookingFor | Prisma.EnumLookingForFieldRefInput<$PrismaModel>
   in?: $Enums.LookingFor[]
   notIn?: $Enums.LookingFor[]
   not?: Prisma.NestedEnumLookingForFilter<$PrismaModel> | $Enums.LookingFor
-}
-
-export type EnumGenderInterestWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
-  in?: $Enums.GenderInterest[]
-  notIn?: $Enums.GenderInterest[]
-  not?: Prisma.NestedEnumGenderInterestWithAggregatesFilter<$PrismaModel> | $Enums.GenderInterest
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
 }
 
 export type EnumLookingForWithAggregatesFilter<$PrismaModel = never> = {
@@ -334,6 +283,23 @@ export type EnumLookingForWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLookingForFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLookingForFilter<$PrismaModel>
+}
+
+export type EnumGenderInterestFilter<$PrismaModel = never> = {
+  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
+  in?: $Enums.GenderInterest[]
+  notIn?: $Enums.GenderInterest[]
+  not?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel> | $Enums.GenderInterest
+}
+
+export type EnumGenderInterestWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
+  in?: $Enums.GenderInterest[]
+  notIn?: $Enums.GenderInterest[]
+  not?: Prisma.NestedEnumGenderInterestWithAggregatesFilter<$PrismaModel> | $Enums.GenderInterest
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
 }
 
 export type EnumFolderVisibilityFilter<$PrismaModel = never> = {
@@ -431,20 +397,6 @@ export type NestedEnumRelationshipStatusNullableFilter<$PrismaModel = never> = {
   in?: $Enums.RelationshipStatus[] | null
   notIn?: $Enums.RelationshipStatus[] | null
   not?: Prisma.NestedEnumRelationshipStatusNullableFilter<$PrismaModel> | $Enums.RelationshipStatus | null
-}
-
-export type NestedEnumLookingForNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.LookingFor | Prisma.EnumLookingForFieldRefInput<$PrismaModel> | null
-  in?: $Enums.LookingFor[] | null
-  notIn?: $Enums.LookingFor[] | null
-  not?: Prisma.NestedEnumLookingForNullableFilter<$PrismaModel> | $Enums.LookingFor | null
-}
-
-export type NestedEnumGenderInterestNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel> | null
-  in?: $Enums.GenderInterest[] | null
-  notIn?: $Enums.GenderInterest[] | null
-  not?: Prisma.NestedEnumGenderInterestNullableFilter<$PrismaModel> | $Enums.GenderInterest | null
 }
 
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -577,26 +529,6 @@ export type NestedEnumRelationshipStatusNullableWithAggregatesFilter<$PrismaMode
   _max?: Prisma.NestedEnumRelationshipStatusNullableFilter<$PrismaModel>
 }
 
-export type NestedEnumLookingForNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.LookingFor | Prisma.EnumLookingForFieldRefInput<$PrismaModel> | null
-  in?: $Enums.LookingFor[] | null
-  notIn?: $Enums.LookingFor[] | null
-  not?: Prisma.NestedEnumLookingForNullableWithAggregatesFilter<$PrismaModel> | $Enums.LookingFor | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumLookingForNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumLookingForNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumGenderInterestNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel> | null
-  in?: $Enums.GenderInterest[] | null
-  notIn?: $Enums.GenderInterest[] | null
-  not?: Prisma.NestedEnumGenderInterestNullableWithAggregatesFilter<$PrismaModel> | $Enums.GenderInterest | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumGenderInterestNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumGenderInterestNullableFilter<$PrismaModel>
-}
-
 export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel> | null
   in?: $Enums.Gender[] | null
@@ -647,28 +579,11 @@ export type NestedEnumSexualityNullableWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumSexualityNullableFilter<$PrismaModel>
 }
 
-export type NestedEnumGenderInterestFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
-  in?: $Enums.GenderInterest[]
-  notIn?: $Enums.GenderInterest[]
-  not?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel> | $Enums.GenderInterest
-}
-
 export type NestedEnumLookingForFilter<$PrismaModel = never> = {
   equals?: $Enums.LookingFor | Prisma.EnumLookingForFieldRefInput<$PrismaModel>
   in?: $Enums.LookingFor[]
   notIn?: $Enums.LookingFor[]
   not?: Prisma.NestedEnumLookingForFilter<$PrismaModel> | $Enums.LookingFor
-}
-
-export type NestedEnumGenderInterestWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
-  in?: $Enums.GenderInterest[]
-  notIn?: $Enums.GenderInterest[]
-  not?: Prisma.NestedEnumGenderInterestWithAggregatesFilter<$PrismaModel> | $Enums.GenderInterest
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
 }
 
 export type NestedEnumLookingForWithAggregatesFilter<$PrismaModel = never> = {
@@ -679,6 +594,23 @@ export type NestedEnumLookingForWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLookingForFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLookingForFilter<$PrismaModel>
+}
+
+export type NestedEnumGenderInterestFilter<$PrismaModel = never> = {
+  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
+  in?: $Enums.GenderInterest[]
+  notIn?: $Enums.GenderInterest[]
+  not?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel> | $Enums.GenderInterest
+}
+
+export type NestedEnumGenderInterestWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GenderInterest | Prisma.EnumGenderInterestFieldRefInput<$PrismaModel>
+  in?: $Enums.GenderInterest[]
+  notIn?: $Enums.GenderInterest[]
+  not?: Prisma.NestedEnumGenderInterestWithAggregatesFilter<$PrismaModel> | $Enums.GenderInterest
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGenderInterestFilter<$PrismaModel>
 }
 
 export type NestedEnumFolderVisibilityFilter<$PrismaModel = never> = {

@@ -57,6 +57,16 @@ export type UserData = Prisma.UserDataModel
  */
 export type UserPreference = Prisma.UserPreferenceModel
 /**
+ * Model UserLookingFor
+ * 
+ */
+export type UserLookingFor = Prisma.UserLookingForModel
+/**
+ * Model UserGenderInterest
+ * 
+ */
+export type UserGenderInterest = Prisma.UserGenderInterestModel
+/**
  * Model GalleryFolder
  * 
  */

@@ -54,8 +54,6 @@ export type UserPreferenceMinAggregateOutputType = {
   minHeightCm: number | null
   maxHeightCm: number | null
   maxDistanceKm: number | null
-  preferredGender: $Enums.GenderInterest | null
-  relationshipGoal: $Enums.LookingFor | null
   verifiedOnly: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -69,8 +67,6 @@ export type UserPreferenceMaxAggregateOutputType = {
   minHeightCm: number | null
   maxHeightCm: number | null
   maxDistanceKm: number | null
-  preferredGender: $Enums.GenderInterest | null
-  relationshipGoal: $Enums.LookingFor | null
   verifiedOnly: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -84,8 +80,6 @@ export type UserPreferenceCountAggregateOutputType = {
   minHeightCm: number
   maxHeightCm: number
   maxDistanceKm: number
-  preferredGender: number
-  relationshipGoal: number
   verifiedOnly: number
   createdAt: number
   updatedAt: number
@@ -121,8 +115,6 @@ export type UserPreferenceMinAggregateInputType = {
   minHeightCm?: true
   maxHeightCm?: true
   maxDistanceKm?: true
-  preferredGender?: true
-  relationshipGoal?: true
   verifiedOnly?: true
   createdAt?: true
   updatedAt?: true
@@ -136,8 +128,6 @@ export type UserPreferenceMaxAggregateInputType = {
   minHeightCm?: true
   maxHeightCm?: true
   maxDistanceKm?: true
-  preferredGender?: true
-  relationshipGoal?: true
   verifiedOnly?: true
   createdAt?: true
   updatedAt?: true
@@ -151,8 +141,6 @@ export type UserPreferenceCountAggregateInputType = {
   minHeightCm?: true
   maxHeightCm?: true
   maxDistanceKm?: true
-  preferredGender?: true
-  relationshipGoal?: true
   verifiedOnly?: true
   createdAt?: true
   updatedAt?: true
@@ -253,8 +241,6 @@ export type UserPreferenceGroupByOutputType = {
   minHeightCm: number | null
   maxHeightCm: number | null
   maxDistanceKm: number | null
-  preferredGender: $Enums.GenderInterest
-  relationshipGoal: $Enums.LookingFor
   verifiedOnly: boolean
   createdAt: Date
   updatedAt: Date
@@ -291,8 +277,6 @@ export type UserPreferenceWhereInput = {
   minHeightCm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   maxHeightCm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   maxDistanceKm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
-  preferredGender?: Prisma.EnumGenderInterestFilter<"UserPreference"> | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFilter<"UserPreference"> | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFilter<"UserPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
@@ -307,8 +291,6 @@ export type UserPreferenceOrderByWithRelationInput = {
   minHeightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   maxHeightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrderInput | Prisma.SortOrder
-  preferredGender?: Prisma.SortOrder
-  relationshipGoal?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -326,8 +308,6 @@ export type UserPreferenceWhereUniqueInput = Prisma.AtLeast<{
   minHeightCm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   maxHeightCm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   maxDistanceKm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
-  preferredGender?: Prisma.EnumGenderInterestFilter<"UserPreference"> | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFilter<"UserPreference"> | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFilter<"UserPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
@@ -342,8 +322,6 @@ export type UserPreferenceOrderByWithAggregationInput = {
   minHeightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   maxHeightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrderInput | Prisma.SortOrder
-  preferredGender?: Prisma.SortOrder
-  relationshipGoal?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -365,8 +343,6 @@ export type UserPreferenceScalarWhereWithAggregatesInput = {
   minHeightCm?: Prisma.IntNullableWithAggregatesFilter<"UserPreference"> | number | null
   maxHeightCm?: Prisma.IntNullableWithAggregatesFilter<"UserPreference"> | number | null
   maxDistanceKm?: Prisma.IntNullableWithAggregatesFilter<"UserPreference"> | number | null
-  preferredGender?: Prisma.EnumGenderInterestWithAggregatesFilter<"UserPreference"> | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForWithAggregatesFilter<"UserPreference"> | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolWithAggregatesFilter<"UserPreference"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserPreference"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UserPreference"> | Date | string
@@ -378,8 +354,6 @@ export type UserPreferenceCreateInput = {
   minHeightCm?: number | null
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
-  preferredGender?: $Enums.GenderInterest
-  relationshipGoal?: $Enums.LookingFor
   verifiedOnly?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -394,8 +368,6 @@ export type UserPreferenceUncheckedCreateInput = {
   minHeightCm?: number | null
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
-  preferredGender?: $Enums.GenderInterest
-  relationshipGoal?: $Enums.LookingFor
   verifiedOnly?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -407,8 +379,6 @@ export type UserPreferenceUpdateInput = {
   minHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  preferredGender?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -423,8 +393,6 @@ export type UserPreferenceUncheckedUpdateInput = {
   minHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  preferredGender?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -438,8 +406,6 @@ export type UserPreferenceCreateManyInput = {
   minHeightCm?: number | null
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
-  preferredGender?: $Enums.GenderInterest
-  relationshipGoal?: $Enums.LookingFor
   verifiedOnly?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -451,8 +417,6 @@ export type UserPreferenceUpdateManyMutationInput = {
   minHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  preferredGender?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -466,8 +430,6 @@ export type UserPreferenceUncheckedUpdateManyInput = {
   minHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  preferredGender?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -486,8 +448,6 @@ export type UserPreferenceCountOrderByAggregateInput = {
   minHeightCm?: Prisma.SortOrder
   maxHeightCm?: Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrder
-  preferredGender?: Prisma.SortOrder
-  relationshipGoal?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -511,8 +471,6 @@ export type UserPreferenceMaxOrderByAggregateInput = {
   minHeightCm?: Prisma.SortOrder
   maxHeightCm?: Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrder
-  preferredGender?: Prisma.SortOrder
-  relationshipGoal?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -526,8 +484,6 @@ export type UserPreferenceMinOrderByAggregateInput = {
   minHeightCm?: Prisma.SortOrder
   maxHeightCm?: Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrder
-  preferredGender?: Prisma.SortOrder
-  relationshipGoal?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -575,22 +531,12 @@ export type UserPreferenceUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserPreferenceUpdateToOneWithWhereWithoutUserInput, Prisma.UserPreferenceUpdateWithoutUserInput>, Prisma.UserPreferenceUncheckedUpdateWithoutUserInput>
 }
 
-export type EnumGenderInterestFieldUpdateOperationsInput = {
-  set?: $Enums.GenderInterest
-}
-
-export type EnumLookingForFieldUpdateOperationsInput = {
-  set?: $Enums.LookingFor
-}
-
 export type UserPreferenceCreateWithoutUserInput = {
   minAge?: number | null
   maxAge?: number | null
   minHeightCm?: number | null
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
-  preferredGender?: $Enums.GenderInterest
-  relationshipGoal?: $Enums.LookingFor
   verifiedOnly?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -603,8 +549,6 @@ export type UserPreferenceUncheckedCreateWithoutUserInput = {
   minHeightCm?: number | null
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
-  preferredGender?: $Enums.GenderInterest
-  relationshipGoal?: $Enums.LookingFor
   verifiedOnly?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -632,8 +576,6 @@ export type UserPreferenceUpdateWithoutUserInput = {
   minHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  preferredGender?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -646,8 +588,6 @@ export type UserPreferenceUncheckedUpdateWithoutUserInput = {
   minHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  preferredGender?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  relationshipGoal?: Prisma.EnumLookingForFieldUpdateOperationsInput | $Enums.LookingFor
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -663,8 +603,6 @@ export type UserPreferenceSelect<ExtArgs extends runtime.Types.Extensions.Intern
   minHeightCm?: boolean
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
-  preferredGender?: boolean
-  relationshipGoal?: boolean
   verifiedOnly?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -679,8 +617,6 @@ export type UserPreferenceSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   minHeightCm?: boolean
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
-  preferredGender?: boolean
-  relationshipGoal?: boolean
   verifiedOnly?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -695,8 +631,6 @@ export type UserPreferenceSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   minHeightCm?: boolean
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
-  preferredGender?: boolean
-  relationshipGoal?: boolean
   verifiedOnly?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -711,14 +645,12 @@ export type UserPreferenceSelectScalar = {
   minHeightCm?: boolean
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
-  preferredGender?: boolean
-  relationshipGoal?: boolean
   verifiedOnly?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "minAge" | "maxAge" | "minHeightCm" | "maxHeightCm" | "maxDistanceKm" | "preferredGender" | "relationshipGoal" | "verifiedOnly" | "createdAt" | "updatedAt", ExtArgs["result"]["userPreference"]>
+export type UserPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "minAge" | "maxAge" | "minHeightCm" | "maxHeightCm" | "maxDistanceKm" | "verifiedOnly" | "createdAt" | "updatedAt", ExtArgs["result"]["userPreference"]>
 export type UserPreferenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -742,8 +674,6 @@ export type $UserPreferencePayload<ExtArgs extends runtime.Types.Extensions.Inte
     minHeightCm: number | null
     maxHeightCm: number | null
     maxDistanceKm: number | null
-    preferredGender: $Enums.GenderInterest
-    relationshipGoal: $Enums.LookingFor
     verifiedOnly: boolean
     createdAt: Date
     updatedAt: Date
@@ -1178,8 +1108,6 @@ export interface UserPreferenceFieldRefs {
   readonly minHeightCm: Prisma.FieldRef<"UserPreference", 'Int'>
   readonly maxHeightCm: Prisma.FieldRef<"UserPreference", 'Int'>
   readonly maxDistanceKm: Prisma.FieldRef<"UserPreference", 'Int'>
-  readonly preferredGender: Prisma.FieldRef<"UserPreference", 'GenderInterest'>
-  readonly relationshipGoal: Prisma.FieldRef<"UserPreference", 'LookingFor'>
   readonly verifiedOnly: Prisma.FieldRef<"UserPreference", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"UserPreference", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserPreference", 'DateTime'>
