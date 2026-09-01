@@ -17,6 +17,7 @@
         "utils": "@/lib/utils",
         "ui": "@/features/_components/ui",
         "lib": "@/lib",
+        "prisma": "@/prisma",
         "hooks": "@/hooks"
     },
     "menuColor": "default",

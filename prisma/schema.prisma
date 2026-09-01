@@ -89,6 +89,7 @@ enum FolderVisibility {
 model User {
   id Int @id @default(autoincrement())
 
+  avatarUrl String?  
   username  String   @unique
   email     String   @unique
   password  String
@@ -104,8 +105,8 @@ model User {
   role UserRole @default(USER)
 
   relationshipStatus RelationshipStatus?
-  lookingFor         LookingFor?
-  interestedIn       GenderInterest?
+  lookingFor         UserLookingFor[]
+  interestedIn       UserGenderInterest[]
   userData           UserData?
 
   folders     GalleryFolder[]
@@ -116,8 +117,10 @@ model User {
   ownedGroups    Group[]         @relation("OwnedGroups")
   groups         Group[]
   groupMembers   GroupMember[]   @relation("GroupMembers")
-  userPreference UserPreference?
+  userPreference UserPreference[]
 }
+
+
 
 model UserData {
   id     Int @id @default(autoincrement())
@@ -126,7 +129,7 @@ model UserData {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   avatar String?
-  displayed_name String?
+  nickname String?
   description    String?
   bio            String?
 
@@ -162,16 +165,35 @@ model UserPreference {
 
   maxDistanceKm Int?
 
-  preferredGender GenderInterest @default(Everyone)
-
-  relationshipGoal LookingFor @default(NothingSpecific)
-
   verifiedOnly Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model UserLookingFor {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  value LookingFor
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, value])
+  @@index([userId])
+}
+
+model UserGenderInterest {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  value GenderInterest
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, value])
+  @@index([userId])
+}
 model GalleryFolder {
   id Int @id @default(autoincrement())
 
