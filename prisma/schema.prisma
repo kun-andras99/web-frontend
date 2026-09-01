@@ -1,0 +1,300 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  MODERATOR
+}
+
+enum Gender {
+  Male
+  Female
+  NonBinary
+  Other
+}
+
+enum Sexuality {
+  Straight
+  Bisexual
+  Gay
+  Lesbian
+  Trans
+  Pansexual
+  Asexual
+  Other
+}
+
+enum CrossdressStatus {
+  Crossdress
+  No
+}
+
+enum RelationshipStatus {
+  Single
+  Relation
+  Engaged
+  Married
+  Separated
+  Divorced
+  Widowed
+  Complicated
+  Open
+}
+
+enum LookingFor {
+  Chat
+  Friendship
+  CasualDating
+  SeriousRelationship
+  Hookup
+  Networking
+  NothingSpecific
+}
+
+enum GenderInterest {
+  Men
+  Women
+  NonBinary
+  Everyone
+  PreferNotToSay
+}
+
+enum TransStatus {
+  Cis
+  Trans
+}
+
+enum City {
+  Centrum
+  Straight
+  Bisexual
+  Gay
+  Trans
+  BDSM
+}
+
+enum FolderVisibility {
+  PUBLIC
+  PRIVATE
+  RESTRICTED
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  isVerified Boolean @default(false)
+  isActive   Boolean @default(true)
+
+  lat Float?
+  lng Float?
+
+  role UserRole @default(USER)
+
+  relationshipStatus RelationshipStatus?
+  lookingFor         LookingFor?
+  interestedIn       GenderInterest?
+  userData           UserData?
+
+  folders     GalleryFolder[]
+  images      GalleryImage[]
+  likes       ImageLike[]
+  permissions FolderPermission[]
+
+  ownedGroups    Group[]         @relation("OwnedGroups")
+  groups         Group[]
+  groupMembers   GroupMember[]   @relation("GroupMembers")
+  userPreference UserPreference?
+}
+
+model UserData {
+  id     Int @id @default(autoincrement())
+  userId Int @unique
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  avatar String?
+  displayed_name String?
+  description    String?
+  bio            String?
+
+  birth DateTime
+
+  heightCm Int?
+  weightKg Int?
+
+  gender    Gender?
+  sexuality Sexuality?
+  pronouns  String?
+
+  city    String?
+  country String?
+
+  avatarUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserPreference {
+  id     Int @id @default(autoincrement())
+  userId Int @unique
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  minAge Int?
+  maxAge Int?
+
+  minHeightCm Int?
+  maxHeightCm Int?
+
+  maxDistanceKm Int?
+
+  preferredGender GenderInterest @default(Everyone)
+
+  relationshipGoal LookingFor @default(NothingSpecific)
+
+  verifiedOnly Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GalleryFolder {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String? // 🔥 új: folder bio
+
+  visibility FolderVisibility @default(PUBLIC)
+
+  isLocked Boolean @default(false) // 🔐 extra protection (future-proof)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  images      GalleryImage[]
+  permissions FolderPermission[]
+
+  @@index([userId])
+}
+
+model FolderPermission {
+  id Int @id @default(autoincrement())
+
+  folderId Int
+  userId   Int
+
+  folder GalleryFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  canView   Boolean @default(true)
+  canUpload Boolean @default(false) // 🔥 extra: collaborator support
+
+  createdAt DateTime @default(now())
+
+  @@unique([folderId, userId])
+  @@index([userId])
+}
+
+model GalleryImage {
+  id Int @id @default(autoincrement())
+
+  folderId Int
+  userId   Int
+
+  folder GalleryFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  url String
+
+  caption String?
+  bio     String? // 🔥 hosszabb leírás / story
+
+  width  Int? // 📸 optional metadata
+  height Int?
+
+  mimeType String?
+  size     Int?
+
+  isPrivate Boolean @default(false) // 🔐 image-level privacy
+
+  createdAt DateTime @default(now())
+
+  likes ImageLike[]
+  views ImageView[]
+
+  @@index([folderId])
+  @@index([userId])
+}
+
+model ImageLike {
+  id Int @id @default(autoincrement())
+
+  imageId Int
+  userId  Int
+
+  image GalleryImage @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([imageId, userId])
+  @@index([userId])
+}
+
+model ImageView {
+  id Int @id @default(autoincrement())
+
+  imageId Int
+  userId  Int?
+
+  image GalleryImage @relation(fields: [imageId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([imageId])
+}
+
+model Group {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+
+  ownerId Int
+  owner   User @relation("OwnedGroups", fields: [ownerId], references: [id])
+
+  members GroupMember[]
+  user    User?         @relation(fields: [userId], references: [id])
+  userId  Int?
+}
+
+model GroupMember {
+  id Int @id @default(autoincrement())
+
+  userId  Int
+  groupId Int
+
+  user  User  @relation("GroupMembers", fields: [userId], references: [id])
+  group Group @relation(fields: [groupId], references: [id])
+
+  joinedAt DateTime @default(now())
+
+  @@unique([userId, groupId])
+}
