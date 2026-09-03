@@ -321,7 +321,7 @@ body {
 
 .bottom-bar {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   --tint: 255, 255, 255;
   display: -webkit-box;
@@ -333,7 +333,6 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 69px;
   width: 100%;
 }
 .bottom-bar .content {
@@ -347,7 +346,7 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: calc(100% - 10px);
-  padding: 7px 6px 6px 6px;
+  padding: 6px;
   border-radius: 40px;
   isolation: isolate;
   background: radial-gradient(circle at 50% 0%, rgba(0, 217, 255, 0.08), transparent 42%), linear-gradient(145deg, rgba(0, 23, 27, 0.4), rgba(0, 23, 27, 0.6) 45%, rgba(0, 23, 27, 0.7));
@@ -373,7 +372,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 5px 14px;
+  padding: 6px 14px;
 }
 .bottom-bar .content .icon {
   border-radius: 10px 10px;
