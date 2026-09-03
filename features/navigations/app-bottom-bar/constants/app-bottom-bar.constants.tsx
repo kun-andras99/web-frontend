@@ -46,9 +46,10 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "extra",
         title: "Extra",
         url: "/extra",
-        icon: <ExtraIconSVG />,
+        icon: <ExtraIconSVG size={26} />,
         activeIcon: (
             <ExtraIconSVG
+                size={26}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -124,9 +125,10 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "cruise",
         title: "Cruise",
         url: "/cruise",
-        icon: <CruiseIconSVG />,
+        icon: <CruiseIconSVG size={26} />,
         activeIcon: (
             <CruiseIconSVG
+                size={26}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -184,9 +186,10 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "love",
         title: "Love",
         url: "/love",
-        icon: <HeartIconSVG />,
+        icon: <HeartIconSVG size={26} />,
         activeIcon: (
             <HeartIconSVG
+                size={26}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -262,9 +265,10 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "inbox",
         title: "Inbox",
         url: "/inbox",
-        icon: <InboxIconSVG />,
+        icon: <InboxIconSVG size={26} />,
         activeIcon: (
             <InboxIconSVG
+                size={26}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -340,9 +344,10 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "community",
         title: "Community",
         url: "/community",
-        icon: <CommunityIconSVG />,
+        icon: <CommunityIconSVG size={26} />,
         activeIcon: (
             <CommunityIconSVG
+                size={26}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
