@@ -46,7 +46,7 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "extra",
         title: "Extra",
         url: "/extra",
-        icon: <ExtraIconSVG />,
+        icon: <ExtraIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <ExtraIconSVG
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
@@ -124,7 +124,7 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "cruise",
         title: "Cruise",
         url: "/cruise",
-        icon: <CruiseIconSVG />,
+        icon: <CruiseIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <CruiseIconSVG
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
@@ -184,7 +184,7 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "love",
         title: "Love",
         url: "/love",
-        icon: <HeartIconSVG />,
+        icon: <HeartIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <HeartIconSVG
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
@@ -262,7 +262,7 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "inbox",
         title: "Inbox",
         url: "/inbox",
-        icon: <InboxIconSVG />,
+        icon: <InboxIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <InboxIconSVG
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
@@ -340,7 +340,7 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "community",
         title: "Community",
         url: "/community",
-        icon: <CommunityIconSVG />,
+        icon: <CommunityIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <CommunityIconSVG
                 startColor={BOTTOM_ICON_COLORS.active.startColor}

@@ -18,7 +18,7 @@ export default function AppBottomBar() {
                         href={route.url}
                         className={` flex h-full flex-1 flex-col items-center justify-center gap-1 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"} `}>
                         <div
-                            className={` flex h-6 w-6 items-center justify-center `}>
+                            className={` flex h-[36px] w-[36px] items-center justify-center `}>
                             {isActive ? route.activeIcon : route.icon}
                         </div>
                         {/* <span className="text-xs font-medium">
