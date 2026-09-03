@@ -46,11 +46,9 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "extra",
         title: "Extra",
         url: "/extra",
-        icon: <ExtraIconSVG size={30} strokeWidth={1.5} />,
+        icon: <ExtraIconSVG />,
         activeIcon: (
             <ExtraIconSVG
-                size={30}
-                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -126,11 +124,9 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "cruise",
         title: "Cruise",
         url: "/cruise",
-        icon: <CruiseIconSVG size={30} strokeWidth={1.5} />,
+        icon: <CruiseIconSVG />,
         activeIcon: (
             <CruiseIconSVG
-                size={30}
-                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -188,11 +184,9 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "love",
         title: "Love",
         url: "/love",
-        icon: <HeartIconSVG size={30} strokeWidth={1.5} />,
+        icon: <HeartIconSVG />,
         activeIcon: (
             <HeartIconSVG
-                size={30}
-                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -268,11 +262,9 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "inbox",
         title: "Inbox",
         url: "/inbox",
-        icon: <InboxIconSVG size={30} strokeWidth={1.5} />,
+        icon: <InboxIconSVG />,
         activeIcon: (
             <InboxIconSVG
-                size={30}
-                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -348,11 +340,9 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         name: "community",
         title: "Community",
         url: "/community",
-        icon: <CommunityIconSVG size={30} strokeWidth={1.5} />,
+        icon: <CommunityIconSVG />,
         activeIcon: (
             <CommunityIconSVG
-                size={30}
-                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
