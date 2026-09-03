@@ -1,4 +1,3 @@
-import UsersNearbyScreen from "@/features/(main-menus)/love/screens/users-nearby";
 import { getAllUsers } from "@/features/user/user-api";
 
 export default async function ExploreNearbyPage() {
@@ -7,7 +6,11 @@ export default async function ExploreNearbyPage() {
     return (
         <>
             explore page
-            <UsersNearbyScreen users={users} />
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            {/* <UsersNearbyScreen users={users} /> */}
         </>
     );
 }

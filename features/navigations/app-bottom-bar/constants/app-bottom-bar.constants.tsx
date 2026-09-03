@@ -49,6 +49,8 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         icon: <ExtraIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <ExtraIconSVG
+                size={30}
+                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -127,6 +129,8 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         icon: <CruiseIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <CruiseIconSVG
+                size={30}
+                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -187,6 +191,8 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         icon: <HeartIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <HeartIconSVG
+                size={30}
+                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -265,6 +271,8 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         icon: <InboxIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <InboxIconSVG
+                size={30}
+                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -343,6 +351,8 @@ export const appBottomBarRoutes: AppBottomBarRoute[] = [
         icon: <CommunityIconSVG size={30} strokeWidth={1.5} />,
         activeIcon: (
             <CommunityIconSVG
+                size={30}
+                strokeWidth={1.5}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={

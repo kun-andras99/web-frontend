@@ -7,27 +7,29 @@ export default function AppBottomBar() {
     const pathname = usePathname();
     return (
         <div className="bottom-bar">
-            {appBottomBarRoutes.map((route) => {
-                const isActive =
-                    pathname === route.url ||
-                    pathname.startsWith(`${route.url}/`);
+            <div className="content">
+                {appBottomBarRoutes.map((route) => {
+                    const isActive =
+                        pathname === route.url ||
+                        pathname.startsWith(`${route.url}/`);
 
-                return (
-                    <Link
-                        key={route.id}
-                        href={route.url}
-                        className={` flex h-full flex-1 flex-col items-center justify-center gap-1 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"} `}>
-                        <div
-                            className={` flex h-[36px] w-[36px] items-center justify-center `}>
-                            {isActive ? route.activeIcon : route.icon}
-                        </div>
-                        {/* <span className="text-xs font-medium">
+                    return (
+                        <>
+                            <div className={`icon ${isActive ? "active" : ""}`}>
+                                <Link
+                                    key={route.id}
+                                    href={route.url}
+                                    className={`link`}>
+                                    {isActive ? route.activeIcon : route.icon}
+                                    {/* <span className="text-xs font-medium">
                             {route.title}
-                        </span> */}
-                    </Link>
-                );
-            })}
-            {/* <div className="bottom-avatar-container">
+                            </span> */}
+                                </Link>
+                            </div>
+                        </>
+                    );
+                })}
+                {/* <div className="bottom-avatar-container">
                 <Image
                     className="bottom-avatar-pic"
                     src="/assets/images/user-blank-1.png"
@@ -36,6 +38,7 @@ export default function AppBottomBar() {
                     height={34}
                 />
             </div> */}
+            </div>
         </div>
     );
 }
