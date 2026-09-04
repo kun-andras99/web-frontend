@@ -27,7 +27,7 @@
         border-radius: 40px;
         // height: 42px;
         isolation: isolate;
-        border: 1px solid rgba(var(--white), 0.2);
+        border: 1px solid rgba(var(--white), 0.25);
         background:
             radial-gradient(
                 circle at 50% 0%,
@@ -61,13 +61,13 @@
 
         .icon {
             // background: #444;
-            border-radius: 10px 10px;
-            &:first-child {
-                border-radius: 50px 25px 25px 50px;
-            }
-            &:last-child {
-                border-radius: 25px 50px 50px 25px;
-            }
+            border-radius: 50px;
+            // &:first-child {
+            //     border-radius: 50px 25px 25px 50px;
+            // }
+            // &:last-child {
+            //     border-radius: 25px 50px 50px 25px;
+            // }
 
             &.active {
                 background: rgba(255, 255, 255, 0.03);

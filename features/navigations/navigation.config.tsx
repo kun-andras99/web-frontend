@@ -127,7 +127,7 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         name: "cruise",
         title: "Cruise",
         url: "/cruise",
-        icon: <CruiseIconSVG size={26} />,
+        icon: <CruiseIconSVG size={26} strokeWidth={1.2} />,
         activeIcon: (
             <CruiseIconSVG
                 size={26}
@@ -188,7 +188,7 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         name: "love",
         title: "Love",
         url: "/love",
-        icon: <HeartIconSVG size={26} />,
+        icon: <HeartIconSVG size={26} strokeWidth={1.2} />,
         activeIcon: (
             <HeartIconSVG
                 size={26}
@@ -346,7 +346,7 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         name: "community",
         title: "Community",
         url: "/community",
-        icon: <CommunityIconSVG size={26} />,
+        icon: <CommunityIconSVG size={26} strokeWidth={1.2} />,
         activeIcon: (
             <CommunityIconSVG
                 size={26}
