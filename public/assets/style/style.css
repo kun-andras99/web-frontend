@@ -167,7 +167,7 @@ body {
 .tab-list::before {
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
-  left: -7px;
+  left: -8px;
   border-radius: 8px 0 0 0;
   background: var(--bg);
   corner-shape: scoop;
@@ -175,7 +175,7 @@ body {
 .tab-list::after {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-  right: -7px;
+  right: -8px;
   border-radius: 8px 0 0 0;
   background: var(--bg);
   corner-shape: scoop;

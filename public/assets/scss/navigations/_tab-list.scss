@@ -98,7 +98,7 @@
 
     &::before {
         transform: rotate(-90deg);
-        left: -7px;
+        left: -8px;
         border-radius: 8px 0 0 0;
         background: var(--bg);
         corner-shape: scoop;
@@ -106,7 +106,7 @@
 
     &::after {
         transform: rotate(180deg);
-        right: -7px;
+        right: -8px;
         border-radius: 8px 0 0 0;
         background: var(--bg);
         corner-shape: scoop;
