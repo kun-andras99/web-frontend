@@ -1,5 +1,6 @@
 .bottom-page {
     margin-block-start: 86px;
+    margin-block-end: 94px;
     display: flex;
     flex-direction: column;
 }
@@ -80,8 +81,19 @@
 
     .shared-box {
         flex: 0 0 130px;
+        position: relative;
         background: #202020;
         border-radius: 10px;
+
+        .image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px;
+            // height: 100%;
+        }
     }
 
     .box-inactive {
@@ -101,9 +113,19 @@
     padding: 0 10px;
 
     .shared-box {
+        position: relative;
         background: #202020;
         border-radius: 10px;
         aspect-ratio: 2 / 3;
+        .image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px;
+            // height: 100%;
+        }
     }
 
     .box-inactive {

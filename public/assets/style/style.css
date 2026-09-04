@@ -513,6 +513,8 @@ body {
 .bottom-page {
   -webkit-margin-before: 86px;
           margin-block-start: 86px;
+  -webkit-margin-after: 94px;
+          margin-block-end: 94px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -618,7 +620,18 @@ body {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 130px;
           flex: 0 0 130px;
+  position: relative;
   background: #202020;
+  border-radius: 10px;
+}
+.first-shared-row .shared-box .image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   border-radius: 10px;
 }
 ::-webkit-scrollbar {
@@ -634,9 +647,20 @@ body {
   padding: 0 10px;
 }
 .second-shared-row .shared-box {
+  position: relative;
   background: #202020;
   border-radius: 10px;
   aspect-ratio: 2/3;
+}
+.second-shared-row .shared-box .image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 10px;
 }
 .filter-message-box {
   display: -webkit-box;
