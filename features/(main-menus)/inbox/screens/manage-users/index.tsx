@@ -6,6 +6,7 @@ import { useFilteredManageUsers } from "@/features/(main-menus)/inbox/hooks/useF
 import { useManageUsersFilter } from "@/features/(main-menus)/inbox/hooks/useManageUsersFilter";
 import { ManageUsersFilter } from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
 import { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
+import { usePathname } from "next/navigation";
 
 interface ManageUsersScreenProps {
     manageUsers: ManageUsers[];
@@ -34,13 +35,14 @@ export default function ManageUsersScreen({
     manageUsers,
 }: ManageUsersScreenProps) {
     const { filter, setFilter } = useManageUsersFilter();
+    const pathname = usePathname();
 
     const filteredManageUsers = useFilteredManageUsers({
         manageUsers,
         filter,
     });
 
-    console.log(manageUsers);
+    console.log(pathname);
 
     return (
         <main className="bottom-page">

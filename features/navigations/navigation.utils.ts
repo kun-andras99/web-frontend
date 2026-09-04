@@ -1,0 +1,145 @@
+import type {
+    NavigationConfig,
+    NavigationScreen,
+    NavigationTab,
+    ResolvedNavigation,
+} from "@/features/navigations/navigation.types";
+
+/**
+ * Levágja a trailing slash-t és a query stringet / hash-t, hogy az
+ * összehasonlítás konzisztens legyen:
+ * "/cruise/", "/cruise?x=1", "/cruise#top" -> "/cruise"
+ */
+export function normalizePath(path: string): string {
+    const withoutHash = path.split("#")[0] ?? "";
+    const withoutQuery = withoutHash.split("?")[0] ?? "";
+
+    if (withoutQuery.length > 1 && withoutQuery.endsWith("/")) {
+        return withoutQuery.slice(0, -1);
+    }
+
+    return withoutQuery || "/";
+}
+
+/**
+ * Megmondja, hogy egy adott route-minta (pl. "/cruise") aktívnak számít-e
+ * a jelenlegi pathname alapján. Beágyazott / dinamikus route-okat is támogat:
+ * minta "/cruise", pathname "/cruise/123" -> true.
+ */
+export function isActivePath(pattern: string, pathname: string): boolean {
+    const normalizedPattern = normalizePath(pattern);
+    const normalizedPathname = normalizePath(pathname);
+
+    if (normalizedPattern === normalizedPathname) {
+        return true;
+    }
+
+    return normalizedPathname.startsWith(`${normalizedPattern}/`);
+}
+
+/**
+ * Egy screen `url` mezője csak a saját szegmens (pl. "/visitors"), NEM a teljes,
+ * ténylegesen böngészőben megjelenő route. A tényleges route a szülő tab
+ * route-jából (`fromUrl`) és ebből a szegmensből áll össze:
+ * "/cruise" + "/visitors" -> "/cruise/visitors".
+ *
+ * Ezt használd a screen-hez tartozó `<Link href>` felépítéséhez is, hogy ne
+ * kelljen sehol kézzel duplikálni a "/cruise" prefixet.
+ */
+export function getScreenFullPath(screen: NavigationScreen): string {
+    const base = screen.fromUrl.endsWith("/")
+        ? screen.fromUrl.slice(0, -1)
+        : screen.fromUrl;
+    const segment = screen.url.startsWith("/") ? screen.url : `/${screen.url}`;
+
+    return `${base}${segment}`;
+}
+
+/**
+ * Megkeresi az aktuális pathname alapján az aktív "screen"-t (al-oldalt), és a
+ * hozzá tartozó szülő tab-ot. A screen-eket priorizáljuk a tab-okkal szemben,
+ * mert azok a specifikusabb route-ok. Több egyező screen esetén a leghosszabb
+ * (legspecifikusabb) url nyer.
+ */
+export function resolveNavigation(
+    pathname: string,
+    navigation: NavigationConfig,
+): ResolvedNavigation {
+    const screenMatch = findMatchingScreen(pathname, navigation);
+
+    if (screenMatch) {
+        return {
+            tab: screenMatch.tab,
+            screen: screenMatch.screen,
+            title: screenMatch.screen.title,
+        };
+    }
+
+    const tabMatch = findMatchingTab(pathname, navigation);
+
+    return {
+        tab: tabMatch,
+        screen: null,
+        title: tabMatch?.title ?? null,
+    };
+}
+
+function findMatchingScreen(
+    pathname: string,
+    navigation: NavigationConfig,
+): { tab: NavigationTab; screen: NavigationScreen } | null {
+    let best: { tab: NavigationTab; screen: NavigationScreen } | null = null;
+    let bestScore = -1;
+
+    for (const tab of navigation) {
+        for (const screen of tab.screens ?? []) {
+            const screenFullPath = getScreenFullPath(screen);
+
+            if (!isActivePath(screenFullPath, pathname)) continue;
+
+            const score = normalizePath(screenFullPath).length;
+            if (score > bestScore) {
+                bestScore = score;
+                // a `fromUrl` alapján keressük a szülő tab-ot: robusztusabb, mint a
+                // jelenlegi loop-beli tab, ha egy screen elméletileg több tab alatt
+                // is megjelenne a jövőben.
+                const parentTab =
+                    navigation.find((t) => t.url === screen.fromUrl) ?? tab;
+                best = { tab: parentTab, screen };
+            }
+        }
+    }
+
+    return best;
+}
+
+function findMatchingTab(
+    pathname: string,
+    navigation: NavigationConfig,
+): NavigationTab | null {
+    let best: NavigationTab | null = null;
+    let bestScore = -1;
+
+    for (const tab of navigation) {
+        if (!isActivePath(tab.url, pathname)) continue;
+
+        const score = normalizePath(tab.url).length;
+        if (score > bestScore) {
+            bestScore = score;
+            best = tab;
+        }
+    }
+
+    return best;
+}
+
+/**
+ * Kényelmi függvény: csak a feloldott címet adja vissza, fallback-kel.
+ */
+export function getPageTitle(
+    pathname: string,
+    navigation: NavigationConfig,
+    fallbackTitle = "s",
+): string {
+    return resolveNavigation(pathname, navigation).title ?? fallbackTitle;
+}

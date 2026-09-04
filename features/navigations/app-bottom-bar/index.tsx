@@ -1,5 +1,5 @@
 "use client";
-import { appBottomBarRoutes } from "@/features/navigations/app-bottom-bar/constants/app-bottom-bar.constants";
+import { APP_BOTTOM_BAR_ROUTES } from "@/features/navigations/navigation.config";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,25 +8,22 @@ export default function AppBottomBar() {
     return (
         <div className="bottom-bar">
             <div className="content">
-                {appBottomBarRoutes.map((route) => {
+                {APP_BOTTOM_BAR_ROUTES.map((route) => {
                     const isActive =
                         pathname === route.url ||
                         pathname.startsWith(`${route.url}/`);
 
                     return (
-                        <>
-                            <div className={`icon ${isActive ? "active" : ""}`}>
-                                <Link
-                                    key={route.id}
-                                    href={route.url}
-                                    className={`link`}>
-                                    {isActive ? route.activeIcon : route.icon}
-                                    {/* <span className="text-xs font-medium">
+                        <div
+                            className={`icon ${isActive ? "active" : ""}`}
+                            key={route.id}>
+                            <Link href={route.url} className={`link`}>
+                                {isActive ? route.activeIcon : route.icon}
+                                {/* <span className="text-xs font-medium">
                             {route.title}
                             </span> */}
-                                </Link>
-                            </div>
-                        </>
+                            </Link>
+                        </div>
                     );
                 })}
                 {/* <div className="bottom-avatar-container">
