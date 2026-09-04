@@ -1,6 +1,6 @@
 export const BOTTOM_ICON_COLORS = {
-    startColor: "#c0c0c0",
-    stopColor: "#808080",
+    startColor: "#dddddd",
+    stopColor: "#acacac",
     backgroundStartColor: "#e0e0e0",
     backgroundStopColor: "#e0e0e0",
 
