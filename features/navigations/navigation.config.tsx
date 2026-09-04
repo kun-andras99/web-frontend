@@ -267,7 +267,7 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         name: "inbox",
         title: "Inbox",
         url: "/inbox",
-        icon: <InboxIconSVG size={26} />,
+        icon: <InboxIconSVG size={26} strokeWidth={1.28} />,
         activeIcon: (
             <InboxIconSVG
                 size={26}

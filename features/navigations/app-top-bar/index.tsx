@@ -50,36 +50,44 @@ export default function AppTopBar({
                         <div className="z-100 flex flex-col items-center justify-center h-[50px]">
                             <p>{pageTitle}</p>
                         </div>
+
+                        {rightSlot ? (
+                            <div className="header__right">{rightSlot}</div>
+                        ) : null}
                         <div className="tab-list">
                             {tabs.screens?.map((tab) => {
-                                const tabUrl = `${tab.fromUrl}/${tab.url}`;
+                                const tabUrl = `${tab.fromUrl}${tab.url}`;
+
+                                console.log(tabUrl);
+                                console.log({ pathname });
 
                                 const isActive = pathname === tabUrl;
 
                                 return (
-                                    <button
+                                    <div
                                         key={tab.id}
                                         onClick={() => handleTabChange(tabUrl)}
-                                        className={`${isActive ? "" : "tab-item"}`}>
-                                        {/* {isActive ? (
-                                        <div className="flex active-tab-item">
-                                            <div className="icon">
-                                                {tab.activeIcon}
-                                                <div className="title">
-                                                    {tab.title}
+                                        className={
+                                            // `${isActive ? " active-tab-item tab-item" : "tab-item"}`
+                                            "tab-item"
+                                        }>
+                                        {isActive ? (
+                                            <div className="icon-container">
+                                                <div className="icon">
+                                                    {tab.activeIcon}
                                                 </div>
                                             </div>
-                                        </div>
-                                    ) : ( */}
-                                        <div className="icon">{tab.icon}</div>
-                                        {/* )} */}
-                                    </button>
+                                        ) : (
+                                            <div className="icon-container">
+                                                <div className="icon">
+                                                    {tab.icon}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                 );
                             })}
                         </div>
-                        {rightSlot ? (
-                            <div className="header__right">{rightSlot}</div>
-                        ) : null}
                     </div>
                 </div>
             </div>
