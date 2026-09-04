@@ -1,11 +1,12 @@
 "use client";
 
+import LoadManageUsersBox from "@/features/(main-menus)/inbox/components/LoadManageUsersBox";
 import { useFilteredManageUsers } from "@/features/(main-menus)/inbox/hooks/useFilteredManageUsers";
 import { useManageUsersFilter } from "@/features/(main-menus)/inbox/hooks/useManageUsersFilter";
 import { ManageUsersFilter } from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
 import { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
 import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
-import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
+import TopFilter from "@/features/_components/ui/top-filter";
 import { usePathname } from "next/navigation";
 
 interface ManageUsersScreenProps {
@@ -46,9 +47,16 @@ export default function ManageUsersScreen({
 
     return (
         <BottomPageWrapper>
-            <LiquidGlassBox />
+            <TopFilter>
+                <div className="filters">
+                    <div className="filter">All</div>
+                    <div className="filter">Favorites</div>
+                    <div className="filter active">Friends</div>
+                    <div className="filter">Blocked</div>
+                </div>
+            </TopFilter>
 
-            {/* <LoadManageUsersBox manageUsers={filteredManageUsers} /> */}
+            <LoadManageUsersBox manageUsers={filteredManageUsers} />
         </BottomPageWrapper>
     );
 }
