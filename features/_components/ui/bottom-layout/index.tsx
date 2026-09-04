@@ -45,7 +45,6 @@ export default function BottomLayout({ children }: { children: ReactNode }) {
     }, []);
     return (
         <div className="test">
-            {/* <AppTopBar /> */}
             <main>{children}</main>
             <AppBottomBar isHidden={isBottomBarHidden} />
         </div>
