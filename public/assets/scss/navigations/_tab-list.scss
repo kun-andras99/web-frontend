@@ -2,14 +2,24 @@
     --bg: #141414;
     --bg-rgb: 3, 6, 10;
 }
-.top-bar {
+
+.top-wrap {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9;
-}
+    .top-bar {
+        transform: translateY(0);
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
 
+    &.is-scrolled {
+        .top-bar {
+            transform: translateY(calc(-100% + 4px));
+        }
+    }
+}
 .page-title {
     font-family: "Dosis", sans-serif;
     display: flex;
@@ -20,6 +30,13 @@
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 0.85px;
+}
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
 }
 .top-bar {
     background: transparent;
@@ -81,7 +98,7 @@
 }
 
 .tab-list {
-    top: 45px;
+    top: 50px;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -104,7 +121,7 @@
         height: 8px;
         position: absolute;
         // background: #fff;
-        top: 5px;
+        top: 0px;
     }
 
     &::before {
@@ -121,6 +138,12 @@
         border-radius: 8px 0 0 0;
         background: var(--bg);
         corner-shape: scoop;
+    }
+
+    &.is-scrolled {
+        .top-bar {
+            transform: translateY(calc(-100% + 4px));
+        }
     }
 
     .icon-container {

@@ -9,7 +9,7 @@
     font-family: "Dosis", sans-serif;
     margin-top: 15px;
     background: var(--background);
-    padding: 36px 0 15px 0;
+    padding: 41px 0 15px 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -17,8 +17,9 @@
     gap: 15px;
     position: sticky;
     z-index: 8;
-    top: 50px;
+    top: 4px;
     height: auto;
+
     .content {
         font-family: "Dosis", sans-serif;
         margin-top: 15px;
@@ -29,7 +30,6 @@
         gap: 15px;
         position: sticky;
         z-index: 8;
-        top: 50px;
         height: 34px;
 
         .blur-pic-container {

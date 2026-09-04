@@ -82,12 +82,24 @@ body {
   --bg-rgb: 3, 6, 10;
 }
 
-.top-bar {
+.top-wrap {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 9;
+}
+.top-wrap .top-bar {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: -webkit-transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), -webkit-transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.top-wrap.is-scrolled .top-bar {
+  -webkit-transform: translateY(calc(-100% + 4px));
+          transform: translateY(calc(-100% + 4px));
 }
 
 .page-title {
@@ -106,6 +118,14 @@ body {
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 0.85px;
+}
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
 }
 
 .top-bar {
@@ -149,7 +169,7 @@ body {
 }
 
 .tab-list {
-  top: 45px;
+  top: 50px;
   position: fixed;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -180,7 +200,7 @@ body {
   width: 8px;
   height: 8px;
   position: absolute;
-  top: 5px;
+  top: 0px;
 }
 .tab-list::before {
   -webkit-transform: rotate(-90deg);
@@ -197,6 +217,10 @@ body {
   border-radius: 8px 0 0 0;
   background: var(--bg);
   corner-shape: scoop;
+}
+.tab-list.is-scrolled .top-bar {
+  -webkit-transform: translateY(calc(-100% + 4px));
+          transform: translateY(calc(-100% + 4px));
 }
 .tab-list .icon-container {
   display: -webkit-box;
@@ -555,7 +579,7 @@ body {
   font-family: "Dosis", sans-serif;
   margin-top: 15px;
   background: var(--background);
-  padding: 36px 0 15px 0;
+  padding: 41px 0 15px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -568,7 +592,7 @@ body {
   gap: 15px;
   position: sticky;
   z-index: 8;
-  top: 50px;
+  top: 4px;
   height: auto;
 }
 .page-top-filter .content {
@@ -587,7 +611,6 @@ body {
   gap: 15px;
   position: sticky;
   z-index: 8;
-  top: 50px;
   height: 34px;
 }
 .page-top-filter .content .blur-pic-container {
