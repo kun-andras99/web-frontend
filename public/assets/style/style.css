@@ -184,15 +184,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-.tab-list .icon-container .icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 5px;
+  padding: 0 5px;
+  gap: 20px;
 }
 .tab-list .tab-item {
   display: -webkit-box;

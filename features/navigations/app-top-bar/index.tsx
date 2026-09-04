@@ -55,38 +55,38 @@ export default function AppTopBar({
                             <div className="header__right">{rightSlot}</div>
                         ) : null}
                         <div className="tab-list">
-                            {tabs.screens?.map((tab) => {
-                                const tabUrl = `${tab.fromUrl}${tab.url}`;
+                            <div className="icon-container">
+                                {tabs.screens?.map((tab) => {
+                                    const tabUrl = `${tab.fromUrl}${tab.url}`;
 
-                                console.log(tabUrl);
-                                console.log({ pathname });
+                                    console.log(tabUrl);
+                                    console.log({ pathname });
 
-                                const isActive = pathname === tabUrl;
+                                    const isActive = pathname === tabUrl;
 
-                                return (
-                                    <div
-                                        key={tab.id}
-                                        onClick={() => handleTabChange(tabUrl)}
-                                        className={
-                                            // `${isActive ? " active-tab-item tab-item" : "tab-item"}`
-                                            "tab-item"
-                                        }>
-                                        {isActive ? (
-                                            <div className="icon-container">
+                                    return (
+                                        <div
+                                            key={tab.id}
+                                            onClick={() =>
+                                                handleTabChange(tabUrl)
+                                            }
+                                            className={
+                                                // `${isActive ? " active-tab-item tab-item" : "tab-item"}`
+                                                "tab-item"
+                                            }>
+                                            {isActive ? (
                                                 <div className="icon">
                                                     {tab.activeIcon}
                                                 </div>
-                                            </div>
-                                        ) : (
-                                            <div className="icon-container">
+                                            ) : (
                                                 <div className="icon">
                                                     {tab.icon}
                                                 </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            })}
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>
