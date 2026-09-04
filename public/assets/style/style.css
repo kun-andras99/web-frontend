@@ -662,6 +662,11 @@ body {
      object-position: center;
   border-radius: 10px;
 }
+.image {
+  -webkit-filter: brightness(85%);
+          filter: brightness(85%);
+}
+
 .filter-message-box {
   display: -webkit-box;
   display: -ms-flexbox;

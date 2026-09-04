@@ -1,8 +1,8 @@
 export const BOTTOM_ICON_COLORS = {
     startColor: "#c0c0c0",
     stopColor: "#808080",
-    backgroundStartColor: "#d0d0d0",
-    backgroundStopColor: "#a0a0a0",
+    backgroundStartColor: "#e0e0e0",
+    backgroundStopColor: "#e0e0e0",
 
     active: {
         topTabColor: "#f0f0f0",
