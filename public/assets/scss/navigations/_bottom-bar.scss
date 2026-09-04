@@ -8,24 +8,40 @@
     justify-content: center;
     width: 100%;
     --white: 255, 255, 255;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
 
-    background: linear-gradient(
-        0deg,
-        rgba(var(--test-dark), 1) 1%,
-        rgba(var(--test-dark), 0.98) 3%,
-        rgba(var(--test-dark), 0.95) 5%,
-        rgba(var(--test-dark), 0.9) 10%,
-        rgba(var(--test-dark), 0.7) 20%,
-        rgba(var(--white), 0) 35%,
-        rgba(var(--white), 0) 60%,
-        rgba(var(--white), 0) 100%
-    );
-    // background: linear-gradient(
-    //     0deg,
-    //     rgba(11, 11, 13, 0.9) 50%,
-    //     transparent 100%
-    // );
-    // border-top: 0.05rem solid var(--border-color);
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(
+            0deg,
+            rgba(var(--test-dark), 1) 1%,
+            rgba(var(--test-dark), 0.98) 3%,
+            rgba(var(--test-dark), 0.95) 5%,
+            rgba(var(--test-dark), 0.9) 10%,
+            rgba(var(--test-dark), 0.7) 20%,
+            rgba(var(--white), 0) 35%,
+            rgba(var(--white), 0) 60%,
+            rgba(var(--white), 0) 100%
+        );
+
+        transition: opacity 0.2s ease;
+
+        pointer-events: none;
+        z-index: 0;
+    }
+    &.hidden {
+        transform: translateY(47px);
+        pointer-events: none;
+    }
 
     .content {
         --blue: 0, 23, 27;
@@ -58,9 +74,11 @@
             // inset 0 -1px 1px #00d9ff4d,
             inset 0 0 15px rgba(var(--white), 0.055);
         transition:
+            opacity 0.2s ease,
             transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
             box-shadow 0.22s ease,
             border-color 0.22s ease;
+        opacity: 1;
 
         .link {
             width: 100%;
