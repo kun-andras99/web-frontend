@@ -43,8 +43,8 @@ export default function AppTopBar({
                                 className="top-avatar-pic"
                                 src="/assets/images/user-blank-1.png"
                                 alt="Profile"
-                                width={34}
-                                height={34}
+                                width={36}
+                                height={36}
                             />
                         </div>
                         <div className="z-100 flex flex-col items-center justify-center h-[50px]">
