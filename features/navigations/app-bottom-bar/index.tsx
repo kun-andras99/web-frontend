@@ -4,11 +4,7 @@ import { APP_BOTTOM_BAR_ROUTES } from "@/features/navigations/navigation.config"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface AppBottomBarProps {
-    isHidden: boolean;
-}
-
-export default function AppBottomBar({ isHidden }: AppBottomBarProps) {
+export default function AppBottomBar({ isHidden }: { isHidden: boolean }) {
     const pathname = usePathname();
 
     return (
