@@ -47,7 +47,7 @@ export default function AppTopBar({
                                 height={36}
                             />
                         </div>
-                        <div className="z-100 flex flex-col items-center justify-center h-[50px]">
+                        <div className="page-title">
                             <p>{pageTitle}</p>
                         </div>
 
@@ -58,9 +58,6 @@ export default function AppTopBar({
                             <div className="icon-container">
                                 {tabs.screens?.map((tab) => {
                                     const tabUrl = `${tab.fromUrl}${tab.url}`;
-
-                                    console.log(tabUrl);
-                                    console.log({ pathname });
 
                                     const isActive = pathname === tabUrl;
 

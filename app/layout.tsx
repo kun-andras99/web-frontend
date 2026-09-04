@@ -1,7 +1,7 @@
 import { cn } from "@/app/lib/utils";
 import FastLinks from "@/features/navigations/fast-links";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Dosis, Geist, Geist_Mono, Inter } from "next/font/google";
 import "../public/assets/style/style.css";
 import "./globals.css";
 
@@ -14,6 +14,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
+
+const dosis = Dosis({
+    variable: "--font-dosis",
     subsets: ["latin"],
 });
 
@@ -34,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 "antialiased",
                 geistSans.variable,
                 geistMono.variable,
-                "font-sans",
+                dosis.variable,
                 inter.variable,
             )}>
             <body className="min-h-full">
