@@ -31,7 +31,9 @@ export default function AppTopBar({
     return (
         <>
             <div className="w-full touch-pan-y overflow-hidden">
-                <div className="top-bar">
+                <div
+                    className="top-bar [clip-path:polygon(0px_0px,100%_0px,100%_56px,70%_56px,70%_88px,30%_88px,30%_56px,0px_56px)]
+">
                     <div className="content">
                         {leftSlot ? (
                             <div className="header__left">{leftSlot}</div>
@@ -48,25 +50,18 @@ export default function AppTopBar({
                         <div className="z-100 flex flex-col items-center justify-center h-[50px]">
                             <p>{pageTitle}</p>
                         </div>
+                        <div className="tab-list">
+                            {tabs.screens?.map((tab) => {
+                                const tabUrl = `${tab.fromUrl}/${tab.url}`;
 
-                        {rightSlot ? (
-                            <div className="header__right">{rightSlot}</div>
-                        ) : null}
-                    </div>
-                </div>
-            </div>
-            <div className="tab-list">
-                {tabs.screens?.map((tab) => {
-                    const tabUrl = `${tab.fromUrl}/${tab.url}`;
+                                const isActive = pathname === tabUrl;
 
-                    const isActive = pathname === tabUrl;
-
-                    return (
-                        <button
-                            key={tab.id}
-                            onClick={() => handleTabChange(tabUrl)}
-                            className={`${isActive ? "" : "tab-item"}`}>
-                            {/* {isActive ? (
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => handleTabChange(tabUrl)}
+                                        className={`${isActive ? "" : "tab-item"}`}>
+                                        {/* {isActive ? (
                                         <div className="flex active-tab-item">
                                             <div className="icon">
                                                 {tab.activeIcon}
@@ -76,11 +71,17 @@ export default function AppTopBar({
                                             </div>
                                         </div>
                                     ) : ( */}
-                            <div className="icon">{tab.icon}</div>
-                            {/* )} */}
-                        </button>
-                    );
-                })}
+                                        <div className="icon">{tab.icon}</div>
+                                        {/* )} */}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        {rightSlot ? (
+                            <div className="header__right">{rightSlot}</div>
+                        ) : null}
+                    </div>
+                </div>
             </div>
         </>
     );
