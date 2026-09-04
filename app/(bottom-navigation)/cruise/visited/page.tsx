@@ -1,9 +1,9 @@
-
+import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
 
 export default function VisitedPage() {
     return (
-        <div>
-            <h1>Page</h1>
-        </div>
-    )
+        <BottomPageWrapper>
+            <h1>Visited Page</h1>
+        </BottomPageWrapper>
+    );
 }

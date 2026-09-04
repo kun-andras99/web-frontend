@@ -1,11 +1,12 @@
 "use client";
 
-import FilterMessageBox from "@/features/(main-menus)/inbox/components/FilterBox";
 import LoadMessagesBox from "@/features/(main-menus)/inbox/components/LoadMessagesBox";
 import { useFilteredMessages } from "@/features/(main-menus)/inbox/hooks/useFilteredMessages";
 import { useMessageFilter } from "@/features/(main-menus)/inbox/hooks/useMessageFilter";
 import { MessageFilter } from "@/features/(main-menus)/inbox/types/message-filter.types";
 import { Message } from "@/features/(main-menus)/inbox/types/message.types";
+import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
 
 interface MessagesScreenProps {
     messages: Message[];
@@ -35,14 +36,10 @@ export default function MessagesScreen({ messages }: MessagesScreenProps) {
     });
 
     return (
-        <main className="bottom-page">
-            <FilterMessageBox
-                value={filter}
-                options={messageFilterOptions}
-                clickChange={setFilter}
-            />
-
+        <BottomPageWrapper>
+            <h1>Manage users Page</h1>
             <LoadMessagesBox messages={filteredMessages} />
-        </main>
+            <LiquidGlassBox />
+        </BottomPageWrapper>
     );
 }

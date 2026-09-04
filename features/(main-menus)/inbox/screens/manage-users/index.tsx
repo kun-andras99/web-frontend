@@ -1,11 +1,11 @@
 "use client";
 
-import FilterBox from "@/features/(main-menus)/inbox/components/FilterBox";
-import LoadManageUsersBox from "@/features/(main-menus)/inbox/components/LoadManageUsersBox";
 import { useFilteredManageUsers } from "@/features/(main-menus)/inbox/hooks/useFilteredManageUsers";
 import { useManageUsersFilter } from "@/features/(main-menus)/inbox/hooks/useManageUsersFilter";
 import { ManageUsersFilter } from "@/features/(main-menus)/inbox/types/manage-users-filter.types";
 import { ManageUsers } from "@/features/(main-menus)/inbox/types/manage-users.types";
+import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
 import { usePathname } from "next/navigation";
 
 interface ManageUsersScreenProps {
@@ -45,14 +45,10 @@ export default function ManageUsersScreen({
     console.log(pathname);
 
     return (
-        <main className="bottom-page">
-            <FilterBox
-                value={filter}
-                options={manageUsersFilterOptions}
-                clickChange={setFilter}
-            />
+        <BottomPageWrapper>
+            <LiquidGlassBox />
 
-            <LoadManageUsersBox manageUsers={filteredManageUsers} />
-        </main>
+            {/* <LoadManageUsersBox manageUsers={filteredManageUsers} /> */}
+        </BottomPageWrapper>
     );
 }

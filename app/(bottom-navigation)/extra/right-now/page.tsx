@@ -1,9 +1,11 @@
-
+import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
 
 export default function RightNowPage() {
     return (
-        <div>
-            <h1>Page</h1>
-        </div>
-    )
+        <BottomPageWrapper>
+            <h1>Right now Page</h1>
+            <LiquidGlassBox />
+        </BottomPageWrapper>
+    );
 }

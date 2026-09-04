@@ -1,5 +1,7 @@
 "use client";
 
+import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
 import { User } from "@/lib/db";
 import Link from "next/link";
 
@@ -9,7 +11,7 @@ interface UsersNearbyScreenProps {
 
 export default function UsersNearbyScreen({ users }: UsersNearbyScreenProps) {
     return (
-        <main className="bottom-page">
+        <BottomPageWrapper>
             <div className="grid grid-cols-3 gap-[1px]">
                 {users.map((user) => {
                     return (
@@ -26,6 +28,7 @@ export default function UsersNearbyScreen({ users }: UsersNearbyScreenProps) {
                     );
                 })}
             </div>
-        </main>
+            <LiquidGlassBox />
+        </BottomPageWrapper>
     );
 }

@@ -1,8 +1,14 @@
 // import BlogsPage from "@/features/blog/components/BlogsPage";
 
+import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
+
 export default function BlogPage() {
     return (
-        <>Blog oldal</>
+        <BottomPageWrapper>
+            <h1>Blogs Page</h1>
+            <LiquidGlassBox />
+        </BottomPageWrapper>
         // <div className="bottom-page">
         //     <div className="pagination">
         //         <div className="btn back"></div>
