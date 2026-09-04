@@ -11,12 +11,12 @@
     z-index: 9;
     .top-bar {
         transform: translateY(0);
-        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transition: transform 0.2s ease;
     }
 
     &.is-scrolled {
         .top-bar {
-            transform: translateY(calc(-100% + 4px));
+            transform: translateY(calc(-100% + 5px));
         }
     }
 }

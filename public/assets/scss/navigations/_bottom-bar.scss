@@ -75,9 +75,9 @@
             inset 0 0 15px rgba(var(--white), 0.055);
         transition:
             opacity 0.2s ease,
-            transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
-            box-shadow 0.22s ease,
-            border-color 0.22s ease;
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
         opacity: 1;
 
         .link {
@@ -156,9 +156,10 @@
             // inset 0 -1px 1px #00d9ff4d,
             inset 0 0 15px rgba(var(--white), 0.055);
         transition:
-            transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
-            box-shadow 0.22s ease,
-            border-color 0.22s ease;
+            transform 0.2s ease,
+            // transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
 
         .link {
             width: 100%;

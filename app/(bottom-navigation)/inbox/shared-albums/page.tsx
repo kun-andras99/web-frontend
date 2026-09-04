@@ -1,23 +1,11 @@
 import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import PageFilter from "@/features/_components/ui/page-filter";
 import Image from "next/image";
 
 export default function SharedAlbumsPage() {
     return (
         <BottomPageWrapper>
-            <div className="page-top-filter">
-                <div className="content">
-                    <div className="blur-pic-container">
-                        <div className="blur-btn">b</div>
-                        <div className="blur-btn active">n</div>
-                    </div>
-                    <div className="separator"></div>
-                    <div className="filters">
-                        <div className="filter">x</div>
-                        <div className="filter active">Online</div>
-                        <div className="filter">Video</div>
-                    </div>
-                </div>
-            </div>
+            <PageFilter />
             <h2 className="small-title">UPDATES</h2>
             <div className="first-shared-row">
                 <div className="shared-box box-inactive">
