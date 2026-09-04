@@ -5,15 +5,17 @@ export default function SharedAlbumsPage() {
     return (
         <BottomPageWrapper>
             <div className="page-top-filter">
-                <div className="blur-pic-container">
-                    <div className="blur-btn">b</div>
-                    <div className="blur-btn active">n</div>
-                </div>
-                <div className="separator"></div>
-                <div className="filters">
-                    <div className="filter">x</div>
-                    <div className="filter active">Online</div>
-                    <div className="filter">Video</div>
+                <div className="content">
+                    <div className="blur-pic-container">
+                        <div className="blur-btn">b</div>
+                        <div className="blur-btn active">n</div>
+                    </div>
+                    <div className="separator"></div>
+                    <div className="filters">
+                        <div className="filter">x</div>
+                        <div className="filter active">Online</div>
+                        <div className="filter">Video</div>
+                    </div>
                 </div>
             </div>
             <h2 className="small-title">UPDATES</h2>

@@ -1,5 +1,5 @@
 .bottom-page {
-    margin-block-start: 86px;
+    margin-block-start: 0;
     margin-block-end: 94px;
     display: flex;
     flex-direction: column;
@@ -8,56 +8,76 @@
 .page-top-filter {
     font-family: "Dosis", sans-serif;
     margin-top: 15px;
-    padding: 0 25px 0px 25px;
+    background: var(--background);
+    padding: 36px 0 15px 0;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+
     gap: 15px;
-
-    .blur-pic-container {
+    position: sticky;
+    z-index: 8;
+    top: 50px;
+    height: auto;
+    .content {
+        font-family: "Dosis", sans-serif;
+        margin-top: 15px;
+        padding: 0 25px 0px 25px;
         display: flex;
-        background: #202020;
-        border-radius: 20px;
-        height: 24px;
-        .blur-btn {
-            position: relative;
-            top: -1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 26px;
-            width: 26px;
-            border-radius: 20px;
-        }
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+        position: sticky;
+        z-index: 8;
+        top: 50px;
+        height: 34px;
 
-        .active {
-            background: #ddd;
-        }
-    }
-    .separator {
-        position: relative;
-        width: 3px;
-        height: 100%;
-        background: #fff;
-    }
-
-    .filters {
-        display: flex;
-        gap: 10px;
-        .filter {
-            font-size: 15px;
-            font-weight: 500;
+        .blur-pic-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 34px;
-            height: 34px;
             background: #202020;
-            padding: 5px 12px;
-            border-radius: 30px;
+            border-radius: 20px;
+            height: 24px;
+            .blur-btn {
+                position: relative;
+                top: -1px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 26px;
+                width: 26px;
+                border-radius: 20px;
+            }
+
+            .active {
+                background: #ddd;
+            }
+        }
+        .separator {
+            position: relative;
+            width: 0.05rem;
+            height: 100%;
+            background: #454545;
         }
 
-        .active {
-            background: #1e3d57;
+        .filters {
+            display: flex;
+            gap: 10px;
+            .filter {
+                font-size: 15px;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 34px;
+                height: 34px;
+                background: #202020;
+                padding: 5px 12px;
+                border-radius: 30px;
+            }
+
+            .active {
+                background: #1e3d57;
+            }
         }
     }
 }

@@ -538,8 +538,8 @@ body {
 }
 
 .bottom-page {
-  -webkit-margin-before: 86px;
-          margin-block-start: 86px;
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
   -webkit-margin-after: 94px;
           margin-block-end: 94px;
   display: -webkit-box;
@@ -554,6 +554,26 @@ body {
 .page-top-filter {
   font-family: "Dosis", sans-serif;
   margin-top: 15px;
+  background: var(--background);
+  padding: 36px 0 15px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 15px;
+  position: sticky;
+  z-index: 8;
+  top: 50px;
+  height: auto;
+}
+.page-top-filter .content {
+  font-family: "Dosis", sans-serif;
+  margin-top: 15px;
   padding: 0 25px 0px 25px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -561,9 +581,16 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   gap: 15px;
+  position: sticky;
+  z-index: 8;
+  top: 50px;
+  height: 34px;
 }
-.page-top-filter .blur-pic-container {
+.page-top-filter .content .blur-pic-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -571,7 +598,7 @@ body {
   border-radius: 20px;
   height: 24px;
 }
-.page-top-filter .blur-pic-container .blur-btn {
+.page-top-filter .content .blur-pic-container .blur-btn {
   position: relative;
   top: -1px;
   display: -webkit-box;
@@ -587,22 +614,22 @@ body {
   width: 26px;
   border-radius: 20px;
 }
-.page-top-filter .blur-pic-container .active {
+.page-top-filter .content .blur-pic-container .active {
   background: #ddd;
 }
-.page-top-filter .separator {
+.page-top-filter .content .separator {
   position: relative;
-  width: 3px;
+  width: 0.05rem;
   height: 100%;
-  background: #fff;
+  background: #454545;
 }
-.page-top-filter .filters {
+.page-top-filter .content .filters {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 10px;
 }
-.page-top-filter .filters .filter {
+.page-top-filter .content .filters .filter {
   font-size: 15px;
   font-weight: 500;
   display: -webkit-box;
@@ -620,7 +647,7 @@ body {
   padding: 5px 12px;
   border-radius: 30px;
 }
-.page-top-filter .filters .active {
+.page-top-filter .content .filters .active {
   background: #1e3d57;
 }
 
