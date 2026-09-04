@@ -444,6 +444,8 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 10px 18px;
+  -webkit-filter: drop-shadow(2px 4px 6px rgba(10, 10, 10, 0.5));
+          filter: drop-shadow(2px 4px 6px rgba(10, 10, 10, 0.5));
 }
 .bottom-bar .content .icon {
   border-radius: 50px;
@@ -451,6 +453,8 @@ body {
 .bottom-bar .content .icon.active {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(25px) saturate(185%) contrast(108%);
+  -webkit-box-shadow: 0 0 2px 1px rgba(10, 10, 10, 0.05);
+          box-shadow: 0 0 2px 1px rgba(10, 10, 10, 0.05);
 }
 .bottom-bar .content .icon:active {
   -webkit-transform: scale(0.94);
