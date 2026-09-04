@@ -30,7 +30,7 @@ export default function AppTopBar({
     };
     return (
         <>
-            <div className="w-full touch-pan-y overflow-hidden">
+            <div className="w-full touch-pan-y overflow-hidden top-wrap">
                 <div
                     className="top-bar [clip-path:polygon(0px_0px,100%_0px,100%_56px,70%_56px,70%_88px,30%_88px,30%_56px,0px_56px)]
 ">

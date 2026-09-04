@@ -3,7 +3,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
     z-index: 10;
 }
 .top-bar {
@@ -15,9 +14,9 @@
         ),
         linear-gradient(
             145deg,
-            rgba(var(--site-bg-rgb), 0.75),
-            rgba(var(--site-bg-rgb), 0.6) 45%,
-            rgba(var(--site-bg-rgb), 0.7)
+            rgba(var(--test-dark), 0.45),
+            rgba(var(--test-dark), 0.4) 45%,
+            rgba(var(--test-dark), 0.5)
         );
     backdrop-filter: blur(25px) saturate(185%) contrast(108%);
     // clip-path: polygon(

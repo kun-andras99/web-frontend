@@ -2,6 +2,7 @@
   --background: #ffffff;
   --foreground: #0d0d0d;
   --site-bg-rgb: 13, 13, 13;
+  --test-dark: 13, 13, 13;
 }
 
 @theme inline {
@@ -11,7 +12,7 @@
   --font-mono: var(--font-geist-mono);
 }
 .dark {
-  --background: #0b0b0d;
+  --background: rgb(11, 11, 13);
   --foreground: #fbfbfb;
   --border-color: #212124;
 }
@@ -81,12 +82,11 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
   z-index: 10;
 }
 
 .top-bar {
-  background: radial-gradient(circle at 50% 0%, rgba(29, 29, 29, 0.08), transparent 42%), linear-gradient(145deg, rgba(var(--site-bg-rgb), 0.75), rgba(var(--site-bg-rgb), 0.6) 45%, rgba(var(--site-bg-rgb), 0.7));
+  background: radial-gradient(circle at 50% 0%, rgba(29, 29, 29, 0.08), transparent 42%), linear-gradient(145deg, rgba(var(--test-dark), 0.45), rgba(var(--test-dark), 0.4) 45%, rgba(var(--test-dark), 0.5));
   backdrop-filter: blur(25px) saturate(185%) contrast(108%);
 }
 .top-bar .content {
@@ -322,7 +322,7 @@ body {
 
 .bottom-bar {
   position: fixed;
-  bottom: 10px;
+  bottom: 0px;
   left: 0;
   --tint: 255, 255, 255;
   display: -webkit-box;
@@ -337,6 +337,8 @@ body {
   width: 100%;
 }
 .bottom-bar .content {
+  --blue: 0, 23, 27;
+  --white: 255, 255, 255;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -348,13 +350,14 @@ body {
           justify-content: space-between;
   width: calc(100% - 10px);
   padding: 6px;
+  margin-bottom: 10px;
   border-radius: 40px;
   isolation: isolate;
-  border: 1px solid rgba(0, 147, 173, 0.15);
-  background: radial-gradient(circle at 50% 0%, rgba(0, 217, 255, 0.08), transparent 42%), linear-gradient(145deg, rgba(0, 23, 27, 0.4), rgba(0, 23, 27, 0.6) 45%, rgba(0, 23, 27, 0.7));
+  border: 1px solid rgba(var(--white), 0.2);
+  background: radial-gradient(circle at 50% 0%, rgba(var(--white), 0.08), transparent 42%), linear-gradient(145deg, rgba(var(--white), 0.11), rgba(var(--white), 0.08) 45%, rgba(var(--white), 0.13));
   backdrop-filter: blur(25px) saturate(185%) contrast(108%);
-  -webkit-box-shadow: inset 0 0 15px rgba(0, 217, 255, 0.055);
-          box-shadow: inset 0 0 15px rgba(0, 217, 255, 0.055);
+  -webkit-box-shadow: inset 0 0 15px rgba(var(--white), 0.055);
+          box-shadow: inset 0 0 15px rgba(var(--white), 0.055);
   -webkit-transition: border-color 0.22s ease, -webkit-transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), -webkit-box-shadow 0.22s ease;
   transition: border-color 0.22s ease, -webkit-transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), -webkit-box-shadow 0.22s ease;
   transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s ease, border-color 0.22s ease;
@@ -386,7 +389,7 @@ body {
   border-radius: 25px 50px 50px 25px;
 }
 .bottom-bar .content .icon.active {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(25px) saturate(185%) contrast(108%);
 }
 .bottom-bar .content .icon:active {
