@@ -1,20 +1,14 @@
 body {
     background: var(--background);
     color: var(--foreground);
-    font-family: "Dosis", sans-serif;
+    font-family: "Tajaval", sans-serif;
+    font-size: 15px;
 }
 
-.test {
-    display: flex;
-    flex-direction: column;
-    height: 100dvh;
-
-    > main {
-        flex: 1 1 auto;
-        min-height: 0;
-        overflow-y: auto;
-        // padding-top: 64px;
-    }
+main {
+    min-height: 100%;
+    overflow-y: auto;
+    // padding-top: 64px;
 }
 
 .fast-links {

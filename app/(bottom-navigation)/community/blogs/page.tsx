@@ -1,14 +1,10 @@
 // import BlogsPage from "@/features/blog/components/BlogsPage";
 
-import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
-import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
+import BlogsScreen from "@/features/(main-menus)/community/screens/blog";
 
 export default function BlogPage() {
     return (
-        <BottomPageWrapper>
-            <h1>Blogs Page</h1>
-            <LiquidGlassBox />
-        </BottomPageWrapper>
+        <BlogsScreen />
         // <div className="bottom-page">
         //     <div className="pagination">
         //         <div className="btn back"></div>

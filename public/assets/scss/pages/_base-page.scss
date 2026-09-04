@@ -9,9 +9,12 @@
     top: 5px;
 }
 
+.bottom-page-without-filter {
+    margin-top: 71px;
+}
+
 .page-top-filter {
     transition: top 0.2s ease;
-    font-family: "Dosis", sans-serif;
     margin-top: 15px;
     background: var(--background);
     padding: 41px 0 15px 0;
@@ -25,7 +28,7 @@
     top: 50px;
     height: auto;
     .content {
-        font-family: "Dosis", sans-serif;
+        font-family: "PT Sans", sans-serif;
         margin-top: 15px;
         padding: 0 15px 0px 15px;
         display: flex;
@@ -74,13 +77,15 @@
                 justify-content: center;
                 min-width: 34px;
                 height: 34px;
-                background: #202020;
+                background: #1d1d1d;
+                color: #a1a1a1;
                 padding: 5px 12px;
                 border-radius: 30px;
             }
 
             .active {
                 background: #1e3d57;
+                color: #cff4ff;
             }
         }
     }
@@ -90,7 +95,7 @@
     padding-top: 11px;
     padding-left: 20px;
     padding-bottom: 5px;
-    letter-spacing: 0.75px;
+    // letter-spacing: 0.75px;
     font-size: 15px;
     font-weight: 500;
 }

@@ -1,11 +1,30 @@
 import { cn } from "@/app/lib/utils";
 import FastLinks from "@/features/navigations/fast-links";
 import type { Metadata } from "next";
-import { Dosis, Geist, Geist_Mono, Inter } from "next/font/google";
+import {
+    Dosis,
+    Geist,
+    Geist_Mono,
+    IBM_Plex_Sans,
+    Inter,
+    PT_Sans,
+    Tajawal,
+} from "next/font/google";
 import "../public/assets/style/style.css";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+const ibm = IBM_Plex_Sans({
+    variable: "--font-ibm-plex-sans",
+    subsets: ["latin"],
+});
+
+const ptSans = PT_Sans({
+    weight: ["400", "700"],
+    variable: "--font-pt-sans",
+    subsets: ["latin"],
+});
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -20,6 +39,12 @@ const geistMono = Geist_Mono({
 const dosis = Dosis({
     variable: "--font-dosis",
     subsets: ["latin"],
+});
+
+const voces = Tajawal({
+    weight: ["300", "400", "500", "700"],
+    subsets: ["latin"],
+    variable: "--font-tajaval",
 });
 
 export const metadata: Metadata = {
@@ -41,6 +66,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 geistMono.variable,
                 dosis.variable,
                 inter.variable,
+                ibm.variable,
+                ptSans.variable,
+                voces.variable,
             )}>
             <body className="min-h-full">
                 {showFastLinks ? <FastLinks /> : null}

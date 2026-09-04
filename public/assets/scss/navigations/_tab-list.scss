@@ -1,5 +1,5 @@
 :root {
-    --bg: #141414;
+    --bg: #1d1d1d;
     --bg-rgb: 3, 6, 10;
 }
 
@@ -21,15 +21,14 @@
     }
 }
 .page-title {
-    font-family: "Dosis", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50px;
     padding: 0 0 3px 0;
-    font-weight: 600;
-    font-size: 20px;
-    letter-spacing: 0.85px;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.75px;
 }
 .top-bar {
     position: fixed;

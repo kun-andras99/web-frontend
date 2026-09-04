@@ -4,11 +4,14 @@ import { APP_BOTTOM_BAR_ROUTES } from "@/features/navigations/navigation.config"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function AppBottomBar({ isHidden }: { isHidden: boolean }) {
+export default function AppBottomBar({ isHidden }: { isHidden?: boolean }) {
     const pathname = usePathname();
 
     return (
-        <div className={`bottom-bar ${isHidden ? "hidden" : ""}`}>
+        <div
+            className={`bottom-bar 
+        // ${isHidden ? "hidden" : ""}
+        `}>
             <div className="content">
                 {APP_BOTTOM_BAR_ROUTES.map((route) => {
                     const isActive =

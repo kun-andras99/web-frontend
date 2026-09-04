@@ -26,24 +26,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Dosis", sans-serif;
+  font-family: "Tajaval", sans-serif;
+  font-size: 15px;
 }
 
-.test {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 100dvh;
-}
-.test > main {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  min-height: 0;
+main {
+  min-height: 100%;
   overflow-y: auto;
 }
 
@@ -78,7 +66,7 @@ body {
 }
 
 :root {
-  --bg: #141414;
+  --bg: #1d1d1d;
   --bg-rgb: 3, 6, 10;
 }
 
@@ -103,7 +91,6 @@ body {
 }
 
 .page-title {
-  font-family: "Dosis", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -115,9 +102,9 @@ body {
           justify-content: center;
   height: 50px;
   padding: 0 0 3px 0;
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: 0.85px;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.75px;
 }
 
 .top-bar {
@@ -579,10 +566,13 @@ body {
   top: 5px;
 }
 
+.bottom-page-without-filter {
+  margin-top: 71px;
+}
+
 .page-top-filter {
   -webkit-transition: top 0.2s ease;
   transition: top 0.2s ease;
-  font-family: "Dosis", sans-serif;
   margin-top: 15px;
   background: var(--background);
   padding: 41px 0 15px 0;
@@ -602,7 +592,7 @@ body {
   height: auto;
 }
 .page-top-filter .content {
-  font-family: "Dosis", sans-serif;
+  font-family: "PT Sans", sans-serif;
   margin-top: 15px;
   padding: 0 15px 0px 15px;
   display: -webkit-box;
@@ -672,19 +662,20 @@ body {
           justify-content: center;
   min-width: 34px;
   height: 34px;
-  background: #202020;
+  background: #1d1d1d;
+  color: #a1a1a1;
   padding: 5px 12px;
   border-radius: 30px;
 }
 .page-top-filter .content .filters .active {
   background: #1e3d57;
+  color: #cff4ff;
 }
 
 .small-title {
   padding-top: 11px;
   padding-left: 20px;
   padding-bottom: 5px;
-  letter-spacing: 0.75px;
   font-size: 15px;
   font-weight: 500;
 }
