@@ -1,9 +1,5 @@
-import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import VisitorsScreen from "@/features/(main-menus)/cruise/screens/visitors";
 
 export default function VisitorsPage() {
-    return (
-        <BottomPageWrapper>
-            <h1>Visitors Page</h1>
-        </BottomPageWrapper>
-    );
+    return <VisitorsScreen />;
 }

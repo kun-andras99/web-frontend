@@ -1,12 +1,10 @@
 "use client";
 
-import LoadMessagesBox from "@/features/(main-menus)/inbox/components/LoadMessagesBox";
 import { useFilteredMessages } from "@/features/(main-menus)/inbox/hooks/useFilteredMessages";
 import { useMessageFilter } from "@/features/(main-menus)/inbox/hooks/useMessageFilter";
 import { MessageFilter } from "@/features/(main-menus)/inbox/types/message-filter.types";
 import { Message } from "@/features/(main-menus)/inbox/types/message.types";
 import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
-import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
 
 interface MessagesScreenProps {
     messages: Message[];
@@ -37,9 +35,10 @@ export default function MessagesScreen({ messages }: MessagesScreenProps) {
 
     return (
         <BottomPageWrapper>
-            <h1>Manage users Page</h1>
-            <LoadMessagesBox messages={filteredMessages} />
-            <LiquidGlassBox />
+            <div className="bottom-page-without-filter">
+                <h2 className="small-title">Bejövő üzenetek</h2>
+                {/* <LoadMessagesBox messages={filteredMessages} /> */}
+            </div>
         </BottomPageWrapper>
     );
 }

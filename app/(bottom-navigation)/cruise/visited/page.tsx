@@ -1,9 +1,5 @@
-import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
+import VisitedScreen from "@/features/(main-menus)/cruise/screens/visited";
 
 export default function VisitedPage() {
-    return (
-        <BottomPageWrapper>
-            <h1>Visited Page</h1>
-        </BottomPageWrapper>
-    );
+    return <VisitedScreen />;
 }

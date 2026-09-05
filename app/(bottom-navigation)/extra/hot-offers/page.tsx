@@ -1,11 +1,5 @@
-import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
-import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
+import HotOffersScreen from "@/features/(main-menus)/extra/screens/hot-offers";
 
 export default function HotOffersPage() {
-    return (
-        <BottomPageWrapper>
-            <h1>Hot offers Page</h1>
-            <LiquidGlassBox />
-        </BottomPageWrapper>
-    );
+    return <HotOffersScreen />;
 }

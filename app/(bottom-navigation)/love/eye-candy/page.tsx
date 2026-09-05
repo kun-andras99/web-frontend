@@ -1,11 +1,5 @@
-import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
-import LiquidGlassBox from "@/features/_components/ui/liquid-glass-box";
+import EyeCandyScreen from "@/features/(main-menus)/love/screens/eye-candy";
 
 export default function ExploreEyeCandyPage() {
-    return (
-        <BottomPageWrapper>
-            <h1>Eye candy screen</h1>
-            <LiquidGlassBox />
-        </BottomPageWrapper>
-    );
+    return <EyeCandyScreen />;
 }
