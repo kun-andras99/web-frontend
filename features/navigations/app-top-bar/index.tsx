@@ -1,21 +1,16 @@
 "use client";
 
-import { NavigationTab } from "@/features/navigations/navigation.types";
+import type { NavigationTab } from "@/features/navigations/navigation.types";
 import { usePageTitle } from "@/features/navigations/usePageTitle";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 
 export interface AppTopBarProps {
     tabs: NavigationTab;
     leftSlot?: ReactNode;
     rightSlot?: ReactNode;
     className?: string;
-
-    /**
-     * True, amikor a main tartalom görgetett állapotban van.
-     */
-    isScrolled?: boolean;
 }
 
 export default function AppTopBar({
@@ -23,7 +18,6 @@ export default function AppTopBar({
     leftSlot,
     rightSlot,
     className = "",
-    isScrolled = false,
 }: AppTopBarProps) {
     const pathname = usePathname();
     const router = useRouter();
@@ -38,10 +32,7 @@ export default function AppTopBar({
     };
 
     return (
-        <div
-            className={`w-full touch-pan-y overflow-hidden top-wrap ${
-                isScrolled ? "is-scrolled" : ""
-            }`}>
+        <div className={`top-wrap`}>
             <div className={`top-bar ${className}`}>
                 <div className={`content`}>
                     {leftSlot ? (
@@ -65,30 +56,27 @@ export default function AppTopBar({
                     {rightSlot ? (
                         <div className="header__right">{rightSlot}</div>
                     ) : null}
+                </div>
+            </div>
+            <div className={`tab-list`}>
+                <div className="icon-container">
+                    {tabs.screens?.map((tab) => {
+                        const tabUrl = `${tab.fromUrl}${tab.url}`;
 
-                    <div
-                        className={`tab-list`}>
-                        <div className="icon-container">
-                            {tabs.screens?.map((tab) => {
-                                const tabUrl = `${tab.fromUrl}${tab.url}`;
+                        const isActive = pathname === tabUrl;
 
-                                const isActive = pathname === tabUrl;
-
-                                return (
-                                    <div
-                                        key={tab.id}
-                                        onClick={() => handleTabChange(tabUrl)}
-                                        className="tab-item">
-                                        <div className="icon">
-                                            {isActive
-                                                ? tab.activeIcon
-                                                : tab.icon}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                        return (
+                            <button
+                                key={tab.id}
+                                type="button"
+                                onClick={() => handleTabChange(tabUrl)}
+                                className={`${isActive ? "active-tab-item tab-item" : "tab-item"}`}>
+                                <div className="icon">
+                                    {isActive ? tab.activeIcon : tab.icon}
+                                </div>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
         </div>

@@ -2,38 +2,33 @@
 
 import { inboxRoutes } from "@/features/navigations/app-bottom-bar/constants/app-bottom-bar.constants";
 import AppTopBar from "@/features/navigations/app-top-bar";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect } from "react";
 
-export default function TopLayout({ children }: { children: ReactNode }) {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const lastScrollY = useRef(0);
+const TOP_BAR_VISIBLE_HEIGHT = 46;
 
+interface TopLayoutProps {
+    children: ReactNode;
+}
+
+export default function TopLayout({ children }: TopLayoutProps) {
     useEffect(() => {
         const main = document.querySelector("main");
 
         if (!main) return;
 
+        const topBar = document.querySelector<HTMLElement>(".top-bar");
+
+        if (!topBar) return;
+
+        const frameId: number | null = null;
+
         const handleScroll = () => {
-            const currentScrollY = main.scrollTop;
+            const scrollY = main.scrollTop;
+            const maxOffset = topBar.offsetHeight - TOP_BAR_VISIBLE_HEIGHT;
 
-            // Legfelül mindig látható
-            if (currentScrollY <= 0) {
-                setIsScrolled(false);
-                lastScrollY.current = 0;
-                return;
-            }
+            const offset = Math.min(scrollY, maxOffset);
 
-            // Lefelé görgetés
-            if (currentScrollY > lastScrollY.current) {
-                setIsScrolled(true);
-            }
-
-            // Felfelé görgetés
-            else if (currentScrollY < lastScrollY.current) {
-                setIsScrolled(false);
-            }
-
-            lastScrollY.current = currentScrollY;
+            topBar.style.setProperty("--top-bar-offset", `-${offset}px`);
         };
 
         main.addEventListener("scroll", handleScroll, {
@@ -42,12 +37,17 @@ export default function TopLayout({ children }: { children: ReactNode }) {
 
         return () => {
             main.removeEventListener("scroll", handleScroll);
+
+            if (frameId !== null) {
+                cancelAnimationFrame(frameId);
+            }
         };
     }, []);
+
     return (
-        <div>
-            <AppTopBar tabs={inboxRoutes!} isScrolled={isScrolled} />
+        <>
+            <AppTopBar tabs={inboxRoutes!} />
             {children}
-        </div>
+        </>
     );
 }

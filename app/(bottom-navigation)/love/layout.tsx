@@ -8,10 +8,10 @@ export default function LoveLayout({ children }: { children: ReactNode }) {
     }
 
     return (
-        <div>
+        <>
             <AppTopBar tabs={loveRoutes} />
 
             {children}
-        </div>
+        </>
     );
 }
