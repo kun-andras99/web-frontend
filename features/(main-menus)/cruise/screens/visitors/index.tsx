@@ -2,25 +2,18 @@
 
 import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
 import TopFilter from "@/features/_components/ui/top-filter";
+import ViewChange from "@/features/_components/ui/view-change";
 import { useScreenStore } from "@/features/_store/screen.store";
 import Image from "next/image";
 
 export default function VisitorsScreen() {
-    const { display, setDisplay } = useScreenStore();
+    const { display } = useScreenStore();
 
     return (
         <BottomPageWrapper>
             <div className="bottom-page">
                 <TopFilter>
-                    <button onClick={() => setDisplay("small-grid-view")}>
-                        1
-                    </button>
-                    <button onClick={() => setDisplay("big-grid-view")}>
-                        2
-                    </button>
-                    <button onClick={() => setDisplay("list-grid-view")}>
-                        3
-                    </button>
+                    <ViewChange />
                 </TopFilter>
                 <div className={`screen-view ${display} `}>
                     {Array.from({ length: 20 }).map((_, index) => (
