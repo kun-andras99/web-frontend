@@ -131,6 +131,7 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         activeIcon: (
             <CruiseIconSVG
                 size={26}
+                strokeWidth={1.2}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
@@ -188,7 +189,7 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         name: "love",
         title: "Love",
         url: "/love",
-        icon: <HeartIconSVG size={26} strokeWidth={1.2} />,
+        icon: <HeartIconSVG size={26} />,
         activeIcon: (
             <HeartIconSVG
                 size={26}
@@ -267,10 +268,11 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
         name: "inbox",
         title: "Inbox",
         url: "/inbox",
-        icon: <InboxIconSVG size={26} strokeWidth={1.28} />,
+        icon: <InboxIconSVG size={26} strokeWidth={1.3} />,
         activeIcon: (
             <InboxIconSVG
                 size={26}
+                strokeWidth={1.3}
                 startColor={BOTTOM_ICON_COLORS.active.startColor}
                 stopColor={BOTTOM_ICON_COLORS.active.stopColor}
                 backgroundStartColor={
