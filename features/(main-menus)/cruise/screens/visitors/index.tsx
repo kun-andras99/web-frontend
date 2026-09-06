@@ -26,13 +26,32 @@ export default function VisitorsScreen() {
                     {Array.from({ length: 20 }).map((_, index) => (
                         <div
                             key={index}
-                            className={`${display === "list-grid-view" ? "list-view" : null}`}>
+                            className={
+                                display === "smal-grid-view"
+                                    ? "small-view"
+                                    : display === "big-grid-view"
+                                      ? "big-view"
+                                      : display === "list-grid-view"
+                                        ? "list-view"
+                                        : ""
+                            }>
                             <Image
                                 src={`https://randomuser.me/api/portraits/men/${index}.jpg`}
-                                width={100}
-                                height={100}
-                                className={`list-view-img`}
+                                width={500}
+                                height={500}
+                                className={
+                                    display === "smal-grid-view"
+                                        ? "small-view-img"
+                                        : display === "big-grid-view"
+                                          ? "big-view-img"
+                                          : display === "list-grid-view"
+                                            ? "list-view-img"
+                                            : ""
+                                }
                                 alt={`Felhasználó ${index + 1}`}
+                                style={{
+                                    borderRadius: 10,
+                                }}
                             />
                             {display === "list-grid-view" ? (
                                 <div className="list-view-data">
