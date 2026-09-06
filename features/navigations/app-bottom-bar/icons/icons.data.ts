@@ -6,6 +6,7 @@ export const BOTTOM_ICON_COLORS = {
 
     active: {
         topTabColor: "#cff4ff",
+        // topTabColor: "#cff4ff",
         // startColor: "#1d5d88",
         // stopColor: "#133f5c",
         // backgroundStartColor: "#10bcf0",
@@ -18,5 +19,6 @@ export const BOTTOM_ICON_COLORS = {
 
     inactive: {
         topTabColor: "#6b7179",
+        // topTabColor: "#6b7179",
     },
 } as const;
