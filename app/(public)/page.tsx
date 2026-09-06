@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import HomeScreen from "@/features/public/screens/home";
 
 export default function Home() {
-    return redirect("/love/nearby");
+    return <HomeScreen />;
 }
