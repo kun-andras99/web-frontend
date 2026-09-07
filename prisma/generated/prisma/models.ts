@@ -9,15 +9,6 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
-export type * from './models/UserData'
-export type * from './models/UserPreference'
-export type * from './models/UserLookingFor'
-export type * from './models/UserGenderInterest'
-export type * from './models/GalleryFolder'
-export type * from './models/FolderPermission'
-export type * from './models/GalleryImage'
-export type * from './models/ImageLike'
-export type * from './models/ImageView'
-export type * from './models/Group'
-export type * from './models/GroupMember'
+export type * from './models/RefreshToken'
+export type * from './models/VerificationToken'
 export type * from './commonInputTypes'

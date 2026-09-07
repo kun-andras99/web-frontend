@@ -1,9 +1,9 @@
-"use client";
+import { SignUpForm } from "@/features/auth/components/sign-up-form";
 
-export default function SignUpScreen() {
+export function SignUpScreen() {
     return (
         <div>
-            <h2 className="small-title">Regisztráció</h2>
+            <SignUpForm />
         </div>
     );
 }

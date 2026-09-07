@@ -1,0 +1,33 @@
+.auth-views {
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-form {
+    width: calc(100dvw - 50px);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        label {
+            font-size: 16px;
+            color: #a0a0a0;
+        }
+        input {
+            border: 0.05rem solid #a0a0a0;
+            padding: 10px 12px;
+            border-radius: 10px;
+        }
+        .error-msg {
+            width: calc(100% - 20px);
+            margin-left: 10px;
+            color: rgb(221, 61, 61);
+        }
+    }
+}

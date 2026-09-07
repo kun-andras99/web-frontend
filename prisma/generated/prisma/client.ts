@@ -47,57 +47,12 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model UserData
+ * Model RefreshToken
  * 
  */
-export type UserData = Prisma.UserDataModel
+export type RefreshToken = Prisma.RefreshTokenModel
 /**
- * Model UserPreference
+ * Model VerificationToken
  * 
  */
-export type UserPreference = Prisma.UserPreferenceModel
-/**
- * Model UserLookingFor
- * 
- */
-export type UserLookingFor = Prisma.UserLookingForModel
-/**
- * Model UserGenderInterest
- * 
- */
-export type UserGenderInterest = Prisma.UserGenderInterestModel
-/**
- * Model GalleryFolder
- * 
- */
-export type GalleryFolder = Prisma.GalleryFolderModel
-/**
- * Model FolderPermission
- * 
- */
-export type FolderPermission = Prisma.FolderPermissionModel
-/**
- * Model GalleryImage
- * 
- */
-export type GalleryImage = Prisma.GalleryImageModel
-/**
- * Model ImageLike
- * 
- */
-export type ImageLike = Prisma.ImageLikeModel
-/**
- * Model ImageView
- * 
- */
-export type ImageView = Prisma.ImageViewModel
-/**
- * Model Group
- * 
- */
-export type Group = Prisma.GroupModel
-/**
- * Model GroupMember
- * 
- */
-export type GroupMember = Prisma.GroupMemberModel
+export type VerificationToken = Prisma.VerificationTokenModel

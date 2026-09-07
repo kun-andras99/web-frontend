@@ -52,17 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  UserData: 'UserData',
-  UserPreference: 'UserPreference',
-  UserLookingFor: 'UserLookingFor',
-  UserGenderInterest: 'UserGenderInterest',
-  GalleryFolder: 'GalleryFolder',
-  FolderPermission: 'FolderPermission',
-  GalleryImage: 'GalleryImage',
-  ImageLike: 'ImageLike',
-  ImageView: 'ImageView',
-  Group: 'Group',
-  GroupMember: 'GroupMember'
+  RefreshToken: 'RefreshToken',
+  VerificationToken: 'VerificationToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,164 +71,42 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  avatarUrl: 'avatarUrl',
   username: 'username',
   email: 'email',
-  password: 'password',
+  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  isVerified: 'isVerified',
-  isActive: 'isActive',
-  lat: 'lat',
-  lng: 'lng',
-  role: 'role',
-  relationshipStatus: 'relationshipStatus'
+  role: 'role'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const UserDataScalarFieldEnum = {
+export const RefreshTokenScalarFieldEnum = {
   id: 'id',
+  tokenHash: 'tokenHash',
   userId: 'userId',
-  avatar: 'avatar',
-  nickname: 'nickname',
-  description: 'description',
-  bio: 'bio',
-  birth: 'birth',
-  heightCm: 'heightCm',
-  weightKg: 'weightKg',
-  gender: 'gender',
-  sexuality: 'sexuality',
-  pronouns: 'pronouns',
-  city: 'city',
-  country: 'country',
-  avatarUrl: 'avatarUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserDataScalarFieldEnum = (typeof UserDataScalarFieldEnum)[keyof typeof UserDataScalarFieldEnum]
-
-
-export const UserPreferenceScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  minAge: 'minAge',
-  maxAge: 'maxAge',
-  minHeightCm: 'minHeightCm',
-  maxHeightCm: 'maxHeightCm',
-  maxDistanceKm: 'maxDistanceKm',
-  verifiedOnly: 'verifiedOnly',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserPreferenceScalarFieldEnum = (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
-
-
-export const UserLookingForScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  value: 'value'
-} as const
-
-export type UserLookingForScalarFieldEnum = (typeof UserLookingForScalarFieldEnum)[keyof typeof UserLookingForScalarFieldEnum]
-
-
-export const UserGenderInterestScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  value: 'value'
-} as const
-
-export type UserGenderInterestScalarFieldEnum = (typeof UserGenderInterestScalarFieldEnum)[keyof typeof UserGenderInterestScalarFieldEnum]
-
-
-export const GalleryFolderScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  description: 'description',
-  visibility: 'visibility',
-  isLocked: 'isLocked',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type GalleryFolderScalarFieldEnum = (typeof GalleryFolderScalarFieldEnum)[keyof typeof GalleryFolderScalarFieldEnum]
-
-
-export const FolderPermissionScalarFieldEnum = {
-  id: 'id',
-  folderId: 'folderId',
-  userId: 'userId',
-  canView: 'canView',
-  canUpload: 'canUpload',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  replacedBy: 'replacedBy',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
   createdAt: 'createdAt'
 } as const
 
-export type FolderPermissionScalarFieldEnum = (typeof FolderPermissionScalarFieldEnum)[keyof typeof FolderPermissionScalarFieldEnum]
+export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
-export const GalleryImageScalarFieldEnum = {
+export const VerificationTokenScalarFieldEnum = {
   id: 'id',
-  folderId: 'folderId',
+  tokenHash: 'tokenHash',
   userId: 'userId',
-  url: 'url',
-  caption: 'caption',
-  bio: 'bio',
-  width: 'width',
-  height: 'height',
-  mimeType: 'mimeType',
-  size: 'size',
-  isPrivate: 'isPrivate',
+  type: 'type',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt'
 } as const
 
-export type GalleryImageScalarFieldEnum = (typeof GalleryImageScalarFieldEnum)[keyof typeof GalleryImageScalarFieldEnum]
-
-
-export const ImageLikeScalarFieldEnum = {
-  id: 'id',
-  imageId: 'imageId',
-  userId: 'userId',
-  createdAt: 'createdAt'
-} as const
-
-export type ImageLikeScalarFieldEnum = (typeof ImageLikeScalarFieldEnum)[keyof typeof ImageLikeScalarFieldEnum]
-
-
-export const ImageViewScalarFieldEnum = {
-  id: 'id',
-  imageId: 'imageId',
-  userId: 'userId',
-  createdAt: 'createdAt'
-} as const
-
-export type ImageViewScalarFieldEnum = (typeof ImageViewScalarFieldEnum)[keyof typeof ImageViewScalarFieldEnum]
-
-
-export const GroupScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  createdAt: 'createdAt',
-  ownerId: 'ownerId',
-  userId: 'userId'
-} as const
-
-export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
-
-
-export const GroupMemberScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  groupId: 'groupId',
-  joinedAt: 'joinedAt'
-} as const
-
-export type GroupMemberScalarFieldEnum = (typeof GroupMemberScalarFieldEnum)[keyof typeof GroupMemberScalarFieldEnum]
+export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
 export const SortOrder = {
