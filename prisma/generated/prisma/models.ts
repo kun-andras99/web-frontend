@@ -11,4 +11,8 @@
 export type * from './models/User'
 export type * from './models/RefreshToken'
 export type * from './models/VerificationToken'
+export type * from './models/UserData'
+export type * from './models/UserPreference'
+export type * from './models/UserLookingFor'
+export type * from './models/UserGenderInterest'
 export type * from './commonInputTypes'

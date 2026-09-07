@@ -53,7 +53,11 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   RefreshToken: 'RefreshToken',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  UserData: 'UserData',
+  UserPreference: 'UserPreference',
+  UserLookingFor: 'UserLookingFor',
+  UserGenderInterest: 'UserGenderInterest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -63,6 +67,9 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
@@ -78,7 +85,8 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  role: 'role'
+  role: 'role',
+  relationshipStatus: 'relationshipStatus'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -111,12 +119,77 @@ export const VerificationTokenScalarFieldEnum = {
 export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
+export const UserDataScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  avatar: 'avatar',
+  nickname: 'nickname',
+  description: 'description',
+  bio: 'bio',
+  birth: 'birth',
+  heightCm: 'heightCm',
+  weightKg: 'weightKg',
+  gender: 'gender',
+  sexuality: 'sexuality',
+  pronouns: 'pronouns',
+  city: 'city',
+  country: 'country',
+  avatarUrl: 'avatarUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserDataScalarFieldEnum = (typeof UserDataScalarFieldEnum)[keyof typeof UserDataScalarFieldEnum]
+
+
+export const UserPreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  minAge: 'minAge',
+  maxAge: 'maxAge',
+  minHeightCm: 'minHeightCm',
+  maxHeightCm: 'maxHeightCm',
+  maxDistanceKm: 'maxDistanceKm',
+  verifiedOnly: 'verifiedOnly',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPreferenceScalarFieldEnum = (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
+
+
+export const UserLookingForScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserLookingForScalarFieldEnum = (typeof UserLookingForScalarFieldEnum)[keyof typeof UserLookingForScalarFieldEnum]
+
+
+export const UserGenderInterestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserGenderInterestScalarFieldEnum = (typeof UserGenderInterestScalarFieldEnum)[keyof typeof UserGenderInterestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {

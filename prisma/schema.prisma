@@ -4,132 +4,131 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
-
-/*
+/**
  * USER AND REGISTRATION - LOGIN
  */
 enum UserRole {
-    USER
-    ADMIN
-    MODERATOR
+  USER
+  ADMIN
+  MODERATOR
 }
 
 enum VerificationTokenType {
-    EMAIL_VERIFICATION
-    PASSWORD_RESET
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
 }
 
-/*
+/**
  * USER PROFILE DATA AFTER REGISTRATION
  */
-// enum Gender {
-//   Male
-//   Female
-//   NonBinary
-//   Other
-// }
+enum Gender {
+  Male
+  Female
+  NonBinary
+  Other
+}
 
-// enum Sexuality {
-//   Straight
-//   Bisexual
-//   Gay
-//   Lesbian
-//   Trans
-//   Pansexual
-//   Asexual
-//   Other
-// }
+enum Sexuality {
+  Straight
+  Bisexual
+  Gay
+  Lesbian
+  Trans
+  Pansexual
+  Asexual
+  Other
+}
 
-// enum CrossdressStatus {
-//   Crossdress
-//   No
-// }
+enum CrossdressStatus {
+  Crossdress
+  No
+}
 
-// enum RelationshipStatus {
-//   Single
-//   Relation
-//   Engaged
-//   Married
-//   Separated
-//   Divorced
-//   Widowed
-//   Complicated
-//   Open
-// }
+enum RelationshipStatus {
+  Single
+  Relation
+  Engaged
+  Married
+  Separated
+  Divorced
+  Widowed
+  Complicated
+  Open
+}
 
-// enum LookingFor {
-//   Chat
-//   Friendship
-//   CasualDating
-//   SeriousRelationship
-//   Hookup
-//   Networking
-//   NothingSpecific
-// }
+enum LookingFor {
+  Chat
+  Friendship
+  CasualDating
+  SeriousRelationship
+  Hookup
+  Networking
+  NothingSpecific
+}
 
-// enum GenderInterest {
-//   Men
-//   Women
-//   NonBinary
-//   Everyone
-//   PreferNotToSay
-// }
+enum GenderInterest {
+  Men
+  Women
+  NonBinary
+  Everyone
+  PreferNotToSay
+}
 
-// enum TransStatus {
-//   Cis
-//   Trans
-// }
+enum TransStatus {
+  Cis
+  Trans
+}
 
-// enum City {
-//   Centrum
-//   Straight
-//   Bisexual
-//   Gay
-//   Trans
-//   BDSM
-// }
+enum City {
+  Centrum
+  Straight
+  Bisexual
+  Gay
+  Trans
+  BDSM
+}
 
-// enum FolderVisibility {
-//   PUBLIC
-//   PRIVATE
-//   RESTRICTED
-// }
+enum FolderVisibility {
+  PUBLIC
+  PRIVATE
+  RESTRICTED
+}
 
 model User {
   id String @id @default(cuid())
 
-  username  String   @unique
-  email     String   @unique
-  password  String
+  username      String    @unique
+  email         String    @unique
+  password      String
   passwordHash  String
   emailVerified DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   role UserRole @default(USER)
 
   refreshTokens      RefreshToken[]
   verificationTokens VerificationToken[]
 
-//   relationshipStatus RelationshipStatus?
-//   lookingFor         UserLookingFor[]
-//   interestedIn       UserGenderInterest[]
-//   userData           UserData?
+  relationshipStatus RelationshipStatus?
+  lookingFor         UserLookingFor[]
+  interestedIn       UserGenderInterest[]
+  userData           UserData?
 
-//   folders     GalleryFolder[]
-//   images      GalleryImage[]
-//   likes       ImageLike[]
-//   permissions FolderPermission[]
+  //   folders     GalleryFolder[]
+  //   images      GalleryImage[]
+  //   likes       ImageLike[]
+  //   permissions FolderPermission[]
 
-//   ownedGroups    Group[]         @relation("OwnedGroups")
-//   groups         Group[]
-//   groupMembers   GroupMember[]   @relation("GroupMembers")
-//   userPreference UserPreference?
+  //   ownedGroups    Group[]         @relation("OwnedGroups")
+  //   groups         Group[]
+  //   groupMembers   GroupMember[]   @relation("GroupMembers")
+  userPreference UserPreference?
 
-    @@map("users")
+  @@map("users")
 }
 
 model RefreshToken {
@@ -161,80 +160,79 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
+model UserData {
+  id     Int    @id @default(autoincrement())
+  userId String @unique
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-// model UserData {
-//   id     Int @id @default(autoincrement())
-//   userId Int @unique
+  avatar      String?
+  nickname    String?
+  description String?
+  bio         String?
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  birth DateTime
 
-//   avatar String?
-//   nickname String?
-//   description    String?
-//   bio            String?
+  heightCm Int?
+  weightKg Int?
 
-//   birth DateTime
+  gender    Gender?
+  sexuality Sexuality?
+  pronouns  String?
 
-//   heightCm Int?
-//   weightKg Int?
+  city    String?
+  country String?
 
-//   gender    Gender?
-//   sexuality Sexuality?
-//   pronouns  String?
+  avatarUrl String?
 
-//   city    String?
-//   country String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-//   avatarUrl String?
+model UserPreference {
+  id     Int    @id @default(autoincrement())
+  userId String @unique
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-// model UserPreference {
-//   id     Int @id @default(autoincrement())
-//   userId Int @unique
+  minAge Int?
+  maxAge Int?
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  minHeightCm Int?
+  maxHeightCm Int?
 
-//   minAge Int?
-//   maxAge Int?
+  maxDistanceKm Int?
 
-//   minHeightCm Int?
-//   maxHeightCm Int?
+  verifiedOnly Boolean @default(false)
 
-//   maxDistanceKm Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-//   verifiedOnly Boolean @default(false)
+model UserLookingFor {
+  id Int @id @default(autoincrement())
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+  userId String
+  value  LookingFor
 
-// model UserLookingFor {
-//   id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-//   userId Int
-//   value LookingFor
+  @@unique([userId, value])
+  @@index([userId])
+}
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model UserGenderInterest {
+  id Int @id @default(autoincrement())
 
-//   @@unique([userId, value])
-//   @@index([userId])
-// }
+  userId String
+  value  GenderInterest
 
-// model UserGenderInterest {
-//   id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-//   userId Int
-//   value GenderInterest
+  @@unique([userId, value])
+  @@index([userId])
+}
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-//   @@unique([userId, value])
-//   @@index([userId])
-// }
 // model GalleryFolder {
 //   id Int @id @default(autoincrement())
 

@@ -32,3 +32,23 @@ export type RefreshToken = Prisma.RefreshTokenModel
  * 
  */
 export type VerificationToken = Prisma.VerificationTokenModel
+/**
+ * Model UserData
+ * 
+ */
+export type UserData = Prisma.UserDataModel
+/**
+ * Model UserPreference
+ * 
+ */
+export type UserPreference = Prisma.UserPreferenceModel
+/**
+ * Model UserLookingFor
+ * 
+ */
+export type UserLookingFor = Prisma.UserLookingForModel
+/**
+ * Model UserGenderInterest
+ * 
+ */
+export type UserGenderInterest = Prisma.UserGenderInterestModel
