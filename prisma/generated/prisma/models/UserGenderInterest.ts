@@ -243,7 +243,7 @@ export type UserGenderInterestScalarWhereWithAggregatesInput = {
 
 export type UserGenderInterestCreateInput = {
   value: $Enums.GenderInterest
-  user: Prisma.UserCreateNestedOneWithoutInterestedInInput
+  user: Prisma.UserCreateNestedOneWithoutGenderInterestInput
 }
 
 export type UserGenderInterestUncheckedCreateInput = {
@@ -254,7 +254,7 @@ export type UserGenderInterestUncheckedCreateInput = {
 
 export type UserGenderInterestUpdateInput = {
   value?: Prisma.EnumGenderInterestFieldUpdateOperationsInput | $Enums.GenderInterest
-  user?: Prisma.UserUpdateOneRequiredWithoutInterestedInNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutGenderInterestNestedInput
 }
 
 export type UserGenderInterestUncheckedUpdateInput = {
@@ -382,7 +382,6 @@ export type UserGenderInterestCreateOrConnectWithoutUserInput = {
 
 export type UserGenderInterestCreateManyUserInputEnvelope = {
   data: Prisma.UserGenderInterestCreateManyUserInput | Prisma.UserGenderInterestCreateManyUserInput[]
-  skipDuplicates?: boolean
 }
 
 export type UserGenderInterestUpsertWithWhereUniqueWithoutUserInput = {
@@ -1139,7 +1138,6 @@ export type UserGenderInterestCreateManyArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many UserGenderInterests.
    */
   data: Prisma.UserGenderInterestCreateManyInput | Prisma.UserGenderInterestCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1158,7 +1156,6 @@ export type UserGenderInterestCreateManyAndReturnArgs<ExtArgs extends runtime.Ty
    * The data used to create many UserGenderInterests.
    */
   data: Prisma.UserGenderInterestCreateManyInput | Prisma.UserGenderInterestCreateManyInput[]
-  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

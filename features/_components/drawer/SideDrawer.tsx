@@ -8,6 +8,7 @@ import {
 import { useAuth } from "@/features/auth/components/auth-provider";
 import { signOutAction } from "@/features/auth/lib/actions";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 export default function SideDrawer() {
     const user = useAuth();
@@ -37,6 +38,9 @@ export default function SideDrawer() {
                             {/* <ProfileRightDrawerCard
                                 onNavigate={() => setOpen(false)}
                             /> */}
+                            <div>
+                                <Link href={`/me`}>profilom</Link>
+                            </div>
                             <div className="navigation-content-drawer">
                                 <div className="drawer-menu-container">
                                     <div>

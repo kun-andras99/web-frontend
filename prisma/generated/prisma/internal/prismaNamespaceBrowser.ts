@@ -57,7 +57,8 @@ export const ModelName = {
   UserData: 'UserData',
   UserPreference: 'UserPreference',
   UserLookingFor: 'UserLookingFor',
-  UserGenderInterest: 'UserGenderInterest'
+  UserGenderInterest: 'UserGenderInterest',
+  UserSexualityInterest: 'UserSexualityInterest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -67,9 +68,6 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
@@ -85,6 +83,10 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  lat: 'lat',
+  lng: 'lng',
+  locationEnabled: 'locationEnabled',
+  locationUpdatedAt: 'locationUpdatedAt',
   role: 'role',
   relationshipStatus: 'relationshipStatus'
 } as const
@@ -123,6 +125,7 @@ export const UserDataScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   avatar: 'avatar',
+  avatarUrl: 'avatarUrl',
   nickname: 'nickname',
   description: 'description',
   bio: 'bio',
@@ -134,7 +137,7 @@ export const UserDataScalarFieldEnum = {
   pronouns: 'pronouns',
   city: 'city',
   country: 'country',
-  avatarUrl: 'avatarUrl',
+  transStatus: 'transStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -151,6 +154,7 @@ export const UserPreferenceScalarFieldEnum = {
   maxHeightCm: 'maxHeightCm',
   maxDistanceKm: 'maxDistanceKm',
   verifiedOnly: 'verifiedOnly',
+  locationRequired: 'locationRequired',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -176,20 +180,21 @@ export const UserGenderInterestScalarFieldEnum = {
 export type UserGenderInterestScalarFieldEnum = (typeof UserGenderInterestScalarFieldEnum)[keyof typeof UserGenderInterestScalarFieldEnum]
 
 
+export const UserSexualityInterestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserSexualityInterestScalarFieldEnum = (typeof UserSexualityInterestScalarFieldEnum)[keyof typeof UserSexualityInterestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {

@@ -403,7 +403,8 @@ export const ModelName = {
   UserData: 'UserData',
   UserPreference: 'UserPreference',
   UserLookingFor: 'UserLookingFor',
-  UserGenderInterest: 'UserGenderInterest'
+  UserGenderInterest: 'UserGenderInterest',
+  UserSexualityInterest: 'UserSexualityInterest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "refreshToken" | "verificationToken" | "userData" | "userPreference" | "userLookingFor" | "userGenderInterest"
+    modelProps: "user" | "refreshToken" | "verificationToken" | "userData" | "userPreference" | "userLookingFor" | "userGenderInterest" | "userSexualityInterest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -941,6 +942,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserSexualityInterest: {
+      payload: Prisma.$UserSexualityInterestPayload<ExtArgs>
+      fields: Prisma.UserSexualityInterestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserSexualityInterestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserSexualityInterestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>
+        }
+        findFirst: {
+          args: Prisma.UserSexualityInterestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserSexualityInterestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>
+        }
+        findMany: {
+          args: Prisma.UserSexualityInterestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>[]
+        }
+        create: {
+          args: Prisma.UserSexualityInterestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>
+        }
+        createMany: {
+          args: Prisma.UserSexualityInterestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserSexualityInterestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>[]
+        }
+        delete: {
+          args: Prisma.UserSexualityInterestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>
+        }
+        update: {
+          args: Prisma.UserSexualityInterestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserSexualityInterestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserSexualityInterestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserSexualityInterestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserSexualityInterestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSexualityInterestPayload>
+        }
+        aggregate: {
+          args: Prisma.UserSexualityInterestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserSexualityInterest>
+        }
+        groupBy: {
+          args: Prisma.UserSexualityInterestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserSexualityInterestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserSexualityInterestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserSexualityInterestCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -971,9 +1046,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
@@ -989,6 +1061,10 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  lat: 'lat',
+  lng: 'lng',
+  locationEnabled: 'locationEnabled',
+  locationUpdatedAt: 'locationUpdatedAt',
   role: 'role',
   relationshipStatus: 'relationshipStatus'
 } as const
@@ -1027,6 +1103,7 @@ export const UserDataScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   avatar: 'avatar',
+  avatarUrl: 'avatarUrl',
   nickname: 'nickname',
   description: 'description',
   bio: 'bio',
@@ -1038,7 +1115,7 @@ export const UserDataScalarFieldEnum = {
   pronouns: 'pronouns',
   city: 'city',
   country: 'country',
-  avatarUrl: 'avatarUrl',
+  transStatus: 'transStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1055,6 +1132,7 @@ export const UserPreferenceScalarFieldEnum = {
   maxHeightCm: 'maxHeightCm',
   maxDistanceKm: 'maxDistanceKm',
   verifiedOnly: 'verifiedOnly',
+  locationRequired: 'locationRequired',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1080,20 +1158,21 @@ export const UserGenderInterestScalarFieldEnum = {
 export type UserGenderInterestScalarFieldEnum = (typeof UserGenderInterestScalarFieldEnum)[keyof typeof UserGenderInterestScalarFieldEnum]
 
 
+export const UserSexualityInterestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value'
+} as const
+
+export type UserSexualityInterestScalarFieldEnum = (typeof UserSexualityInterestScalarFieldEnum)[keyof typeof UserSexualityInterestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {
@@ -1118,142 +1197,9 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'String[]'
- */
-export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime[]'
- */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'UserRole'
- */
-export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
-    
-
-
-/**
- * Reference to a field of type 'UserRole[]'
- */
-export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
-    
-
-
-/**
- * Reference to a field of type 'RelationshipStatus'
- */
-export type EnumRelationshipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelationshipStatus'>
-    
-
-
-/**
- * Reference to a field of type 'RelationshipStatus[]'
- */
-export type ListEnumRelationshipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelationshipStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'VerificationTokenType'
- */
-export type EnumVerificationTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationTokenType'>
-    
-
-
-/**
- * Reference to a field of type 'VerificationTokenType[]'
- */
-export type ListEnumVerificationTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationTokenType[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
- * Reference to a field of type 'Gender'
- */
-export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
-    
-
-
-/**
- * Reference to a field of type 'Gender[]'
- */
-export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
-    
-
-
-/**
- * Reference to a field of type 'Sexuality'
- */
-export type EnumSexualityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sexuality'>
-    
-
-
-/**
- * Reference to a field of type 'Sexuality[]'
- */
-export type ListEnumSexualityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sexuality[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
- * Reference to a field of type 'LookingFor'
- */
-export type EnumLookingForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LookingFor'>
-    
-
-
-/**
- * Reference to a field of type 'LookingFor[]'
- */
-export type ListEnumLookingForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LookingFor[]'>
-    
-
-
-/**
- * Reference to a field of type 'GenderInterest'
- */
-export type EnumGenderInterestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderInterest'>
-    
-
-
-/**
- * Reference to a field of type 'GenderInterest[]'
- */
-export type ListEnumGenderInterestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderInterest[]'>
     
 
 
@@ -1265,9 +1211,79 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
 
 
 /**
- * Reference to a field of type 'Float[]'
+ * Reference to a field of type 'Boolean'
  */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'UserRole'
+ */
+export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+/**
+ * Reference to a field of type 'RelationshipStatus'
+ */
+export type EnumRelationshipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelationshipStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'VerificationTokenType'
+ */
+export type EnumVerificationTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationTokenType'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Gender'
+ */
+export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+/**
+ * Reference to a field of type 'Sexuality'
+ */
+export type EnumSexualityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sexuality'>
+    
+
+
+/**
+ * Reference to a field of type 'TransStatus'
+ */
+export type EnumTransStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'LookingFor'
+ */
+export type EnumLookingForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LookingFor'>
+    
+
+
+/**
+ * Reference to a field of type 'GenderInterest'
+ */
+export type EnumGenderInterestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderInterest'>
+    
+
+
+/**
+ * Reference to a field of type 'SexualityInterest'
+ */
+export type EnumSexualityInterestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SexualityInterest'>
     
 
 /**
@@ -1428,6 +1444,7 @@ export type GlobalOmitConfig = {
   userPreference?: Prisma.UserPreferenceOmit
   userLookingFor?: Prisma.UserLookingForOmit
   userGenderInterest?: Prisma.UserGenderInterestOmit
+  userSexualityInterest?: Prisma.UserSexualityInterestOmit
 }
 
 /* Types for Logging */

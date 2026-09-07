@@ -382,7 +382,6 @@ export type UserLookingForCreateOrConnectWithoutUserInput = {
 
 export type UserLookingForCreateManyUserInputEnvelope = {
   data: Prisma.UserLookingForCreateManyUserInput | Prisma.UserLookingForCreateManyUserInput[]
-  skipDuplicates?: boolean
 }
 
 export type UserLookingForUpsertWithWhereUniqueWithoutUserInput = {
@@ -1139,7 +1138,6 @@ export type UserLookingForCreateManyArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many UserLookingFors.
    */
   data: Prisma.UserLookingForCreateManyInput | Prisma.UserLookingForCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1158,7 +1156,6 @@ export type UserLookingForCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * The data used to create many UserLookingFors.
    */
   data: Prisma.UserLookingForCreateManyInput | Prisma.UserLookingForCreateManyInput[]
-  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

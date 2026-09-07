@@ -1,4 +1,7 @@
-"use client";
+import { getCurrentUser } from "@/features/auth/lib/session";
+import { getProfileByUserId } from "@/features/profile/data/profile";
+import UserProfileScreen from "@/features/profile/screens/user-profile";
+import { redirect } from "next/navigation";
 
 interface UserPageProps {
     params: Promise<{
@@ -6,10 +9,19 @@ interface UserPageProps {
     }>;
 }
 
-export default function UserPage({ params }: UserPageProps) {
-    return (
-        <main>
-            <h1>Felhasználó oldala</h1>
-        </main>
-    );
+export default async function UserProfilePage({ params }: UserPageProps) {
+    const { id } = await params;
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+        redirect("/sign-in");
+    }
+
+    const profile = await getProfileByUserId(id);
+
+    if (!profile) {
+        redirect("/love");
+    }
+
+    return <UserProfileScreen user={profile} />;
 }

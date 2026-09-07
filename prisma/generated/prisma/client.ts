@@ -76,3 +76,8 @@ export type UserLookingFor = Prisma.UserLookingForModel
  * 
  */
 export type UserGenderInterest = Prisma.UserGenderInterestModel
+/**
+ * Model UserSexualityInterest
+ * 
+ */
+export type UserSexualityInterest = Prisma.UserSexualityInterestModel

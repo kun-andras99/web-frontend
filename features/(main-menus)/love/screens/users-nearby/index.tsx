@@ -4,10 +4,46 @@ import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
 import TopFilter from "@/features/_components/ui/top-filter";
 import ViewChange from "@/features/_components/ui/view-change";
 import { useScreenStore } from "@/features/_store/screen.store";
-import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+interface NearbyUser {
+    id: string;
+    username: string;
+    email: string;
+    userData: {
+        nickname: string;
+        gender: string;
+    } | null;
+}
 
 export default function UsersNearbyScreen() {
     const { display } = useScreenStore();
+
+    const [users, setUsers] = useState<NearbyUser[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadUsers() {
+            try {
+                const response = await fetch("/api/users/nearby?page=1");
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error);
+                }
+
+                setUsers(result.users);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadUsers();
+    }, []);
 
     return (
         <BottomPageWrapper>
@@ -16,7 +52,17 @@ export default function UsersNearbyScreen() {
                     <ViewChange />
                 </TopFilter>
                 <div className={`screen-view ${display} `}>
-                    {Array.from({ length: 20 }).map((_, index) => (
+                    {users.map((user) => {
+                        return (
+                            <div key={user.id}>
+                                <Link href={`/profile/${user.id}`}>
+                                    <p>{user.username}</p>
+                                    <p>{user.email}</p>
+                                </Link>
+                            </div>
+                        );
+                    })}
+                    {/* {Array.from({ length: 20 }).map((_, index) => (
                         <div
                             key={index}
                             className={
@@ -119,7 +165,7 @@ export default function UsersNearbyScreen() {
                                 </div>
                             ) : null}
                         </div>
-                    ))}
+                    ))} */}
                 </div>
             </div>
         </BottomPageWrapper>

@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
 }
 
 /**
@@ -25,76 +25,73 @@ enum VerificationTokenType {
  * USER PROFILE DATA AFTER REGISTRATION
  */
 enum Gender {
-  Male
-  Female
-  NonBinary
-  Other
-}
-
-enum Sexuality {
-  Straight
-  Bisexual
-  Gay
-  Lesbian
-  Trans
-  Pansexual
-  Asexual
-  Other
-}
-
-enum CrossdressStatus {
-  Crossdress
-  No
-}
-
-enum RelationshipStatus {
-  Single
-  Relation
-  Engaged
-  Married
-  Separated
-  Divorced
-  Widowed
-  Complicated
-  Open
-}
-
-enum LookingFor {
-  Chat
-  Friendship
-  CasualDating
-  SeriousRelationship
-  Hookup
-  Networking
-  NothingSpecific
+  MAN
+  WOMAN
+  TRANS_MAN
+  TRANS_WOMAN
 }
 
 enum GenderInterest {
-  Men
-  Women
-  NonBinary
-  Everyone
-  PreferNotToSay
+  MAN
+  WOMAN
+  TRANS_MAN
+  TRANS_WOMAN
+}
+
+enum Sexuality {
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  PANSEXUAL
+  ASEXUAL
+  OTHER
+}
+
+enum SexualityInterest {
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  PANSEXUAL
+  ASEXUAL
+  OTHER
+}
+
+enum LookingFor {
+  CHAT
+  FRIENDSHIP
+  CASUAL_DATING
+  SERIOUS_RELATIONSHIP
+  HOOKUP
+  NETWORKING
+  NOTHING_SPECIFIC
+}
+
+enum RelationshipStatus {
+  SINGLE
+  IN_RELATION
+  ENGAGED
+  MARRIED
+  SEPARATED
+  DIVORCED
+  WIDOWED
+  COMPLICATED
+  OPEN
 }
 
 enum TransStatus {
-  Cis
-  Trans
+  CIS
+  TRANS
 }
 
 enum City {
-  Centrum
-  Straight
-  Bisexual
-  Gay
-  Trans
-  BDSM
-}
-
-enum FolderVisibility {
-  PUBLIC
-  PRIVATE
-  RESTRICTED
+  CENTRUM
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  TRANS
 }
 
 model User {
@@ -108,6 +105,11 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  lat               Float?
+  lng               Float?
+  locationEnabled   Boolean   @default(false)
+  locationUpdatedAt DateTime?
+
   role UserRole @default(USER)
 
   refreshTokens      RefreshToken[]
@@ -115,7 +117,8 @@ model User {
 
   relationshipStatus RelationshipStatus?
   lookingFor         UserLookingFor[]
-  interestedIn       UserGenderInterest[]
+  genderInterest     UserGenderInterest[]
+  sexualityInteres   UserSexualityInterest[]
   userData           UserData?
 
   //   folders     GalleryFolder[]
@@ -128,6 +131,9 @@ model User {
   //   groupMembers   GroupMember[]   @relation("GroupMembers")
   userPreference UserPreference?
 
+  @@index([lat, lng])
+  @@index([locationEnabled])
+  @@index([createdAt])
   @@map("users")
 }
 
@@ -144,6 +150,7 @@ model RefreshToken {
   createdAt  DateTime  @default(now())
 
   @@index([userId])
+  @@index([expiresAt])
   @@map("refresh_tokens")
 }
 
@@ -157,6 +164,7 @@ model VerificationToken {
   createdAt DateTime              @default(now())
 
   @@index([userId, type])
+  @@index([expiresAt])
   @@map("verification_tokens")
 }
 
@@ -167,6 +175,7 @@ model UserData {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   avatar      String?
+  avatarUrl   String?
   nickname    String?
   description String?
   bio         String?
@@ -180,13 +189,17 @@ model UserData {
   sexuality Sexuality?
   pronouns  String?
 
-  city    String?
-  country String?
+  city    City?
 
-  avatarUrl String?
+  transStatus TransStatus?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([gender])
+  @@index([sexuality])
+  @@index([city])
+  @@map("user_data")
 }
 
 model UserPreference {
@@ -203,10 +216,13 @@ model UserPreference {
 
   maxDistanceKm Int?
 
-  verifiedOnly Boolean @default(false)
+  verifiedOnly     Boolean @default(false)
+  locationRequired Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("user_preferences")
 }
 
 model UserLookingFor {
@@ -219,6 +235,8 @@ model UserLookingFor {
 
   @@unique([userId, value])
   @@index([userId])
+  @@index([value])
+  @@map("user_looking_for")
 }
 
 model UserGenderInterest {
@@ -231,6 +249,22 @@ model UserGenderInterest {
 
   @@unique([userId, value])
   @@index([userId])
+  @@index([value])
+  @@map("user_gender_interest")
+}
+
+model UserSexualityInterest {
+  id Int @id @default(autoincrement())
+
+  userId String
+  value  SexualityInterest
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, value])
+  @@index([userId])
+  @@index([value])
+  @@map("user_sexuality_interest")
 }
 
 // model GalleryFolder {

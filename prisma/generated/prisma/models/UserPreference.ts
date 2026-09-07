@@ -53,6 +53,7 @@ export type UserPreferenceMinAggregateOutputType = {
   maxHeightCm: number | null
   maxDistanceKm: number | null
   verifiedOnly: boolean | null
+  locationRequired: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +67,7 @@ export type UserPreferenceMaxAggregateOutputType = {
   maxHeightCm: number | null
   maxDistanceKm: number | null
   verifiedOnly: boolean | null
+  locationRequired: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -79,6 +81,7 @@ export type UserPreferenceCountAggregateOutputType = {
   maxHeightCm: number
   maxDistanceKm: number
   verifiedOnly: number
+  locationRequired: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -112,6 +115,7 @@ export type UserPreferenceMinAggregateInputType = {
   maxHeightCm?: true
   maxDistanceKm?: true
   verifiedOnly?: true
+  locationRequired?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -125,6 +129,7 @@ export type UserPreferenceMaxAggregateInputType = {
   maxHeightCm?: true
   maxDistanceKm?: true
   verifiedOnly?: true
+  locationRequired?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -138,6 +143,7 @@ export type UserPreferenceCountAggregateInputType = {
   maxHeightCm?: true
   maxDistanceKm?: true
   verifiedOnly?: true
+  locationRequired?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -238,6 +244,7 @@ export type UserPreferenceGroupByOutputType = {
   maxHeightCm: number | null
   maxDistanceKm: number | null
   verifiedOnly: boolean
+  locationRequired: boolean
   createdAt: Date
   updatedAt: Date
   _count: UserPreferenceCountAggregateOutputType | null
@@ -274,6 +281,7 @@ export type UserPreferenceWhereInput = {
   maxHeightCm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   maxDistanceKm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   verifiedOnly?: Prisma.BoolFilter<"UserPreference"> | boolean
+  locationRequired?: Prisma.BoolFilter<"UserPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -288,6 +296,7 @@ export type UserPreferenceOrderByWithRelationInput = {
   maxHeightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrderInput | Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
+  locationRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -305,6 +314,7 @@ export type UserPreferenceWhereUniqueInput = Prisma.AtLeast<{
   maxHeightCm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   maxDistanceKm?: Prisma.IntNullableFilter<"UserPreference"> | number | null
   verifiedOnly?: Prisma.BoolFilter<"UserPreference"> | boolean
+  locationRequired?: Prisma.BoolFilter<"UserPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPreference"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -319,6 +329,7 @@ export type UserPreferenceOrderByWithAggregationInput = {
   maxHeightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrderInput | Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
+  locationRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserPreferenceCountOrderByAggregateInput
@@ -340,6 +351,7 @@ export type UserPreferenceScalarWhereWithAggregatesInput = {
   maxHeightCm?: Prisma.IntNullableWithAggregatesFilter<"UserPreference"> | number | null
   maxDistanceKm?: Prisma.IntNullableWithAggregatesFilter<"UserPreference"> | number | null
   verifiedOnly?: Prisma.BoolWithAggregatesFilter<"UserPreference"> | boolean
+  locationRequired?: Prisma.BoolWithAggregatesFilter<"UserPreference"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserPreference"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UserPreference"> | Date | string
 }
@@ -351,6 +363,7 @@ export type UserPreferenceCreateInput = {
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserPreferenceInput
@@ -365,6 +378,7 @@ export type UserPreferenceUncheckedCreateInput = {
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -376,6 +390,7 @@ export type UserPreferenceUpdateInput = {
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserPreferenceNestedInput
@@ -390,6 +405,7 @@ export type UserPreferenceUncheckedUpdateInput = {
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -403,6 +419,7 @@ export type UserPreferenceCreateManyInput = {
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -414,6 +431,7 @@ export type UserPreferenceUpdateManyMutationInput = {
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -427,6 +445,7 @@ export type UserPreferenceUncheckedUpdateManyInput = {
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -445,6 +464,7 @@ export type UserPreferenceCountOrderByAggregateInput = {
   maxHeightCm?: Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
+  locationRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -467,6 +487,7 @@ export type UserPreferenceMaxOrderByAggregateInput = {
   maxHeightCm?: Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
+  locationRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -480,6 +501,7 @@ export type UserPreferenceMinOrderByAggregateInput = {
   maxHeightCm?: Prisma.SortOrder
   maxDistanceKm?: Prisma.SortOrder
   verifiedOnly?: Prisma.SortOrder
+  locationRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -525,10 +547,6 @@ export type UserPreferenceUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserPreferenceUpdateToOneWithWhereWithoutUserInput, Prisma.UserPreferenceUpdateWithoutUserInput>, Prisma.UserPreferenceUncheckedUpdateWithoutUserInput>
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type UserPreferenceCreateWithoutUserInput = {
   minAge?: number | null
   maxAge?: number | null
@@ -536,6 +554,7 @@ export type UserPreferenceCreateWithoutUserInput = {
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -548,6 +567,7 @@ export type UserPreferenceUncheckedCreateWithoutUserInput = {
   maxHeightCm?: number | null
   maxDistanceKm?: number | null
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -575,6 +595,7 @@ export type UserPreferenceUpdateWithoutUserInput = {
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -587,6 +608,7 @@ export type UserPreferenceUncheckedUpdateWithoutUserInput = {
   maxHeightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   maxDistanceKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   verifiedOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  locationRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -602,6 +624,7 @@ export type UserPreferenceSelect<ExtArgs extends runtime.Types.Extensions.Intern
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -616,6 +639,7 @@ export type UserPreferenceSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -630,6 +654,7 @@ export type UserPreferenceSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -644,11 +669,12 @@ export type UserPreferenceSelectScalar = {
   maxHeightCm?: boolean
   maxDistanceKm?: boolean
   verifiedOnly?: boolean
+  locationRequired?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "minAge" | "maxAge" | "minHeightCm" | "maxHeightCm" | "maxDistanceKm" | "verifiedOnly" | "createdAt" | "updatedAt", ExtArgs["result"]["userPreference"]>
+export type UserPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "minAge" | "maxAge" | "minHeightCm" | "maxHeightCm" | "maxDistanceKm" | "verifiedOnly" | "locationRequired" | "createdAt" | "updatedAt", ExtArgs["result"]["userPreference"]>
 export type UserPreferenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -673,6 +699,7 @@ export type $UserPreferencePayload<ExtArgs extends runtime.Types.Extensions.Inte
     maxHeightCm: number | null
     maxDistanceKm: number | null
     verifiedOnly: boolean
+    locationRequired: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["userPreference"]>
@@ -1107,6 +1134,7 @@ export interface UserPreferenceFieldRefs {
   readonly maxHeightCm: Prisma.FieldRef<"UserPreference", 'Int'>
   readonly maxDistanceKm: Prisma.FieldRef<"UserPreference", 'Int'>
   readonly verifiedOnly: Prisma.FieldRef<"UserPreference", 'Boolean'>
+  readonly locationRequired: Prisma.FieldRef<"UserPreference", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"UserPreference", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserPreference", 'DateTime'>
 }
@@ -1343,7 +1371,6 @@ export type UserPreferenceCreateManyArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many UserPreferences.
    */
   data: Prisma.UserPreferenceCreateManyInput | Prisma.UserPreferenceCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1362,7 +1389,6 @@ export type UserPreferenceCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * The data used to create many UserPreferences.
    */
   data: Prisma.UserPreferenceCreateManyInput | Prisma.UserPreferenceCreateManyInput[]
-  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

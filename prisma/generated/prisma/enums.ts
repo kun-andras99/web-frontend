@@ -27,100 +27,94 @@ export type VerificationTokenType = (typeof VerificationTokenType)[keyof typeof 
 
 
 export const Gender = {
-  Male: 'Male',
-  Female: 'Female',
-  NonBinary: 'NonBinary',
-  Other: 'Other'
+  MAN: 'MAN',
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 } as const
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
 
 
-export const Sexuality = {
-  Straight: 'Straight',
-  Bisexual: 'Bisexual',
-  Gay: 'Gay',
-  Lesbian: 'Lesbian',
-  Trans: 'Trans',
-  Pansexual: 'Pansexual',
-  Asexual: 'Asexual',
-  Other: 'Other'
-} as const
-
-export type Sexuality = (typeof Sexuality)[keyof typeof Sexuality]
-
-
-export const CrossdressStatus = {
-  Crossdress: 'Crossdress',
-  No: 'No'
-} as const
-
-export type CrossdressStatus = (typeof CrossdressStatus)[keyof typeof CrossdressStatus]
-
-
-export const RelationshipStatus = {
-  Single: 'Single',
-  Relation: 'Relation',
-  Engaged: 'Engaged',
-  Married: 'Married',
-  Separated: 'Separated',
-  Divorced: 'Divorced',
-  Widowed: 'Widowed',
-  Complicated: 'Complicated',
-  Open: 'Open'
-} as const
-
-export type RelationshipStatus = (typeof RelationshipStatus)[keyof typeof RelationshipStatus]
-
-
-export const LookingFor = {
-  Chat: 'Chat',
-  Friendship: 'Friendship',
-  CasualDating: 'CasualDating',
-  SeriousRelationship: 'SeriousRelationship',
-  Hookup: 'Hookup',
-  Networking: 'Networking',
-  NothingSpecific: 'NothingSpecific'
-} as const
-
-export type LookingFor = (typeof LookingFor)[keyof typeof LookingFor]
-
-
 export const GenderInterest = {
-  Men: 'Men',
-  Women: 'Women',
-  NonBinary: 'NonBinary',
-  Everyone: 'Everyone',
-  PreferNotToSay: 'PreferNotToSay'
+  MAN: 'MAN',
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 } as const
 
 export type GenderInterest = (typeof GenderInterest)[keyof typeof GenderInterest]
 
 
+export const Sexuality = {
+  STRAIGHT: 'STRAIGHT',
+  BISEXUAL: 'BISEXUAL',
+  GAY: 'GAY',
+  LESBIAN: 'LESBIAN',
+  PANSEXUAL: 'PANSEXUAL',
+  ASEXUAL: 'ASEXUAL',
+  OTHER: 'OTHER'
+} as const
+
+export type Sexuality = (typeof Sexuality)[keyof typeof Sexuality]
+
+
+export const SexualityInterest = {
+  STRAIGHT: 'STRAIGHT',
+  BISEXUAL: 'BISEXUAL',
+  GAY: 'GAY',
+  LESBIAN: 'LESBIAN',
+  PANSEXUAL: 'PANSEXUAL',
+  ASEXUAL: 'ASEXUAL',
+  OTHER: 'OTHER'
+} as const
+
+export type SexualityInterest = (typeof SexualityInterest)[keyof typeof SexualityInterest]
+
+
+export const LookingFor = {
+  CHAT: 'CHAT',
+  FRIENDSHIP: 'FRIENDSHIP',
+  CASUAL_DATING: 'CASUAL_DATING',
+  SERIOUS_RELATIONSHIP: 'SERIOUS_RELATIONSHIP',
+  HOOKUP: 'HOOKUP',
+  NETWORKING: 'NETWORKING',
+  NOTHING_SPECIFIC: 'NOTHING_SPECIFIC'
+} as const
+
+export type LookingFor = (typeof LookingFor)[keyof typeof LookingFor]
+
+
+export const RelationshipStatus = {
+  SINGLE: 'SINGLE',
+  IN_RELATION: 'IN_RELATION',
+  ENGAGED: 'ENGAGED',
+  MARRIED: 'MARRIED',
+  SEPARATED: 'SEPARATED',
+  DIVORCED: 'DIVORCED',
+  WIDOWED: 'WIDOWED',
+  COMPLICATED: 'COMPLICATED',
+  OPEN: 'OPEN'
+} as const
+
+export type RelationshipStatus = (typeof RelationshipStatus)[keyof typeof RelationshipStatus]
+
+
 export const TransStatus = {
-  Cis: 'Cis',
-  Trans: 'Trans'
+  CIS: 'CIS',
+  TRANS: 'TRANS'
 } as const
 
 export type TransStatus = (typeof TransStatus)[keyof typeof TransStatus]
 
 
 export const City = {
-  Centrum: 'Centrum',
-  Straight: 'Straight',
-  Bisexual: 'Bisexual',
-  Gay: 'Gay',
-  Trans: 'Trans',
-  BDSM: 'BDSM'
+  CENTRUM: 'CENTRUM',
+  STRAIGHT: 'STRAIGHT',
+  BISEXUAL: 'BISEXUAL',
+  GAY: 'GAY',
+  LESBIAN: 'LESBIAN',
+  TRANS: 'TRANS'
 } as const
 
 export type City = (typeof City)[keyof typeof City]
-
-
-export const FolderVisibility = {
-  PUBLIC: 'PUBLIC',
-  PRIVATE: 'PRIVATE',
-  RESTRICTED: 'RESTRICTED'
-} as const
-
-export type FolderVisibility = (typeof FolderVisibility)[keyof typeof FolderVisibility]
