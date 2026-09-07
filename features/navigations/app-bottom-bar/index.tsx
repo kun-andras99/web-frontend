@@ -1,10 +1,11 @@
 "use client";
 
+import { SessionUser } from "@/features/auth/types/auth-index";
 import { APP_BOTTOM_BAR_ROUTES } from "@/features/navigations/navigation.config";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function AppBottomBar() {
+export default function AppBottomBar({user}: {user: SessionUser | null}) {
     const pathname = usePathname();
 
     return (

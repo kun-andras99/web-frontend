@@ -23,7 +23,6 @@ export interface UseHeaderResult extends ResolvedNavigation {
  */
 export function useHeader(): UseHeaderResult {
     const pathname = usePathname();
-    console.log(pathname);
     return useMemo<UseHeaderResult>(() => {
         const resolved = resolveNavigation(pathname, APP_BOTTOM_BAR_ROUTES);
 

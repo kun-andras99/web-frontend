@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export default function AuthenticationLayout({
@@ -5,5 +6,10 @@ export default function AuthenticationLayout({
 }: {
     children: ReactNode;
 }) {
-    return <main className="auth-views">{children}</main>;
+    return (
+        <main className="auth-views">
+            <Link href={`/`}>Vissza a kezdőlapra</Link>
+            {children}
+        </main>
+    );
 }

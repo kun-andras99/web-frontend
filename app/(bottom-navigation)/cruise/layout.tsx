@@ -2,7 +2,11 @@ import { cruiseRoutes } from "@/features/navigations/app-bottom-bar/constants/ap
 import AppTopBar from "@/features/navigations/app-top-bar";
 import { ReactNode } from "react";
 
-export default function CruiseLayout({ children }: { children: ReactNode }) {
+export default async function CruiseLayout({
+    children,
+}: {
+    children: ReactNode;
+}) {
     if (!cruiseRoutes) {
         return null;
     }

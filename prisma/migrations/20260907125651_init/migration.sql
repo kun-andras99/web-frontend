@@ -3,7 +3,9 @@ CREATE TABLE "users" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "username" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "passwordHash" TEXT NOT NULL,
+    "emailVerified" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "role" TEXT NOT NULL DEFAULT 'USER'

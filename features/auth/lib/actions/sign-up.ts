@@ -25,7 +25,7 @@ export async function signUpAction(
     formData: FormData,
 ): Promise<ActionState<SignUpFields>> {
     const parsed = signUpSchema.safeParse({
-        name: formData.get("name"),
+        username: formData.get("username"),
         email: formData.get("email"),
         password: formData.get("password"),
         confirmPassword: formData.get("confirmPassword"),
@@ -39,7 +39,7 @@ export async function signUpAction(
         };
     }
 
-    const { name, email, password } = parsed.data;
+    const { username, email, password } = parsed.data;
 
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
@@ -51,7 +51,7 @@ export async function signUpAction(
     }
 
     const passwordHash = await hashPassword(password);
-    const user = await createUser({ name, email, passwordHash });
+    const user = await createUser({ username, email, passwordHash });
     const userId = user.id as UserId;
 
     const verificationToken = await createEmailVerificationToken(userId);

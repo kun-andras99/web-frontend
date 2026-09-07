@@ -70,23 +70,37 @@
         align-items: center;
         flex-direction: column;
         background: var(--bg);
-        .image {
+        .user-container {
             position: fixed;
             top: 7px;
             left: 10px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            // background: rgba(255, 255, 255, 0.11);
-            // backdrop-filter: blur(3px);
-            box-shadow: 0.05rem 0.05rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15);
+            gap: 10px;
 
-            .top-avatar-pic {
+            .image {
+                width: 36px;
+                height: 36px;
                 border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // background: rgba(255, 255, 255, 0.11);
+                // backdrop-filter: blur(3px);
+                box-shadow: 0.05rem 0.05rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15);
+
+                .top-avatar-pic {
+                    border-radius: 50%;
+                }
             }
+
+            span {
+                font-size: 13px;
+            }
+        }
+        .top-bar-sign-out {
+            position: fixed;
+            top: 7px;
+            right: 10px;
         }
     }
 }

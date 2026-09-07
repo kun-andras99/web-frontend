@@ -19,6 +19,7 @@ export function createUser(input: {
         data: {
             username: input.username,
             email: input.email,
+            password: input.passwordHash,
             passwordHash: input.passwordHash,
         },
     });

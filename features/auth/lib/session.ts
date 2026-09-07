@@ -1,3 +1,5 @@
+"use server";
+
 import { getUserById } from "@/features/auth/data/user";
 import type { SessionUser } from "@/features/auth/types/auth-index";
 import { cookies } from "next/headers";
@@ -26,7 +28,7 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
     return {
         id: user.id,
         email: user.email,
-        name: user.name,
+        username: user.username,
         emailVerified: Boolean(user.emailVerified),
     };
 });
