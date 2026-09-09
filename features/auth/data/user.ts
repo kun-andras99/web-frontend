@@ -3,11 +3,11 @@ import { prisma } from "@/lib/prisma";
 import "server-only";
 
 export function getUserByEmail(email: string) {
-    return prisma.user.findUnique({ where: { email } });
+    return prisma.users.findUnique({ where: { email } });
 }
 
 export function getUserById(id: UserId) {
-    return prisma.user.findUnique({ where: { id } });
+    return prisma.users.findUnique({ where: { id } });
 }
 
 export function createUser(input: {
@@ -15,7 +15,7 @@ export function createUser(input: {
     email: string;
     passwordHash: string;
 }) {
-    return prisma.user.create({
+    return prisma.users.create({
         data: {
             username: input.username,
             email: input.email,
@@ -26,14 +26,14 @@ export function createUser(input: {
 }
 
 export function markEmailAsVerified(id: UserId) {
-    return prisma.user.update({
+    return prisma.users.update({
         where: { id },
         data: { emailVerified: new Date() },
     });
 }
 
 export function updateUserPassword(id: UserId, passwordHash: string) {
-    return prisma.user.update({
+    return prisma.users.update({
         where: { id },
         data: { passwordHash },
     });

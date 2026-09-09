@@ -1,4 +1,4 @@
-import { User } from "../../../prisma/generated/prisma/client";
+import { Users } from "../../../prisma/generated/prisma";
 
 /**
  * Nominal ("branded") típus-helper. Cél: két, egyébként strukturálisan azonos
@@ -12,7 +12,7 @@ export type AccessToken = Brand<string, "AccessToken">;
 export type RefreshToken = Brand<string, "RefreshToken">;
 
 /** A kliensnek/session-nek szánt user-alak — a jelszó-hash sosem hagyja el a data réteget. */
-export type PublicUser = Omit<User, "passwordHash">;
+export type PublicUser = Omit<Users, "passwordHash">;
 
 export interface SessionUser extends Pick<
     PublicUser,

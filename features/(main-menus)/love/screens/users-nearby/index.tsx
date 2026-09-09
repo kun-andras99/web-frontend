@@ -52,7 +52,7 @@ export default function UsersNearbyScreen() {
                     <ViewChange />
                 </TopFilter>
                 <div className={`screen-view ${display} `}>
-                    {users.map((user) => {
+                    {users?.map((user) => {
                         return (
                             <div key={user.id}>
                                 <Link href={`/profile/${user.id}`}>

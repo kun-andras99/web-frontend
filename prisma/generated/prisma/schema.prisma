@@ -1,0 +1,395 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/**
+ * USER AND REGISTRATION - LOGIN
+ */
+enum UserRole {
+  USER
+  ADMIN
+  MODERATOR
+}
+
+enum VerificationTokenType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+/**
+ * USER PROFILE DATA AFTER REGISTRATION
+ */
+enum Gender {
+  MAN
+  WOMAN
+  TRANS_MAN
+  TRANS_WOMAN
+}
+
+enum GenderInterest {
+  MAN
+  WOMAN
+  TRANS_MAN
+  TRANS_WOMAN
+}
+
+enum Sexuality {
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  PANSEXUAL
+  ASEXUAL
+  OTHER
+}
+
+enum SexualityInterest {
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  PANSEXUAL
+  ASEXUAL
+  OTHER
+}
+
+enum LookingFor {
+  CHAT
+  FRIENDSHIP
+  CASUAL_DATING
+  SERIOUS_RELATIONSHIP
+  HOOKUP
+  NETWORKING
+  NOTHING_SPECIFIC
+}
+
+enum RelationshipStatus {
+  SINGLE
+  IN_RELATION
+  ENGAGED
+  MARRIED
+  SEPARATED
+  DIVORCED
+  WIDOWED
+  COMPLICATED
+  OPEN
+}
+
+enum TransStatus {
+  CIS
+  TRANS
+}
+
+enum City {
+  CENTRUM
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  TRANS
+}
+
+model Users {
+  id String @id @default(cuid())
+
+  username      String    @unique
+  email         String    @unique
+  password      String
+  passwordHash  String
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  lat               Float?
+  lng               Float?
+  locationEnabled   Boolean   @default(false)
+  locationUpdatedAt DateTime?
+
+  role UserRole @default(USER)
+
+  refreshTokens      RefreshToken[]
+  verificationTokens VerificationToken[]
+
+  relationshipStatus RelationshipStatus?
+  lookingFor         UserLookingFor[]
+  genderInterest     UserGenderInterest[]
+  sexualityInteres   UserSexualityInterest[]
+  userData           UserData?
+
+  //   folders     GalleryFolder[]
+  //   images      GalleryImage[]
+  //   likes       ImageLike[]
+  //   permissions FolderPermission[]
+
+  //   ownedGroups    Group[]         @relation("OwnedGroups")
+  //   groups         Group[]
+  //   groupMembers   GroupMember[]   @relation("GroupMembers")
+  userPreference UserPreference?
+
+  @@index([lat, lng])
+  @@index([locationEnabled])
+  @@index([createdAt])
+  @@map("users")
+}
+
+model RefreshToken {
+  id         String    @id @default(cuid())
+  tokenHash  String    @unique
+  userId     String
+  user       Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  replacedBy String?
+  userAgent  String?
+  ipAddress  String?
+  createdAt  DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}
+
+model VerificationToken {
+  id        String                @id @default(cuid())
+  tokenHash String                @unique
+  userId    String
+  user      Users                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      VerificationTokenType
+  expiresAt DateTime
+  createdAt DateTime              @default(now())
+
+  @@index([userId, type])
+  @@index([expiresAt])
+  @@map("verification_tokens")
+}
+
+model UserData {
+  id     Int    @id @default(autoincrement())
+  userId String @unique
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  avatar      String?
+  avatarUrl   String?
+  nickname    String?
+  description String?
+  bio         String?
+
+  birth DateTime
+
+  heightCm Int?
+  weightKg Int?
+
+  gender    Gender?
+  sexuality Sexuality?
+  pronouns  String?
+
+  city City?
+
+  transStatus TransStatus?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([gender])
+  @@index([sexuality])
+  @@index([city])
+  @@map("user_data")
+}
+
+model UserPreference {
+  id     Int    @id @default(autoincrement())
+  userId String @unique
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  minAge Int?
+  maxAge Int?
+
+  minHeightCm Int?
+  maxHeightCm Int?
+
+  maxDistanceKm Int?
+
+  verifiedOnly     Boolean @default(false)
+  locationRequired Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_preferences")
+}
+
+model UserLookingFor {
+  id Int @id @default(autoincrement())
+
+  userId String
+  value  LookingFor
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, value])
+  @@index([userId])
+  @@index([value])
+  @@map("user_looking_for")
+}
+
+model UserGenderInterest {
+  id Int @id @default(autoincrement())
+
+  userId String
+  value  GenderInterest
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, value])
+  @@index([userId])
+  @@index([value])
+  @@map("user_gender_interest")
+}
+
+model UserSexualityInterest {
+  id Int @id @default(autoincrement())
+
+  userId String
+  value  SexualityInterest
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, value])
+  @@index([userId])
+  @@index([value])
+  @@map("user_sexuality_interest")
+}
+
+// model GalleryFolder {
+//   id Int @id @default(autoincrement())
+
+//   userId Int
+//   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   name        String
+//   description String? // 🔥 új: folder bio
+
+//   visibility FolderVisibility @default(PUBLIC)
+
+//   isLocked Boolean @default(false) // 🔐 extra protection (future-proof)
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   images      GalleryImage[]
+//   permissions FolderPermission[]
+
+//   @@index([userId])
+// }
+
+// model FolderPermission {
+//   id Int @id @default(autoincrement())
+
+//   folderId Int
+//   userId   Int
+
+//   folder GalleryFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+//   user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   canView   Boolean @default(true)
+//   canUpload Boolean @default(false) // 🔥 extra: collaborator support
+
+//   createdAt DateTime @default(now())
+
+//   @@unique([folderId, userId])
+//   @@index([userId])
+// }
+
+// model GalleryImage {
+//   id Int @id @default(autoincrement())
+
+//   folderId Int
+//   userId   Int
+
+//   folder GalleryFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+//   user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   url String
+
+//   caption String?
+//   bio     String? // 🔥 hosszabb leírás / story
+
+//   width  Int? // 📸 optional metadata
+//   height Int?
+
+//   mimeType String?
+//   size     Int?
+
+//   isPrivate Boolean @default(false) // 🔐 image-level privacy
+
+//   createdAt DateTime @default(now())
+
+//   likes ImageLike[]
+//   views ImageView[]
+
+//   @@index([folderId])
+//   @@index([userId])
+// }
+
+// model ImageLike {
+//   id Int @id @default(autoincrement())
+
+//   imageId Int
+//   userId  Int
+
+//   image GalleryImage @relation(fields: [imageId], references: [id], onDelete: Cascade)
+//   user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   createdAt DateTime @default(now())
+
+//   @@unique([imageId, userId])
+//   @@index([userId])
+// }
+
+// model ImageView {
+//   id Int @id @default(autoincrement())
+
+//   imageId Int
+//   userId  Int?
+
+//   image GalleryImage @relation(fields: [imageId], references: [id], onDelete: Cascade)
+
+//   createdAt DateTime @default(now())
+
+//   @@index([imageId])
+// }
+
+// model Group {
+//   id          Int      @id @default(autoincrement())
+//   name        String
+//   description String?
+//   createdAt   DateTime @default(now())
+
+//   ownerId Int
+//   owner   User @relation("OwnedGroups", fields: [ownerId], references: [id])
+
+//   members GroupMember[]
+//   user    User?         @relation(fields: [userId], references: [id])
+//   userId  Int?
+// }
+
+// model GroupMember {
+//   id Int @id @default(autoincrement())
+
+//   userId  Int
+//   groupId Int
+
+//   user  User  @relation("GroupMembers", fields: [userId], references: [id])
+//   group Group @relation(fields: [groupId], references: [id])
+
+//   joinedAt DateTime @default(now())
+
+//   @@unique([userId, groupId])
+// }

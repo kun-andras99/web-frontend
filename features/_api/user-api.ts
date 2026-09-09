@@ -2,14 +2,14 @@ import { prisma } from "@/lib/prisma";
 import type { User } from "../../prisma/generated/prisma/client";
 
 export async function getUserById(id: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.userss.findUnique({
         where: { id },
     });
     return user;
 }
 
 export async function getUserByName(username: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.userss.findUnique({
         where: { username },
     });
     return user;
@@ -23,7 +23,7 @@ export async function getUsers(
 ): Promise<User[]> {
     const skip = (page - 1) * limit;
 
-    const users = await prisma.user.findMany({
+    const users = await prisma.userss.findMany({
         where: {
             ...(currentUserId && {
                 id: {

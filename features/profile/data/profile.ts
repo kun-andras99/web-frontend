@@ -26,7 +26,7 @@ interface UpdateProfileData {
 }
 
 export async function getProfileByUserId(userId: string) {
-    return prisma.user.findUnique({
+    return prisma.userss.findUnique({
         where: {
             id: userId,
         },
