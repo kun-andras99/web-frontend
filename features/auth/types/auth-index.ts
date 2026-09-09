@@ -34,17 +34,18 @@ export interface AccessTokenPayload {
 export type ActionState<
     TFields extends Record<string, unknown> = Record<string, never>,
 > =
-    | { status: "idle" }
+    | { status: "idle"; message?: string; redirectTo?: string }
     | {
           status: "error";
           message: string;
           fieldErrors?: Partial<Record<keyof TFields, string[]>>;
+          redirectTo?: string;
       }
-    | { status: "success"; message?: string };
+    | { status: "success"; message?: string; redirectTo?: string };
 
 export type SignInFields = { email: string; password: string };
 export type SignUpFields = {
-    name: string;
+    username: string;
     email: string;
     password: string;
     confirmPassword: string;

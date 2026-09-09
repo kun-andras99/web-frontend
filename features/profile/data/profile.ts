@@ -3,7 +3,7 @@ import {
     Gender,
     RelationshipStatus,
     Sexuality,
-} from "../../../prisma/generated/prisma/enums";
+} from "../../../prisma/generated/prisma";
 
 interface UpdateProfileData {
     username?: string;
@@ -26,7 +26,7 @@ interface UpdateProfileData {
 }
 
 export async function getProfileByUserId(userId: string) {
-    return prisma.userss.findUnique({
+    return prisma.users.findUnique({
         where: {
             id: userId,
         },
@@ -42,7 +42,7 @@ export async function getProfileByUserId(userId: string) {
 
 export async function updateProfile(userId: string, data: UpdateProfileData) {
     return prisma.$transaction(async (tx) => {
-        const user = await tx.user.update({
+        const user = await tx.users.update({
             where: {
                 id: userId,
             },
@@ -57,20 +57,20 @@ export async function updateProfile(userId: string, data: UpdateProfileData) {
             },
         });
 
-        if (data.userData) {
-            await tx.userData.upsert({
-                where: {
-                    userId,
-                },
-                create: {
-                    userId,
-                    ...data.userData,
-                },
-                update: {
-                    ...data.userData,
-                },
-            });
-        }
+        // if (data.userData) {
+        //     await tx.userData.upsert({
+        //         where: {
+        //             userId,
+        //         },
+        //         create: {
+        //             userId,
+        //             ...data.userData,
+        //         },
+        //         update: {
+        //             ...data.userData,
+        //         },
+        //     });
+        // }
 
         return user;
     });

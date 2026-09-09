@@ -1,15 +1,15 @@
 import { prisma } from "@/lib/prisma";
-import type { User } from "../../prisma/generated/prisma/client";
+import { Users } from "../../prisma/generated/prisma";
 
-export async function getUserById(id: string): Promise<User | null> {
-    const user = await prisma.userss.findUnique({
+export async function getUserById(id: string): Promise<Users | null> {
+    const user = await prisma.users.findUnique({
         where: { id },
     });
     return user;
 }
 
-export async function getUserByName(username: string): Promise<User | null> {
-    const user = await prisma.userss.findUnique({
+export async function getUserByName(username: string): Promise<Users | null> {
+    const user = await prisma.users.findUnique({
         where: { username },
     });
     return user;
@@ -20,10 +20,10 @@ export async function getUsers(
     page: number = 1,
     limit: number = 30,
     cursor?: string,
-): Promise<User[]> {
+): Promise<Users[]> {
     const skip = (page - 1) * limit;
 
-    const users = await prisma.userss.findMany({
+    const users = await prisma.users.findMany({
         where: {
             ...(currentUserId && {
                 id: {

@@ -1,5 +1,12 @@
 import { z } from "zod";
-import { Gender, GenderInterest, LookingFor, RelationshipStatus, Sexuality, SexualityInterest } from "../../../prisma/generated/prisma/enums";
+import {
+    Gender,
+    GenderInterest,
+    LookingFor,
+    RelationshipStatus,
+    Sexuality,
+    SexualityInterest,
+} from "../../../prisma/generated/prisma";
 
 export const createProfileSchema = z.object({
     nickname: z
@@ -14,9 +21,7 @@ export const createProfileSchema = z.object({
     sexuality: z.enum(Sexuality),
 
     lookingFor: z
-        .array(
-            z.enum(LookingFor),
-        )
+        .array(z.enum(LookingFor))
         .min(1, "Legalább egy lehetőséget válassz."),
 
     genderInterest: z
@@ -24,9 +29,7 @@ export const createProfileSchema = z.object({
         .min(1, "Legalább egy nemet válassz."),
 
     sexualityInterest: z
-        .array(
-            z.enum(SexualityInterest),
-        )
+        .array(z.enum(SexualityInterest))
         .min(1, "Legalább egy lehetőséget válassz."),
 
     relationshipStatus: z.enum(RelationshipStatus),

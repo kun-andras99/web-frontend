@@ -6,7 +6,7 @@ import { generateRawToken, hashToken } from "@/features/auth/lib/tokens";
 import type { UserId } from "@/features/auth/types/auth-index";
 import { prisma } from "@/lib/prisma";
 import "server-only";
-import { VerificationTokenType } from "../../../prisma/generated/prisma/enums";
+import { VerificationTokenType } from "../../../prisma/generated/prisma";
 
 async function createVerificationToken(
     userId: UserId,

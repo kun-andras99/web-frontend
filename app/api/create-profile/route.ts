@@ -89,7 +89,7 @@ export async function POST(request: Request) {
             /*
              * 1. BEJELENTKEZETT USER FRISSÍTÉSE
              */
-            await tx.user.update({
+            await tx.users.update({
                 where: {
                     id: user.id,
                 },
@@ -123,10 +123,6 @@ export async function POST(request: Request) {
                     heightCm: profile.heightCm ?? null,
 
                     weightKg: profile.weightKg ?? null,
-
-                    city: profile.city ?? null,
-
-                    country: profile.country ?? null,
                 },
 
                 update: {
@@ -144,10 +140,6 @@ export async function POST(request: Request) {
                     heightCm: profile.heightCm ?? null,
 
                     weightKg: profile.weightKg ?? null,
-
-                    city: profile.city ?? null,
-
-                    country: profile.country ?? null,
                 },
             });
 

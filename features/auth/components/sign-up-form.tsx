@@ -5,14 +5,25 @@ import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignUpForm } from "@/features/auth/hooks/use-sign-up-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export function SignUpForm() {
+    const router = useRouter();
+
     const [state, formAction] = useSignUpForm();
+
+    useEffect(() => {
+        if (state.status === "success" && state.redirectTo) {
+            router.push(state.redirectTo);
+        }
+    }, [state.status, state.redirectTo, router]);
 
     return (
         <form action={formAction} noValidate className="action-form">
             <div className="input-group">
-                <label htmlFor="name">Név</label>
+                <label htmlFor="username">Név</label>
+
                 <input
                     id="username"
                     name="username"
@@ -21,17 +32,19 @@ export function SignUpForm() {
                     autoComplete="username"
                     required
                 />
-                {state.status === "error" && state.fieldErrors?.name && (
+
+                {state.status === "error" && state.fieldErrors?.username && (
                     <FormMessage
                         className="error-msg"
                         status="error"
-                        message={state.fieldErrors.name[0]}
+                        message={state.fieldErrors.username[0]}
                     />
                 )}
             </div>
 
             <div className="input-group">
                 <label htmlFor="email">Email cím</label>
+
                 <input
                     id="email"
                     name="email"
@@ -40,6 +53,7 @@ export function SignUpForm() {
                     autoComplete="email"
                     required
                 />
+
                 {state.status === "error" && state.fieldErrors?.email && (
                     <FormMessage
                         className="error-msg"
@@ -51,6 +65,7 @@ export function SignUpForm() {
 
             <div className="input-group">
                 <label htmlFor="password">Jelszó</label>
+
                 <input
                     id="password"
                     name="password"
@@ -59,6 +74,7 @@ export function SignUpForm() {
                     autoComplete="new-password"
                     required
                 />
+
                 {state.status === "error" && state.fieldErrors?.password && (
                     <FormMessage
                         className="error-msg"
@@ -70,6 +86,7 @@ export function SignUpForm() {
 
             <div className="input-group">
                 <label htmlFor="confirmPassword">Jelszó megerősítése</label>
+
                 <input
                     id="confirmPassword"
                     name="confirmPassword"
@@ -78,6 +95,7 @@ export function SignUpForm() {
                     autoComplete="new-password"
                     required
                 />
+
                 {state.status === "error" &&
                     state.fieldErrors?.confirmPassword && (
                         <FormMessage
