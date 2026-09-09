@@ -4,6 +4,7 @@ export default function HomeScreen() {
     return (
         <div>
             <h2 className="small-title">Welcome here.</h2>
+            <p>változott</p>
             <p>
                 <Link href={`/sign-in`}>Click here to login.</Link>
             </p>
