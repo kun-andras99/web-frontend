@@ -5,14 +5,25 @@ import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export function SignInForm() {
+    const router = useRouter();
+
     const [state, formAction] = useSignInForm();
+
+    useEffect(() => {
+        if (state.status === "success" && state.redirectTo) {
+            router.push(state.redirectTo);
+        }
+    }, [state.status, state.redirectTo, router]);
 
     return (
         <form action={formAction} noValidate className="action-form">
             <div className="input-group">
                 <label htmlFor="email">Email cím</label>
+
                 <input
                     id="email"
                     name="email"
@@ -21,6 +32,7 @@ export function SignInForm() {
                     autoComplete="email"
                     required
                 />
+
                 {state.status === "error" && state.fieldErrors?.email && (
                     <FormMessage
                         className="error-msg"
@@ -32,6 +44,7 @@ export function SignInForm() {
 
             <div className="input-group">
                 <label htmlFor="password">Jelszó</label>
+
                 <input
                     id="password"
                     name="password"
@@ -40,6 +53,7 @@ export function SignInForm() {
                     autoComplete="current-password"
                     required
                 />
+
                 {state.status === "error" && state.fieldErrors?.password && (
                     <FormMessage
                         className="error-msg"
@@ -66,6 +80,7 @@ export function SignInForm() {
                     Elfelejtett jelszó?
                 </Link>
             </p>
+
             <p>
                 Nincs még fiókod?{" "}
                 <Link href={AUTH_ROUTES.signUp}>Regisztráció</Link>
