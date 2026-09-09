@@ -19,18 +19,14 @@ export default function ProfileHeader({
     onBack,
 }: ProfileHeaderProps) {
     return (
-        <header className="fixed inset-x-0 top-0 z-50 h-16">
-            <div className="relative flex h-full items-center px-4">
+        <header className="fixed inset-x-0 top-0 z-10 h-[50px]">
+            <div className="relative flex h-[50px] items-center ">
                 <button
                     type="button"
                     onClick={onBack}
                     className="
-                        relative z-20
+                        relative z-10
                         flex size-10 items-center justify-center
-                        rounded-full
-                        bg-black/10
-                        backdrop-blur-xl
-                        transition
                         hover:bg-black/20
                     ">
                     <ArrowLeft className="size-5" />
@@ -40,20 +36,27 @@ export default function ProfileHeader({
                     initial={false}
                     animate={{
                         opacity: isCollapsed ? 1 : 0,
-                        scale: isCollapsed ? 1 : 0.92,
-                        x: isCollapsed ? 0 : -10,
+                        scale: isCollapsed ? 1 : 0.9,
+                        // x: isCollapsed ? -110 : -130,
+                        left: isCollapsed ? 0 : -8,
+                        paddingLeft: isCollapsed ? 40 : 32,
+                        top: isCollapsed ? 0 : 0,
+                        background: isCollapsed
+                            ? "var(--background)"
+                            : "transparent",
                     }}
                     transition={{
-                        duration: 0.1,
+                        duration: 0.15,
                         ease: "easeOut",
                     }}
                     className="
                         pointer-events-none
                         absolute inset-x-0
-                        flex items-center justify-center
+                        flex items-center 
+                        bg-[var(--background)]
                     ">
                     <div className="flex items-center gap-2">
-                        <div className="relative size-8 overflow-hidden rounded-full">
+                        <div className="relative h-[50px] overflow-hidden rounded-full">
                             {avatarUrl && (
                                 <Image
                                     src={avatarUrl}
@@ -65,7 +68,7 @@ export default function ProfileHeader({
                             )}
                         </div>
 
-                        <span className="text-sm font-semibold">
+                        <span className="text-sm font-semibold text-[18px]">
                             {user?.username}
                         </span>
                     </div>

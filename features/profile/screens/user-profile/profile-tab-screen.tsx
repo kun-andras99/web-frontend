@@ -26,12 +26,16 @@ export default function ProfileTabScreen({
     const startX = useRef<number | null>(null);
     const [dragX, setDragX] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
+
+    // javitani
+    const tabs = PROFILE_TABS("woman");
+
     const tabContentRefs = useRef<Record<ProfileTab, HTMLDivElement | null>>({
-        about: null,
-        photos: null,
-        interests: null,
-        "looking-for": null,
-        activity: null,
+        statistics: null,
+        dress: null,
+        datas: null,
+        albums: null,
+        pin: null,
     });
 
     const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -57,12 +61,12 @@ export default function ProfileTabScreen({
         const delta = dragX;
 
         if (Math.abs(delta) >= SWIPE_THRESHOLD) {
-            if (delta < 0 && activeIndex < PROFILE_TABS.length - 1) {
-                onTabChange(PROFILE_TABS[activeIndex + 1].id);
+            if (delta < 0 && activeIndex < tabs.length - 1) {
+                onTabChange(tabs[activeIndex + 1].id);
             }
 
             if (delta > 0 && activeIndex > 0) {
-                onTabChange(PROFILE_TABS[activeIndex - 1].id);
+                onTabChange(tabs[activeIndex - 1].id);
             }
         }
 
@@ -93,7 +97,7 @@ export default function ProfileTabScreen({
                     flex
                     w-full
                 ">
-                {PROFILE_TABS.map((tab) => (
+                {tabs.map((tab) => (
                     <div
                         key={tab.id}
                         data-tab={tab.id}

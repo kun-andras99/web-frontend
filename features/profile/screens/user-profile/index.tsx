@@ -18,10 +18,11 @@ export default function UserProfileScreen({ user }: UserProfileScreenProps) {
     const tabContentRef = useRef<HTMLDivElement>(null);
 
     const { isCollapsed } = useProfileScroll(scrollRef, {
-        threshold: 150,
+        threshold: 206,
     });
 
-    const { activeTab, activeIndex, goToTab } = useProfileTabs();
+    const { tabs, activeTab, activeIndex, goToTab, nextTab, previousTab } =
+        useProfileTabs("woman");
 
     const handleTabChange = (tab: typeof activeTab) => {
         goToTab(tab);
@@ -32,7 +33,7 @@ export default function UserProfileScreen({ user }: UserProfileScreenProps) {
 
             if (!element || !container) return;
 
-            const offset = 100;
+            const offset = 94;
 
             const top = element.offsetTop - offset;
 
@@ -60,7 +61,11 @@ export default function UserProfileScreen({ user }: UserProfileScreenProps) {
                 ">
                 <ProfileHero user={user} isCollapsed={isCollapsed} />
 
-                <ProfileTabs activeTab={activeTab} onChange={goToTab} />
+                <ProfileTabs
+                    activeTab={activeTab}
+                    onChange={goToTab}
+                    usergender="man"
+                />
 
                 <div ref={tabContentRef}>
                     <ProfileTabScreen

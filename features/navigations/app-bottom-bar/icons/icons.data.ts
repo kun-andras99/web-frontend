@@ -5,6 +5,7 @@ export const BOTTOM_ICON_COLORS = {
     backgroundStopColor: "#e0e0e0",
 
     active: {
+        profileIconColor: "#ffffff",
         topTabColor: "#cff4ff",
         // topTabColor: "#cff4ff",
         // startColor: "#1d5d88",
@@ -18,6 +19,7 @@ export const BOTTOM_ICON_COLORS = {
     },
 
     inactive: {
+        profileIconColor: "#8a8a8a",
         topTabColor: "#6b7179",
         // topTabColor: "#6b7179",
     },

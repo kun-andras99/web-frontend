@@ -7,8 +7,7 @@ import {
     UserSexualityInterest,
 } from "../../../prisma/generated/prisma/client";
 
-export type ProfileTab =
-    "about" | "photos" | "interests" | "looking-for" | "activity";
+export type ProfileTab = "statistics" | "dress" | "datas" | "albums" | "pin";
 
 export interface ProfileUser {
     id: string;

@@ -39,5 +39,6 @@ export function useProfileScroll(
     return {
         scrollY,
         isCollapsed,
+        setIsCollapsed,
     };
 }
