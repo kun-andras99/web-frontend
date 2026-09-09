@@ -60,14 +60,17 @@ export async function POST(request: Request) {
             passwordHash,
         });
 
+        console.log("[SIGN-UP] user created:", user.id);
         const userId = user.id as UserId;
 
+        console.log("[SIGN-UP] creating verification token");
         const verificationToken = await createEmailVerificationToken(userId);
 
         const verifyLink =
             `${process.env.NEXT_PUBLIC_APP_URL}` +
             `/api/auth/verify-email?token=${verificationToken}`;
 
+        console.log("[SIGN-UP] sending verification email");
         await sendEmail({
             to: email,
             subject: "Erősítsd meg az email címed",
@@ -79,19 +82,23 @@ export async function POST(request: Request) {
             request.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
             request.headers.get("x-real-ip");
 
+        console.log("[SIGN-UP] creating refresh token");
         const { rawToken: refreshToken } = await createRefreshToken({
             userId,
             userAgent,
             ipAddress,
         });
 
+        console.log("[SIGN-UP] creating access token");
         const accessToken = await signAccessToken({
             sub: userId,
             email,
         });
 
+        console.log("[SIGN-UP] setting cookies");
         await setAuthCookies(accessToken, refreshToken);
 
+        console.log("[SIGN-UP] SUCCESS");
         return NextResponse.json(
             {
                 status: "success",
@@ -101,7 +108,10 @@ export async function POST(request: Request) {
             { status: 201 },
         );
     } catch (error) {
-        console.error("Sign-up API error:", error);
+        console.error("=================================");
+        console.error("SIGN UP API ERROR");
+        console.error(error);
+        console.error("=================================");
 
         return NextResponse.json(
             {
