@@ -7,6 +7,8 @@ export const BOTTOM_ICON_COLORS = {
     active: {
         profileIconColor: "#ffffff",
         topTabColor: "#cff4ff",
+        mainTopStartColor: "#fff",
+        mainTopStopColor: "#bbb",
         // topTabColor: "#cff4ff",
         // startColor: "#1d5d88",
         // stopColor: "#133f5c",

@@ -14,9 +14,12 @@ export function SignInForm() {
     const [state, formAction] = useSignInForm();
 
     useEffect(() => {
-        if (state.status === "success" && state.redirectTo) {
-            router.push(state.redirectTo);
+        if (state.status !== "success" || !state.redirectTo) {
+            return;
         }
+
+        router.replace(state.redirectTo);
+        router.refresh();
     }, [state.status, state.redirectTo, router]);
 
     return (

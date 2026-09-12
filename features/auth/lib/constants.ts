@@ -15,6 +15,10 @@ export const AUTH_ROUTES = {
     resetPassword: "/reset-password",
     // Állítsd át a saját, bejelentkezés utáni landing route-odra.
     afterSignIn: "/love",
+    about: "/about",
+    contactUs: "/contact-us",
+    ourTeam: "/our-team",
+    safetyWarning: "/safety-warning",
 } as const satisfies Record<string, string>;
 
 /** Bejelentkezve NEM elérhető route-ok — ha van érvényes session, elirányítjuk innen. */

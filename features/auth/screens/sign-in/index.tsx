@@ -8,7 +8,7 @@ interface SignInScreenProps {
 
 export function SignInScreen({ verified, verifyError }: SignInScreenProps) {
     return (
-        <div>
+        <>
             {verified && (
                 <FormMessage
                     status="success"
@@ -22,6 +22,6 @@ export function SignInScreen({ verified, verifyError }: SignInScreenProps) {
                 />
             )}
             <SignInForm />
-        </div>
+        </>
     );
 }

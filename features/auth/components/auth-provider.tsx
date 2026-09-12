@@ -1,14 +1,12 @@
 "use client";
 
 import type { SessionUser } from "@/features/auth/types/auth-index";
-import { createContext, useContext, type ReactNode } from "react";
+import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
+import { createContext, useContext } from "react";
 
-export const CurrentUserContext = createContext<SessionUser | null>(null);
-
-interface AuthProviderProps {
-    user: SessionUser | null;
-    children?: ReactNode;
-}
+export const CurrentUserContext = createContext<SessionUser | null | undefined>(
+    undefined,
+);
 
 /**
  * A gyökér (Server Component) layoutban töltsd fel a `user` propot egy
@@ -16,7 +14,10 @@ interface AuthProviderProps {
  * pontján elérhető a bejelentkezett felhasználó, külön fetch/loading
  * állapot nélkül.
  */
-export function AuthProvider({ user, children }: AuthProviderProps) {
+export function AuthProvider({
+    user,
+    children,
+}: ChildrenProp & SessionUserProps) {
     return (
         <CurrentUserContext.Provider value={user}>
             {children}
@@ -27,7 +28,7 @@ export function AuthProvider({ user, children }: AuthProviderProps) {
 export function useAuth() {
     const context = useContext(CurrentUserContext);
 
-    if (!context) {
+    if (context === undefined) {
         throw new Error("useAuth must be used within AuthProvider");
     }
 

@@ -25,7 +25,7 @@ export default function AppTopBar({ tabs, className = "" }: AppTopBarProps) {
 
     return (
         <div className={`top-wrap`}>
-            <div className={`top-bar ${className}`}>
+            <div className={`top-bar`}>
                 <div className={`content`}>
                     <div className="user-container">
                         <div className="image">
@@ -37,8 +37,8 @@ export default function AppTopBar({ tabs, className = "" }: AppTopBarProps) {
                     </div>
                 </div>
             </div>
-            <div className={`tab-list`}>
-                <div className="icon-container">
+            <div className={`tab-list for-mobile`}>
+                <div className={`icon-container `}>
                     {tabs.screens?.map((tab) => {
                         const tabUrl = `${tab.fromUrl}${tab.url}`;
 

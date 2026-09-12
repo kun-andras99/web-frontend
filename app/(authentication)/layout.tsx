@@ -7,9 +7,9 @@ export default function AuthenticationLayout({
     children: ReactNode;
 }) {
     return (
-        <main className="auth-views">
+        <section className="auth-views">
             <Link href={`/`}>Vissza a kezdőlapra</Link>
             {children}
-        </main>
+        </section>
     );
 }

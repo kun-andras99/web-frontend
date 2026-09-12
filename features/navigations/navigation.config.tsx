@@ -19,6 +19,11 @@ import SharedAlbumIconSVG from "@/features/navigations/app-top-bar/icons/SharedA
 import VisitedIconSVG from "@/features/navigations/app-top-bar/icons/VisitedIconSVG";
 import VisitorsIconSVG from "@/features/navigations/app-top-bar/icons/VisitorsIconSVG";
 import { NavigationConfig } from "@/features/navigations/navigation.types";
+import AboutUsIconSVG from "@/features/navigations/top-bar/icons/AboutUsIconSVG";
+import ContactUsIconSVG from "@/features/navigations/top-bar/icons/ContactUsIconSVG";
+import HomeIconSVG from "@/features/navigations/top-bar/icons/HomeIconSVG";
+import OurTeamIconSVG from "@/features/navigations/top-bar/icons/OurTeamIconSVG";
+import SafetyWarningIconSVG from "@/features/navigations/top-bar/icons/SafetyWarningIconSVG";
 import { ComponentType, ReactNode } from "react";
 
 export interface NavigationScreen {
@@ -360,6 +365,237 @@ export const APP_BOTTOM_BAR_ROUTES: NavigationConfig = [
                 backgroundStopColor={
                     BOTTOM_ICON_COLORS.active.backgroundStopColor
                 }
+            />
+        ),
+        screens: [
+            {
+                id: 1,
+                name: "groups",
+                title: "Groups",
+                icon: (
+                    <GroupsIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                    />
+                ),
+                activeIcon: (
+                    <GroupsIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                    />
+                ),
+                fromUrl: "/community",
+                url: "/groups",
+            },
+            {
+                id: 2,
+                name: "city",
+                title: "City",
+                icon: (
+                    <CityIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                    />
+                ),
+                activeIcon: (
+                    <CityIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                    />
+                ),
+                fromUrl: "/community",
+                url: "/city",
+            },
+            {
+                id: 3,
+                name: "blogs",
+                title: "Blogs",
+                icon: (
+                    <BlogsIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                        stopColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                        backgroundStartColor={
+                            BOTTOM_ICON_COLORS.inactive.topTabColor
+                        }
+                        backgroundStopColor={
+                            BOTTOM_ICON_COLORS.inactive.topTabColor
+                        }
+                    />
+                ),
+                activeIcon: (
+                    <BlogsIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                        stopColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                        backgroundStartColor={
+                            BOTTOM_ICON_COLORS.active.topTabColor
+                        }
+                        backgroundStopColor={
+                            BOTTOM_ICON_COLORS.active.topTabColor
+                        }
+                    />
+                ),
+                fromUrl: "/community",
+                url: "/blogs",
+            },
+        ],
+    },
+];
+
+export const QUEST_TOP_MENU_ROUTES: NavigationConfig = [
+    {
+        id: 1,
+        name: "home",
+        title: "Home",
+        url: "/",
+        icon: <HomeIconSVG size={26} strokeWidth={1.5} />,
+        activeIcon: (
+            <HomeIconSVG
+                size={26}
+                strokeWidth={1.5}
+                startColor={BOTTOM_ICON_COLORS.active.mainTopStartColor}
+                stopColor={BOTTOM_ICON_COLORS.active.mainTopStopColor}
+                // backgroundStartColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStartColor
+                // }
+                // backgroundStopColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStopColor
+                // }
+            />
+        ),
+    },
+    {
+        id: 2,
+        name: "about",
+        title: "About",
+        url: "/about",
+        icon: <AboutUsIconSVG size={26} strokeWidth={1.5} />,
+        activeIcon: (
+            <AboutUsIconSVG
+                size={26}
+                strokeWidth={1.5}
+                startColor={BOTTOM_ICON_COLORS.active.mainTopStartColor}
+                stopColor={BOTTOM_ICON_COLORS.active.mainTopStopColor}
+                // strokeWidth={1.2}
+                // startColor={BOTTOM_ICON_COLORS.active.startColor}
+                // stopColor={BOTTOM_ICON_COLORS.active.stopColor}
+                // backgroundStartColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStartColor
+                // }
+                // backgroundStopColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStopColor
+                // }
+            />
+        ),
+    },
+    {
+        id: 3,
+        name: "contact",
+        title: "Contact us",
+        url: "/contact-us",
+        icon: <ContactUsIconSVG size={26} strokeWidth={1.5} />,
+        activeIcon: (
+            <ContactUsIconSVG
+                size={26}
+                strokeWidth={1.5}
+                startColor={BOTTOM_ICON_COLORS.active.mainTopStartColor}
+                stopColor={BOTTOM_ICON_COLORS.active.mainTopStopColor}
+                // startColor={BOTTOM_ICON_COLORS.active.startColor}
+                // stopColor={BOTTOM_ICON_COLORS.active.stopColor}
+                // backgroundStartColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStartColor
+                // }
+                // backgroundStopColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStopColor
+                // }
+            />
+        ),
+    },
+    {
+        id: 4,
+        name: "our-team",
+        title: "Our team",
+        url: "/our-team",
+        icon: <OurTeamIconSVG size={26} strokeWidth={1.5} />,
+        activeIcon: (
+            <OurTeamIconSVG
+                size={26}
+                strokeWidth={1.5}
+                startColor={BOTTOM_ICON_COLORS.active.mainTopStartColor}
+                stopColor={BOTTOM_ICON_COLORS.active.mainTopStopColor}
+                // strokeWidth={1.3}
+                // startColor={BOTTOM_ICON_COLORS.active.startColor}
+                // stopColor={BOTTOM_ICON_COLORS.active.stopColor}
+                // backgroundStartColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStartColor
+                // }
+                // backgroundStopColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStopColor
+                // }
+            />
+        ),
+        screens: [
+            {
+                id: 1,
+                name: "messages",
+                title: "Messages",
+                icon: (
+                    <MessagesIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                    />
+                ),
+                activeIcon: (
+                    <MessagesIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                    />
+                ),
+                fromUrl: "/inbox",
+                url: "/messages",
+            },
+            {
+                id: 2,
+                name: "shared-albums",
+                title: "Shared albums",
+                icon: (
+                    <SharedAlbumIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                    />
+                ),
+                activeIcon: (
+                    <SharedAlbumIconSVG
+                        size={20}
+                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                    />
+                ),
+                fromUrl: "/inbox",
+                url: "/shared-albums",
+            },
+        ],
+    },
+    {
+        id: 5,
+        name: "safety-warning",
+        title: "Safety warning",
+        url: "/safety-warning",
+        icon: <SafetyWarningIconSVG size={26} strokeWidth={1.5} />,
+        activeIcon: (
+            <SafetyWarningIconSVG
+                size={26}
+                strokeWidth={1.5}
+                startColor={BOTTOM_ICON_COLORS.active.mainTopStartColor}
+                stopColor={BOTTOM_ICON_COLORS.active.mainTopStopColor}
+                // startColor={BOTTOM_ICON_COLORS.active.startColor}
+                // stopColor={BOTTOM_ICON_COLORS.active.stopColor}
+                // backgroundStartColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStartColor
+                // }
+                // backgroundStopColor={
+                //     BOTTOM_ICON_COLORS.active.backgroundStopColor
+                // }
             />
         ),
         screens: [

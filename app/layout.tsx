@@ -1,16 +1,15 @@
 import { cn } from "@/app/lib/utils";
 import { AuthProvider } from "@/features/auth/components/auth-provider";
 import { getCurrentUser } from "@/features/auth/lib/session";
-import FastLinks from "@/features/navigations/fast-links";
 import type { Metadata } from "next";
 import {
-    Dosis,
+    Cal_Sans,
     Geist,
     Geist_Mono,
     IBM_Plex_Sans,
     Inter,
+    Nunito,
     PT_Sans,
-    Tajawal,
 } from "next/font/google";
 import "../public/assets/style/style.css";
 import "./globals.css";
@@ -38,15 +37,16 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-const dosis = Dosis({
-    variable: "--font-dosis",
+const nunito = Nunito({
+    weight: ["200", "300", "400", "500", "600", "700", "800"],
+    variable: "--font-tilt-neon",
     subsets: ["latin"],
 });
 
-const voces = Tajawal({
-    weight: ["300", "400", "500", "700"],
+const voltaire = Cal_Sans({
+    weight: "400",
+    variable: "--font-cal-sans",
     subsets: ["latin"],
-    variable: "--font-tajaval",
 });
 
 export const metadata: Metadata = {
@@ -55,7 +55,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-    const showFastLinks = false;
     const user = await getCurrentUser();
 
     return (
@@ -67,17 +66,14 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 "antialiased",
                 geistSans.variable,
                 geistMono.variable,
-                dosis.variable,
+                nunito.variable,
                 inter.variable,
                 ibm.variable,
                 ptSans.variable,
-                voces.variable,
+                voltaire.variable,
             )}>
             <body className="min-h-full">
-                <AuthProvider user={user}>
-                    {showFastLinks ? <FastLinks /> : null}
-                    {children}
-                </AuthProvider>
+                <AuthProvider user={user}>{children}</AuthProvider>
             </body>
         </html>
     );

@@ -1,3 +1,5 @@
+"use client";
+
 import LogoutButton from "@/features/_components/button/logout-button";
 import { AccordionVip } from "@/features/_components/drawer/AccordionVip";
 import {
@@ -5,15 +7,15 @@ import {
     DrawerContent,
     DrawerTrigger,
 } from "@/features/_components/ui/drawer";
+import { useDrawer } from "@/features/_hooks/useDrawer";
 import { useAuth } from "@/features/auth/components/auth-provider";
 import { signOutAction } from "@/features/auth/lib/actions";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-export default function SideDrawer() {
-    const user = useAuth();
-    const [open, setOpen] = useState(false);
 
+export default function SideDrawer() {
+    const { open, setOpen } = useDrawer();
+    const user = useAuth();
     return (
         <>
             {user && (
@@ -24,10 +26,10 @@ export default function SideDrawer() {
                     <DrawerTrigger>
                         <div className="">
                             <Image
-                                className="top-avatar-pic"
+                                className="rounded-full top-avatar-pic"
                                 src={`/assets/images/user-blank-1.png`}
-                                width={36}
-                                height={36}
+                                width={46}
+                                height={46}
                                 alt={``}
                             />
                         </div>

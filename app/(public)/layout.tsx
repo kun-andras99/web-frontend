@@ -1,21 +1,9 @@
-import BottomLayout from "@/features/_components/ui/bottom-layout";
+import MainLayout from "@/features/_components/layout/MainLayout";
 import { getCurrentUser } from "@/features/auth/lib/session";
-import { ReactNode } from "react";
+import { ChildrenProp } from "@/lib/utils/props";
 
-export default async function PublicLayout({
-    children,
-}: {
-    children: ReactNode;
-}) {
+export default async function PublicPagesLayout({ children }: ChildrenProp) {
     const user = await getCurrentUser();
 
-    return (
-        <>
-            {user?.id ? (
-                <BottomLayout user={user}>{children}</BottomLayout>
-            ) : (
-                children
-            )}
-        </>
-    );
+    return <MainLayout user={user}>{children}</MainLayout>;
 }

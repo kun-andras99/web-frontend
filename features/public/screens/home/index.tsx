@@ -1,16 +1,16 @@
-import Link from "next/link";
+import NewsCarousel from "@/features/_components/carousel/news-carousel";
 
 export default function HomeScreen() {
     return (
-        <div>
-            <h2 className="small-title">Welcome here.</h2>
-            <p>változott</p>
-            <p>
-                <Link href={`/sign-in`}>Click here to login.</Link>
-            </p>
-            <p>
-                <Link href={`/sign-up`}>Click here to register.</Link>
-            </p>
-        </div>
+        <>
+            <main>
+                <section className="home-news">
+                    <NewsCarousel />
+                </section>
+                <section className="main">
+                    <p>main here</p>
+                </section>
+            </main>
+        </>
     );
 }

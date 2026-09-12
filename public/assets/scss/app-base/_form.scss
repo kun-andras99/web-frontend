@@ -1,5 +1,5 @@
 .auth-views {
-    width: 100dvw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,8 @@
 }
 
 .action-form {
-    width: calc(100dvw - 50px);
+    width: calc(100% - 20px);
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     gap: 25px;

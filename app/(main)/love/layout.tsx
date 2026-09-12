@@ -1,5 +1,4 @@
 import { loveRoutes } from "@/features/navigations/app-bottom-bar/constants/app-bottom-bar.constants";
-import AppTopBar from "@/features/navigations/app-top-bar";
 import { ReactNode } from "react";
 
 export default async function LoveLayout({
@@ -13,7 +12,7 @@ export default async function LoveLayout({
 
     return (
         <>
-            <AppTopBar tabs={loveRoutes} />
+            {/* <AppTopBar tabs={loveRoutes} /> */}
 
             {children}
         </>
