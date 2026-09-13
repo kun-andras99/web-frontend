@@ -628,7 +628,14 @@ main {
         }
     }
 
+    .main-top-navigation {
+        .content {
+            width: calc(100% - 20px);
+        }
+    }
+
     .home-news {
+        margin: 0;
         .image-carousel {
             width: calc(100% - 30px);
             margin: 0 auto;

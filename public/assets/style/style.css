@@ -751,6 +751,12 @@ main {
   .app-body > aside.right-sidebar {
     display: none;
   }
+  .main-top-navigation .content {
+    width: calc(100% - 20px);
+  }
+  .home-news {
+    margin: 0;
+  }
   .home-news .image-carousel {
     width: calc(100% - 30px);
     margin: 0 auto;
