@@ -25,7 +25,6 @@ body {
         position: sticky;
         top: 0;
         background: var(--background);
-        backdrop-filter: blur(25px);
         // box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.25);
         z-index: 10;
     }
@@ -64,7 +63,7 @@ body {
 .app-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     height: 64px;
 
     .header-containter {
@@ -597,7 +596,6 @@ main {
             position: sticky;
             top: 0;
             background: var(--background);
-            backdrop-filter: blur(25px);
             // box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.25);
             z-index: 10;
 
@@ -650,7 +648,6 @@ main {
             top: calc(100dvh - 64px);
             left: 0;
             background: var(--background);
-            backdrop-filter: blur(25px);
             // box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.25);
             z-index: 10;
 
@@ -658,6 +655,7 @@ main {
                 width: 100%;
                 display: grid;
                 grid-template-columns: 1fr;
+
                 .logo-text {
                     display: none;
                 }
