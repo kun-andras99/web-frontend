@@ -95,6 +95,8 @@ header {
             .icon {
                 // background: #444;
                 border-radius: 50px;
+                display: flex;
+                flex-direction: column;
                 // &:first-child {
                 //     border-radius: 50px 25px 25px 50px;
                 // }

@@ -55,8 +55,6 @@ export default function NewsCarousel() {
             </div>
             <div className="carousel-pictures transition-all duration-500">
                 {newsItems.map((item, index) => {
-                    console.log(item);
-
                     return (
                         <div
                             key={index}

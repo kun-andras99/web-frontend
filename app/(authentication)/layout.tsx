@@ -1,15 +1,15 @@
+import AuthLayout from "@/features/_components/layout/AuthLayout";
+import { getCurrentUser } from "@/features/auth/lib/session";
+import { ChildrenProp } from "@/lib/utils/props";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
-export default function AuthenticationLayout({
-    children,
-}: {
-    children: ReactNode;
-}) {
+export default async function AuthenticationLayout({ children }: ChildrenProp) {
+        const user = await getCurrentUser();
+    
     return (
-        <section className="auth-views">
+        <AuthLayout user={user}>
             <Link href={`/`}>Vissza a kezdőlapra</Link>
             {children}
-        </section>
+        </AuthLayout>
     );
 }

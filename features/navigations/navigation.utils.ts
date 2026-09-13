@@ -1,4 +1,8 @@
 import type {
+    MobileTopNavigationConfig,
+    MobileTopNavigationScreen,
+    MobileTopNavigationTab,
+    MobileTopResolvedNavigation,
     NavigationConfig,
     NavigationScreen,
     NavigationTab,
@@ -55,6 +59,19 @@ export function getScreenFullPath(screen: NavigationScreen): string {
     return `${base}${segment}`;
 }
 
+export function getMobileScreenFullPath(
+    screen: MobileTopNavigationScreen,
+): string {
+    const fromUrl = screen.fromUrl ?? "";
+    const url = screen.url ?? "";
+
+    const base = fromUrl.endsWith("/") ? fromUrl.slice(0, -1) : fromUrl;
+
+    const segment = url ? (url.startsWith("/") ? url : `/${url}`) : "";
+
+    return `${base}${segment}` || "/";
+}
+
 /**
  * Megkeresi az aktuális pathname alapján az aktív "screen"-t (al-oldalt), és a
  * hozzá tartozó szülő tab-ot. A screen-eket priorizáljuk a tab-okkal szemben,
@@ -82,6 +99,99 @@ export function resolveNavigation(
         screen: null,
         title: tabMatch?.title ?? null,
     };
+}
+
+export function resolveMobileTopNavigation(
+    pathname: string,
+    navigation: MobileTopNavigationConfig,
+): MobileTopResolvedNavigation {
+    const screenMatch = findMatchingMobileScreen(pathname, navigation);
+
+    if (screenMatch) {
+        return {
+            tab: screenMatch.tab,
+            screen: screenMatch.screen,
+            title: screenMatch.screen.title,
+        };
+    }
+
+    const tabMatch = findMatchingMobileTab(pathname, navigation);
+
+    return {
+        tab: tabMatch,
+        screen: null,
+        title: tabMatch?.title ?? null,
+    };
+}
+
+function findMatchingMobileScreen(
+    pathname: string,
+    navigation: MobileTopNavigationConfig,
+): {
+    tab: MobileTopNavigationTab;
+    screen: MobileTopNavigationScreen;
+} | null {
+    let best: {
+        tab: MobileTopNavigationTab;
+        screen: MobileTopNavigationScreen;
+    } | null = null;
+
+    let bestScore = -1;
+
+    for (const tab of navigation) {
+        for (const screen of tab.screens ?? []) {
+            const screenFullPath = getMobileScreenFullPath(screen);
+
+            if (!isActivePath(screenFullPath, pathname)) {
+                continue;
+            }
+
+            const score = normalizePath(screenFullPath).length;
+
+            if (score > bestScore) {
+                bestScore = score;
+
+                const parentTab =
+                    navigation.find(
+                        (t) =>
+                            normalizePath(t.url) ===
+                            normalizePath(screen.fromUrl ?? ""),
+                    ) ?? tab;
+
+                best = {
+                    tab: parentTab,
+                    screen,
+                };
+            }
+        }
+    }
+
+    return best;
+}
+
+
+function findMatchingMobileTab(
+    pathname: string,
+    navigation: MobileTopNavigationConfig,
+): MobileTopNavigationTab | null {
+    let best: MobileTopNavigationTab | null = null;
+
+    let bestScore = -1;
+
+    for (const tab of navigation) {
+        if (!isActivePath(tab.url, pathname)) {
+            continue;
+        }
+
+        const score = normalizePath(tab.url).length;
+
+        if (score > bestScore) {
+            bestScore = score;
+            best = tab;
+        }
+    }
+
+    return best;
 }
 
 function findMatchingScreen(
@@ -142,4 +252,15 @@ export function getPageTitle(
     fallbackTitle = "s",
 ): string {
     return resolveNavigation(pathname, navigation).title ?? fallbackTitle;
+}
+
+export function getMobilePageTitle(
+    pathname: string,
+    navigation: MobileTopNavigationConfig,
+    fallbackTitle = "",
+): string {
+    return (
+        resolveMobileTopNavigation(pathname, navigation)
+            .title ?? fallbackTitle
+    );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { APP_BOTTOM_BAR_ROUTES } from "@/features/navigations/navigation.config";
-import { getPageTitle } from "@/features/navigations/navigation.utils";
+import { GUEST_TOP_MENU_ROUTES } from "@/features/navigations/navigation.config";
+import { getMobilePageTitle } from "@/features/navigations/navigation.utils";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
@@ -11,11 +11,22 @@ import { useMemo } from "react";
  * `isScreen` flag-re), ez olcsóbb és egyértelműbb, mint a `useHeader()`
  * meghívása és csak a `.title` kiszedése belőle.
  */
-export function usePageTitle(fallbackTitle = "s"): string {
+export function usePageTitle(fallbackTitle = ""): string {
     const pathname = usePathname();
 
     return useMemo(
-        () => getPageTitle(pathname, APP_BOTTOM_BAR_ROUTES, fallbackTitle),
+        () =>
+            getMobilePageTitle(pathname, GUEST_TOP_MENU_ROUTES, fallbackTitle),
+        [pathname, fallbackTitle],
+    );
+}
+
+export function useMobileTopPageTitle(fallbackTitle = ""): string {
+    const pathname = usePathname();
+
+    return useMemo(
+        () =>
+            getMobilePageTitle(pathname, GUEST_TOP_MENU_ROUTES, fallbackTitle),
         [pathname, fallbackTitle],
     );
 }

@@ -2,8 +2,8 @@
 
 import SideDrawer from "@/features/_components/drawer/SideDrawer";
 import {
-    APP_BOTTOM_BAR_ROUTES,
-    QUEST_TOP_MENU_ROUTES,
+    appMenus,
+    publicMenus,
 } from "@/features/navigations/navigation.config";
 import { SessionUserProps } from "@/lib/utils/props";
 import Link from "next/link";
@@ -11,6 +11,9 @@ import { usePathname } from "next/navigation";
 
 export default function TopBar({ user }: SessionUserProps) {
     const pathname = usePathname();
+
+    console.log(publicMenus);
+    console.log(appMenus);
 
     return (
         <header className="app-header">
@@ -20,7 +23,7 @@ export default function TopBar({ user }: SessionUserProps) {
                     <section className={`main-top-navigation`}>
                         <div className="content">
                             {user
-                                ? APP_BOTTOM_BAR_ROUTES.map((route) => {
+                                ? appMenus.map((route) => {
                                       const isActive =
                                           pathname === route.url ||
                                           pathname.startsWith(`${route.url}/`);
@@ -32,17 +35,16 @@ export default function TopBar({ user }: SessionUserProps) {
                                               <Link
                                                   href={route.url}
                                                   className={`link`}>
-                                                  {isActive
-                                                      ? route.activeIcon
-                                                      : route.icon}
-                                                  {/* <span className="text-xs font-medium">
-                            {route.title}
-                            </span> */}
+                                                  {isActive ? (
+                                                      <>{route.activeIcon}</>
+                                                  ) : (
+                                                      route.icon
+                                                  )}
                                               </Link>
                                           </div>
                                       );
                                   })
-                                : QUEST_TOP_MENU_ROUTES.map((route) => {
+                                : publicMenus.map((route) => {
                                       const isActive =
                                           pathname === route.url ||
                                           pathname.startsWith(`${route.url}/`);
@@ -54,12 +56,11 @@ export default function TopBar({ user }: SessionUserProps) {
                                               <Link
                                                   href={route.url}
                                                   className={`link`}>
-                                                  {isActive
-                                                      ? route.activeIcon
-                                                      : route.icon}
-                                                  {/* <span className="text-xs font-medium">
-                            {route.title}
-                            </span> */}
+                                                  {isActive ? (
+                                                      <>{route.activeIcon}</>
+                                                  ) : (
+                                                      route.icon
+                                                  )}
                                               </Link>
                                           </div>
                                       );
@@ -68,9 +69,12 @@ export default function TopBar({ user }: SessionUserProps) {
                     </section>
                 </section>
                 {user ? (
-                    <section className="user-options">
-                        <SideDrawer />
-                    </section>
+                    <>
+                        <section className="user-options">
+                            <SideDrawer />
+                        </section>
+                        <section className="">van tartalom</section>
+                    </>
                 ) : (
                     <section className="nothing"></section>
                 )}

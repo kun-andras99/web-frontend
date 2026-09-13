@@ -1,5 +1,3 @@
-import { extraRoutes } from "@/features/navigations/app-bottom-bar/constants/app-bottom-bar.constants";
-import AppTopBar from "@/features/navigations/app-top-bar";
 import { ReactNode } from "react";
 
 export default async function ExtraLayout({
@@ -7,14 +5,8 @@ export default async function ExtraLayout({
 }: {
     children: ReactNode;
 }) {
-    if (!extraRoutes) {
-        return null;
-    }
-
     return (
         <div>
-            <AppTopBar tabs={extraRoutes} />
-
             {children}
         </div>
     );

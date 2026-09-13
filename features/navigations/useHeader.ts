@@ -1,12 +1,12 @@
 "use client";
 
-import { APP_BOTTOM_BAR_ROUTES } from "@/features/navigations/navigation.config";
-import type { ResolvedNavigation } from "@/features/navigations/navigation.types";
-import { resolveNavigation } from "@/features/navigations/navigation.utils";
+import { GUEST_TOP_MENU_ROUTES } from "@/features/navigations/navigation.config";
+import { resolveMobileTopNavigation } from "@/features/navigations/navigation.utils";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
+import { MobileTopResolvedNavigation } from "./navigation.types";
 
-export interface UseHeaderResult extends ResolvedNavigation {
+export interface UseHeaderResult extends MobileTopResolvedNavigation {
     /** A jelenlegi pathname, ahogy a Next.js szolgáltatja */
     pathname: string;
     /** true, ha egy "screen" (al-oldal) aktív, nem csak egy top-level tab */
@@ -24,7 +24,10 @@ export interface UseHeaderResult extends ResolvedNavigation {
 export function useHeader(): UseHeaderResult {
     const pathname = usePathname();
     return useMemo<UseHeaderResult>(() => {
-        const resolved = resolveNavigation(pathname, APP_BOTTOM_BAR_ROUTES);
+        const resolved = resolveMobileTopNavigation(
+            pathname,
+            GUEST_TOP_MENU_ROUTES,
+        );
 
         return {
             ...resolved,

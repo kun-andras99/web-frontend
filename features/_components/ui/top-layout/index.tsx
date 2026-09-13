@@ -1,7 +1,5 @@
 "use client";
 
-import { inboxRoutes } from "@/features/navigations/app-bottom-bar/constants/app-bottom-bar.constants";
-import AppTopBar from "@/features/navigations/app-top-bar";
 import { ReactNode, useEffect } from "react";
 
 const TOP_BAR_VISIBLE_HEIGHT = 46;
@@ -46,7 +44,7 @@ export default function TopLayout({ children }: TopLayoutProps) {
 
     return (
         <>
-            <AppTopBar tabs={inboxRoutes!} />
+            {/* <AppTopBar tabs={inboxRoutes!} /> */}
             {children}
         </>
     );

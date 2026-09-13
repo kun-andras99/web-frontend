@@ -26,15 +26,16 @@ export default function AppTopBar({ tabs, className = "" }: AppTopBarProps) {
     return (
         <div className={`top-wrap`}>
             <div className={`top-bar`}>
+                <div className="page-title">
+                    <p>{pageTitle}</p>
+                </div>
                 <div className={`content`}>
                     <div className="user-container">
                         <div className="image">
                             <SideDrawer />
                         </div>
                     </div>
-                    <div className="page-title">
-                        <p>{pageTitle}</p>
-                    </div>
+                    <div>másik</div>
                 </div>
             </div>
             <div className={`tab-list for-mobile`}>

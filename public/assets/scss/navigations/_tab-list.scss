@@ -18,6 +18,7 @@
     .top-bar {
         transform: translateY(0);
         transition: transform 0.2s ease;
+        height: 64px;
     }
 
     .tab-list {
@@ -66,14 +67,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    height: 64px;
     padding: 0 0 3px 0;
-    font-weight: 700;
-    font-size: 17px;
+    font-weight: 800;
+    font-size: 19px;
     letter-spacing: 0.75px;
-    text-shadow:
-        1px 1px 2px rgba(0, 0, 0, 1),
-        1px 1px 2px rgba(0, 0, 0, 0.3);
+    background: radial-gradient(
+        farthest-corner at center 80px,
+        #ffffff 0%,
+        #ffffff 10%,
+        #dbdbdb 50%,
+        #3d3d3d 100%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 400;
 }
 .top-bar {
     width: 100%;
@@ -89,25 +97,65 @@
 
     transform: translate3d(0, var(--top-bar-offset), 0);
 }
+
+/*
+ * MOBILE PAGE TITLE CSS
+*/
+
 .top-bar {
     background: transparent;
-    filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.6))
-        drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.4))
-        drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.2))
-        drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+    // filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.6))
+    //     drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.4))
+    //     drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.2))
+    //     drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+    z-index: 12;
 
     .content {
         width: 100%;
         display: flex;
         align-items: center;
         flex-direction: column;
-        background: var(--bg);
+        background: var(--background);
+
+        .is-authed {
+            position: fixed;
+            width: calc(100% - 20px);
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-direction: row;
+
+            .image {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // background: rgba(255, 255, 255, 0.11);
+                // backdrop-filter: blur(3px);
+                box-shadow: 0.05rem 0.05rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15);
+
+                .top-avatar-pic {
+                    border-radius: 50%;
+                }
+            }
+
+            span {
+                font-size: 13px;
+            }
+        }
         .user-container {
             position: fixed;
-            top: 7px;
-            left: 10px;
+            width: calc(100% - 20px);
+            height: 64px;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 10px;
+            flex-direction: row;
 
             .image {
                 width: 36px;
