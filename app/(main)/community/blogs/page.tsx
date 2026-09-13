@@ -5,7 +5,7 @@ import BlogsScreen from "@/features/(main-menus)/community/screens/blog";
 export default function BlogPage() {
     return (
         <BlogsScreen />
-        // <div className="bottom-page">
+        // <div className="">
         //     <div className="pagination">
         //         <div className="btn back"></div>
         //         <div className="numbers">

@@ -5,7 +5,7 @@ import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
 export default function RightNowScreen() {
     return (
         <BottomPageWrapper>
-            <div className="bottom-page-without-filter">
+            <div className="">
                 <h2 className="small-title">Right now</h2>
             </div>
         </BottomPageWrapper>

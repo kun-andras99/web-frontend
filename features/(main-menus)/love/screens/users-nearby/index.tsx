@@ -47,7 +47,7 @@ export default function UsersNearbyScreen() {
 
     return (
         <BottomPageWrapper>
-            <div className="bottom-page">
+            <div className="">
                 <TopFilter>
                     <ViewChange />
                 </TopFilter>

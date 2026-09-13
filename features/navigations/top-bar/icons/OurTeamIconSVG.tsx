@@ -1,5 +1,5 @@
-import { BOTTOM_ICON_COLORS } from "@/features/navigations/app-bottom-bar/icons/icons.data";
-import { BottomTabIconSVGProps } from "@/features/navigations/app-bottom-bar/icons/icons.props";
+import { BOTTOM_ICON_COLORS } from "@/features/navigations/top-bar/icons/icons/icons.data";
+import { BottomTabIconSVGProps } from "@/features/navigations/top-bar/icons/icons/icons.props";
 import { useId } from "react";
 
 export function OurTeamIconSVG({

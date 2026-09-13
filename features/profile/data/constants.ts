@@ -1,4 +1,4 @@
-import { BottomTabIconSVGProps } from "@/features/navigations/app-bottom-bar/icons/icons.props";
+import { BottomTabIconSVGProps } from "@/features/navigations/top-bar/icons/icons/icons.props";
 import ManBodyIconSVG from "@/features/profile/icons/ManBodyIconSVG";
 import ManChestIconSVG from "@/features/profile/icons/ManChestIconSVG";
 import UserAlbumIconSVG from "@/features/profile/icons/UserAlbumIconSVG";

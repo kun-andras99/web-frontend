@@ -1,27 +1,27 @@
-import CommunityIconSVG from "@/features/navigations/app-bottom-bar/icons/CommunityIconSVG";
-import CruiseIconSVG from "@/features/navigations/app-bottom-bar/icons/CruiseIconSVG";
-import ExtraIconSVG from "@/features/navigations/app-bottom-bar/icons/ExtraIconSVG";
-import HeartIconSVG from "@/features/navigations/app-bottom-bar/icons/HeartIconSVG";
-import { BOTTOM_ICON_COLORS } from "@/features/navigations/app-bottom-bar/icons/icons.data";
-import InboxIconSVG from "@/features/navigations/app-bottom-bar/icons/InboxIconSVG";
-import AuctionIconSVG from "@/features/navigations/app-top-bar/icons/AuctionIconSVG";
-import BlogsIconSVG from "@/features/navigations/app-top-bar/icons/BlogsIconSVG";
-import CityIconSVG from "@/features/navigations/app-top-bar/icons/CityIconSVG";
-import EyeCandyIconSVG from "@/features/navigations/app-top-bar/icons/EyeCandyIconSVG";
-import GroupsIconSVG from "@/features/navigations/app-top-bar/icons/GroupsIconSVG";
-import HotOffersIconSVG from "@/features/navigations/app-top-bar/icons/HotOffersIconSVG";
-import ManageUsersIconSVG from "@/features/navigations/app-top-bar/icons/ManageUsersIconSVG";
-import MatchIconSVG from "@/features/navigations/app-top-bar/icons/MatchIconSVG";
-import MessagesIconSVG from "@/features/navigations/app-top-bar/icons/MessagesIconSVG";
-import NearbyUsersIconSVG from "@/features/navigations/app-top-bar/icons/NearbyUsersIcon";
-import { RightNowIconSVG } from "@/features/navigations/app-top-bar/icons/RightNowIconSVG";
-import SharedAlbumIconSVG from "@/features/navigations/app-top-bar/icons/SharedAlbumIconSVG";
-import VisitedIconSVG from "@/features/navigations/app-top-bar/icons/VisitedIconSVG";
-import VisitorsIconSVG from "@/features/navigations/app-top-bar/icons/VisitorsIconSVG";
+import AuctionIconSVG from "@/features/navigations/mobile-top-nav/icons/AuctionIconSVG";
+import BlogsIconSVG from "@/features/navigations/mobile-top-nav/icons/BlogsIconSVG";
+import CityIconSVG from "@/features/navigations/mobile-top-nav/icons/CityIconSVG";
+import EyeCandyIconSVG from "@/features/navigations/mobile-top-nav/icons/EyeCandyIconSVG";
+import GroupsIconSVG from "@/features/navigations/mobile-top-nav/icons/GroupsIconSVG";
+import HotOffersIconSVG from "@/features/navigations/mobile-top-nav/icons/HotOffersIconSVG";
+import ManageUsersIconSVG from "@/features/navigations/mobile-top-nav/icons/ManageUsersIconSVG";
+import MatchIconSVG from "@/features/navigations/mobile-top-nav/icons/MatchIconSVG";
+import MessagesIconSVG from "@/features/navigations/mobile-top-nav/icons/MessagesIconSVG";
+import NearbyUsersIconSVG from "@/features/navigations/mobile-top-nav/icons/NearbyUsersIcon";
+import { RightNowIconSVG } from "@/features/navigations/mobile-top-nav/icons/RightNowIconSVG";
+import SharedAlbumIconSVG from "@/features/navigations/mobile-top-nav/icons/SharedAlbumIconSVG";
+import VisitedIconSVG from "@/features/navigations/mobile-top-nav/icons/VisitedIconSVG";
+import VisitorsIconSVG from "@/features/navigations/mobile-top-nav/icons/VisitorsIconSVG";
 import { MobileTopNavigationConfig } from "@/features/navigations/navigation.types";
 import AboutUsIconSVG from "@/features/navigations/top-bar/icons/AboutUsIconSVG";
 import ContactUsIconSVG from "@/features/navigations/top-bar/icons/ContactUsIconSVG";
 import HomeIconSVG from "@/features/navigations/top-bar/icons/HomeIconSVG";
+import CommunityIconSVG from "@/features/navigations/top-bar/icons/icons/CommunityIconSVG";
+import CruiseIconSVG from "@/features/navigations/top-bar/icons/icons/CruiseIconSVG";
+import ExtraIconSVG from "@/features/navigations/top-bar/icons/icons/ExtraIconSVG";
+import HeartIconSVG from "@/features/navigations/top-bar/icons/icons/HeartIconSVG";
+import { BOTTOM_ICON_COLORS } from "@/features/navigations/top-bar/icons/icons/icons.data";
+import InboxIconSVG from "@/features/navigations/top-bar/icons/icons/InboxIconSVG";
 import OurTeamIconSVG from "@/features/navigations/top-bar/icons/OurTeamIconSVG";
 import SafetyWarningIconSVG from "@/features/navigations/top-bar/icons/SafetyWarningIconSVG";
 import { ComponentType, ReactNode } from "react";
@@ -705,17 +705,3 @@ export const publicMenus = GUEST_TOP_MENU_ROUTES.filter(
 export const appMenus = GUEST_TOP_MENU_ROUTES.filter(
     (route) => route.appMenu === true,
 );
-// export const cruiseRoutes = APP_BOTTOM_BAR_ROUTES.find(
-//     (route) => route.name === "cruise",
-// );
-// export const loveRoutes = APP_BOTTOM_BAR_ROUTES.find(
-//     (route) => route.name === "love",
-// );
-// export const inboxRoutes = APP_BOTTOM_BAR_ROUTES.find(
-//     (route) => route.name === "inbox",
-// );
-// export const communityRoutes = APP_BOTTOM_BAR_ROUTES.find(
-//     (route) => route.name === "community",
-// );
-
-// export const ALL_ROUTE = [...APP_BOTTOM_BAR_ROUTES, ...GUEST_TOP_MENU_ROUTES];

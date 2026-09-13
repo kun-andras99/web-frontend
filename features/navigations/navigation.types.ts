@@ -1,18 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
 
-export interface NavigationScreen {
-    id: number;
-    name: string;
-    title: string;
-    icon: ReactNode;
-    activeIcon: ReactNode;
-    /** A szülő tab route-ja, pl. "/cruise" */
-    fromUrl: string;
-    /** A screen saját route-ja, pl. "/visitors" */
-    url: string;
-    component?: ComponentType;
-}
-
 export interface MobileTopNavigationScreen {
     id: number;
     name: string;
@@ -20,20 +7,10 @@ export interface MobileTopNavigationScreen {
     icon?: ReactNode;
     activeIcon?: ReactNode;
     /** A szülő tab route-ja, pl. "/cruise" */
-    fromUrl?: string;
+    fromUrl: string;
     /** A screen saját route-ja, pl. "/visitors" */
-    url?: string;
-    component?: ComponentType;
-}
-
-export interface NavigationTab {
-    id: number;
-    name: string;
-    title: string;
     url: string;
-    icon: ReactNode;
-    activeIcon?: ReactNode;
-    screens?: NavigationScreen[];
+    component?: ComponentType;
 }
 
 export interface MobileTopNavigationTab {
@@ -41,7 +18,7 @@ export interface MobileTopNavigationTab {
     name: string;
     title: string;
     bottomTitle?: string;
-    url?: string;
+    url: string;
     icon?: ReactNode;
     activeIcon?: ReactNode;
     publicMenu?: boolean;
@@ -49,14 +26,7 @@ export interface MobileTopNavigationTab {
     screens?: MobileTopNavigationScreen[];
 }
 
-export type NavigationConfig = NavigationTab[];
 export type MobileTopNavigationConfig = MobileTopNavigationTab[];
-
-export interface ResolvedNavigation {
-    tab: NavigationTab | null;
-    screen: NavigationScreen | null;
-    title: string | null;
-}
 
 export interface MobileTopResolvedNavigation {
     tab: MobileTopNavigationTab | null;

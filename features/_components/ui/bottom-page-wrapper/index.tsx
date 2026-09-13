@@ -5,5 +5,5 @@ export default function BottomPageWrapper({
 }: {
     children: React.ReactNode;
 }) {
-    return <div className="bottom-page">{children}</div>;
+    return <div className="">{children}</div>;
 }

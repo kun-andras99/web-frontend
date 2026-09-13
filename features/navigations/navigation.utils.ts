@@ -3,10 +3,6 @@ import type {
     MobileTopNavigationScreen,
     MobileTopNavigationTab,
     MobileTopResolvedNavigation,
-    NavigationConfig,
-    NavigationScreen,
-    NavigationTab,
-    ResolvedNavigation,
 } from "@/features/navigations/navigation.types";
 
 /**
@@ -50,7 +46,7 @@ export function isActivePath(pattern: string, pathname: string): boolean {
  * Ezt használd a screen-hez tartozó `<Link href>` felépítéséhez is, hogy ne
  * kelljen sehol kézzel duplikálni a "/cruise" prefixet.
  */
-export function getScreenFullPath(screen: NavigationScreen): string {
+export function getScreenFullPath(screen: MobileTopNavigationScreen): string {
     const base = screen.fromUrl.endsWith("/")
         ? screen.fromUrl.slice(0, -1)
         : screen.fromUrl;
@@ -80,9 +76,9 @@ export function getMobileScreenFullPath(
  */
 export function resolveNavigation(
     pathname: string,
-    navigation: NavigationConfig,
-): ResolvedNavigation {
-    const screenMatch = findMatchingScreen(pathname, navigation);
+    navigation: MobileTopNavigationConfig,
+): MobileTopResolvedNavigation {
+    const screenMatch = findMatchingMobileScreen(pathname, navigation);
 
     if (screenMatch) {
         return {
@@ -92,7 +88,7 @@ export function resolveNavigation(
         };
     }
 
-    const tabMatch = findMatchingTab(pathname, navigation);
+    const tabMatch = findMatchingMobileTab(pathname, navigation);
 
     return {
         tab: tabMatch,
@@ -169,7 +165,6 @@ function findMatchingMobileScreen(
     return best;
 }
 
-
 function findMatchingMobileTab(
     pathname: string,
     navigation: MobileTopNavigationConfig,
@@ -194,73 +189,12 @@ function findMatchingMobileTab(
     return best;
 }
 
-function findMatchingScreen(
-    pathname: string,
-    navigation: NavigationConfig,
-): { tab: NavigationTab; screen: NavigationScreen } | null {
-    let best: { tab: NavigationTab; screen: NavigationScreen } | null = null;
-    let bestScore = -1;
-
-    for (const tab of navigation) {
-        for (const screen of tab.screens ?? []) {
-            const screenFullPath = getScreenFullPath(screen);
-
-            if (!isActivePath(screenFullPath, pathname)) continue;
-
-            const score = normalizePath(screenFullPath).length;
-            if (score > bestScore) {
-                bestScore = score;
-                // a `fromUrl` alapján keressük a szülő tab-ot: robusztusabb, mint a
-                // jelenlegi loop-beli tab, ha egy screen elméletileg több tab alatt
-                // is megjelenne a jövőben.
-                const parentTab =
-                    navigation.find((t) => t.url === screen.fromUrl) ?? tab;
-                best = { tab: parentTab, screen };
-            }
-        }
-    }
-
-    return best;
-}
-
-function findMatchingTab(
-    pathname: string,
-    navigation: NavigationConfig,
-): NavigationTab | null {
-    let best: NavigationTab | null = null;
-    let bestScore = -1;
-
-    for (const tab of navigation) {
-        if (!isActivePath(tab.url, pathname)) continue;
-
-        const score = normalizePath(tab.url).length;
-        if (score > bestScore) {
-            bestScore = score;
-            best = tab;
-        }
-    }
-
-    return best;
-}
-
-/**
- * Kényelmi függvény: csak a feloldott címet adja vissza, fallback-kel.
- */
-export function getPageTitle(
-    pathname: string,
-    navigation: NavigationConfig,
-    fallbackTitle = "s",
-): string {
-    return resolveNavigation(pathname, navigation).title ?? fallbackTitle;
-}
-
 export function getMobilePageTitle(
     pathname: string,
     navigation: MobileTopNavigationConfig,
     fallbackTitle = "",
 ): string {
     return (
-        resolveMobileTopNavigation(pathname, navigation)
-            .title ?? fallbackTitle
+        resolveMobileTopNavigation(pathname, navigation).title ?? fallbackTitle
     );
 }

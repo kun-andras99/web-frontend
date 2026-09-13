@@ -35,7 +35,7 @@ export default function MessagesScreen({ messages }: MessagesScreenProps) {
 
     return (
         <BottomPageWrapper>
-            <div className="bottom-page-without-filter">
+            <div className="">
                 <h2 className="small-title">Bejövő üzenetek</h2>
                 {/* <LoadMessagesBox messages={filteredMessages} /> */}
             </div>

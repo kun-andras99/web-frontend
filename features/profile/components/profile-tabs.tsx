@@ -1,6 +1,6 @@
 "use client";
 
-import { BOTTOM_ICON_COLORS } from "@/features/navigations/app-bottom-bar/icons/icons.data";
+import { BOTTOM_ICON_COLORS } from "@/features/navigations/top-bar/icons/icons/icons.data";
 import { PROFILE_TABS } from "@/features/profile/data/constants";
 import { useProfileTabScroll } from "@/features/profile/hooks/use-profile-tab-scroll";
 import { motion } from "framer-motion";

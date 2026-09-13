@@ -11,7 +11,7 @@ export default function VisitorsScreen() {
 
     return (
         <BottomPageWrapper>
-            <div className="bottom-page">
+            <div className="">
                 <TopFilter>
                     <ViewChange />
                 </TopFilter>
