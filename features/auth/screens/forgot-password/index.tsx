@@ -1,10 +1,22 @@
+"use client";
+
 import { ForgotPasswordForm } from "@/features/auth/components/forgot-password-form";
+import { useBackButton } from "@/features/back-button";
 
 export function ForgotPasswordScreen() {
-  return (
-    <section>
-      <h1>Elfelejtett jelszó</h1>
-      <ForgotPasswordForm />
-    </section>
-  );
+    const { shouldShow } = useBackButton();
+    return (
+        <>
+            {/* {shouldShow && (
+                <SmartBackButton
+                    style={{
+                        fontSize: "14px",
+                    }}
+                />
+            )} */}
+            <div className="auth-view">
+                <ForgotPasswordForm />
+            </div>
+        </>
+    );
 }

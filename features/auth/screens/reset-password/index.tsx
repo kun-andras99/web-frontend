@@ -5,6 +5,7 @@ interface ResetPasswordScreenProps {
 }
 
 export function ResetPasswordScreen({ token }: ResetPasswordScreenProps) {
+    
   return (
     <section>
       <h1>Új jelszó beállítása</h1>

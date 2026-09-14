@@ -38,23 +38,9 @@ export async function createRefreshToken({
 /** A bemenet egy MÉG NEM ellenőrzött, cookie-ból/requestből származó nyers string. */
 export async function findRefreshTokenByRawValue(rawToken: string) {
     const tokenHash = hashToken(rawToken);
-
-    console.log("TOKEN HASH:", tokenHash);
-
-    try {
-        const token = await prisma.refreshToken.findUnique({
-            where: {
-                tokenHash,
-            },
-        });
-
-        console.log("REFRESH TOKEN:", token);
-
-        return token;
-    } catch (error) {
-        console.error("REFRESH TOKEN DB ERROR:", error);
-        throw error;
-    }
+    return prisma.refreshToken.findUnique({
+        where: { tokenHash },
+    });
 }
 
 export function revokeRefreshTokenById(id: string) {

@@ -1,9 +1,26 @@
+"use client";
+
 import { SignUpForm } from "@/features/auth/components/sign-up-form";
+import { AUTH_ROUTES } from "@/features/auth/lib/constants";
+import { useBackButton } from "@/features/back-button";
+import Link from "next/link";
 
 export function SignUpScreen() {
+    const { shouldShow } = useBackButton();
+
     return (
-        <div>
-            <SignUpForm />
-        </div>
+        <>
+            {/* {shouldShow && (
+                <SmartBackButton
+                    style={{
+                        fontSize: "14px",
+                    }}
+                />
+            )} */}
+            <div className="auth-view">
+                <SignUpForm />
+                <Link href={AUTH_ROUTES.home}>Back to home</Link>
+            </div>
+        </>
     );
 }

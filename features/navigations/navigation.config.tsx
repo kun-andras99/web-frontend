@@ -154,17 +154,17 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Messages",
                 icon: (
                     <MessagesIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <MessagesIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
-                fromUrl: "/inbox",
+                fromUrl: "/our-team",
                 url: "/messages",
             },
             {
@@ -173,17 +173,17 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Shared albums",
                 icon: (
                     <SharedAlbumIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <SharedAlbumIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
-                fromUrl: "/inbox",
+                fromUrl: "/our-team",
                 url: "/shared-albums",
             },
         ],
@@ -219,17 +219,17 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Groups",
                 icon: (
                     <GroupsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <GroupsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
-                fromUrl: "/community",
+                fromUrl: "/safety-warning",
                 url: "/groups",
             },
             {
@@ -238,17 +238,17 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "City",
                 icon: (
                     <CityIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <CityIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
-                fromUrl: "/community",
+                fromUrl: "/safety-warning",
                 url: "/city",
             },
             {
@@ -257,7 +257,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Blogs",
                 icon: (
                     <BlogsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                         stopColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                         backgroundStartColor={
@@ -270,7 +270,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 ),
                 activeIcon: (
                     <BlogsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                         stopColor={BOTTOM_ICON_COLORS.active.topTabColor}
                         backgroundStartColor={
@@ -281,7 +281,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                         }
                     />
                 ),
-                fromUrl: "/community",
+                fromUrl: "/safety-warning",
                 url: "/blogs",
             },
         ],
@@ -314,13 +314,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Right now",
                 icon: (
                     <RightNowIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <RightNowIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -333,13 +333,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Hot offers",
                 icon: (
                     <HotOffersIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <HotOffersIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -352,13 +352,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Auction",
                 icon: (
                     <AuctionIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <AuctionIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -396,13 +396,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Visitors",
                 icon: (
                     <VisitorsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <VisitorsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -415,13 +415,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Visited",
                 icon: (
                     <VisitedIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <VisitedIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -459,13 +459,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Users nearby",
                 icon: (
                     <NearbyUsersIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <NearbyUsersIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -478,13 +478,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Eye candy",
                 icon: (
                     <EyeCandyIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <EyeCandyIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -497,13 +497,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Match",
                 icon: (
                     <MatchIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <MatchIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -541,13 +541,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Messages",
                 icon: (
                     <MessagesIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <MessagesIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -560,13 +560,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Shared albums",
                 icon: (
                     <SharedAlbumIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <SharedAlbumIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -579,13 +579,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Manage users",
                 icon: (
                     <ManageUsersIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <ManageUsersIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -622,13 +622,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Groups",
                 icon: (
                     <GroupsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <GroupsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -641,13 +641,13 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "City",
                 icon: (
                     <CityIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                     />
                 ),
                 activeIcon: (
                     <CityIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                     />
                 ),
@@ -660,7 +660,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 title: "Blogs",
                 icon: (
                     <BlogsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                         stopColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
                         backgroundStartColor={
@@ -673,7 +673,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 ),
                 activeIcon: (
                     <BlogsIconSVG
-                        size={20}
+                        size={19}
                         startColor={BOTTOM_ICON_COLORS.active.topTabColor}
                         stopColor={BOTTOM_ICON_COLORS.active.topTabColor}
                         backgroundStartColor={
@@ -695,6 +695,20 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         title: "Sign In",
         bottomTitle: "Sign In",
         url: "/sign-in",
+    },
+    {
+        id: 12,
+        name: "sign up",
+        title: "Sign Up",
+        bottomTitle: "Sign Up",
+        url: "/sign-up",
+    },
+    {
+        id: 13,
+        name: "forgot password",
+        title: "Forgot password",
+        bottomTitle: "Forgot password",
+        url: "/forgot-password",
     },
 ];
 

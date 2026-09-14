@@ -18,9 +18,19 @@ export const signInSchema = z.object({
     password: z.string().min(1, "A jelszó megadása kötelező."),
 });
 
+export const usernameSchema = z
+    .string()
+    .trim()
+    .min(3, "A felhasználónév legalább 3 karakter legyen.")
+    .max(32, "A felhasználónév legfeljebb 32 karakter lehet.")
+    .regex(
+        /^[a-zA-Z0-9._-]+$/,
+        "Csak betű, szám, pont, aláhúzás és kötőjel használható.",
+    );
+
 export const signUpSchema = z
     .object({
-        username: z.string().trim().min(6, "A név legalább 2 karakter legyen."),
+        username: usernameSchema,
         email: emailSchema,
         password: passwordSchema,
         confirmPassword: z.string(),

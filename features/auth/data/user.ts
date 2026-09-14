@@ -6,6 +6,10 @@ export function getUserByEmail(email: string) {
     return prisma.users.findUnique({ where: { email } });
 }
 
+export function getUserByUsername(username: string) {
+    return prisma.users.findUnique({ where: { username } });
+}
+
 export function getUserById(id: UserId) {
     return prisma.users.findUnique({ where: { id } });
 }
@@ -35,6 +39,6 @@ export function markEmailAsVerified(id: UserId) {
 export function updateUserPassword(id: UserId, passwordHash: string) {
     return prisma.users.update({
         where: { id },
-        data: { passwordHash },
+        data: { password: passwordHash, passwordHash },
     });
 }

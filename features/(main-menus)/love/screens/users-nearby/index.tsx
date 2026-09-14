@@ -1,68 +1,79 @@
 "use client";
 
-import BottomPageWrapper from "@/features/_components/ui/bottom-page-wrapper";
-import TopFilter from "@/features/_components/ui/top-filter";
-import ViewChange from "@/features/_components/ui/view-change";
+// import TopFilter from "@/features/_components/ui/top-filter";
+// import ViewChange from "@/features/_components/ui/view-change";
+import usersMock from "@/features/_lib/mock/usersMock";
 import { useScreenStore } from "@/features/_store/screen.store";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-interface NearbyUser {
-    id: string;
-    username: string;
-    email: string;
-    userData: {
-        nickname: string;
-        gender: string;
-    } | null;
-}
+// interface NearbyUser {
+//     id: string;
+//     username: string;
+//     email: string;
+//     userData: {
+//         nickname: string;
+//         gender: string;
+//     } | null;
+// }
 
 export default function UsersNearbyScreen() {
     const { display } = useScreenStore();
 
-    const [users, setUsers] = useState<NearbyUser[]>([]);
-    const [loading, setLoading] = useState(true);
+    // const [users, setUsers] = useState<NearbyUser[]>([]);
+    // const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function loadUsers() {
-            try {
-                const response = await fetch("/api/users/nearby?page=1");
+    // useEffect(() => {
+    //     async function loadUsers() {
+    //         try {
+    //             const response = await fetch("/api/users/nearby?page=1");
 
-                const result = await response.json();
+    //             const result = await response.json();
 
-                if (!response.ok) {
-                    throw new Error(result.error);
-                }
+    //             if (!response.ok) {
+    //                 throw new Error(result.error);
+    //             }
 
-                setUsers(result.users);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
-        }
+    //             setUsers(result.users);
+    //         } catch (error) {
+    //             console.error(error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
 
-        loadUsers();
-    }, []);
+    //     loadUsers();
+    // }, []);
 
     return (
-        <BottomPageWrapper>
-            <div className="">
-                <TopFilter>
-                    <ViewChange />
-                </TopFilter>
-                <div className={`screen-view ${display} `}>
-                    {users?.map((user) => {
-                        return (
-                            <div key={user.id}>
-                                <Link href={`/profile/${user.id}`}>
-                                    <p>{user.username}</p>
-                                    <p>{user.email}</p>
-                                </Link>
-                            </div>
-                        );
-                    })}
-                    {/* {Array.from({ length: 20 }).map((_, index) => (
+        <div className="main">
+            {/* <TopFilter>
+                <ViewChange />
+            </TopFilter> */}
+            <div className={`screen-view ${display} `}>
+                {usersMock?.map((user) => {
+                    return (
+                        <div key={user.id}>
+                            <Link href={`/profile/${user.id}`}>
+                                <Image
+                                    src={`${user.userData?.avatarUrl}`}
+                                    style={{
+                                        width: "100%",
+                                        height: "auto",
+                                        aspectRatio: "1 / 1",
+                                    }}
+                                    width={50}
+                                    height={50}
+                                    alt=""
+                                />
+                                <p>{user.username}</p>
+                                <p>{user.email}</p>
+                            </Link>
+                        </div>
+                    );
+                })}
+                {/* {Array.from({ length: 20 }).map((_, index) => (
                         <div
                             key={index}
                             className={
@@ -166,9 +177,8 @@ export default function UsersNearbyScreen() {
                             ) : null}
                         </div>
                     ))} */}
-                </div>
             </div>
-        </BottomPageWrapper>
+        </div>
     );
 }
 

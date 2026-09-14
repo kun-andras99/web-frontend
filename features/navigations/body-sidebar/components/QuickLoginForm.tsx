@@ -5,22 +5,10 @@ import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function QuickLoginForm() {
-    const router = useRouter();
-
     const [state, formAction] = useSignInForm();
 
-    useEffect(() => {
-        if (state.status !== "success" || !state.redirectTo) {
-            return;
-        }
-
-        router.replace(state.redirectTo);
-        router.refresh();
-    }, [state.status, state.redirectTo, router]);
     return (
         <>
             <section className="quick-login">

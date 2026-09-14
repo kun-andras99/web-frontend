@@ -5,28 +5,13 @@ import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export function SignInForm() {
-    const router = useRouter();
-
     const [state, formAction] = useSignInForm();
-
-    useEffect(() => {
-        if (state.status !== "success" || !state.redirectTo) {
-            return;
-        }
-
-        router.replace(state.redirectTo);
-        router.refresh();
-    }, [state.status, state.redirectTo, router]);
 
     return (
         <form action={formAction} noValidate className="action-form">
             <div className="input-group">
-                <label htmlFor="email">Email cím</label>
-
                 <input
                     id="email"
                     name="email"
@@ -46,8 +31,6 @@ export function SignInForm() {
             </div>
 
             <div className="input-group">
-                <label htmlFor="password">Jelszó</label>
-
                 <input
                     id="password"
                     name="password"
@@ -74,20 +57,19 @@ export function SignInForm() {
                 />
             )}
 
-            <SubmitButton pendingText="Bejelentkezés…">
-                Bejelentkezés
+            <SubmitButton className="submit" pendingText="Bejelentkezés…">
+                Login
             </SubmitButton>
 
             <p>
-                <Link href={AUTH_ROUTES.forgotPassword}>
-                    Elfelejtett jelszó?
-                </Link>
+                <Link href={AUTH_ROUTES.forgotPassword}>Forgot password?</Link>
             </p>
 
-            <p>
-                Nincs még fiókod?{" "}
-                <Link href={AUTH_ROUTES.signUp}>Regisztráció</Link>
-            </p>
+            <Link href={AUTH_ROUTES.signUp}>
+                <div className="auth-r">
+                    <div className="b">Click to register!</div>
+                </div>
+            </Link>
         </form>
     );
 }

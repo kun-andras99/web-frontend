@@ -11,18 +11,6 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-.dark {
-  --background: #2d2d33;
-  --foreground: #fbfbfb;
-  --border-color: #212124;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #fbfbfb;
-    --foreground: #0b0b0b;
-  }
-}
 html,
 body {
   width: 100%;
@@ -962,9 +950,42 @@ main {
           justify-content: center;
 }
 
+.auth-view {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: -webkit-fill-available;
+}
+
+.auth-r .b {
+  background: var(--background);
+  border-radius: 50px;
+  padding: 10px 12px;
+}
+.auth-r {
+  text-align: center;
+  padding: 2px;
+  border-radius: 50px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1095ca), to(#0b6285));
+  background: linear-gradient(to bottom, #1095ca, #0b6285);
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
 .action-form {
   width: calc(100% - 20px);
-  max-width: 400px;
+  max-width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -989,14 +1010,30 @@ main {
   color: #a0a0a0;
 }
 .action-form .input-group input {
-  border: 0.05rem solid #a0a0a0;
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px 16px;
+  border-radius: 50px;
+  background: #272727;
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
 }
 .action-form .input-group .error-msg {
   width: calc(100% - 20px);
   margin-left: 10px;
   color: rgb(221, 61, 61);
+}
+.action-form .submit {
+  padding: 12px 12px;
+  border-radius: 50px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1095ca), to(#0b6285));
+  background: linear-gradient(to bottom, #1095ca, #0b6285);
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.right-sidebar > .love-wall-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 :root {
@@ -1004,18 +1041,10 @@ main {
   --bg-rgb: 3, 6, 10;
 }
 
-@media (min-width: 768px) {
-  .for-mobile {
-    display: none;
-  }
-}
 .top-wrap {
   z-index: 10;
   width: 100%;
   background: var(--background);
-}
-.top-wrap .for-mobile {
-  display: none;
 }
 .top-wrap .top-bar {
   -webkit-transform: translateY(0);
@@ -1026,14 +1055,6 @@ main {
   transition: transform 0.2s ease, -webkit-transform 0.2s ease;
   height: 64px;
 }
-.top-wrap .tab-list {
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  -webkit-transition: -webkit-transform 0.2s ease;
-  transition: -webkit-transform 0.2s ease;
-  transition: transform 0.2s ease;
-  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
-}
 .top-wrap.is-scrolled .top-bar {
   -webkit-transform: translateY(calc(-100% + 5px));
           transform: translateY(calc(-100% + 5px));
@@ -1041,6 +1062,11 @@ main {
 .top-wrap.is-scrolled .tab-list {
   -webkit-transform: translateX(calc(-100% + 5px));
           transform: translateX(calc(-100% + 5px));
+}
+.top-wrap .tab-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .page-title {
@@ -1058,7 +1084,7 @@ main {
   font-weight: 800;
   font-size: 19px;
   letter-spacing: 0.75px;
-  background: radial-gradient(farthest-corner at center 80px, #ffffff 0%, #ffffff 10%, #dbdbdb 50%, #3d3d3d 100%);
+  background: radial-gradient(farthest-corner at center 70px, #ffffff 0%, #ffffff 10%, #ffffff 25%, #e7e7e7 50%, #e7e7e7 6%, #3d3d3d 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1186,16 +1212,14 @@ main {
 }
 
 .tab-list {
-  top: 40px;
   position: fixed;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  left: 0;
+  top: 44px;
+  width: 100%;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   padding: 0;
-  background: var(--bg);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1205,41 +1229,38 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 25px;
-  border-radius: 0px 0px 10px 10px;
-  z-index: 10;
-}
-.tab-list::before, .tab-list::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  position: absolute;
-  top: 0px;
-}
-.tab-list::before {
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-  top: 10px;
-  left: -8px;
-  border-radius: 8px 0 0 0;
-  background: var(--bg);
-  corner-shape: scoop;
-}
-.tab-list::after {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-  top: 10px;
-  right: -8px;
-  border-radius: 8px 0 0 0;
-  background: var(--bg);
-  corner-shape: scoop;
+  z-index: 12;
 }
 .tab-list .icon-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 8px 10px 10px 10px;
-  gap: 3px;
+  padding: 8px 0;
+  font-size: 11px;
+  gap: 10px;
+}
+.tab-list .icon-container .icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 12px 24px;
+  border-radius: 50px;
+  background: rgba(16, 16, 17, 0.6352941176);
+  backdrop-filter: blur(20px);
+}
+.tab-list .icon-container .icon.active {
+  -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
+}
+.tab-list .icon-container .icon.active .container svg {
+  -webkit-filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
 }
 .tab-list .tab-item {
   padding: 6px 14px;

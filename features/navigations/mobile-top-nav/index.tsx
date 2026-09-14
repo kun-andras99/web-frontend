@@ -5,29 +5,34 @@ import { useAuth } from "@/features/auth/components/auth-provider";
 import type { MobileTopNavigationTab } from "@/features/navigations/navigation.types";
 import { getMobileScreenFullPath } from "@/features/navigations/navigation.utils";
 import { useMobileTopPageTitle } from "@/features/navigations/usePageTitle";
-import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
 export interface MobileTopNavProps {
     tabs?: MobileTopNavigationTab[];
-    className?: string;
 }
 
-export default function MobileTopNav({
-    tabs,
-    className = "",
-}: MobileTopNavProps) {
+export default function MobileTopNav({ tabs }: MobileTopNavProps) {
     const pathname = usePathname();
-    const router = useRouter();
     const pageTitle = useMobileTopPageTitle("");
     const user = useAuth();
 
-    const handleTabChange = (url: string) => {
-        if (pathname === url) {
-            return;
-        }
+    const active = tabs
+        ?.flatMap((tab) =>
+            (tab.screens ?? []).map((screen) => ({
+                tab,
+                screen,
+            })),
+        )
+        .find(({ screen }) => {
+            const tabUrl = getMobileScreenFullPath(screen);
+            return pathname === tabUrl;
+        });
 
-        router.replace(url);
-    };
+    const activeTab = active?.tab;
+
+    console.log(activeTab);
 
     return (
         <section className="mobile-top-header">
@@ -48,37 +53,41 @@ export default function MobileTopNav({
                         </div>
                     </div>
                 </div>
-                <div className={`tab-list for-mobile`}>
-                    <div className={`icon-container `}>
-                        {tabs?.map((tab) =>
-                            tab.screens?.map((screen) => {
-                                const tabUrl = getMobileScreenFullPath(screen);
-                                const isActive = pathname === tabUrl;
+                {(activeTab?.screens?.length ?? 0) > 0 && (
+                    <div className={`tab-list`}>
+                        <div className={`icon-container`}>
+                            {activeTab?.screens?.map((screen) => {
+                                const isActive =
+                                    pathname === screen.fromUrl + screen.url;
+                                // screen neve nagybetűvel kezdve
+                                // const name =
+                                //     screen.name.charAt(0).toUpperCase() +
+                                //     screen.name.slice(1);
 
                                 return (
-                                    <div key={screen.id}>
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                handleTabChange(tabUrl)
-                                            }
-                                            className={
-                                                isActive
-                                                    ? "active-tab-item tab-item"
-                                                    : "tab-item"
-                                            }>
-                                            <div className="icon">
-                                                {isActive
-                                                    ? screen.activeIcon
-                                                    : screen.icon}
+                                    <React.Fragment key={screen.id}>
+                                        <Link
+                                            href={`${screen.fromUrl}${screen.url}`}>
+                                            <div
+                                                className={`icon ${isActive ? "active" : null}`}>
+                                                <div className="container">
+                                                    {isActive ? (
+                                                        <>
+                                                            {screen.activeIcon}
+                                                            {/* <span>{name}</span> */}
+                                                        </>
+                                                    ) : (
+                                                        screen.icon
+                                                    )}
+                                                </div>
                                             </div>
-                                        </button>
-                                    </div>
+                                        </Link>
+                                    </React.Fragment>
                                 );
-                            }),
-                        )}
+                            })}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </section>
     );

@@ -5,5 +5,5 @@ export default async function LoveLayout({
 }: {
     children: ReactNode;
 }) {
-    return <>{children}</>;
+    return <main>{children}</main>;
 }

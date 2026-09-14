@@ -164,7 +164,7 @@ export async function proxy(request: NextRequest) {
 
     // isProtected
     if (!session.authenticated) {
-        return NextResponse.redirect(new URL(AUTH_ROUTES.home, request.url));
+        return NextResponse.redirect(new URL(AUTH_ROUTES.signIn, request.url));
     }
 
     return withRotatedTokens(NextResponse.next(), session);

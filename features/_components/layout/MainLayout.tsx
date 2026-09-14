@@ -13,7 +13,33 @@ export default function MainLayout({
             <TopBar user={user} />
             <BodySidebar user={user} />
             <main>{children}</main>
-            <aside className="right-sidebar">psst...</aside>
+            <aside className="right-sidebar">
+                <section className="love-wall-container">
+                    <div className="messages">
+                        {Array.from({ length: 20 }, (_, index) => (
+                            <div className="message" key={index}>
+                                <span>kep</span>
+
+                                <div className="wrapper">
+                                    {/* ikonokkal megjelenitve */}
+                                    <div className="data">
+                                        <span>nev</span>
+                                        <span>ido</span>
+                                    </div>
+
+                                    <div className="content">
+                                        itt az üzenet tartalma
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="love-wall-actions">
+                        <input type="text" name="" id="" />
+                        <button type="submit">S</button>
+                    </div>
+                </section>
+            </aside>
         </div>
     );
 }

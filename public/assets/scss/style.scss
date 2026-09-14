@@ -1,9 +1,11 @@
 @use "./variables/root";
-@use "./variables/dark-mode";
-@use "./variables/light-mode";
+// @use "./variables/dark-mode";
+// @use "./variables/light-mode";
 
 @use "./app-base/base";
 @use "./app-base/form";
+
+@use "./love-wall";
 
 @use "./navigations/tab-list";
 @use "./navigations/top-bar";

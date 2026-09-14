@@ -5,25 +5,13 @@ import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignUpForm } from "@/features/auth/hooks/use-sign-up-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export function SignUpForm() {
-    const router = useRouter();
-
     const [state, formAction] = useSignUpForm();
-
-    useEffect(() => {
-        if (state.status === "success" && state.redirectTo) {
-            router.push(state.redirectTo);
-        }
-    }, [state.status, state.redirectTo, router]);
 
     return (
         <form action={formAction} noValidate className="action-form">
             <div className="input-group">
-                <label htmlFor="username">Név</label>
-
                 <input
                     id="username"
                     name="username"
@@ -43,8 +31,6 @@ export function SignUpForm() {
             </div>
 
             <div className="input-group">
-                <label htmlFor="email">Email cím</label>
-
                 <input
                     id="email"
                     name="email"
@@ -64,12 +50,10 @@ export function SignUpForm() {
             </div>
 
             <div className="input-group">
-                <label htmlFor="password">Jelszó</label>
-
                 <input
                     id="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="********"
                     type="password"
                     autoComplete="new-password"
                     required
@@ -85,12 +69,10 @@ export function SignUpForm() {
             </div>
 
             <div className="input-group">
-                <label htmlFor="confirmPassword">Jelszó megerősítése</label>
-
                 <input
                     id="confirmPassword"
                     name="confirmPassword"
-                    placeholder="confirm password"
+                    placeholder="******* ********"
                     type="password"
                     autoComplete="new-password"
                     required
@@ -114,14 +96,15 @@ export function SignUpForm() {
                 />
             )}
 
-            <SubmitButton pendingText="Regisztráció…">
-                Regisztráció
+            <SubmitButton className="submit" pendingText="Regisztráció…">
+                Registration
             </SubmitButton>
 
-            <p>
-                Már van fiókod?{" "}
-                <Link href={AUTH_ROUTES.signIn}>Bejelentkezés</Link>
-            </p>
+            <Link href={AUTH_ROUTES.signIn}>
+                <div className="auth-r">
+                    <div className="b">Click to login</div>
+                </div>
+            </Link>
         </form>
     );
 }

@@ -12,9 +12,6 @@ import { usePathname } from "next/navigation";
 export default function TopBar({ user }: SessionUserProps) {
     const pathname = usePathname();
 
-    console.log(publicMenus);
-    console.log(appMenus);
-
     return (
         <header className="app-header">
             <section className="header-containter">
@@ -73,7 +70,6 @@ export default function TopBar({ user }: SessionUserProps) {
                         <section className="user-options">
                             <SideDrawer />
                         </section>
-                        <section className="">van tartalom</section>
                     </>
                 ) : (
                     <section className="nothing"></section>

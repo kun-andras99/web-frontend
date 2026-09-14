@@ -1,52 +1,21 @@
 import { cn } from "@/app/lib/utils";
 import { AuthProvider } from "@/features/auth/components/auth-provider";
 import { getCurrentUser } from "@/features/auth/lib/session";
+import { RouteHistoryProvider } from "@/features/back-button";
 import type { Metadata } from "next";
-import {
-    Cal_Sans,
-    Geist,
-    Geist_Mono,
-    IBM_Plex_Sans,
-    Inter,
-    Nunito,
-    PT_Sans,
-} from "next/font/google";
+import { Cal_Sans, Nunito } from "next/font/google";
 import "../public/assets/style/style.css";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-
-const ibm = IBM_Plex_Sans({
-    variable: "--font-ibm-plex-sans",
-    subsets: ["latin"],
-});
-
-const ptSans = PT_Sans({
-    weight: ["400", "700"],
-    variable: "--font-pt-sans",
-    subsets: ["latin"],
-});
-
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
-
 const nunito = Nunito({
     weight: ["200", "300", "400", "500", "600", "700", "800"],
-    variable: "--font-tilt-neon",
+    variable: "--font-nunito",
     subsets: ["latin"],
 });
 
-const voltaire = Cal_Sans({
+const calSans = Cal_Sans({
     weight: "400",
     variable: "--font-cal-sans",
-    subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -64,16 +33,13 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 "dark",
                 "h-full",
                 "antialiased",
-                geistSans.variable,
-                geistMono.variable,
                 nunito.variable,
-                inter.variable,
-                ibm.variable,
-                ptSans.variable,
-                voltaire.variable,
+                calSans.variable,
             )}>
             <body className="min-h-full">
-                <AuthProvider user={user}>{children}</AuthProvider>
+                <RouteHistoryProvider>
+                    <AuthProvider user={user}>{children}</AuthProvider>
+                </RouteHistoryProvider>
             </body>
         </html>
     );

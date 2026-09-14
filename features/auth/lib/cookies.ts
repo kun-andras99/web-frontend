@@ -3,6 +3,7 @@ import type {
     RefreshToken,
 } from "@/features/auth/types/auth-index";
 import { cookies } from "next/headers";
+import type { NextResponse } from "next/server";
 import {
     ACCESS_TOKEN_COOKIE,
     ACCESS_TOKEN_TTL_SECONDS,
@@ -18,6 +19,22 @@ const baseCookieOptions = {
     sameSite: "lax",
     path: "/",
 } as const;
+
+export function attachAuthCookies(
+    response: NextResponse,
+    accessToken: AccessToken,
+    refreshToken: RefreshToken,
+): NextResponse {
+    response.cookies.set(ACCESS_TOKEN_COOKIE, accessToken, {
+        ...baseCookieOptions,
+        maxAge: ACCESS_TOKEN_TTL_SECONDS,
+    });
+    response.cookies.set(REFRESH_TOKEN_COOKIE, refreshToken, {
+        ...baseCookieOptions,
+        maxAge: REFRESH_TOKEN_TTL_SECONDS,
+    });
+    return response;
+}
 
 export async function setAuthCookies(
     accessToken: AccessToken,
