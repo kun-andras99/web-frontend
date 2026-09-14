@@ -57,8 +57,10 @@ export function SignInForm() {
                 />
             )}
 
-            <SubmitButton className="submit" pendingText="Bejelentkezés…">
-                Login
+            <SubmitButton pendingText="Logging in...">
+                <div className="auth-r">
+                    <div className="r">Login</div>
+                </div>
             </SubmitButton>
 
             <p>

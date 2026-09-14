@@ -96,8 +96,10 @@ export function SignUpForm() {
                 />
             )}
 
-            <SubmitButton className="submit" pendingText="Regisztráció…">
-                Registration
+            <SubmitButton pendingText="Registrating...">
+                <div className="auth-r">
+                    <div className="r">Registration</div>
+                </div>
             </SubmitButton>
 
             <Link href={AUTH_ROUTES.signIn}>

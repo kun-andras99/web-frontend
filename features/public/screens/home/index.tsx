@@ -8,13 +8,18 @@ export default function HomeScreen() {
                     <NewsCarousel />
                 </section> */}
             <section className="main">
-                <p>main here</p>
-                <p>
-                    <Link href={AUTH_ROUTES.signIn}>Login here</Link>
-                </p>
-                <p>
-                    <Link href={AUTH_ROUTES.signUp}>Register</Link>
-                </p>
+                <div className="button-group">
+                    <Link href={AUTH_ROUTES.signIn}>
+                        <div className="auth-r">
+                            <div className="r">Login</div>
+                        </div>
+                    </Link>
+                    <Link href={AUTH_ROUTES.signUp}>
+                        <div className="auth-r">
+                            <div className="b">Register</div>
+                        </div>
+                    </Link>
+                </div>
             </section>
         </>
     );
