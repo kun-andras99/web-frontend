@@ -1,8 +1,9 @@
 "use client";
 
+import { ProfileAvatarChange } from "@/features/profile/avatar-change";
+import { PROFILE_AVATAR_MOCK_IMAGES } from "@/features/profile/avatar-change/mock/avatarChangeMock";
 import { ProfileWithRelations } from "@/features/profile/types/profile.types";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 interface ProfileHeroProps {
     user: ProfileWithRelations;
@@ -39,24 +40,12 @@ export default function ProfileHero({ user, isCollapsed }: ProfileHeroProps) {
 
                     <div className="profile-card">
                         <div className="data-wrapper">
-                            <div className="image-wrapper">
-                                <div className="indicator-container">
-                                    <div className="indicator active-indicator"></div>
-                                    <div className="indicator"></div>
-                                    <div className="indicator"></div>
-                                    <div className="indicator"></div>
-                                    <div className="indicator"></div>
-                                </div>
-                                <div className="image-container">
-                                    <Image
-                                        src={`/assets/images/user-blank-1.png`}
-                                        width={90}
-                                        height={90}
-                                        alt={``}
-                                        className="rounded-full"
-                                    />
-                                </div>
-                            </div>
+                            <ProfileAvatarChange
+                                username={user.username}
+                                images={PROFILE_AVATAR_MOCK_IMAGES}
+                                autoPlay={true}
+                                interval={5000}
+                            />
                             <div className="data-container">
                                 <div>
                                     <p>
