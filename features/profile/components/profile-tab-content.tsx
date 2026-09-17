@@ -20,7 +20,6 @@ export default function ProfileTabContent({
     switch (tab) {
         case "statistics":
             return <StatisticsTabView />;
-
         case "dress":
             return <UserDressView />;
         case "datas":

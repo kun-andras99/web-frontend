@@ -17,11 +17,11 @@ export interface ProfileTabConfig {
 }
 
 export const PROFILE_TABS = (gender: string): ProfileTabConfig[] => {
-    const isWoman = gender === "woman";
+    const isWoman = gender === "man";
 
-    const DressIcon = isWoman ? WomanDressIconSVG : ManBodyIconSVG;
+    const DressIcon = isWoman ? WomanDressIconSVG : ManChestIconSVG;
 
-    const ChestIcon = isWoman ? WomanChestIconSVG : ManChestIconSVG;
+    const ChestIcon = isWoman ? WomanChestIconSVG : ManBodyIconSVG;
 
     return [
         {

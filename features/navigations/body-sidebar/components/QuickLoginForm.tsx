@@ -73,9 +73,17 @@ export default function QuickLoginForm() {
                             Forgot password?
                         </Link>
                     </section>
-                    <SubmitButton>Login</SubmitButton>
+                    <SubmitButton pendingText="Logging in...">
+                        <div className="auth-r">
+                            <div className="r">Login</div>
+                        </div>
+                    </SubmitButton>
+                    <Link href={AUTH_ROUTES.signUp}>
+                        <div className="auth-r">
+                            <div className="b">Click here to register</div>
+                        </div>
+                    </Link>
                 </form>
-                <Link href={AUTH_ROUTES.signUp}>Click here to register</Link>
             </section>
         </>
     );

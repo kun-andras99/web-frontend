@@ -16,6 +16,8 @@ import Link from "next/link";
 export default function SideDrawer() {
     const { open, setOpen } = useDrawer();
     const user = useAuth();
+
+    console.log(user);
     return (
         <>
             {user && (
@@ -42,6 +44,11 @@ export default function SideDrawer() {
                             /> */}
                             <div>
                                 <Link href={`/me`}>profilom</Link>
+                            </div>
+                            <div>
+                                <Link href={`/profile/${user.id}`}>
+                                    profilom más megtekintés
+                                </Link>
                             </div>
                             <div className="navigation-content-drawer">
                                 <div className="drawer-menu-container">

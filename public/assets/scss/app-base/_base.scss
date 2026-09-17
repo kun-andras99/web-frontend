@@ -113,14 +113,12 @@ body {
     gap: 10px;
     padding: 10px 10px 0 10px;
     // margin: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
 
-    a {
-        color: #21ace2;
-        font-size: 16px;
-        text-align: center;
-    }
+    // a {
+    //     color: #21ace2;
+    //     font-size: 16px;
+    //     text-align: center;
+    // }
 
     h2 {
         font-size: 20px;
@@ -160,13 +158,6 @@ body {
                     letter-spacing: 1.15px;
                 }
             }
-        }
-
-        button {
-            background: linear-gradient(to bottom, #1095ca, #0b6285);
-            border-radius: 5px;
-            padding: 8px 10px;
-            box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
         }
 
         .login-options {
@@ -222,10 +213,10 @@ body {
                 //     transform: scale(0.9);
                 // }
             }
-            a {
-                color: #21ace2;
-                font-size: 16px;
-            }
+            // a {
+            // color: #21ace2;
+            // font-size: 16px;
+            // }
         }
     }
 }

@@ -67,7 +67,7 @@ export default function UserProfileScreen({ user }: UserProfileScreenProps) {
                     usergender="man"
                 />
 
-                <div ref={tabContentRef}>
+                <div className="h-full" ref={tabContentRef}>
                     <ProfileTabScreen
                         activeIndex={activeIndex}
                         activeTab={activeTab}

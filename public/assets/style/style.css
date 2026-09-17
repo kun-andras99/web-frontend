@@ -133,14 +133,6 @@ body {
           align-items: center;
   gap: 10px;
   padding: 10px 10px 0 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
-          box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
-}
-.quick-login a {
-  color: #21ace2;
-  font-size: 16px;
-  text-align: center;
 }
 .quick-login h2 {
   font-size: 20px;
@@ -200,14 +192,6 @@ body {
   font-weight: 500;
   letter-spacing: 1.15px;
 }
-.quick-login form button {
-  background: -webkit-gradient(linear, left top, left bottom, from(#1095ca), to(#0b6285));
-  background: linear-gradient(to bottom, #1095ca, #0b6285);
-  border-radius: 5px;
-  padding: 8px 10px;
-  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
-          box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
-}
 .quick-login form .login-options {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -259,10 +243,6 @@ body {
 .quick-login form .login-options .checkbox:checked {
   background: #1c4b6d;
   accent-color: #1095ca;
-}
-.quick-login form .login-options a {
-  color: #21ace2;
-  font-size: 16px;
 }
 
 .left-sidebar {
