@@ -2860,6 +2860,11 @@ header .main-navigation-bar .content .icon:active {
 }
 
 .profile-avatar-like-user {
+  width: 100%;
+  border: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2867,7 +2872,36 @@ header .main-navigation-bar .content .icon:active {
       -ms-flex-align: center;
           align-items: center;
   gap: 12px;
-  padding: 10px 0;
+  padding: 8px;
+  border-radius: 14px;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: background-color 180ms ease, -webkit-transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background-color 180ms ease, -webkit-transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background-color 180ms ease, transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background-color 180ms ease, transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), -webkit-transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.profile-avatar-like-user:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.profile-avatar-like-user:active {
+  -webkit-transform: scale(0.99);
+          transform: scale(0.99);
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-transition-duration: 80ms;
+          transition-duration: 80ms;
+}
+.profile-avatar-like-user:focus {
+  outline: none;
+  background-color: transparent;
+}
+.profile-avatar-like-user:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
 }
 
 .profile-avatar-like-user img {

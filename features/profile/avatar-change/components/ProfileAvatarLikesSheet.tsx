@@ -167,8 +167,9 @@ export function ProfileAvatarLikesSheet({
                         </div>
                     ) : (
                         users.map((user) => (
-                            <div
+                            <button
                                 key={user.id}
+                                type="button"
                                 className="profile-avatar-like-user">
                                 <Image
                                     src={
@@ -184,7 +185,7 @@ export function ProfileAvatarLikesSheet({
                                 <div className="profile-avatar-like-user-info">
                                     <p>{user.username}</p>
                                 </div>
-                            </div>
+                            </button>
                         ))
                     )}
                 </div>
