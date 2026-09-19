@@ -16,19 +16,19 @@ export default function QuickLoginForm() {
                 <form action={formAction} noValidate>
                     <label>
                         <input
-                            id="email"
-                            name="email"
-                            placeholder="Email"
-                            type="email"
-                            autoComplete="email"
+                            id="identifier"
+                            name="identifier"
+                            placeholder="Email or username"
+                            type="text"
+                            autoComplete="username"
                             required
                         />
                         {state.status === "error" &&
-                            state.fieldErrors?.email && (
+                            state.fieldErrors?.identifier && (
                                 <FormMessage
                                     className="error-msg"
                                     status="error"
-                                    message={state.fieldErrors.email[0]}
+                                    message={state.fieldErrors.identifier[0]}
                                 />
                             )}
                     </label>
