@@ -1,8 +1,8 @@
 "use client";
 
+import { useBackButton } from "@/features/_components/back-button";
 import { SignUpForm } from "@/features/auth/components/sign-up-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
-import { useBackButton } from "@/features/back-button";
 import Link from "next/link";
 
 export function SignUpScreen() {

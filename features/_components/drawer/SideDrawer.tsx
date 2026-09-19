@@ -17,7 +17,7 @@ export default function SideDrawer() {
     const { open, setOpen } = useDrawer();
     const user = useAuth();
 
-    console.log(user);
+    // console.log(user);
     return (
         <>
             {user && (

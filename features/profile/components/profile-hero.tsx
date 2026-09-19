@@ -1,16 +1,18 @@
 "use client";
 
-import { ProfileAvatarChange } from "@/features/profile/avatar-change";
-import { PROFILE_AVATAR_MOCK_IMAGES } from "@/features/profile/avatar-change/mock/avatarChangeMock";
-import { ProfileWithRelations } from "@/features/profile/types/profile.types";
+import { SessionUserProps } from "@/lib/utils/props";
+// import { ProfileWithRelations } from "@/features/profile/types/profile.types";
 import { motion } from "framer-motion";
 
 interface ProfileHeroProps {
-    user: ProfileWithRelations;
+    // user: ProfileWithRelations;
     isCollapsed: boolean;
 }
 
-export default function ProfileHero({ user, isCollapsed }: ProfileHeroProps) {
+export default function ProfileHero({
+    user,
+    isCollapsed,
+}: ProfileHeroProps & SessionUserProps) {
     return (
         <section className=" ">
             <motion.div
@@ -24,10 +26,10 @@ export default function ProfileHero({ user, isCollapsed }: ProfileHeroProps) {
                 }}
                 className="overflow-hidden">
                 <div className="relative w-full">
-                    {/* {user.avatarUrl && (
+                    {/* {user?.avatarUrl && (
                         <Image
-                            src={user.avatarUrl}
-                            alt={user.username}
+                            src={user?.avatarUrl}
+                            alt={user?.username}
                             fill
                             priority
                             sizes="
@@ -40,20 +42,28 @@ export default function ProfileHero({ user, isCollapsed }: ProfileHeroProps) {
 
                     <div className="profile-card">
                         <div className="data-wrapper">
-                            <ProfileAvatarChange
-                                username={user.username}
+                            {/* <ProfileAvatarChange
+                                username={user?.username}
                                 images={PROFILE_AVATAR_MOCK_IMAGES}
                                 autoPlay={true}
                                 interval={5000}
-                            />
+                            /> */}
                             <div className="data-container">
                                 <div>
-                                    <p>
-                                        {user.username}, <span>37, férfi</span>
+                                    {/* <p>
+                                        {user?.username},{" "}
+                                        <span>
+                                            {user?.userData?.birth
+                                                ? new Date(
+                                                      user?.userData.birth,
+                                                  ).toLocaleDateString("en-GB")
+                                                : "Not specified"}
+                                            , {user?.userData?.gender}
+                                        </span>
                                     </p>
                                     <p className="text-[#ccc] text-[14px]">
-                                        Hungary, Budapest
-                                    </p>
+                                        {user?.lat} - {user?.lng}
+                                    </p> */}
                                 </div>
                             </div>
                         </div>

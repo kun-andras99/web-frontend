@@ -1,5 +1,6 @@
+import usersMock from "@/features/_lib/mock/usersMock";
 import { getCurrentUser } from "@/features/auth/lib/session";
-import { getProfileByUserId } from "@/features/profile/data/profile";
+// import { getProfileByUserId } from "@/features/profile/data/profile";
 import UserProfileScreen from "@/features/profile/screens/user-profile";
 import { redirect } from "next/navigation";
 
@@ -17,11 +18,14 @@ export default async function UserProfilePage({ params }: UserPageProps) {
         redirect("/sign-in");
     }
 
-    const profile = await getProfileByUserId(id);
+    const user = usersMock.find((user) => user.id === id);
 
-    if (!profile) {
-        redirect("/love");
-    }
+    if (!user) redirect("/love");
+    // const profile = await getProfileByUserId(id);
 
-    return <UserProfileScreen user={profile} />;
+    // if (!profile) {
+    //     redirect("/love");
+    // }
+
+    return <UserProfileScreen />;
 }

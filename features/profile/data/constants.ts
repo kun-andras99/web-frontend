@@ -1,4 +1,4 @@
-import { BottomTabIconSVGProps } from "@/features/navigations/top-bar/icons/icons/icons.props";
+import { BottomTabIconSVGProps } from "@/features/(app)/navigations/top-bar/icons/icons/icons.props";
 import ManBodyIconSVG from "@/features/profile/icons/ManBodyIconSVG";
 import ManChestIconSVG from "@/features/profile/icons/ManChestIconSVG";
 import UserAlbumIconSVG from "@/features/profile/icons/UserAlbumIconSVG";
@@ -14,14 +14,18 @@ export interface ProfileTabConfig {
     label: string;
     icon: ComponentType<BottomTabIconSVGProps>;
     iconHover: ComponentType<BottomTabIconSVGProps>;
+    show?: boolean;
 }
 
-export const PROFILE_TABS = (gender: string): ProfileTabConfig[] => {
-    const isWoman = gender === "man";
+export const PROFILE_TABS = (
+    gender: string | null | undefined,
+): ProfileTabConfig[] => {
+    const isWoman = gender === "WOMAN";
 
     const DressIcon = isWoman ? WomanDressIconSVG : ManChestIconSVG;
 
     const ChestIcon = isWoman ? WomanChestIconSVG : ManBodyIconSVG;
+    // const visibility = user?.tabVisibility || {};
 
     return [
         {
@@ -29,33 +33,35 @@ export const PROFILE_TABS = (gender: string): ProfileTabConfig[] => {
             label: "Statistics",
             icon: StatsIconSVG,
             iconHover: StatsIconSVG,
+            // show: visibility.statistics !== false,
         },
         {
             id: "dress",
             label: "Lifestyle and dress",
             icon: DressIcon,
             iconHover: StatsIconSVG,
+            // show: isWoman && visibility.dress !== false,
         },
-
         {
             id: "datas",
             label: "Personal datas",
             icon: ChestIcon,
             iconHover: ChestIcon,
+            // show: visibility.datas !== false,
         },
-
         {
             id: "albums",
             label: "User albums",
             icon: UserAlbumIconSVG,
             iconHover: UserAlbumIconSVG,
+            // show: visibility.albums !== false,
         },
-
         {
             id: "pin",
             label: "User pins",
             icon: UserPinIconSVG,
             iconHover: UserPinIconSVG,
+            // show: visibility.pin !== false,
         },
     ];
 };

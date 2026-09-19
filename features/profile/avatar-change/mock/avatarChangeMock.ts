@@ -6,7 +6,7 @@ export const PROFILE_AVATAR_MOCK_IMAGES: ProfileAvatarImage[] = [
         url: "/assets/images/user-blank-1.png",
         alt: "Profile image 1",
         likesCount: 2,
-        isLiked: false,
+        isLiked: true,
         likes: [
             {
                 id: "like-1",
@@ -100,7 +100,7 @@ export const PROFILE_AVATAR_MOCK_IMAGES: ProfileAvatarImage[] = [
                 userId: "user-2",
                 profileImageId: "image-1",
                 user: {
-                    id: "user-3",
+                    id: "user-5",
                     username: "Alex",
                     avatarUrl: "/assets/images/user-blank-5.png",
                 },
@@ -131,7 +131,7 @@ export const PROFILE_AVATAR_MOCK_IMAGES: ProfileAvatarImage[] = [
                 userId: "user-2",
                 profileImageId: "image-1",
                 user: {
-                    id: "user-3",
+                    id: "user-2",
                     username: "Alex",
                     avatarUrl: "/assets/images/user-blank-2.png",
                 },
@@ -141,7 +141,7 @@ export const PROFILE_AVATAR_MOCK_IMAGES: ProfileAvatarImage[] = [
                 userId: "user-2",
                 profileImageId: "image-1",
                 user: {
-                    id: "user-3",
+                    id: "user-1",
                     username: "Alex",
                     avatarUrl: "/assets/images/user-blank-1.png",
                 },

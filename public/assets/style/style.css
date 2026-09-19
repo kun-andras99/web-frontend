@@ -1086,7 +1086,7 @@ main {
   font-weight: 800;
   font-size: 19px;
   letter-spacing: 0.75px;
-  background: radial-gradient(farthest-corner at center 70px, #ffffff 0%, #ffffff 10%, #ffffff 25%, #ffffff 50%, #ffffff 6%, #ffffff 100%);
+  background: radial-gradient(farthest-corner at center 70px, #ffffff 0%, #ffffff 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1215,29 +1215,36 @@ main {
 .tab-list {
   position: fixed;
   left: 0;
-  top: 44px;
+  top: 64px;
   width: 100%;
+  background: var(--background);
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  padding: 0;
+  padding: 0 12px;
+  overflow: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   z-index: 12;
 }
 .tab-list .icon-container {
+  width: 100%;
+  overflow: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 8px 0;
-  font-size: 11px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 0px 0 10px 0;
+  font-size: 13px;
   gap: 10px;
 }
 .tab-list .icon-container .icon {
@@ -1250,14 +1257,36 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 12px 24px;
   border-radius: 50px;
   background: rgba(16, 16, 17, 0.6352941176);
-  backdrop-filter: blur(20px);
 }
-.tab-list .icon-container .icon.active {
-  -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
-          box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
+.tab-list .icon-container .icon .container {
+  color: #565656;
+}
+.tab-list .icon-container .icon .container svg {
+  -webkit-filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
+}
+.tab-list .icon-container .container {
+  width: 100%;
+  background: #202020;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin: 0px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 700;
+  border: 0.005rem solid transparent;
+  gap: 8px;
+}
+.tab-list .icon-container .icon.active .container {
+  color: #1dbdfc;
+  border: 0.005rem solid #0b6f97;
+  background: #032735;
 }
 .tab-list .icon-container .icon.active .container svg {
   -webkit-filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
@@ -1867,6 +1896,7 @@ header .main-navigation-bar .content .icon:active {
      object-position: center;
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -1895,15 +1925,10 @@ header .main-navigation-bar .content .icon:active {
      object-position: center;
   border-radius: 10px;
 }
+
 .image {
   -webkit-filter: brightness(85%);
           filter: brightness(85%);
-}
-
-.screen-view {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
 }
 
 .small-grid-view {
@@ -2203,9 +2228,9 @@ header .main-navigation-bar .content .icon:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   width: 100%;
   gap: 15px;
 }
@@ -2355,11 +2380,11 @@ header .main-navigation-bar .content .icon:active {
           transform: translateX(-50%);
 }
 .profile-card .indicator {
-  width: 7px;
+  width: 10px;
   height: 7px;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 50%;
+  border-radius: 7px;
   background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   -webkit-transition: width 0.2s ease, background 0.2s ease, -webkit-transform 0.2s ease;
@@ -3234,5 +3259,55 @@ header .main-navigation-bar .content .icon:active {
   100% {
     -webkit-transform: translateX(100%);
             transform: translateX(100%);
+  }
+}
+@media (max-width: 720px) {
+  .screen-view {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .screen-view .user-datas {
+    padding: 10px;
+    background: #202020;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+            box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+  }
+  .screen-view .user-datas img {
+    border-radius: 5px;
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+            box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+  .screen-view .user-datas .image-container {
+    position: relative;
+  }
+  .screen-view .user-datas .image-container .name {
+    width: 100%;
+    height: 28px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.75);
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+  }
+  .screen-view .user-datas.dark-data {
+    -webkit-filter: grayscale(100%) opacity(0.5);
+            filter: grayscale(100%) opacity(0.5);
   }
 }

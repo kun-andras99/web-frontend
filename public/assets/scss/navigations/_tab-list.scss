@@ -41,10 +41,6 @@
     background: radial-gradient(
         farthest-corner at center 70px,
         #ffffff 0%,
-        #ffffff 10%,
-        #ffffff 25%,
-        #ffffff 50%,
-        #ffffff 6%,
         #ffffff 100%
     );
     background-clip: text;
@@ -155,41 +151,68 @@
 .tab-list {
     position: fixed;
     left: 0;
-    top: 44px;
+    top: 64px;
     width: 100%;
-    // background: var(--background);
+    background: var(--background);
     height: max-content;
-    padding: 0;
+    padding: 0 12px;
+    overflow: auto;
     // background: var(--bg);
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     z-index: 12;
     // border-top: 0.015rem solid #242424;
     // border-bottom: 0.015rem solid #242424;
 
     .icon-container {
+        width: 100%;
+        overflow: auto;
         display: flex;
-        padding: 8px 0;
-        font-size: 11px;
+        align-items: flex-start;
+        padding: 0px 0 10px 0;
+        font-size: 13px;
         gap: 10px;
 
         .icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
+            // padding: 12px 24px;
             border-radius: 50px;
             background: #101011a2;
-            backdrop-filter: blur(20px);
+            // backdrop-filter: blur(20px);
+            .container {
+                color: #565656;
+                svg {
+                    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
+                }
+            }
+        }
+
+        .container {
+            width: 100%;
+            background: #202020;
+            border-radius: 20px;
+            padding: 6px 12px;
+            margin: 0px 0;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            border: 0.005rem solid transparent;
+            gap: 8px;
         }
 
         .icon.active {
             // background: #072a33;
-            box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
+            // box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
             // border: 0.005rem solid #fff;
             .container {
+                color: #1dbdfc;
+                border: 0.005rem solid #0b6f97;
+                background: #032735;
+
                 svg {
                     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.25));
                 }

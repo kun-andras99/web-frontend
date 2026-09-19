@@ -2,11 +2,15 @@
 
 import type { SessionUser } from "@/features/auth/types/auth-index";
 import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
-import { createContext, useContext } from "react";
+import { createContext, ReactNode, useContext } from "react";
 
 export const CurrentUserContext = createContext<SessionUser | null | undefined>(
     undefined,
 );
+
+interface AuthProviderProps extends SessionUserProps {
+    children: ReactNode;
+}
 
 /**
  * A gyökér (Server Component) layoutban töltsd fel a `user` propot egy
@@ -17,7 +21,7 @@ export const CurrentUserContext = createContext<SessionUser | null | undefined>(
 export function AuthProvider({
     user,
     children,
-}: ChildrenProp & SessionUserProps) {
+}: ChildrenProp & SessionUserProps & AuthProviderProps) {
     return (
         <CurrentUserContext.Provider value={user}>
             {children}

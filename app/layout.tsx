@@ -1,7 +1,8 @@
 import { cn } from "@/app/lib/utils";
+import { RouteHistoryProvider } from "@/features/_components/back-button";
+import { QueryProvider } from "@/features/_components/providers/QueryProvider";
 import { AuthProvider } from "@/features/auth/components/auth-provider";
 import { getCurrentUser } from "@/features/auth/lib/session";
-import { RouteHistoryProvider } from "@/features/back-button";
 import type { Metadata } from "next";
 import { Cal_Sans, Nunito } from "next/font/google";
 import "../public/assets/style/style.css";
@@ -37,9 +38,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 calSans.variable,
             )}>
             <body className="min-h-full">
-                <RouteHistoryProvider>
-                    <AuthProvider user={user}>{children}</AuthProvider>
-                </RouteHistoryProvider>
+                <QueryProvider>
+                    <RouteHistoryProvider>
+                        <AuthProvider user={user}>{children}</AuthProvider>
+                    </RouteHistoryProvider>
+                </QueryProvider>
             </body>
         </html>
     );

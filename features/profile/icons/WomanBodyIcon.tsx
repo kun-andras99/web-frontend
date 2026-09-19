@@ -1,5 +1,5 @@
-import { BOTTOM_ICON_COLORS } from "@/features/navigations/top-bar/icons/icons/icons.data";
-import { BottomTabIconSVGProps } from "@/features/navigations/top-bar/icons/icons/icons.props";
+import { BOTTOM_ICON_COLORS } from "@/features/(app)/navigations/top-bar/icons/icons/icons.data";
+import { BottomTabIconSVGProps } from "@/features/(app)/navigations/top-bar/icons/icons/icons.props";
 
 export default function WomanBodyIconSVG({
     size = 19,

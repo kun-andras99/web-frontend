@@ -1,6 +1,6 @@
 "use client";
 
-import type { ProfileTab, ProfileWithRelations } from "../types/profile.types";
+import type { ProfileTab } from "../types/profile.types";
 
 import AlbumsView from "@/features/profile/screens/user-profile/tabs/AlbumsView";
 import StatisticsTabView from "@/features/profile/screens/user-profile/tabs/StatisticsTabView";
@@ -10,13 +10,10 @@ import UserPinView from "@/features/profile/screens/user-profile/tabs/UserPinVie
 
 interface ProfileTabContentProps {
     tab: ProfileTab;
-    user: ProfileWithRelations;
+    // user: ProfileWithRelations;
 }
 
-export default function ProfileTabContent({
-    tab,
-    user,
-}: ProfileTabContentProps) {
+export default function ProfileTabContent({ tab }: ProfileTabContentProps) {
     switch (tab) {
         case "statistics":
             return <StatisticsTabView />;

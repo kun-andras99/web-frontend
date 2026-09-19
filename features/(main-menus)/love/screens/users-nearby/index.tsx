@@ -4,6 +4,7 @@
 // import ViewChange from "@/features/_components/ui/view-change";
 import usersMock from "@/features/_lib/mock/usersMock";
 import { useScreenStore } from "@/features/_store/screen.store";
+import { calculateAge } from "@/features/profile/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 // import { useEffect, useState } from "react";
@@ -51,24 +52,39 @@ export default function UsersNearbyScreen() {
             {/* <TopFilter>
                 <ViewChange />
             </TopFilter> */}
-            <div className={`screen-view ${display} `}>
+            <div className={`screen-view `}>
                 {usersMock?.map((user) => {
+                    const active = user.userData?.isActive === true;
                     return (
-                        <div key={user.id}>
+                        <div
+                            className={`user-datas ${active ? null : "dark-data"}`}
+                            key={user.id}>
                             <Link href={`/profile/${user.id}`}>
-                                <Image
-                                    src={`${user.userData?.avatarUrl}`}
-                                    style={{
-                                        width: "100%",
-                                        height: "auto",
-                                        aspectRatio: "1 / 1",
-                                    }}
-                                    width={50}
-                                    height={50}
-                                    alt=""
-                                />
-                                <p>{user.username}</p>
-                                <p>{user.email}</p>
+                                <div className="image-container">
+                                    <Image
+                                        src={`${user.userData?.avatarUrl}`}
+                                        width={50}
+                                        height={50}
+                                        alt=""
+                                    />
+                                    <div className="name">
+                                        <span>{user.username}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>{user.userData?.gender}, </span>
+                                    <span>
+                                        {user.userData?.birth && (
+                                            <>
+                                                {calculateAge(
+                                                    user.userData.birth,
+                                                )}{" "}
+                                            </>
+                                        )}
+                                    </span>
+                                </div>
+                                {/* <p>{user.username}</p>
+                                <p>{user.email}</p> */}
                             </Link>
                         </div>
                     );

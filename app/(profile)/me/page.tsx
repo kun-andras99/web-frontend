@@ -17,7 +17,7 @@ export default async function MePage() {
     return (
         <main>
             <h1>Felhasználó oldala</h1>
-            <p>{profile.userData?.nickname}</p>
+            {/* <p>{profile.userData?.nickname}</p>
             <p>{profile.userData?.bio}</p>
 
             <p>Kapcsolat: {profile.relationshipStatus}</p>
@@ -38,7 +38,7 @@ export default async function MePage() {
 
             {profile.sexualityInteres.map((item) => (
                 <div key={item.id}>{item.value}</div>
-            ))}
+            ))} */}
         </main>
     );
 }

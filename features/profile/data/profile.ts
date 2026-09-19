@@ -35,7 +35,7 @@ export async function getProfileByUserId(userId: string) {
             userPreference: true,
             lookingFor: true,
             genderInterest: true,
-            sexualityInteres: true,
+            sexualityInterest: true,
         },
     });
 }

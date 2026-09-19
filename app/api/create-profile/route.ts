@@ -114,8 +114,6 @@ export async function POST(request: Request) {
                     gender: profile.gender,
                     sexuality: profile.sexuality,
 
-                    pronouns: profile.pronouns ?? null,
-
                     description: profile.description ?? null,
 
                     bio: profile.bio ?? null,
@@ -130,8 +128,6 @@ export async function POST(request: Request) {
                     birth: new Date(profile.birth),
                     gender: profile.gender,
                     sexuality: profile.sexuality,
-
-                    pronouns: profile.pronouns ?? null,
 
                     description: profile.description ?? null,
 

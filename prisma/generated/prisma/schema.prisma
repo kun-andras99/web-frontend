@@ -85,7 +85,7 @@ enum TransStatus {
   TRANS
 }
 
-enum City {
+enum AppCity {
   CENTRUM
   STRAIGHT
   BISEXUAL
@@ -94,46 +94,304 @@ enum City {
   TRANS
 }
 
+// ============================================================
+// GALLERY
+// ============================================================
+
+enum GalleryType {
+  PROFILE
+  USER
+}
+
+enum GalleryVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+// ============================================================
+// GROUP
+// ============================================================
+
+enum GroupVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum GroupMemberRole {
+  MEMBER
+  MODERATOR
+  ADMIN
+}
+
+enum GroupJoinRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum GroupInvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+// ============================================================
+// BLOG
+// ============================================================
+
+enum BlogVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum UserAccountStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+  DELETED
+}
+
+// ============================================================
+// SOCIAL RELATIONS
+// ============================================================
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+enum FriendshipStatus {
+  ACTIVE
+  ENDED
+}
+
+enum MatchActionType {
+  LIKE
+  PASS
+}
+
+enum MatchStatus {
+  ACTIVE
+  UNMATCHED
+}
+
+// ============================================================
+// EYE CANDY
+// ============================================================
+
+enum EyeCandyAction {
+  RATE
+  SKIP
+}
+
+// ============================================================
+// MESSAGING
+// ============================================================
+
+enum MessageType {
+  TEXT
+  IMAGE
+  SYSTEM
+}
+
+// ============================================================
+// QUICK DISPLAY
+// ============================================================
+
+enum QuickDisplayType {
+  ONE_HOUR
+}
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+
+enum NotificationType {
+  PROFILE_VISIT
+  NEW_FAVORITE
+  FRIEND_REQUEST
+  FRIEND_ACCEPTED
+  GROUP_INVITATION
+  GROUP_JOIN_REQUEST
+  GROUP_JOIN_ACCEPTED
+  GALLERY_SHARED
+  BLOG_LIKE
+  MATCH
+  NEW_MESSAGE
+  SYSTEM
+}
+
+// ============================================================
+// MODERATION
+// ============================================================
+
+enum ReportType {
+  USER
+  BLOG
+  GROUP
+  MESSAGE
+  GALLERY
+  IMAGE
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWING
+  RESOLVED
+  REJECTED
+}
+
+enum ModerationActionType {
+  WARNING
+  CONTENT_REMOVED
+  USER_SUSPENDED
+  USER_BANNED
+  USER_UNBANNED
+  USER_UNBLOCKED
+}
+
+// ============================================================
+// VIP
+// ============================================================
+
+enum VipTier {
+  FREE
+  VIP1
+  VIP2
+  VIP3
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  PENDING
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
 model Users {
   id String @id @default(cuid())
 
-  username      String    @unique
-  email         String    @unique
-  password      String
+  username      String            @unique
+  email         String            @unique
   passwordHash  String
   emailVerified DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  role          UserRole          @default(USER)
+  status        UserAccountStatus @default(ACTIVE)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
 
   lat               Float?
   lng               Float?
   locationEnabled   Boolean   @default(false)
   locationUpdatedAt DateTime?
+  lastActiveAt      DateTime?
 
-  role UserRole @default(USER)
-
+  // AUTH
   refreshTokens      RefreshToken[]
   verificationTokens VerificationToken[]
 
-  relationshipStatus RelationshipStatus?
-  lookingFor         UserLookingFor[]
-  genderInterest     UserGenderInterest[]
-  sexualityInteres   UserSexualityInterest[]
-  userData           UserData?
+  // PROFILE
+  lookingFor        UserLookingFor[]
+  genderInterest    UserGenderInterest[]
+  sexualityInterest UserSexualityInterest[]
 
-  //   folders     GalleryFolder[]
-  //   images      GalleryImage[]
-  //   likes       ImageLike[]
-  //   permissions FolderPermission[]
-
-  //   ownedGroups    Group[]         @relation("OwnedGroups")
-  //   groups         Group[]
-  //   groupMembers   GroupMember[]   @relation("GroupMembers")
+  userData       UserData?
   userPreference UserPreference?
+
+  // REGISTERED PARTNER - Optional registered partner.
+  relationshipStatus RelationshipStatus?
+  partnerUserId      String?             @unique
+  partnerUser        Users?              @relation("UserPartner", fields: [partnerUserId], references: [id], onDelete: SetNull)
+  partnerOf          Users?              @relation("UserPartner")
+
+  // SOCIAL / USER RELATIONS
+  sentFriendRequests     FriendRequest[] @relation("FriendRequestSender")
+  receivedFriendRequests FriendRequest[] @relation("FriendRequestReceiver")
+
+  friendshipsAsUser1 Friendship[] @relation("FriendshipUser1")
+  friendshipsAsUser2 Friendship[] @relation("FriendshipUser2")
+
+  favoritesGiven    UserFavorite[] @relation("FavoriteFrom")
+  favoritesReceived UserFavorite[] @relation("FavoriteTo")
+
+  blocksGiven    UserBlock[] @relation("BlockFrom")
+  blocksReceived UserBlock[] @relation("BlockTo")
+
+  // VISITS
+  profileVisitsReceived ProfileVisit[] @relation("ProfileVisitedUser")
+  profileVisitsMade     ProfileVisit[] @relation("ProfileVisitor")
+  groupVisits           GroupVisit[]   @relation("GroupVisitor")
+
+  // GALLERIES
+  galleries             Gallery[]      @relation("GalleryOwner")
+  gallerySharesGiven    GalleryShare[] @relation("GalleryShareOwner")
+  gallerySharesReceived GalleryShare[] @relation("GalleryShareRecipient")
+
+  // GROUPS
+  groupsCreated Group[]       @relation("GroupCreator")
+  groupMembers  GroupMember[]
+
+  groupJoinRequestsSent     GroupJoinRequest[] @relation("GroupJoinRequester")
+  groupJoinRequestsReceived GroupJoinRequest[] @relation("GroupJoinTarget")
+
+  groupInvitationsSent     GroupInvitation[] @relation("GroupInvitationSender")
+  groupInvitationsReceived GroupInvitation[] @relation("GroupInvitationReceiver")
+
+  // BLOG
+  blogs     Blog[]
+  blogLikes BlogLike[]
+
+  // MATCHING
+  matchActionsGiven    MatchAction[] @relation("MatchActionFrom")
+  matchActionsReceived MatchAction[] @relation("MatchActionTo")
+
+  matchesAsUser1 Match[] @relation("MatchUser1")
+  matchesAsUser2 Match[] @relation("MatchUser2")
+
+  // EYE CANDY
+  eyeCandyParticipations EyeCandyParticipant[]
+  eyeCandyVotesGiven     EyeCandyVote[]        @relation("EyeCandyVoter")
+  eyeCandyVotesReceived  EyeCandyVote[]        @relation("EyeCandyCandidate")
+
+  // QUICK DISPLAY
+  quickDisplays QuickDisplay[]
+
+  // CHAT
+  conversationParticipants ConversationParticipant[]
+  messagesSent             Message[]                 @relation("MessageSender")
+
+  messageReads MessageRead[]
+
+  // NOTIF 
+  notifications          Notification[] @relation("NotificationRecipient")
+  notificationsTriggered Notification[] @relation("NotificationActor")
+
+  // MODERATION
+  reportsCreated         Report[]           @relation("ReportCreator")
+  reportsAgainst         Report[]           @relation("ReportTargetUser")
+  moderationActionsGiven ModerationAction[] @relation("Moderator")
+
+  // VIP
+  subscriptions UserSubscription[]
+  payments      SubscriptionPayment[]
 
   @@index([lat, lng])
   @@index([locationEnabled])
+  @@index([status])
   @@index([createdAt])
+  @@index([lastActiveAt])
+  @@index([partnerUserId])
   @@map("users")
 }
 
@@ -187,9 +445,15 @@ model UserData {
 
   gender    Gender?
   sexuality Sexuality?
-  pronouns  String?
 
-  city City?
+  /**
+   * Location displayed on profile.
+   * These are intentionally strings rather than enums.
+   */
+  countryCode String?
+  region      String?
+  city        String?
+  appCity     AppCity?
 
   transStatus TransStatus?
 
@@ -198,7 +462,10 @@ model UserData {
 
   @@index([gender])
   @@index([sexuality])
+  @@index([countryCode])
+  @@index([region])
   @@index([city])
+  @@index([appCity])
   @@map("user_data")
 }
 
@@ -267,129 +534,901 @@ model UserSexualityInterest {
   @@map("user_sexuality_interest")
 }
 
-// model GalleryFolder {
-//   id Int @id @default(autoincrement())
+/**
+ * PROFILE VISITS
+ * When user A opens user B's profile,
+ * one record is created.
+ */
+model ProfileVisit {
+  id String @id @default(cuid())
 
-//   userId Int
-//   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  visitorId     String
+  visitedUserId String
 
-//   name        String
-//   description String? // 🔥 új: folder bio
+  visitor     Users @relation("ProfileVisitor", fields: [visitorId], references: [id], onDelete: Cascade)
+  visitedUser Users @relation("ProfileVisitedUser", fields: [visitedUserId], references: [id], onDelete: Cascade)
 
-//   visibility FolderVisibility @default(PUBLIC)
+  visitedAt DateTime @default(now())
 
-//   isLocked Boolean @default(false) // 🔐 extra protection (future-proof)
+  @@index([visitedUserId, visitedAt])
+  @@index([visitorId, visitedAt])
+  @@map("profile_visits")
+}
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+/**
+ * VISITED ITEMS
+ * Stores when a user viewed another user
+ * or a group.
+ */
+model GroupVisit {
+  id String @id @default(cuid())
 
-//   images      GalleryImage[]
-//   permissions FolderPermission[]
+  groupId   String
+  visitorId String
 
-//   @@index([userId])
-// }
+  visitor Users @relation("GroupVisitor", fields: [visitorId], references: [id], onDelete: Cascade)
+  group   Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
-// model FolderPermission {
-//   id Int @id @default(autoincrement())
+  visitedAt DateTime @default(now())
 
-//   folderId Int
-//   userId   Int
+  @@index([groupId, visitedAt])
+  @@index([visitorId, visitedAt])
+  @@map("group_visits")
+}
 
-//   folder GalleryFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
-//   user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+/**
+ * GALLERIES
+ */
+model Gallery {
+  id String @id @default(cuid())
 
-//   canView   Boolean @default(true)
-//   canUpload Boolean @default(false) // 🔥 extra: collaborator support
+  ownerId String
+  owner   Users  @relation("GalleryOwner", fields: [ownerId], references: [id], onDelete: Cascade)
 
-//   createdAt DateTime @default(now())
+  name String
 
-//   @@unique([folderId, userId])
-//   @@index([userId])
-// }
+  type       GalleryType       @default(USER)
+  visibility GalleryVisibility @default(PRIVATE)
 
-// model GalleryImage {
-//   id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   folderId Int
-//   userId   Int
+  images GalleryImage[]
 
-//   folder GalleryFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
-//   user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shares GalleryShare[] @relation("GalleryShared")
 
-//   url String
+  @@unique([ownerId, type])
+  @@index([ownerId])
+  @@index([visibility])
+  @@map("galleries")
+}
 
-//   caption String?
-//   bio     String? // 🔥 hosszabb leírás / story
+/**
+ * GALLERY IMAGES
+ */
+model GalleryImage {
+  id String @id @default(cuid())
 
-//   width  Int? // 📸 optional metadata
-//   height Int?
+  galleryId String
 
-//   mimeType String?
-//   size     Int?
+  gallery Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
 
-//   isPrivate Boolean @default(false) // 🔐 image-level privacy
+  url        String
+  storageKey String?
 
-//   createdAt DateTime @default(now())
+  mimeType String?
+  fileSize Int?
+  width    Int?
+  height   Int?
 
-//   likes ImageLike[]
-//   views ImageView[]
+  isAvatar Boolean @default(false)
 
-//   @@index([folderId])
-//   @@index([userId])
-// }
+  sortOrder Int @default(0)
 
-// model ImageLike {
-//   id Int @id @default(autoincrement())
+  uploadedAt DateTime @default(now())
 
-//   imageId Int
-//   userId  Int
+  @@index([galleryId, sortOrder])
+  @@index([galleryId, uploadedAt])
+  @@index([galleryId, isAvatar])
+  @@map("gallery_images")
+}
 
-//   image GalleryImage @relation(fields: [imageId], references: [id], onDelete: Cascade)
-//   user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+/**
+ * PRIVATE GALLERY ACCESS
+ * A private gallery can be shared with another user
+ * for 1-3 hours or until manually revoked.
+ */
+model GalleryShare {
+  id String @id @default(cuid())
 
-//   createdAt DateTime @default(now())
+  galleryId   String
+  ownerId     String
+  recipientId String
 
-//   @@unique([imageId, userId])
-//   @@index([userId])
-// }
+  gallery Gallery @relation("GalleryShared", fields: [galleryId], references: [id], onDelete: Cascade)
 
-// model ImageView {
-//   id Int @id @default(autoincrement())
+  owner     Users @relation("GalleryShareOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  recipient Users @relation("GalleryShareRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
 
-//   imageId Int
-//   userId  Int?
+  grantedAt DateTime @default(now())
+  expiresAt DateTime
 
-//   image GalleryImage @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  revokedAt DateTime?
 
-//   createdAt DateTime @default(now())
+  purgeAfter DateTime
 
-//   @@index([imageId])
-// }
+  @@index([galleryId, recipientId])
+  @@index([recipientId, expiresAt])
+  @@index([expiresAt])
+  @@index([purgeAfter])
+  @@map("gallery_shares")
+}
 
-// model Group {
-//   id          Int      @id @default(autoincrement())
-//   name        String
-//   description String?
-//   createdAt   DateTime @default(now())
+/**
+ * GROUP
+ */
+model Group {
+  id String @id @default(cuid())
 
-//   ownerId Int
-//   owner   User @relation("OwnedGroups", fields: [ownerId], references: [id])
+  name        String
+  description String?
 
-//   members GroupMember[]
-//   user    User?         @relation(fields: [userId], references: [id])
-//   userId  Int?
-// }
+  visibility GroupVisibility @default(PUBLIC)
 
-// model GroupMember {
-//   id Int @id @default(autoincrement())
+  creatorId String
+  creator   Users  @relation("GroupCreator", fields: [creatorId], references: [id], onDelete: Cascade)
 
-//   userId  Int
-//   groupId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   user  User  @relation("GroupMembers", fields: [userId], references: [id])
-//   group Group @relation(fields: [groupId], references: [id])
+  members GroupMember[]
 
-//   joinedAt DateTime @default(now())
+  joinRequests GroupJoinRequest[]
+  invitations  GroupInvitation[]
 
-//   @@unique([userId, groupId])
-// }
+  visits GroupVisit[]
+
+  @@index([creatorId])
+  @@index([visibility])
+  @@index([createdAt])
+  @@map("groups")
+}
+
+/**
+ * GROUP MEMBERS
+ */
+model GroupMember {
+  id String @id @default(cuid())
+
+  groupId String
+  userId  String
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role GroupMemberRole @default(MEMBER)
+
+  joinedAt DateTime @default(now())
+
+  @@unique([groupId, userId])
+  @@index([userId])
+  @@map("group_members")
+}
+
+/**
+ * GROUP JOIN REQUEST
+ */
+model GroupJoinRequest {
+  id String @id @default(cuid())
+
+  groupId     String
+  requesterId String
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  requester Users @relation("GroupJoinRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  status GroupJoinRequestStatus @default(PENDING)
+
+  createdAt   DateTime  @default(now())
+  respondedAt DateTime?
+
+  respondedById String?
+
+  respondedBy Users? @relation("GroupJoinTarget", fields: [respondedById], references: [id], onDelete: SetNull)
+
+  @@unique([groupId, requesterId])
+  @@index([groupId, status])
+  @@index([requesterId, status])
+  @@map("group_join_requests")
+}
+
+/**
+ * GROUP INVITATION
+ */
+model GroupInvitation {
+  id String @id @default(cuid())
+
+  groupId String
+
+  senderId   String
+  receiverId String
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  sender Users @relation("GroupInvitationSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  receiver Users @relation("GroupInvitationReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  status GroupInvitationStatus @default(PENDING)
+
+  createdAt   DateTime  @default(now())
+  respondedAt DateTime?
+
+  @@index([groupId, receiverId])
+  @@index([receiverId, status])
+  @@map("group_invitations")
+}
+
+/**
+ * BLOG
+ */
+model Blog {
+  id String @id @default(cuid())
+
+  authorId String
+  author   Users  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  title   String
+  content String
+
+  visibility BlogVisibility @default(PUBLIC)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tags  BlogTag[]
+  likes BlogLike[]
+
+  @@index([authorId, createdAt])
+  @@index([visibility, createdAt])
+  @@map("blogs")
+}
+
+/**
+ * BLOG TAG
+ */
+model BlogTag {
+  id String @id @default(cuid())
+
+  blogId String
+
+  blog Blog @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  name String
+
+  createdAt DateTime @default(now())
+
+  @@unique([blogId, name])
+  @@index([name])
+  @@map("blog_tags")
+}
+
+/**
+ * BLOG LIKE
+ */
+model BlogLike {
+  id String @id @default(cuid())
+
+  blogId String
+  userId String
+
+  blog Blog  @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  /**
+   * One user can like a blog only once.
+   */
+  @@unique([blogId, userId])
+  @@index([userId])
+  @@map("blog_likes")
+}
+
+/**
+ * FAVORITES
+ */
+model UserFavorite {
+  id String @id @default(cuid())
+
+  fromUserId String
+  toUserId   String
+
+  fromUser Users @relation("FavoriteFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser   Users @relation("FavoriteTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+  @@map("user_favorites")
+}
+
+/**
+ * BLOCKS
+ */
+model UserBlock {
+  id String @id @default(cuid())
+
+  blockerId String
+  blockedId String
+
+  blocker Users @relation("BlockFrom", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked Users @relation("BlockTo", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([blockerId, blockedId])
+  @@index([blockedId])
+  @@map("user_blocks")
+}
+
+/**
+ * FRIEND REQUESTS
+ */
+model FriendRequest {
+  id String @id @default(cuid())
+
+  senderId   String
+  receiverId String
+
+  sender   Users @relation("FriendRequestSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver Users @relation("FriendRequestReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  status FriendRequestStatus @default(PENDING)
+
+  createdAt   DateTime  @default(now())
+  respondedAt DateTime?
+
+  @@unique([senderId, receiverId])
+  @@index([receiverId, status])
+  @@index([senderId, status])
+  @@map("friend_requests")
+}
+
+model Friendship {
+  id String @id @default(cuid())
+
+  user1Id String
+  user2Id String
+
+  user1 Users @relation("FriendshipUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2 Users @relation("FriendshipUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  status FriendshipStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  endedAt   DateTime?
+
+  pairKey String @unique
+
+  @@index([user1Id])
+  @@index([user2Id])
+  @@index([status])
+  @@map("friendships")
+}
+
+/**
+ * MATCH ACTION
+ * A user can express interest in another user.
+ * Example:
+ * User A likes User B.
+ * User B likes User A.
+ * Then a Match record can be created.
+ */
+model MatchAction {
+  id String @id @default(cuid())
+
+  fromUserId String
+  toUserId   String
+
+  fromUser Users @relation("MatchActionFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser   Users @relation("MatchActionTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  type      MatchActionType
+  createdAt DateTime        @default(now())
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+  @@map("match_actions")
+}
+
+/**
+ * MATCH
+ * Created when both users have expressed interest.
+ */
+model Match {
+  id String @id @default(cuid())
+
+  user1Id String
+  user2Id String
+
+  user1 Users @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2 Users @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  status MatchStatus @default(ACTIVE)
+
+  matchedAt   DateTime  @default(now())
+  unmatchedAt DateTime?
+
+  pairKey String @unique
+
+  @@unique([user1Id, user2Id])
+  @@index([user2Id])
+  @@index([status])
+  @@map("matches")
+}
+
+/**
+ * EYE CANDY CONTEST
+ * Example:
+ * startAt  = Monday 00:00
+ * endAt    = Sunday 23:59
+ * After the contest ends, voting records can be cleaned.
+ */
+model EyeCandyContest {
+  id String @id @default(cuid())
+
+  name String?
+
+  startAt DateTime
+  endAt   DateTime
+
+  createdAt DateTime @default(now())
+
+  participants EyeCandyParticipant[]
+  votes        EyeCandyVote[]
+
+  @@index([startAt, endAt])
+  @@map("eye_candy_contests")
+}
+
+/**
+ * EYE CANDY PARTICIPANT
+ */
+model EyeCandyParticipant {
+  id String @id @default(cuid())
+
+  contestId String
+  userId    String
+
+  contest EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  user    Users           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /**
+   * Snapshot of the participant's region.
+   * Important because the user's region can change later.
+   */
+  countryCode String?
+  region      String?
+  city        String?
+
+  /**
+   * Maximum 3 images.
+   * Minimum 1 image.
+   * Application logic validates 1-3.
+   */
+  images EyeCandyImage[]
+
+  /**
+   * Stored after contest calculation.
+   */
+  totalScore Int @default(0)
+  voteCount  Int @default(0)
+
+  globalRank   Int?
+  regionalRank Int?
+
+  participatedAt DateTime @default(now())
+
+  @@unique([contestId, userId])
+  @@index([contestId, totalScore])
+  @@index([contestId, region, totalScore])
+  @@map("eye_candy_participants")
+}
+
+model EyeCandyImage {
+  id String @id @default(cuid())
+
+  participantId String
+
+  participant EyeCandyParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+
+  url        String
+  storageKey String?
+
+  sortOrder Int @default(0)
+
+  uploadedAt DateTime @default(now())
+
+  @@index([participantId, sortOrder])
+  @@map("eye_candy_images")
+}
+
+/**
+ * EYE CANDY VOTE
+ */
+model EyeCandyVote {
+  id String @id @default(cuid())
+
+  contestId String
+
+  contest EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+
+  voterId     String
+  candidateId String
+
+  voter     Users @relation("EyeCandyVoter", fields: [voterId], references: [id], onDelete: Cascade)
+  candidate Users @relation("EyeCandyCandidate", fields: [candidateId], references: [id], onDelete: Cascade)
+
+  action EyeCandyAction
+
+  /**
+   * Rating is null when action = SKIP.
+   * Rating: 1-5.
+   */
+  rating Int?
+
+  /**
+   * Snapshot of candidate's region.
+   */
+  candidateCountryCode String?
+  candidateRegion      String?
+
+  createdAt DateTime @default(now())
+
+  /**
+   * A voter can process a candidate only once
+   * during one contest.
+   */
+  @@unique([contestId, voterId, candidateId])
+  @@index([contestId, candidateId])
+  @@index([contestId, voterId])
+  @@index([createdAt])
+  @@map("eye_candy_votes")
+}
+
+/**
+ * QUICK DISPLAY
+ * User pays/activates a one-hour
+ * highlighted visibility period.
+ */
+model QuickDisplay {
+  id String @id @default(cuid())
+
+  userId String
+  user   Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type QuickDisplayType @default(ONE_HOUR)
+
+  startedAt DateTime
+  expiresAt DateTime
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, expiresAt])
+  @@index([expiresAt])
+  @@map("quick_displays")
+}
+
+/**
+ * CONVERSATION
+ * A conversation belongs to exactly two users.
+ */
+model Conversation {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  participants ConversationParticipant[]
+  messages     Message[]
+
+  @@index([updatedAt])
+  @@map("conversations")
+}
+
+/**
+ * CONVERSATION PARTICIPANTS
+ * Per-user chat deletion state lives here.
+ */
+model ConversationParticipant {
+  id String @id @default(cuid())
+
+  conversationId String
+  userId         String
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user         Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  joinedAt DateTime @default(now())
+
+  /**
+   * User deleted/cleared the conversation
+   * from their own inbox.
+   */
+  deletedAt DateTime?
+
+  lastReadAt DateTime?
+
+  @@unique([conversationId, userId])
+  @@index([userId, deletedAt])
+  @@map("conversation_participants")
+}
+
+/**
+ * MESSAGE
+ */
+model Message {
+  id String @id @default(cuid())
+
+  conversationId String
+  senderId       String
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       Users        @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  type MessageType @default(TEXT)
+
+  content String?
+
+  sentAt DateTime @default(now())
+
+  /**
+   * Message was read by the other participant.
+   */
+  reads MessageRead[]
+
+  /**
+   * Message withdrawal.
+   * We keep the record but hide/replace its content.
+   */
+  revokedAt DateTime?
+
+  attachments MessageAttachment[]
+
+  @@index([conversationId, sentAt])
+  @@index([senderId, sentAt])
+  @@map("messages")
+}
+
+model MessageRead {
+  id String @id @default(cuid())
+
+  messageId String
+  userId    String
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  readAt DateTime @default(now())
+
+  /**
+   * A user can mark a message as read only once.
+   */
+  @@unique([messageId, userId])
+  @@index([userId, readAt])
+  @@map("message_reads")
+}
+
+/**
+ * MESSAGE ATTACHMENT
+ */
+model MessageAttachment {
+  id String @id @default(cuid())
+
+  messageId String
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  url        String
+  storageKey String?
+
+  mimeType String?
+  fileSize Int?
+  width    Int?
+  height   Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([messageId])
+  @@map("message_attachments")
+}
+
+model Notification {
+  id String @id @default(cuid())
+
+  recipientId String
+  actorId     String?
+
+  recipient Users @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  actor Users? @relation("NotificationActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  type NotificationType
+
+  title   String?
+  message String?
+
+  /**
+   * Generic references to the entity that caused
+   * the notification.
+   * The application interprets these according to type.
+   */
+  entityId   String?
+  entityType String?
+
+  readAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([recipientId, readAt, createdAt])
+  @@index([actorId, createdAt])
+  @@map("notifications")
+}
+
+model Report {
+  id String @id @default(cuid())
+
+  reporterId String
+
+  reporter Users @relation("ReportCreator", fields: [reporterId], references: [id], onDelete: Cascade)
+
+  type ReportType
+
+  targetUserId String?
+
+  targetUser Users? @relation("ReportTargetUser", fields: [targetUserId], references: [id], onDelete: SetNull)
+
+  targetId String?
+
+  reason      String
+  description String?
+
+  status ReportStatus @default(PENDING)
+
+  createdAt  DateTime  @default(now())
+  resolvedAt DateTime?
+
+  @@index([reporterId, createdAt])
+  @@index([status, createdAt])
+  @@index([targetUserId])
+  @@map("reports")
+}
+
+model ModerationAction {
+  id String @id @default(cuid())
+
+  moderatorId  String
+  targetUserId String?
+
+  moderator Users @relation("Moderator", fields: [moderatorId], references: [id], onDelete: Cascade)
+
+  action ModerationActionType
+
+  reason String?
+
+  metadata Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([moderatorId, createdAt])
+  @@index([targetUserId, createdAt])
+  @@map("moderation_actions")
+}
+
+// ============================================================
+// VIP PLANS
+// ============================================================
+
+model VipPlan {
+  id String @id @default(cuid())
+
+  tier VipTier @unique
+
+  name String
+
+  price Decimal @db.Decimal(10, 2)
+
+  durationDays Int
+
+  /**
+   * Feature configuration.
+   * Example:
+   * {
+   * "maxGalleryShares": 10,
+   * "eyeCandy": true
+   * }
+   */
+  features Json
+
+  active Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subscriptions UserSubscription[]
+
+  payments SubscriptionPayment[]
+
+  @@map("vip_plans")
+}
+
+// ============================================================
+// USER SUBSCRIPTION
+// ============================================================
+
+model UserSubscription {
+  id String @id @default(cuid())
+
+  userId String
+  planId String
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  plan VipPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  status SubscriptionStatus @default(PENDING)
+
+  startedAt DateTime
+  expiresAt DateTime
+
+  cancelledAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payments SubscriptionPayment[]
+
+  @@index([userId, status])
+  @@index([userId, expiresAt])
+  @@index([expiresAt])
+  @@map("user_subscriptions")
+}
+
+// ============================================================
+// SUBSCRIPTION PAYMENTS
+// ============================================================
+
+model SubscriptionPayment {
+  id String @id @default(cuid())
+
+  userId String
+  planId String
+
+  subscriptionId String?
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  plan VipPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  subscription UserSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+
+  amount Decimal @db.Decimal(10, 2)
+
+  currency String @default("HUF")
+
+  status PaymentStatus @default(PENDING)
+
+  provider          String?
+  providerPaymentId String?
+
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  @@index([userId, createdAt])
+  @@index([subscriptionId])
+  @@index([providerPaymentId])
+  @@map("subscription_payments")
+}

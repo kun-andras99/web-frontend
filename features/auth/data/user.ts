@@ -23,7 +23,6 @@ export function createUser(input: {
         data: {
             username: input.username,
             email: input.email,
-            password: input.passwordHash,
             passwordHash: input.passwordHash,
         },
     });
@@ -39,6 +38,6 @@ export function markEmailAsVerified(id: UserId) {
 export function updateUserPassword(id: UserId, passwordHash: string) {
     return prisma.users.update({
         where: { id },
-        data: { password: passwordHash, passwordHash },
+        data: { passwordHash },
     });
 }

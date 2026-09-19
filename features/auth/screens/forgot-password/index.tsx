@@ -1,7 +1,7 @@
 "use client";
 
+import { useBackButton } from "@/features/_components/back-button";
 import { ForgotPasswordForm } from "@/features/auth/components/forgot-password-form";
-import { useBackButton } from "@/features/back-button";
 
 export function ForgotPasswordScreen() {
     const { shouldShow } = useBackButton();

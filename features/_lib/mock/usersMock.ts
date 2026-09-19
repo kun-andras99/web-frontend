@@ -9,7 +9,7 @@ import type {
     UserRole,
 } from "../../../prisma/generated/prisma";
 
-type MockUser = {
+export type MockUser = {
     id: string;
     username: string;
     email: string;
@@ -56,6 +56,7 @@ type MockUser = {
         birth: Date;
         heightCm: number | null;
         weightKg: number | null;
+        isActive: boolean;
         gender: Gender | null;
         sexuality: Sexuality | null;
         pronouns: string | null;
@@ -78,6 +79,14 @@ type MockUser = {
         createdAt: Date;
         updatedAt: Date;
     } | null;
+
+    tabVisibility: {
+        statistics: boolean;
+        dress: boolean;
+        datas: boolean;
+        albums: boolean;
+        pin: boolean;
+    };
 };
 
 const now = new Date("2026-09-14T12:00:00.000Z");
@@ -563,6 +572,7 @@ export const usersMock: MockUser[] = names.map((name, index) => {
             avatar,
             avatarUrl: avatar,
             nickname: name,
+            isActive: Math.random() < 0.5,
             description: descriptions[index % descriptions.length],
             bio: `Szia, ${name} vagyok! Szeretem az életet, a jó társaságot és az új élményeket.`,
             birth: birthDate(22 + (index % 19)),
@@ -593,6 +603,14 @@ export const usersMock: MockUser[] = names.map((name, index) => {
             locationRequired: true,
             createdAt,
             updatedAt: now,
+        },
+
+        tabVisibility: {
+            statistics: true, // Mindig látható
+            dress: Math.random() > 0.2, // 80% chance
+            datas: Math.random() > 0.3, // 70% chance
+            albums: Math.random() > 0.15, // 85% chance
+            pin: Math.random() > 0.4, // 60% chance (legkevésbé látható)
         },
     };
 });

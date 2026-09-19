@@ -2,16 +2,13 @@
 
 import ProfileTabContent from "@/features/profile/components/profile-tab-content";
 import { PROFILE_TABS } from "@/features/profile/data/constants";
-import {
-    ProfileTab,
-    ProfileWithRelations,
-} from "@/features/profile/types/profile.types";
+import { ProfileTab } from "@/features/profile/types/profile.types";
 import { PointerEvent, useRef, useState } from "react";
 
 interface ProfileTabViewProps {
     activeIndex: number;
     activeTab: ProfileTab;
-    user: ProfileWithRelations;
+    // user: ProfileWithRelations;
     onTabChange: (tab: ProfileTab) => void;
 }
 
@@ -20,7 +17,6 @@ const SWIPE_THRESHOLD = 60;
 export default function ProfileTabScreen({
     activeIndex,
     activeTab,
-    user,
     onTabChange,
 }: ProfileTabViewProps) {
     const startX = useRef<number | null>(null);
@@ -28,7 +24,7 @@ export default function ProfileTabScreen({
     const [isDragging, setIsDragging] = useState(false);
 
     // javitani
-    const tabs = PROFILE_TABS("woman");
+    const tabs = PROFILE_TABS("man");
 
     const tabContentRefs = useRef<Record<ProfileTab, HTMLDivElement | null>>({
         statistics: null,
@@ -110,7 +106,7 @@ export default function ProfileTabScreen({
                             min-h-full
                             shrink-0
                         ">
-                        <ProfileTabContent tab={activeTab} user={user} />
+                        <ProfileTabContent tab={activeTab} />
                     </div>
                 ))}
             </div>

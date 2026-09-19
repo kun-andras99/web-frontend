@@ -1,4 +1,4 @@
-import BackHeader from "@/features/navigations/back-header";
+import BackHeader from "@/features/(app)/navigations/back-header";
 
 export default async function BlogPage() {
     // const { slug } = await params;

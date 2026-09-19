@@ -124,17 +124,19 @@ exports.Prisma.UsersScalarFieldEnum = {
   id: 'id',
   username: 'username',
   email: 'email',
-  password: 'password',
   passwordHash: 'passwordHash',
   emailVerified: 'emailVerified',
+  role: 'role',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   lat: 'lat',
   lng: 'lng',
   locationEnabled: 'locationEnabled',
   locationUpdatedAt: 'locationUpdatedAt',
-  role: 'role',
-  relationshipStatus: 'relationshipStatus'
+  lastActiveAt: 'lastActiveAt',
+  relationshipStatus: 'relationshipStatus',
+  partnerUserId: 'partnerUserId'
 };
 
 exports.Prisma.RefreshTokenScalarFieldEnum = {
@@ -171,8 +173,10 @@ exports.Prisma.UserDataScalarFieldEnum = {
   weightKg: 'weightKg',
   gender: 'gender',
   sexuality: 'sexuality',
-  pronouns: 'pronouns',
+  countryCode: 'countryCode',
+  region: 'region',
   city: 'city',
+  appCity: 'appCity',
   transStatus: 'transStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -210,9 +214,350 @@ exports.Prisma.UserSexualityInterestScalarFieldEnum = {
   value: 'value'
 };
 
+exports.Prisma.ProfileVisitScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  visitedUserId: 'visitedUserId',
+  visitedAt: 'visitedAt'
+};
+
+exports.Prisma.GroupVisitScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  visitorId: 'visitorId',
+  visitedAt: 'visitedAt'
+};
+
+exports.Prisma.GalleryScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  name: 'name',
+  type: 'type',
+  visibility: 'visibility',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GalleryImageScalarFieldEnum = {
+  id: 'id',
+  galleryId: 'galleryId',
+  url: 'url',
+  storageKey: 'storageKey',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  width: 'width',
+  height: 'height',
+  isAvatar: 'isAvatar',
+  sortOrder: 'sortOrder',
+  uploadedAt: 'uploadedAt'
+};
+
+exports.Prisma.GalleryShareScalarFieldEnum = {
+  id: 'id',
+  galleryId: 'galleryId',
+  ownerId: 'ownerId',
+  recipientId: 'recipientId',
+  grantedAt: 'grantedAt',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  purgeAfter: 'purgeAfter'
+};
+
+exports.Prisma.GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  visibility: 'visibility',
+  creatorId: 'creatorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GroupMemberScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  userId: 'userId',
+  role: 'role',
+  joinedAt: 'joinedAt'
+};
+
+exports.Prisma.GroupJoinRequestScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  requesterId: 'requesterId',
+  status: 'status',
+  createdAt: 'createdAt',
+  respondedAt: 'respondedAt',
+  respondedById: 'respondedById'
+};
+
+exports.Prisma.GroupInvitationScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  status: 'status',
+  createdAt: 'createdAt',
+  respondedAt: 'respondedAt'
+};
+
+exports.Prisma.BlogScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  title: 'title',
+  content: 'content',
+  visibility: 'visibility',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogTagScalarFieldEnum = {
+  id: 'id',
+  blogId: 'blogId',
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BlogLikeScalarFieldEnum = {
+  id: 'id',
+  blogId: 'blogId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserFavoriteScalarFieldEnum = {
+  id: 'id',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserBlockScalarFieldEnum = {
+  id: 'id',
+  blockerId: 'blockerId',
+  blockedId: 'blockedId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FriendRequestScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  status: 'status',
+  createdAt: 'createdAt',
+  respondedAt: 'respondedAt'
+};
+
+exports.Prisma.FriendshipScalarFieldEnum = {
+  id: 'id',
+  user1Id: 'user1Id',
+  user2Id: 'user2Id',
+  status: 'status',
+  createdAt: 'createdAt',
+  endedAt: 'endedAt',
+  pairKey: 'pairKey'
+};
+
+exports.Prisma.MatchActionScalarFieldEnum = {
+  id: 'id',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  type: 'type',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MatchScalarFieldEnum = {
+  id: 'id',
+  user1Id: 'user1Id',
+  user2Id: 'user2Id',
+  status: 'status',
+  matchedAt: 'matchedAt',
+  unmatchedAt: 'unmatchedAt',
+  pairKey: 'pairKey'
+};
+
+exports.Prisma.EyeCandyContestScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EyeCandyParticipantScalarFieldEnum = {
+  id: 'id',
+  contestId: 'contestId',
+  userId: 'userId',
+  countryCode: 'countryCode',
+  region: 'region',
+  city: 'city',
+  totalScore: 'totalScore',
+  voteCount: 'voteCount',
+  globalRank: 'globalRank',
+  regionalRank: 'regionalRank',
+  participatedAt: 'participatedAt'
+};
+
+exports.Prisma.EyeCandyImageScalarFieldEnum = {
+  id: 'id',
+  participantId: 'participantId',
+  url: 'url',
+  storageKey: 'storageKey',
+  sortOrder: 'sortOrder',
+  uploadedAt: 'uploadedAt'
+};
+
+exports.Prisma.EyeCandyVoteScalarFieldEnum = {
+  id: 'id',
+  contestId: 'contestId',
+  voterId: 'voterId',
+  candidateId: 'candidateId',
+  action: 'action',
+  rating: 'rating',
+  candidateCountryCode: 'candidateCountryCode',
+  candidateRegion: 'candidateRegion',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.QuickDisplayScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  startedAt: 'startedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ConversationParticipantScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  userId: 'userId',
+  joinedAt: 'joinedAt',
+  deletedAt: 'deletedAt',
+  lastReadAt: 'lastReadAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  type: 'type',
+  content: 'content',
+  sentAt: 'sentAt',
+  revokedAt: 'revokedAt'
+};
+
+exports.Prisma.MessageReadScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  userId: 'userId',
+  readAt: 'readAt'
+};
+
+exports.Prisma.MessageAttachmentScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  url: 'url',
+  storageKey: 'storageKey',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  width: 'width',
+  height: 'height',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  recipientId: 'recipientId',
+  actorId: 'actorId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  entityId: 'entityId',
+  entityType: 'entityType',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ReportScalarFieldEnum = {
+  id: 'id',
+  reporterId: 'reporterId',
+  type: 'type',
+  targetUserId: 'targetUserId',
+  targetId: 'targetId',
+  reason: 'reason',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  resolvedAt: 'resolvedAt'
+};
+
+exports.Prisma.ModerationActionScalarFieldEnum = {
+  id: 'id',
+  moderatorId: 'moderatorId',
+  targetUserId: 'targetUserId',
+  action: 'action',
+  reason: 'reason',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VipPlanScalarFieldEnum = {
+  id: 'id',
+  tier: 'tier',
+  name: 'name',
+  price: 'price',
+  durationDays: 'durationDays',
+  features: 'features',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  status: 'status',
+  startedAt: 'startedAt',
+  expiresAt: 'expiresAt',
+  cancelledAt: 'cancelledAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SubscriptionPaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  subscriptionId: 'subscriptionId',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  provider: 'provider',
+  providerPaymentId: 'providerPaymentId',
+  createdAt: 'createdAt',
+  completedAt: 'completedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -224,10 +569,23 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.UserRole = exports.$Enums.UserRole = {
   USER: 'USER',
   ADMIN: 'ADMIN',
   MODERATOR: 'MODERATOR'
+};
+
+exports.UserAccountStatus = exports.$Enums.UserAccountStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  BANNED: 'BANNED',
+  DELETED: 'DELETED'
 };
 
 exports.RelationshipStatus = exports.$Enums.RelationshipStatus = {
@@ -264,7 +622,7 @@ exports.Sexuality = exports.$Enums.Sexuality = {
   OTHER: 'OTHER'
 };
 
-exports.City = exports.$Enums.City = {
+exports.AppCity = exports.$Enums.AppCity = {
   CENTRUM: 'CENTRUM',
   STRAIGHT: 'STRAIGHT',
   BISEXUAL: 'BISEXUAL',
@@ -305,6 +663,144 @@ exports.SexualityInterest = exports.$Enums.SexualityInterest = {
   OTHER: 'OTHER'
 };
 
+exports.GalleryType = exports.$Enums.GalleryType = {
+  PROFILE: 'PROFILE',
+  USER: 'USER'
+};
+
+exports.GalleryVisibility = exports.$Enums.GalleryVisibility = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+};
+
+exports.GroupVisibility = exports.$Enums.GroupVisibility = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+};
+
+exports.GroupMemberRole = exports.$Enums.GroupMemberRole = {
+  MEMBER: 'MEMBER',
+  MODERATOR: 'MODERATOR',
+  ADMIN: 'ADMIN'
+};
+
+exports.GroupJoinRequestStatus = exports.$Enums.GroupJoinRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.GroupInvitationStatus = exports.$Enums.GroupInvitationStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED',
+  EXPIRED: 'EXPIRED'
+};
+
+exports.BlogVisibility = exports.$Enums.BlogVisibility = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+};
+
+exports.FriendRequestStatus = exports.$Enums.FriendRequestStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.FriendshipStatus = exports.$Enums.FriendshipStatus = {
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED'
+};
+
+exports.MatchActionType = exports.$Enums.MatchActionType = {
+  LIKE: 'LIKE',
+  PASS: 'PASS'
+};
+
+exports.MatchStatus = exports.$Enums.MatchStatus = {
+  ACTIVE: 'ACTIVE',
+  UNMATCHED: 'UNMATCHED'
+};
+
+exports.EyeCandyAction = exports.$Enums.EyeCandyAction = {
+  RATE: 'RATE',
+  SKIP: 'SKIP'
+};
+
+exports.QuickDisplayType = exports.$Enums.QuickDisplayType = {
+  ONE_HOUR: 'ONE_HOUR'
+};
+
+exports.MessageType = exports.$Enums.MessageType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  SYSTEM: 'SYSTEM'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  PROFILE_VISIT: 'PROFILE_VISIT',
+  NEW_FAVORITE: 'NEW_FAVORITE',
+  FRIEND_REQUEST: 'FRIEND_REQUEST',
+  FRIEND_ACCEPTED: 'FRIEND_ACCEPTED',
+  GROUP_INVITATION: 'GROUP_INVITATION',
+  GROUP_JOIN_REQUEST: 'GROUP_JOIN_REQUEST',
+  GROUP_JOIN_ACCEPTED: 'GROUP_JOIN_ACCEPTED',
+  GALLERY_SHARED: 'GALLERY_SHARED',
+  BLOG_LIKE: 'BLOG_LIKE',
+  MATCH: 'MATCH',
+  NEW_MESSAGE: 'NEW_MESSAGE',
+  SYSTEM: 'SYSTEM'
+};
+
+exports.ReportType = exports.$Enums.ReportType = {
+  USER: 'USER',
+  BLOG: 'BLOG',
+  GROUP: 'GROUP',
+  MESSAGE: 'MESSAGE',
+  GALLERY: 'GALLERY',
+  IMAGE: 'IMAGE'
+};
+
+exports.ReportStatus = exports.$Enums.ReportStatus = {
+  PENDING: 'PENDING',
+  REVIEWING: 'REVIEWING',
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED'
+};
+
+exports.ModerationActionType = exports.$Enums.ModerationActionType = {
+  WARNING: 'WARNING',
+  CONTENT_REMOVED: 'CONTENT_REMOVED',
+  USER_SUSPENDED: 'USER_SUSPENDED',
+  USER_BANNED: 'USER_BANNED',
+  USER_UNBANNED: 'USER_UNBANNED',
+  USER_UNBLOCKED: 'USER_UNBLOCKED'
+};
+
+exports.VipTier = exports.$Enums.VipTier = {
+  FREE: 'FREE',
+  VIP1: 'VIP1',
+  VIP2: 'VIP2',
+  VIP3: 'VIP3'
+};
+
+exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED',
+  PENDING: 'PENDING'
+};
+
+exports.PaymentStatus = exports.$Enums.PaymentStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
+};
+
 exports.Prisma.ModelName = {
   Users: 'Users',
   RefreshToken: 'RefreshToken',
@@ -313,7 +809,41 @@ exports.Prisma.ModelName = {
   UserPreference: 'UserPreference',
   UserLookingFor: 'UserLookingFor',
   UserGenderInterest: 'UserGenderInterest',
-  UserSexualityInterest: 'UserSexualityInterest'
+  UserSexualityInterest: 'UserSexualityInterest',
+  ProfileVisit: 'ProfileVisit',
+  GroupVisit: 'GroupVisit',
+  Gallery: 'Gallery',
+  GalleryImage: 'GalleryImage',
+  GalleryShare: 'GalleryShare',
+  Group: 'Group',
+  GroupMember: 'GroupMember',
+  GroupJoinRequest: 'GroupJoinRequest',
+  GroupInvitation: 'GroupInvitation',
+  Blog: 'Blog',
+  BlogTag: 'BlogTag',
+  BlogLike: 'BlogLike',
+  UserFavorite: 'UserFavorite',
+  UserBlock: 'UserBlock',
+  FriendRequest: 'FriendRequest',
+  Friendship: 'Friendship',
+  MatchAction: 'MatchAction',
+  Match: 'Match',
+  EyeCandyContest: 'EyeCandyContest',
+  EyeCandyParticipant: 'EyeCandyParticipant',
+  EyeCandyImage: 'EyeCandyImage',
+  EyeCandyVote: 'EyeCandyVote',
+  QuickDisplay: 'QuickDisplay',
+  Conversation: 'Conversation',
+  ConversationParticipant: 'ConversationParticipant',
+  Message: 'Message',
+  MessageRead: 'MessageRead',
+  MessageAttachment: 'MessageAttachment',
+  Notification: 'Notification',
+  Report: 'Report',
+  ModerationAction: 'ModerationAction',
+  VipPlan: 'VipPlan',
+  UserSubscription: 'UserSubscription',
+  SubscriptionPayment: 'SubscriptionPayment'
 };
 
 /**

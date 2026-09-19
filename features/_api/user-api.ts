@@ -40,7 +40,7 @@ export async function getUsers(
             userPreference: true,
             lookingFor: true,
             genderInterest: true,
-            sexualityInteres: true,
+            sexualityInterest: true,
         },
         orderBy: {
             createdAt: "desc",

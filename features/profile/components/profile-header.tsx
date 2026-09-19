@@ -1,12 +1,13 @@
 "use client";
 
-import { ProfileWithRelations } from "@/features/profile/types/profile.types";
+import { SessionUserProps } from "@/lib/utils/props";
+// import { ProfileWithRelations } from "@/features/profile/types/profile.types";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 
 interface ProfileHeaderProps {
-    user: ProfileWithRelations;
+    // user: ProfileWithRelations;
     avatarUrl?: string | null;
     isCollapsed: boolean;
     onBack: () => void;
@@ -17,7 +18,7 @@ export default function ProfileHeader({
     avatarUrl,
     isCollapsed,
     onBack,
-}: ProfileHeaderProps) {
+}: ProfileHeaderProps & SessionUserProps) {
     return (
         <header className="fixed inset-x-0 top-0 z-10 h-[50px]">
             <div className="relative flex h-[50px] items-center ">

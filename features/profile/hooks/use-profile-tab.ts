@@ -5,7 +5,10 @@ import { useCallback, useMemo, useState } from "react";
 import { PROFILE_TABS } from "@/features/profile/data/constants";
 import type { ProfileTab } from "../types/profile.types";
 
-export function useProfileTabs(usergender: string, initialTab?: ProfileTab) {
+export function useProfileTabs(
+    usergender: string | null | undefined,
+    initialTab?: ProfileTab,
+) {
     const tabs = useMemo(() => PROFILE_TABS(usergender), [usergender]);
 
     const [activeTab, setActiveTab] = useState<ProfileTab>(

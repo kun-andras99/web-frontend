@@ -14,10 +14,7 @@ import type {
 import type { ClientMeta } from "./client-meta";
 import { AUTH_ROUTES } from "./constants";
 import { createSessionTokens } from "./create-session";
-import {
-    sendEmail,
-    verificationEmailTemplate,
-} from "./mailer";
+import { sendEmail, verificationEmailTemplate } from "./mailer";
 import { hashPassword } from "./password";
 import { signUpSchema } from "./validation";
 

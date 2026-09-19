@@ -1,6 +1,6 @@
 // app/settings/page.tsx
 
-import BackHeader from "@/features/navigations/back-header";
+import BackHeader from "@/features/(app)/navigations/back-header";
 import Link from "next/link";
 
 export default function SettingsPage() {

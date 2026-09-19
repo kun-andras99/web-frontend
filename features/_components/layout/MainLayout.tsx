@@ -1,7 +1,7 @@
-import BodySidebar from "@/features/navigations/body-sidebar";
-import MobileTopNav from "@/features/navigations/mobile-top-nav";
-import { GUEST_TOP_MENU_ROUTES } from "@/features/navigations/navigation.config";
-import TopBar from "@/features/navigations/top-bar";
+import BodySidebar from "@/features/(app)/navigations/body-sidebar";
+import MobileTopNav from "@/features/(app)/navigations/mobile-top-nav";
+import { GUEST_TOP_MENU_ROUTES } from "@/features/(app)/navigations/navigation.config";
+import TopBar from "@/features/(app)/navigations/top-bar";
 import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
 export default function MainLayout({
     children,

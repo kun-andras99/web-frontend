@@ -1,6 +1,6 @@
 "use client";
 
-import { BOTTOM_ICON_COLORS } from "@/features/navigations/top-bar/icons/icons/icons.data";
+import { BOTTOM_ICON_COLORS } from "@/features/(app)/navigations/top-bar/icons/icons/icons.data";
 import { PROFILE_TABS } from "@/features/profile/data/constants";
 import { useProfileTabScroll } from "@/features/profile/hooks/use-profile-tab-scroll";
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ import type { ProfileTab } from "../types/profile.types";
 interface ProfileTabsProps {
     activeTab: ProfileTab;
     onChange: (tab: ProfileTab) => void;
-    usergender: "woman" | "man";
+    usergender: string | null | undefined;
 }
 
 export default function ProfileTabs({
@@ -22,7 +22,7 @@ export default function ProfileTabs({
 
     useProfileTabScroll(tabsContainerRef, activeTab);
 
-    const tabs = PROFILE_TABS(usergender);
+    const tabs = PROFILE_TABS(usergender).filter((tab) => tab.show !== false);
 
     return (
         <div
@@ -78,8 +78,8 @@ export default function ProfileTabs({
                                         absolute
                                         z-10
                                         bottom-[1]
-                                        h-[2px]
-                                        w-[38px]
+                                        h-[3px]
+                                        w-[44px]
                                         left-1/2
                                         -translate-x-1/2
                                         rounded-full
