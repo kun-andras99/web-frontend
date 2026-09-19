@@ -43,7 +43,7 @@ export type ActionState<
       }
     | { status: "success"; message?: string; redirectTo?: string };
 
-export type SignInFields = { email: string; password: string };
+export type SignInFields = { identifier: string; password: string };
 export type SignUpFields = {
     username: string;
     email: string;

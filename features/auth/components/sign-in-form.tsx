@@ -13,19 +13,21 @@ export function SignInForm() {
         <form action={formAction} noValidate className="action-form">
             <div className="input-group">
                 <input
-                    id="email"
-                    name="email"
-                    placeholder="email"
-                    type="email"
-                    autoComplete="email"
+                    id="identifier"
+                    name="identifier"
+                    placeholder="email or username"
+                    type="text"
+                    autoComplete="username"
+                    autoCapitalize="none"
+                    spellCheck={false}
                     required
                 />
 
-                {state.status === "error" && state.fieldErrors?.email && (
+                {state.status === "error" && state.fieldErrors?.identifier && (
                     <FormMessage
                         className="error-msg"
                         status="error"
-                        message={state.fieldErrors.email[0]}
+                        message={state.fieldErrors.identifier[0]}
                     />
                 )}
             </div>

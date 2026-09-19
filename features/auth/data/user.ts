@@ -41,3 +41,20 @@ export function updateUserPassword(id: UserId, passwordHash: string) {
         data: { passwordHash },
     });
 }
+
+export async function getUserByIdentifier(identifier: string) {
+    const value = identifier.trim();
+
+    return prisma.users.findFirst({
+        where: {
+            OR: [
+                {
+                    email: value.toLowerCase(),
+                },
+                {
+                    username: value,
+                },
+            ],
+        },
+    });
+}

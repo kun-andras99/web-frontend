@@ -7,9 +7,9 @@ import Link from "next/link";
 export default function HomeScreen() {
     const { data: users, isLoading, isError } = useUsers();
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    // if (isLoading) {
+    //     return <div>Loading...</div>;
+    // }
 
     if (isError) {
         return <div>Failed to load users.</div>;

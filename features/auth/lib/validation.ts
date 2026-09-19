@@ -14,8 +14,12 @@ export const passwordSchema = z
     .regex(/[0-9]/, "Legalább egy számjegyet tartalmaznia kell.");
 
 export const signInSchema = z.object({
-    email: emailSchema,
-    password: z.string().min(1, "A jelszó megadása kötelező."),
+    identifier: z
+        .string()
+        .trim()
+        .min(1, "Add meg az email címed vagy felhasználóneved."),
+
+    password: z.string().min(1, "Add meg a jelszavad."),
 });
 
 export const usernameSchema = z

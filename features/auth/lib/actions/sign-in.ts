@@ -16,7 +16,7 @@ export async function signInAction(
 ): Promise<ActionState<SignInFields>> {
     const result = await authenticateCredentials(
         {
-            email: formData.get("email"),
+            identifier: formData.get("identifier"),
             password: formData.get("password"),
         },
         clientMetaFromHeaders(await headers()),

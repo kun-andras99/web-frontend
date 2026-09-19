@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const result = await authenticateCredentials(
         {
-            email: body.email,
+            identifier: body.identifier,
             password: body.password,
         },
         clientMetaFromHeaders(request.headers),

@@ -1,4 +1,3 @@
-import { getUserByEmail } from "@/features/auth/data/user";
 import type {
     AccessToken,
     ActionState,
@@ -10,8 +9,9 @@ import { AUTH_ROUTES } from "./constants";
 import { createSessionTokens } from "./create-session";
 import { verifyPassword } from "./password";
 import { signInSchema } from "./validation";
+import { getUserByIdentifier } from "@/features/auth/data/user";
 
-const GENERIC_ERROR = "Hibás email cím vagy jelszó.";
+const GENERIC_ERROR = "Hibás email cím, felhasználónév vagy jelszó.";
 
 export type SignInResult =
     | {
@@ -46,14 +46,29 @@ export async function authenticateCredentials(
     }
 
     try {
-        const { email, password } = parsed.data;
-        const user = await getUserByEmail(email);
+        const { identifier, password } = parsed.data;
+
+        const user = await getUserByIdentifier(identifier);
 
         if (!user) {
             return {
                 ok: false,
                 httpStatus: 401,
-                state: { status: "error", message: GENERIC_ERROR },
+                state: {
+                    status: "error",
+                    message: GENERIC_ERROR,
+                },
+            };
+        }
+
+        if (user.status !== "ACTIVE") {
+            return {
+                ok: false,
+                httpStatus: 401,
+                state: {
+                    status: "error",
+                    message: GENERIC_ERROR,
+                },
             };
         }
 
@@ -66,7 +81,10 @@ export async function authenticateCredentials(
             return {
                 ok: false,
                 httpStatus: 401,
-                state: { status: "error", message: GENERIC_ERROR },
+                state: {
+                    status: "error",
+                    message: GENERIC_ERROR,
+                },
             };
         }
 
@@ -84,6 +102,7 @@ export async function authenticateCredentials(
         };
     } catch (error) {
         console.error("[SIGN-IN ERROR]", error);
+
         return {
             ok: false,
             httpStatus: 500,
