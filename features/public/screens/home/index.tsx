@@ -40,13 +40,13 @@ export default function HomeScreen() {
                 </span>
                 <div className="starter-auth-button-group">
                     <Link href={AUTH_ROUTES.signUp}>
-                        <AppButton width="260px" starter>
+                        <AppButton width="180px" starter>
                             Bejelentkezés
                         </AppButton>
                     </Link>
                     <p>Még nincs fiókod?</p>
                     <Link href={AUTH_ROUTES.signUp}>
-                        <AppButton variant="outline" width="260px" starter>
+                        <AppButton variant="outline" width="180px" starter>
                             Regisztráció
                         </AppButton>
                     </Link>
@@ -89,6 +89,8 @@ export default function HomeScreen() {
                     </div>
                 </div>
             </div>
+            <div className="bg-img-1"></div>
+            <div className="bg-img-2"></div>
         </section>
         // <motion.section
         //     className="center-main"
