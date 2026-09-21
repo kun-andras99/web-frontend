@@ -4,7 +4,7 @@ import { AuthProvider } from "@/features/auth/components/auth-provider";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { cn } from "@/lib/utils/cn";
 import type { Metadata } from "next";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "../public/assets/style/style.css";
 import "./globals.css";
 
@@ -17,6 +17,11 @@ const outfit = Outfit({
 const plusJakarta = Plus_Jakarta_Sans({
     weight: ["200", "300", "400", "500", "600", "700", "800"],
     variable: "--font-cal-sans",
+});
+
+const inter = Inter({
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    variable: "--inter-sans",
 });
 
 export const metadata: Metadata = {
@@ -36,6 +41,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 "antialiased",
                 outfit.variable,
                 plusJakarta.variable,
+                inter.variable,
             )}>
             <body className="min-h-full">
                 <QueryProvider>
