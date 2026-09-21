@@ -1,14 +1,14 @@
 export const BOTTOM_ICON_COLORS = {
-    startColor: "#dddddd",
-    stopColor: "#acacac",
+    startColor: "#555",
+    stopColor: "#555",
     backgroundStartColor: "#e0e0e0",
     backgroundStopColor: "#e0e0e0",
 
     active: {
         profileIconColor: "#ffffff",
         topTabColor: "#1dbdfc",
-        mainTopStartColor: "#fff",
-        mainTopStopColor: "#bbb",
+        mainTopStartColor: "#1095ca",
+        mainTopStopColor: "#1095ca",
         // topTabColor: "#cff4ff",
         // startColor: "#1d5d88",
         // stopColor: "#133f5c",

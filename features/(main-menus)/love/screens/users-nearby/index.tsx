@@ -2,11 +2,8 @@
 
 // import TopFilter from "@/features/_components/ui/top-filter";
 // import ViewChange from "@/features/_components/ui/view-change";
-import usersMock from "@/features/_lib/mock/usersMock";
 import { useScreenStore } from "@/features/_store/screen.store";
-import { calculateAge } from "@/features/profile/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
+import { useCurrentUserFull } from "@/features/auth/hooks/useCurrentUserFull";
 // import { useEffect, useState } from "react";
 
 // interface NearbyUser {
@@ -21,43 +18,19 @@ import Link from "next/link";
 
 export default function UsersNearbyScreen() {
     const { display } = useScreenStore();
-
-    // const [users, setUsers] = useState<NearbyUser[]>([]);
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(() => {
-    //     async function loadUsers() {
-    //         try {
-    //             const response = await fetch("/api/users/nearby?page=1");
-
-    //             const result = await response.json();
-
-    //             if (!response.ok) {
-    //                 throw new Error(result.error);
-    //             }
-
-    //             setUsers(result.users);
-    //         } catch (error) {
-    //             console.error(error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     }
-
-    //     loadUsers();
-    // }, []);
-
+    const { data: user } = useCurrentUserFull();
+    console.log({ user });
     return (
         <div className="main">
             {/* <TopFilter>
                 <ViewChange />
             </TopFilter> */}
             <div className={`screen-view `}>
-                {usersMock?.map((user) => {
+                {/* {usersMock?.map((user) => {
                     const active = user.userData?.isActive === true;
                     return (
                         <div
-                            className={`user-datas ${active ? null : "dark-data"}`}
+                            className={`user-datas ${active ? "" : "dark-data"}`}
                             key={user.id}>
                             <Link href={`/profile/${user.id}`}>
                                 <div className="image-container">
@@ -83,12 +56,11 @@ export default function UsersNearbyScreen() {
                                         )}
                                     </span>
                                 </div>
-                                {/* <p>{user.username}</p>
-                                <p>{user.email}</p> */}
+                                <p>{user.email}</p> 
                             </Link>
                         </div>
                     );
-                })}
+                })} */}
                 {/* {Array.from({ length: 20 }).map((_, index) => (
                         <div
                             key={index}

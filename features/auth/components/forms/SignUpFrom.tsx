@@ -1,7 +1,7 @@
 "use client";
 
-import { FormMessage } from "@/features/auth/components/form-message";
-import { SubmitButton } from "@/features/auth/components/submit-button";
+import AppButton from "@/features/_components/button/AppButton";
+import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useSignUpForm } from "@/features/auth/hooks/use-sign-up-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export function SignUpForm() {
                 <input
                     id="username"
                     name="username"
-                    placeholder="username"
+                    placeholder="Username"
                     type="text"
                     autoComplete="username"
                     required
@@ -34,7 +34,7 @@ export function SignUpForm() {
                 <input
                     id="email"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email address"
                     type="email"
                     autoComplete="email"
                     required
@@ -53,7 +53,7 @@ export function SignUpForm() {
                 <input
                     id="password"
                     name="password"
-                    placeholder="********"
+                    placeholder="Password"
                     type="password"
                     autoComplete="new-password"
                     required
@@ -72,7 +72,7 @@ export function SignUpForm() {
                 <input
                     id="confirmPassword"
                     name="confirmPassword"
-                    placeholder="******* ********"
+                    placeholder="Confirm password"
                     type="password"
                     autoComplete="new-password"
                     required
@@ -96,16 +96,17 @@ export function SignUpForm() {
                 />
             )}
 
-            <SubmitButton pendingText="Registrating...">
-                <div className="auth-r">
-                    <div className="r">Registration</div>
-                </div>
-            </SubmitButton>
+            <AppButton type="submit" pendingText="Process registration...">
+                Registration
+            </AppButton>
 
             <Link href={AUTH_ROUTES.signIn}>
-                <div className="auth-r">
-                    <div className="b">Click to login</div>
-                </div>
+                <AppButton
+                    className="button-full"
+                    variant="outline"
+                    type="button">
+                    Click to login
+                </AppButton>
             </Link>
         </form>
     );

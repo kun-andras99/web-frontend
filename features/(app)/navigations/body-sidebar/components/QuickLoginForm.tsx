@@ -1,6 +1,6 @@
 "use client";
 
-import { FormMessage } from "@/features/auth/components/form-message";
+import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";

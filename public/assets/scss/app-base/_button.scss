@@ -1,0 +1,23 @@
+.button-full {
+    width: 100%;
+}
+
+.button-container {
+    .fill {
+        border-radius: 8px;
+        padding: 10px 12px;
+    }
+    .outline {
+        background: transparent;
+        border-radius: 8px;
+        padding: 10px 12px;
+    }
+    text-align: center;
+    padding: 2px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: "Outfit", sans-serif;
+    background: linear-gradient(to bottom, #1095ca, #0b6285);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+    font-weight: 600;
+}

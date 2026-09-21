@@ -1,7 +1,7 @@
 "use client";
 
 import { useBackButton } from "@/features/_components/back-button";
-import { SignUpForm } from "@/features/auth/components/sign-up-form";
+import { SignUpForm } from "@/features/auth/components/forms/SignUpFrom";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { useBackButton } from "@/features/_components/back-button";
-import { FormMessage } from "@/features/auth/components/form-message";
-import { SignInForm } from "@/features/auth/components/sign-in-form";
+// import { useBackButton } from "@/features/_components/back-button";
+import { FormMessage } from "@/features/auth/components/forms/FormMessage";
+import { SignInForm } from "@/features/auth/components/forms/SignInForm";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ interface SignInScreenProps {
 }
 
 export function SignInScreen({ verified, verifyError }: SignInScreenProps) {
-    const { shouldShow } = useBackButton();
+    // const { shouldShow } = useBackButton();
     return (
         <>
             {/* {shouldShow && (

@@ -1,7 +1,7 @@
 "use client";
 
-import { FormMessage } from "@/features/auth/components/form-message";
-import { SubmitButton } from "@/features/auth/components/submit-button";
+import AppButton from "@/features/_components/button/AppButton";
+import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export function SignInForm() {
                 <input
                     id="identifier"
                     name="identifier"
-                    placeholder="email or username"
+                    placeholder="Email or username"
                     type="text"
                     autoComplete="username"
                     autoCapitalize="none"
@@ -36,7 +36,7 @@ export function SignInForm() {
                 <input
                     id="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     type="password"
                     autoComplete="current-password"
                     required
@@ -59,20 +59,24 @@ export function SignInForm() {
                 />
             )}
 
-            <SubmitButton pendingText="Logging in...">
+            {/* <SubmitButton pendingText="Logging in...">
                 <div className="auth-r">
                     <div className="r">Login</div>
                 </div>
-            </SubmitButton>
+            </SubmitButton> */}
+            <AppButton type="submit" pendingText="Logging in...">
+                Login
+            </AppButton>
 
-            <p>
-                <Link href={AUTH_ROUTES.forgotPassword}>Forgot password?</Link>
-            </p>
+            <Link href={AUTH_ROUTES.forgotPassword}>Forgot password?</Link>
 
             <Link href={AUTH_ROUTES.signUp}>
-                <div className="auth-r">
-                    <div className="b">Click to register!</div>
-                </div>
+                <AppButton
+                    className="button-full"
+                    variant="outline"
+                    type="button">
+                    Click to register
+                </AppButton>
             </Link>
         </form>
     );

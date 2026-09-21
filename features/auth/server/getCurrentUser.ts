@@ -34,13 +34,13 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
             secretKey,
         );
 
-        if (!payload.userId) {
+        if (!payload.sub) {
             return null;
         }
 
         const user = await prisma.users.findUnique({
             where: {
-                id: payload.userId,
+                id: payload.sub,
             },
             select: {
                 id: true,
