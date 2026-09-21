@@ -368,13 +368,13 @@ body {
             }
         }
         .icon.active {
-            background: #242424;
+            background: rgba(7, 63, 85, 0.35);
+            backdrop-filter: blur(20px);
             display: flex;
             flex-direction: column;
-            border-radius: 30% 30% 30% 30% / 30% 30% 30% 30%;
+            border-radius: 50px;
             // box-shadow: 0.05rem 0.05rem 3px 2px rgba(255, 255, 255, 0.05);
             // color: #000;
-            box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.25);
         }
     }
 }

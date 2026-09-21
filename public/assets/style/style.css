@@ -448,7 +448,8 @@ body {
   text-align: center;
 }
 .main-top-navigation .content .icon.active {
-  background: #242424;
+  background: rgba(7, 63, 85, 0.35);
+  backdrop-filter: blur(20px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -456,9 +457,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border-radius: 30% 30% 30% 30%/30% 30% 30% 30%;
-  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.25);
-          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
 }
 
 .home-news {
@@ -1069,7 +1068,7 @@ main {
           align-items: center;
   width: 100%;
   gap: 15px;
-  color: #c0c0c0;
+  color: #fff;
   font-size: 14px;
 }
 .starter-auth-button-group p::before, .starter-auth-button-group p::after {
@@ -1078,7 +1077,7 @@ main {
       -ms-flex: 1;
           flex: 1;
   height: 0.015rem;
-  background: #c0c0c0;
+  background: #fff;
 }
 
 .action-form {
@@ -3264,8 +3263,9 @@ header .main-navigation-bar .content .icon:active {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  max-width: 440px;
   gap: 15px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255);
   font-size: 14px;
 }
 .center-main .starter-auth-button-group p::before, .center-main .starter-auth-button-group p::after {
@@ -3274,7 +3274,7 @@ header .main-navigation-bar .content .icon:active {
       -ms-flex: 1;
           flex: 1;
   height: 0.015rem;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgb(255, 255, 255);
 }
 .center-main .starter-auth-button-group .starter-button-container {
   width: 260px;
