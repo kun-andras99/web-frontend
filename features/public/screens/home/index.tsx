@@ -1,22 +1,33 @@
 "use client";
 
-import AppButton from "@/features/_components/button/AppButton";
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarGroup,
-    AvatarImage,
-} from "@/features/_components/ui/avatar";
+import QuickLoginForm from "@/features/(app)/navigations/body-sidebar/components/QuickLoginForm";
+import BaseDrawer from "@/features/_components/drawer/BaseDrawer";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
 
 export default function HomeScreen() {
     return (
-        <section className="center-main">
-            <div className="top">
+        <div className="flex flex-col">
+            <BaseDrawer />
+            <section className="center-main">
                 <span className="logo-text">
-                    {/* Next<span>Love</span> */}
-                    Next<span>Love</span>
+                    <h1>KAMAFTU</h1>
+                    <span>People. Places. Connections.</span>
+                </span>
+                <QuickLoginForm />
+                <div className="not-registered">
+                    <p>Do not have an account?</p>
+                    <Link href={AUTH_ROUTES.signUp}>
+                        Click here to register
+                    </Link>
+                </div>
+
+                {/* <div className="top">
+                <span className="logo-text">
+                    Next<span>Love</span> 
+                    <h1>KAMAFTU</h1>
+                    
+                    <span>Love has no labels</span>
                 </span>
                 <div className="drawer-button">
                     <div></div>
@@ -81,7 +92,6 @@ export default function HomeScreen() {
                             />
                             <AvatarFallback>IMG</AvatarFallback>
                         </Avatar>
-                        {/* <AvatarGroupCount>+3</AvatarGroupCount> */}
                     </AvatarGroup>
                     <div className="text">
                         Több mint 150.000{" "}
@@ -90,8 +100,10 @@ export default function HomeScreen() {
                 </div>
             </div>
             <div className="bg-img-1"></div>
-            <div className="bg-img-2"></div>
-        </section>
+            <div className="bg-img-2"></div> */}
+            </section>
+        </div>
+
         // <motion.section
         //     className="center-main"
         //     initial="hidden"

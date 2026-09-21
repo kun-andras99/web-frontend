@@ -1,7 +1,7 @@
 "use client";
 
+import AppButton from "@/features/_components/button/AppButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
-import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
@@ -12,7 +12,6 @@ export default function QuickLoginForm() {
     return (
         <>
             <section className="quick-login">
-                {/* <h2>Authentication</h2> */}
                 <form action={formAction} noValidate>
                     <label>
                         <input
@@ -36,7 +35,7 @@ export default function QuickLoginForm() {
                         <input
                             id="password"
                             name="password"
-                            placeholder="********"
+                            placeholder="Password"
                             type="password"
                             autoComplete="current-password"
                             required
@@ -60,29 +59,26 @@ export default function QuickLoginForm() {
                         />
                     )}
 
-                    <section className="login-options">
-                        <label>
+                    {/* <section className="login-options"> */}
+                    {/* <label>
                             <input
                                 type="checkbox"
                                 name="remember"
                                 className="checkbox"
                             />
                             Keep me logged in
-                        </label>
-                        <Link href={AUTH_ROUTES.forgotPassword}>
-                            Forgot password?
-                        </Link>
-                    </section>
-                    <SubmitButton pendingText="Logging in...">
+                        </label> */}
+                    <Link href={AUTH_ROUTES.forgotPassword}>
+                        Forgot password?
+                    </Link>
+                    {/* </section> */}
+                    <AppButton
+                        className="centered-button"
+                        pendingText="Logging in...">
                         <div className="auth-r">
                             <div className="r">Login</div>
                         </div>
-                    </SubmitButton>
-                    <Link href={AUTH_ROUTES.signUp}>
-                        <div className="auth-r">
-                            <div className="b">Click here to register</div>
-                        </div>
-                    </Link>
+                    </AppButton>
                 </form>
             </section>
         </>
