@@ -1136,7 +1136,7 @@ main {
   padding: 10px 12px;
 }
 .button-container .outline {
-  background: transparent;
+  background: var(--background);
   border-radius: 8px;
   padding: 10px 12px;
 }
@@ -1144,13 +1144,13 @@ main {
   text-align: center;
   padding: 2px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 16px;
   font-family: "Outfit", sans-serif;
   background: -webkit-gradient(linear, left top, left bottom, from(#1095ca), to(#0b6285));
   background: linear-gradient(to bottom, #1095ca, #0b6285);
   -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
           box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .right-sidebar > .love-wall-container {
@@ -3342,46 +3342,26 @@ header .main-navigation-bar .content .icon:active {
   height: 0.015rem;
   background: #7683a8;
 }
-.center-main .starter-auth-button-group .starter-button-container {
-  width: 100%;
-  text-align: center;
-  padding: 0;
-  border-radius: 50px;
-  font-size: 16px;
-  font-family: "Outfit", sans-serif;
-  font-weight: 400;
-}
-.center-main .starter-auth-button-group .starter-button-container div {
-  border: none;
-}
 .center-main .starter-auth-button-group .starter-button-container .fill {
-  border-radius: 10px;
-  padding: 12px 12px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#1095ca), to(#0b6285));
-  background: linear-gradient(to bottom, #1095ca, #0b6285);
-  outline: unset;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  gap: 15px;
-  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
-          box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
-}
-.center-main .starter-auth-button-group .starter-button-container .fill span {
-  font-size: 14px;
-}
-.center-main .starter-auth-button-group .starter-button-container .outline {
-  background: transparent;
   border-radius: 8px;
   padding: 10px 12px;
-  color: #1095ca;
-  outline: unset;
+}
+.center-main .starter-auth-button-group .starter-button-container .outline {
+  background: var(--background);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.center-main .starter-auth-button-group .starter-button-container {
+  text-align: center;
+  padding: 2px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Outfit", sans-serif;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1095ca), to(#0b6285));
+  background: linear-gradient(to bottom, #1095ca, #0b6285);
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+  font-weight: 500;
 }
 .center-main .drawer-button {
   display: -webkit-box;
@@ -3399,12 +3379,12 @@ header .main-navigation-bar .content .icon:active {
           justify-content: center;
   width: 36px;
   height: 36px;
-  gap: 9px;
+  gap: 8px;
   cursor: pointer;
 }
 .center-main .drawer-button div {
   width: 88%;
-  height: 3px;
+  height: 4px;
   background: #f0f0f0;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);

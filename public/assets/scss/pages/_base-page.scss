@@ -1445,53 +1445,68 @@
         }
 
         .starter-button-container {
-            width: 100%;
+            // width: 100%;
 
-            text-align: center;
+            // text-align: center;
 
-            padding: 0;
+            // border-radius: 10px;
 
-            border-radius: 50px;
+            // font-size: 16px;
+            // font-family: "Outfit", sans-serif;
+            // font-weight: 400;
 
-            font-size: 16px;
-            font-family: "Outfit", sans-serif;
-            font-weight: 400;
+            // background: linear-gradient(to bottom, #1095ca, #0b6285);
+            // padding: 2px;
 
-            div {
-                border: none;
-            }
+            // .fill {
+            //     border-radius: 10px;
+
+            //     padding: 10px 12px;
+
+            //     background: transparent;
+
+            //     outline: unset;
+
+            //     display: flex;
+            //     align-items: center;
+            //     justify-content: center;
+            //     gap: 15px;
+            //     box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
+
+            //     span {
+            //         font-size: 14px;
+            //     }
+            // }
+
+            // .outline {
+            //     background: var(--background);
+
+            //     border-radius: 8px;
+
+            //     padding: 10px 12px;
+
+            //     color: #1095ca;
+
+            //     outline: unset;
+            // }
 
             .fill {
-                border-radius: 10px;
-
-                padding: 12px 12px;
-
-                background: linear-gradient(to bottom, #1095ca, #0b6285);
-
-                outline: unset;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 15px;
-                box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
-
-                span {
-                    font-size: 14px;
-                }
-            }
-
-            .outline {
-                background: transparent;
-
                 border-radius: 8px;
-
                 padding: 10px 12px;
-
-                color: #1095ca;
-
-                outline: unset;
             }
+            .outline {
+                background: var(--background);
+                border-radius: 8px;
+                padding: 10px 12px;
+            }
+            text-align: center;
+            padding: 2px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: "Outfit", sans-serif;
+            background: linear-gradient(to bottom, #1095ca, #0b6285);
+            box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+            font-weight: 500;
         }
     }
 
@@ -1509,13 +1524,13 @@
         width: 36px;
         height: 36px;
 
-        gap: 9px;
+        gap: 8px;
 
         cursor: pointer;
 
         div {
             width: 88%;
-            height: 3px;
+            height: 4px;
 
             background: #f0f0f0;
 
