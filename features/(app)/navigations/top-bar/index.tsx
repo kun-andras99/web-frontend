@@ -13,7 +13,7 @@ export default function TopBar({ user }: SessionUserProps) {
     const pathname = usePathname();
 
     return (
-        <header className="app-header">
+        <header className="main-bottom-nav">
             <section className="header-containter">
                 <h2 className="logo-text">AppName.</h2>
                 <section className="flex flex-1 items-center justify-center">

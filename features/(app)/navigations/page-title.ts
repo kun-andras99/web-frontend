@@ -93,4 +93,90 @@ export const DISPLAY_PAGE_TITLE: MobileTopNavigationConfig = [
         title: "Reset password",
         url: "/reset-password",
     },
+
+    //authed
+    {
+        id: 30,
+        name: "nearby",
+        title: "Nearby users",
+        url: "/love/nearby",
+    },
+    {
+        id: 30,
+        name: "match",
+        title: "Match",
+        url: "/love/match",
+    },
+    {
+        id: 31,
+        name: "eye-candy",
+        title: "Eye candy",
+        url: "/love/eye-candy",
+    },
+    {
+        id: 32,
+        name: "right-now",
+        title: "Right now",
+        url: "/extra/right-now",
+    },
+    {
+        id: 33,
+        name: "hot-offers",
+        title: "Hot offers",
+        url: "/extra/hot-offers",
+    },
+    {
+        id: 34,
+        name: "auction",
+        title: "Auction",
+        url: "/extra/auction",
+    },
+    {
+        id: 35,
+        name: "visitors",
+        title: "Visitors",
+        url: "/cruise/visitors",
+    },
+    {
+        id: 36,
+        name: "visited",
+        title: "Visited",
+        url: "/cruise/visited",
+    },
+    {
+        id: 37,
+        name: "messages",
+        title: "Messages",
+        url: "/inbox/messages",
+    },
+    {
+        id: 38,
+        name: "notifications",
+        title: "Notifications",
+        url: "/inbox/notifications",
+    },
+    {
+        id: 39,
+        name: "shared-albums",
+        title: "Shared albums",
+        url: "/inbox/shared-albums",
+    },
+    {
+        id: 40,
+        name: "groups",
+        title: "Groups",
+        url: "/community/groups",
+    },
+    {
+        id: 41,
+        name: "city",
+        title: "City",
+        url: "/community/city",
+    },
+    {
+        id: 42,
+        name: "blogs",
+        title: "Blogs",
+        url: "/community/blogs",
+    },
 ];

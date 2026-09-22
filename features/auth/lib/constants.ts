@@ -31,21 +31,34 @@ export const GUEST_ROUTES = {
     terms: "/terms",
     cookie: "/cookie",
 } as const satisfies Record<string, string>;
+
+export const AUTHED_ROUTES = {
+    travel: "/travel",
+    map: "/map",
+
+    nearby: "/love/nearby",
+    match: "/love/match",
+    eyeCandy: "/love/eye-candy",
+
+    auction: "/extra/auction",
+    rightNow: "/extra/right-now",
+    hotOffers: "/extra/hot-offers",
+
+    groups: "/community/groups",
+    city: "/community/city",
+    blogs: "/community/blogs",
+
+    profileSettings: "/settings/profile",
+    manageUsers: "/settings/manage-users",
+    customizeSettings: "/settings/customize",
+} as const satisfies Record<string, string>;
+
 /** Bejelentkezve NEM elérhető route-ok — ha van érvényes session, elirányítjuk innen. */
 export const GUEST_ONLY_ROUTES = [
+    AUTH_ROUTES.signIn,
+    AUTH_ROUTES.signUp,
     GUEST_ROUTES.forgotPassword,
-    GUEST_ROUTES.resetPassword,
     GUEST_ROUTES.home,
-    GUEST_ROUTES.about,
-    GUEST_ROUTES.contactUs,
-    GUEST_ROUTES.ourTeam,
-    GUEST_ROUTES.jobs,
-    GUEST_ROUTES.safetyWarning,
-    GUEST_ROUTES.saferSex,
-    GUEST_ROUTES.datingSafely,
-    GUEST_ROUTES.profileLocations,
-    GUEST_ROUTES.privacy,
-    GUEST_ROUTES.terms,
     GUEST_ROUTES.cookie,
 ] as const;
 

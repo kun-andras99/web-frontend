@@ -10,7 +10,7 @@ export default function LogoutButton({
     return (
         <form action={action}>
             <button type="submit" className={className}>
-                Kijelentkezés
+                Log out
             </button>
         </form>
     );

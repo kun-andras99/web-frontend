@@ -456,7 +456,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
             {
                 id: 1,
                 name: "nearby",
-                title: "Users nearby",
+                title: "Nearby users",
                 icon: (
                     <NearbyUsersIconSVG
                         size={19}
@@ -556,6 +556,25 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
             },
             {
                 id: 2,
+                name: "notifications",
+                title: "Notifications",
+                icon: (
+                    <ManageUsersIconSVG
+                        size={19}
+                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
+                    />
+                ),
+                activeIcon: (
+                    <ManageUsersIconSVG
+                        size={19}
+                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
+                    />
+                ),
+                fromUrl: "/inbox",
+                url: "/notifications",
+            },
+            {
+                id: 3,
                 name: "shared-albums",
                 title: "Shared albums",
                 icon: (
@@ -572,25 +591,6 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
                 ),
                 fromUrl: "/inbox",
                 url: "/shared-albums",
-            },
-            {
-                id: 3,
-                name: "manage-users",
-                title: "Manage users",
-                icon: (
-                    <ManageUsersIconSVG
-                        size={19}
-                        startColor={BOTTOM_ICON_COLORS.inactive.topTabColor}
-                    />
-                ),
-                activeIcon: (
-                    <ManageUsersIconSVG
-                        size={19}
-                        startColor={BOTTOM_ICON_COLORS.active.topTabColor}
-                    />
-                ),
-                fromUrl: "/inbox",
-                url: "/manage-users",
             },
         ],
     },

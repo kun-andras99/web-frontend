@@ -2,9 +2,7 @@
 
 import type { MobileTopNavigationTab } from "@/features/(app)/navigations/navigation.types";
 import { getMobileScreenFullPath } from "@/features/(app)/navigations/navigation.utils";
-import { useMobileTopPageTitle } from "@/features/(app)/navigations/usePageTitle";
-import SideDrawer from "@/features/_components/drawer/SideDrawer";
-import { useAuth } from "@/features/auth/components/auth-provider";
+import { notificationsMock } from "@/features/notification/data/notifications.mock";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -15,8 +13,10 @@ export interface MobileTopNavProps {
 
 export default function MobileTopNav({ tabs }: MobileTopNavProps) {
     const pathname = usePathname();
-    const pageTitle = useMobileTopPageTitle("");
-    const user = useAuth();
+
+    const unreadCount = notificationsMock.filter(
+        (notification) => notification.readAt === null,
+    ).length;
 
     const active = tabs
         ?.flatMap((tab) =>
@@ -32,66 +32,56 @@ export default function MobileTopNav({ tabs }: MobileTopNavProps) {
 
     const activeTab = active?.tab;
 
-    // console.log(activeTab);
+    console.log("unreadCount:", unreadCount);
 
     return (
-        <section className="display-header-title">
-            <div className={`top-wrap`}>
-                <div className={`top-bar`}>
-                    <div className={`content`}>
-                        {user ? (
-                            <div className="user-container">
-                                <div className="image">
-                                    <SideDrawer />
-                                </div>
-                                <div>másik</div>
-                            </div>
-                        ) : null}
+        <>
+            {(activeTab?.screens?.length ?? 0) > 0 && (
+                <div className={`top-tab-links`}>
+                    <div className={`top-tab-links__container`}>
+                        {activeTab?.screens?.map((screen) => {
+                            const screenPath = `${screen.fromUrl}${screen.url}`;
 
-                        <div className="page-title">
-                            <p>{pageTitle}</p>
-                        </div>
+                            const isActive = pathname === screenPath;
+
+                            const name =
+                                screen.title.charAt(0).toUpperCase() +
+                                screen.title.slice(1);
+
+                            const isNotifications =
+                                screenPath === "/inbox/notifications";
+
+                            return (
+                                <React.Fragment key={screen.id}>
+                                    <Link
+                                        href={`${screen.fromUrl}${screen.url}`}>
+                                        <div
+                                            className={`icon ${
+                                                isActive ? "active" : ""
+                                            }`}>
+                                            <div className="container">
+                                                {isActive
+                                                    ? screen.activeIcon
+                                                    : screen.icon}
+
+                                                <span>
+                                                    {name}{" "}
+                                                    {isNotifications &&
+                                                        unreadCount > 0 && (
+                                                            <span className="notification-count">
+                                                                +{unreadCount}
+                                                            </span>
+                                                        )}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </React.Fragment>
+                            );
+                        })}
                     </div>
                 </div>
-                {(activeTab?.screens?.length ?? 0) > 0 && (
-                    <div className={`tab-list`}>
-                        <div className={`icon-container`}>
-                            {activeTab?.screens?.map((screen) => {
-                                const isActive =
-                                    pathname === screen.fromUrl + screen.url;
-                                // screen neve nagybetűvel kezdve
-                                const name =
-                                    screen.name.charAt(0).toUpperCase() +
-                                    screen.name.slice(1);
-
-                                return (
-                                    <React.Fragment key={screen.id}>
-                                        <Link
-                                            href={`${screen.fromUrl}${screen.url}`}>
-                                            <div
-                                                className={`icon ${isActive ? "active" : null}`}>
-                                                <div className="container">
-                                                    {isActive ? (
-                                                        <>
-                                                            {screen.activeIcon}
-                                                            <span>{name}</span>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            {screen.icon}
-                                                            <span>{name}</span>
-                                                        </>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </React.Fragment>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-            </div>
-        </section>
+            )}
+        </>
     );
 }

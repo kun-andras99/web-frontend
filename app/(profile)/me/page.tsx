@@ -10,6 +10,8 @@ export default async function MePage() {
 
     const profile = await getProfileByUserId(user.id);
 
+    console.log({ profile });
+
     if (!profile) {
         return null;
     }

@@ -74,7 +74,8 @@ export default function QuickLoginForm() {
                     {/* </section> */}
                     <AppButton
                         className="centered-button"
-                        pendingText="Logging in...">
+                        pendingText="Logging in..."
+                        type="submit">
                         <div className="auth-r">
                             <div className="r">Login</div>
                         </div>

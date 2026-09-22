@@ -15,7 +15,7 @@ export function SignUpScreen() {
                     }}
                 />
             )} */}
-            <div className="main-container">
+            <div className="main-container centered-main">
                 <SignUpForm />
             </div>
         </>

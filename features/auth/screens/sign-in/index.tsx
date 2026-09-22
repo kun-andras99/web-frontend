@@ -20,7 +20,7 @@ export function SignInScreen({ verified, verifyError }: SignInScreenProps) {
                     }}
                 />
             )} */}
-            <div className="main-container">
+            <div className="main-container centered-main">
                 {" "}
                 {verified && (
                     <FormMessage

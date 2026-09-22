@@ -1,19 +1,29 @@
+.page-with-bottom {
+    padding-bottom: calc(56px + 0.1rem);
+
+    .screen-view {
+        img {
+            border-radius: 5px;
+        }
+    }
+}
+
 @media (max-width: 720px) {
     .screen-view {
-        width: calc(100% - 20px);
+        width: calc(100% - 0.2rem);
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.1rem;
 
         .user-datas {
             padding: 10px;
             background: #202020;
-            border-radius: 10px;
+            border-radius: 0;
             box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
 
             img {
-                border-radius: 5px;
+                border-radius: 0;
                 box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
                 width: 100%;
                 height: auto;

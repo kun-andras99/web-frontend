@@ -1,10 +1,10 @@
 export default function Page() {
     return (
         <div className="main-container">
-            <span className="logo-text">
+            {/* <span className="logo-text">
                 <h1>KAMAFTU</h1>
                 <span>People. Places. Connections.</span>
-            </span>
+            </span> */}
             <div className="about-box">
                 <h2>Mi a ...?</h2>
                 <p></p>

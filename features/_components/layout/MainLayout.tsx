@@ -1,4 +1,7 @@
+import BottomNavigation from "@/features/(app)/navigations/bottom-navigation";
 import DisplayHeaderTitle from "@/features/(app)/navigations/header-title";
+import MobileTopNav from "@/features/(app)/navigations/mobile-top-nav";
+import { GUEST_TOP_MENU_ROUTES } from "@/features/(app)/navigations/navigation.config";
 import BaseDrawer from "@/features/_components/drawer/BaseDrawer";
 import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
 
@@ -8,15 +11,15 @@ export default function MainLayout({
 }: ChildrenProp & SessionUserProps) {
     return (
         <div className="main-layout-body">
-            {/* <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} /> */}
             <header className="header">
                 {/* leftmenu */}
                 <DisplayHeaderTitle />
                 <BaseDrawer />
             </header>
-
+            {user && <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} />}
             {/* <BodySidebar user={user} /> */}
             <main>{children}</main>
+            {user && <BottomNavigation user={user} />}
             {/* <aside className="right-sidebar">
                 <section className="love-wall-container">
                     <div className="messages">

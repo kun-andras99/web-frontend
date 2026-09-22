@@ -4,6 +4,7 @@
 
 @use "./app-base/base";
 @use "./app-base/header-title";
+@use "./app-base/page-tab-links";
 @use "./app-base/form";
 @use "./app-base/button";
 @use "./app-base/drawer";
@@ -16,6 +17,7 @@
 
 @use "./pages/base-page";
 @use "./pages/messages-page";
+@use "./pages/notifications-page";
 @use "./pages/manage-users-page";
 @use "./pages/blogs-page";
 @use "./pages/love-page";

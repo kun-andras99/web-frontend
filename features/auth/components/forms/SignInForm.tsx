@@ -3,8 +3,6 @@
 import AppButton from "@/features/_components/button/AppButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
-import { GUEST_ROUTES } from "@/features/auth/lib/constants";
-import Link from "next/link";
 
 export function SignInForm() {
     const [state, formAction] = useSignInForm();
@@ -68,13 +66,12 @@ export function SignInForm() {
                             />
                             Keep me logged in
                         </label> */}
-                    <Link href={GUEST_ROUTES.forgotPassword}>
-                        Forgot password?
-                    </Link>
                     {/* </section> */}
                     <AppButton
                         className="centered-button"
-                        pendingText="Logging in...">Login
+                        pendingText="Logging in..."
+                        type="submit">
+                        Login
                     </AppButton>
                 </form>
             </section>
