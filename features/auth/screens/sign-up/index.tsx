@@ -2,8 +2,6 @@
 
 import { useBackButton } from "@/features/_components/back-button";
 import { SignUpForm } from "@/features/auth/components/forms/SignUpFrom";
-import { AUTH_ROUTES } from "@/features/auth/lib/constants";
-import Link from "next/link";
 
 export function SignUpScreen() {
     const { shouldShow } = useBackButton();
@@ -19,7 +17,6 @@ export function SignUpScreen() {
             )} */}
             <div className="auth-view">
                 <SignUpForm />
-                <Link href={AUTH_ROUTES.home}>Back to home</Link>
             </div>
         </>
     );

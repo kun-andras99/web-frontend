@@ -17,31 +17,34 @@ export function ForgotPasswordForm() {
     }
 
     return (
-        <form action={formAction} noValidate className="action-form">
-            <div className="input-group">
-                <input
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                />
-                {state.status === "error" && state.fieldErrors?.email && (
-                    <FormMessage
-                        status="error"
-                        message={state.fieldErrors.email[0]}
+        <section className="quick-login">
+            <form action={formAction} noValidate>
+                <label>
+                    <input
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        type="email"
+                        autoComplete="email"
+                        required
                     />
+                    {state.status === "error" && state.fieldErrors?.email && (
+                        <FormMessage
+                            status="error"
+                            message={state.fieldErrors.email[0]}
+                        />
+                    )}
+                </label>
+                {state.status === "error" && !state.fieldErrors && (
+                    <FormMessage status="error" message={state.message} />
                 )}
-            </div>
-
-            {state.status === "error" && !state.fieldErrors && (
-                <FormMessage status="error" message={state.message} />
-            )}
-
-            <AppButton type="submit" pendingText="Requesting...">
-                Request password reset link
-            </AppButton>
-        </form>
+                <AppButton
+                    className="centered-button"
+                    type="submit"
+                    pendingText="Requesting...">
+                    Request password reset link
+                </AppButton>
+            </form>
+        </section>
     );
 }

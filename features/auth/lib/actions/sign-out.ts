@@ -4,7 +4,7 @@ import {
     findRefreshTokenByRawValue,
     revokeRefreshTokenById,
 } from "@/features/auth/data/refresh-token";
-import { AUTH_ROUTES } from "@/features/auth/lib/constants";
+import { GUEST_ROUTES } from "@/features/auth/lib/constants";
 import {
     clearAuthCookies,
     getRefreshTokenFromCookies,
@@ -22,5 +22,5 @@ export async function signOutAction(): Promise<void> {
     }
 
     await clearAuthCookies();
-    redirect(AUTH_ROUTES.home);
+    redirect(GUEST_ROUTES.home);
 }

@@ -2,7 +2,7 @@
 
 import UserProfileBox from "@/features/(app)/navigations/body-sidebar/components/UserProfileBox";
 import { useAuth } from "@/features/auth/components/auth-provider";
-import { AUTH_ROUTES } from "@/features/auth/lib/constants";
+import { GUEST_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
 
 export default function SidebarMainMenus() {
@@ -18,19 +18,19 @@ export default function SidebarMainMenus() {
                         <nav aria-label="Sidebar navigation">
                             <ul>
                                 <li>
-                                    <Link href={AUTH_ROUTES.home}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>Explore users
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={AUTH_ROUTES.about}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>Eye Candy
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={AUTH_ROUTES.contactUs}>
+                                    <Link href={GUEST_ROUTES.contactUs}>
                                         {" "}
                                         <span>»</span>Find a match
                                     </Link>
@@ -43,13 +43,13 @@ export default function SidebarMainMenus() {
                         <nav aria-label="Sidebar navigation">
                             <ul>
                                 <li>
-                                    <Link href={AUTH_ROUTES.home}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>Visitors
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={AUTH_ROUTES.about}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>Visited
                                     </Link>
@@ -62,19 +62,19 @@ export default function SidebarMainMenus() {
                         <nav aria-label="Sidebar navigation">
                             <ul>
                                 <li>
-                                    <Link href={AUTH_ROUTES.home}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>Groups
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={AUTH_ROUTES.about}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>Blogs
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={AUTH_ROUTES.about}>
+                                    <Link href={GUEST_ROUTES.home}>
                                         {" "}
                                         <span>»</span>City
                                     </Link>
@@ -89,31 +89,31 @@ export default function SidebarMainMenus() {
                     <nav aria-label="Sidebar navigation">
                         <ul>
                             <li>
-                                <Link href={AUTH_ROUTES.home}>
+                                <Link href={GUEST_ROUTES.home}>
                                     {" "}
                                     <span>»</span>Home
                                 </Link>
                             </li>
                             <li>
-                                <Link href={AUTH_ROUTES.about}>
+                                <Link href={GUEST_ROUTES.home}>
                                     {" "}
                                     <span>»</span>About
                                 </Link>
                             </li>
                             <li>
-                                <Link href={AUTH_ROUTES.contactUs}>
+                                <Link href={GUEST_ROUTES.contactUs}>
                                     {" "}
                                     <span>»</span>Contact us
                                 </Link>
                             </li>
                             <li>
-                                <Link href={AUTH_ROUTES.ourTeam}>
+                                <Link href={GUEST_ROUTES.ourTeam}>
                                     {" "}
                                     <span>»</span>Our team
                                 </Link>
                             </li>
                             <li>
-                                <Link href={AUTH_ROUTES.safetyWarning}>
+                                <Link href={GUEST_ROUTES.safetyWarning}>
                                     {" "}
                                     <span>»</span>Safety warning
                                 </Link>

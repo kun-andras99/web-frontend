@@ -1002,6 +1002,7 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-height: 100dvh;
   gap: 50px;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -3183,18 +3184,21 @@ button {
 }
 
 .centered-button {
-  width: 100%;
-  max-width: 160px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 120px;
+  max-width: 240px;
   margin: 0 auto;
   text-align: center;
 }
 
 button.top {
-  background: var(--background);
+  all: unset;
   position: fixed;
-  padding: 15px 15px 10px 15px;
-  top: 0;
-  left: 0;
+  z-index: 10;
+  top: 20;
+  right: 20;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

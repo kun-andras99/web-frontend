@@ -3,7 +3,7 @@
 import AppButton from "@/features/_components/button/AppButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
-import { AUTH_ROUTES } from "@/features/auth/lib/constants";
+import { GUEST_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
 
 export default function QuickLoginForm() {
@@ -68,7 +68,7 @@ export default function QuickLoginForm() {
                             />
                             Keep me logged in
                         </label> */}
-                    <Link href={AUTH_ROUTES.forgotPassword}>
+                    <Link href={GUEST_ROUTES.forgotPassword}>
                         Forgot password?
                     </Link>
                     {/* </section> */}

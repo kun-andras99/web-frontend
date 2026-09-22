@@ -1,7 +1,7 @@
 "use client";
 
+import AppButton from "@/features/_components/button/AppButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
-import { SubmitButton } from "@/features/auth/components/submit-button";
 import { useResetPasswordForm } from "@/features/auth/hooks/use-reset-password-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import { useRouter } from "next/navigation";
@@ -28,47 +28,52 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     }
 
     return (
-        <form action={formAction} noValidate>
-            <div>
-                <label htmlFor="password">Új jelszó</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                />
-                {state.status === "error" && state.fieldErrors?.password && (
-                    <FormMessage
-                        status="error"
-                        message={state.fieldErrors.password[0]}
+        <section className="quick-login">
+            <form action={formAction} noValidate>
+                <div>
+                    <label htmlFor="password">Új jelszó</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        autoComplete="new-password"
+                        required
                     />
+                    {state.status === "error" &&
+                        state.fieldErrors?.password && (
+                            <FormMessage
+                                status="error"
+                                message={state.fieldErrors.password[0]}
+                            />
+                        )}
+                </div>
+
+                <div>
+                    <label htmlFor="confirmPassword">
+                        Új jelszó megerősítése
+                    </label>
+                    <input
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        type="password"
+                        autoComplete="new-password"
+                        required
+                    />
+                    {state.status === "error" &&
+                        state.fieldErrors?.confirmPassword && (
+                            <FormMessage
+                                status="error"
+                                message={state.fieldErrors.confirmPassword[0]}
+                            />
+                        )}
+                </div>
+
+                {state.status === "error" && !state.fieldErrors && (
+                    <FormMessage status="error" message={state.message} />
                 )}
-            </div>
 
-            <div>
-                <label htmlFor="confirmPassword">Új jelszó megerősítése</label>
-                <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                />
-                {state.status === "error" &&
-                    state.fieldErrors?.confirmPassword && (
-                        <FormMessage
-                            status="error"
-                            message={state.fieldErrors.confirmPassword[0]}
-                        />
-                    )}
-            </div>
-
-            {state.status === "error" && !state.fieldErrors && (
-                <FormMessage status="error" message={state.message} />
-            )}
-
-            <SubmitButton pendingText="Mentés…">Jelszó módosítása</SubmitButton>
-        </form>
+                <AppButton pendingText="Mentés…">Jelszó módosítása</AppButton>
+            </form>
+        </section>
     );
 }

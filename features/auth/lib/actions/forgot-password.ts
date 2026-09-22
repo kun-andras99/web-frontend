@@ -2,7 +2,7 @@
 
 import { getUserByEmail } from "@/features/auth/data/user";
 import { createPasswordResetToken } from "@/features/auth/data/verification-token";
-import { AUTH_ROUTES } from "@/features/auth/lib/constants";
+import { GUEST_ROUTES } from "@/features/auth/lib/constants";
 import {
     passwordResetEmailTemplate,
     sendEmail,
@@ -38,7 +38,7 @@ export async function forgotPasswordAction(
     // Mindig ugyanazt a sikerüzenetet adjuk vissza — enumerálás-védelem.
     if (user) {
         const rawToken = await createPasswordResetToken(user.id as UserId);
-        const resetLink = `${process.env.NEXT_PUBLIC_APP_URL}${AUTH_ROUTES.resetPassword}?token=${rawToken}`;
+        const resetLink = `${process.env.NEXT_PUBLIC_APP_URL}${GUEST_ROUTES.resetPassword}?token=${rawToken}`;
         await sendEmail({
             to: user.email,
             subject: "Jelszó visszaállítása",
