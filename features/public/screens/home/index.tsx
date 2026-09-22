@@ -1,14 +1,12 @@
 "use client";
 
 import QuickLoginForm from "@/features/(app)/navigations/body-sidebar/components/QuickLoginForm";
-import BaseDrawer from "@/features/_components/drawer/BaseDrawer";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import Link from "next/link";
 
 export default function HomeScreen() {
     return (
         <div className="flex flex-col">
-            <BaseDrawer />
             <section className="center-main">
                 <span className="logo-text">
                     <h1>KAMAFTU</h1>

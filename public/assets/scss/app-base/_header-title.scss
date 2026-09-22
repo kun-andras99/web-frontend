@@ -1,0 +1,318 @@
+.main-layout-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+
+    header {
+        display: flex;
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    header.header {
+        width: 100%;
+        background: var(--background);
+        height: 56px;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding: 0 10px;
+
+        .display-header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: max-content;
+            h2 {
+                color: #fff;
+                font-weight: 800;
+                font-family: "Outfit", sans-serif;
+                font-size: 24px;
+            }
+        }
+
+        .main-drawer-button {
+            all: unset;
+            display: flex;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+
+            .drawer-button {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                gap: 7px;
+                cursor: pointer;
+
+                div {
+                    width: 32px;
+                    height: 4px;
+                    background: #f0f0f0;
+                    border-radius: 5px;
+                    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+    }
+
+    main {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+        .main-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            .logo-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin-bottom: 50px;
+
+                h1 {
+                    font-size: 65;
+                    height: 80px;
+                    font-weight: 800;
+                    font-family: "Outfit", sans-serif;
+                    color: #d6d318;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    text-align: center;
+                }
+
+                span {
+                    color: #fff;
+                    font-size: 13px;
+                    font-weight: 400;
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-family: "Plus Jakarta Sans", sans-serif;
+                    letter-spacing: 0.224rem;
+                }
+            }
+
+            .not-registered {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px;
+                gap: 15px;
+
+                p {
+                    display: flex;
+                    align-items: center;
+                    width: calc(100% - 30px);
+                    max-width: 400px;
+                    gap: 15px;
+                    font-weight: 400;
+                    color: #e0e0e0;
+                    font-size: 13px;
+                    text-transform: uppercase;
+
+                    &::before,
+                    &::after {
+                        content: "";
+                        flex: 1;
+                        height: 0.015rem;
+                        // background: #7683a8;
+                        background: #e0e0e0;
+                    }
+                }
+
+                a {
+                    color: #0b92c7;
+                    font-size: 16px;
+                    font-weight: 800;
+                    text-decoration: underline;
+                }
+            }
+
+            .more-than {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+
+                .text {
+                    font-size: 13px;
+                    text-align: center;
+                    font-weight: 300;
+                    color: #fff;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    span {
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            h2 {
+                font-size: 20px;
+                font-weight: 800;
+                color: #808080;
+            }
+
+            .thing {
+                width: calc(100% - 20px);
+                margin: 0 auto;
+                font-size: 12px;
+                max-width: 390px;
+                text-align: center;
+                line-height: 2;
+                padding: 5px;
+                background: #303030;
+                text-shadow: 0 0 2px rgb(0, 0, 0, 0.25);
+            }
+        }
+    }
+}
+
+.about-box {
+    line-height: 2;
+    p {
+        font-size: 15px;
+        padding: 0 20px;
+        line-height: 2;
+    }
+    h2 {
+        padding-left: 10px;
+    }
+    h3 {
+        padding-left: 15px;
+        font-size: 17px;
+        font-weight: 600;
+        color: #0b92c7;
+    }
+}
+
+.love-wall-fall {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+    background: #080808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__symbols {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+    &__symbol {
+        position: absolute;
+        bottom: -25px;
+        display: block;
+        animation-name: love-wall-symbol;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        will-change: transform, bottom;
+    }
+    &__symbol svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    &__gradient {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 35px;
+        background: linear-gradient(to top, #101011 0%, transparent 100%);
+    }
+    &__content {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        bottom: 25px;
+    }
+
+    &__logo-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        h2 {
+            font-size: 42px;
+            font-weight: 800;
+            font-family: "Outfit", sans-serif;
+            background: linear-gradient(
+                40deg,
+                #1eb1eb 0%,
+                #4da6ff 15%,
+                #55c7d9 30%,
+                #ff5fa2 45%,
+                #d77cff 60%,
+                #d77cff 75%,
+                #d77cff 100%
+            );
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            height: 48px;
+            text-align: center;
+
+            span {
+                font-size: 42px;
+                font-weight: 800;
+                font-family: "Outfit", sans-serif;
+                background: #fff;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        span.slogan {
+            padding: 0;
+            margin: 0;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 400;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            text-shadow:
+                0 0 5px rgba(0, 0, 0, 0.75),
+                0 0 5px rgba(0, 0, 0, 0.75),
+                0 0 5px rgba(0, 0, 0, 0.75);
+            letter-spacing: 0.2435rem;
+        }
+    }
+}
+@keyframes love-wall-symbol {
+    0% {
+        bottom: -20px;
+        transform: translateX(0) rotate(var(--rotation));
+    }
+    25% {
+        transform: translateX(8px) rotate(calc(var(--rotation) + 8deg));
+    }
+    50% {
+        transform: translateX(-6px) rotate(calc(var(--rotation) - 15deg));
+    }
+    75% {
+        transform: translateX(7px) rotate(calc(var(--rotation) + 15deg));
+    }
+    100% {
+        bottom: calc(100% + 20px);
+        transform: translateX(-5px) rotate(var(--rotation));
+    }
+}

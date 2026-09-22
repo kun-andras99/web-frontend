@@ -1270,52 +1270,53 @@ button {
     text-align: center;
 }
 
-button.top {
-    all: unset;
-    position: fixed;
-    z-index: 10;
-    top: 20;
-    right: 20;
-    display: flex;
-    width: 36px;
-    height: 36px;
-    align-items: center;
-    justify-content: space-between;
+// button.top {
+//     all: unset;
+//     position: fixed;
+//     z-index: 10;
+//     top: 20;
+//     right: 20;
+//     display: flex;
+//     width: 36px;
+//     height: 36px;
+//     align-items: center;
+//     justify-content: space-between;
 
-    .drawer-button {
-        // position: absolute;
+//     .drawer-button {
+//         // position: absolute;
 
-        // top: 25px;
-        // right: 25px;
+//         // top: 25px;
+//         // right: 25px;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
 
-        width: 36px;
-        height: 36px;
+//         width: 36px;
+//         height: 36px;
 
-        gap: 8px;
+//         gap: 8px;
 
-        cursor: pointer;
+//         cursor: pointer;
 
-        div {
-            width: 88%;
-            height: 4px;
+//         div {
+//             width: 88%;
+//             height: 4px;
 
-            background: #f0f0f0;
+//             background: #f0f0f0;
 
-            border-radius: 5px;
+//             border-radius: 5px;
 
-            box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
-        }
-    }
-}
+//             box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25);
+//         }
+//     }
+// }
 
 .center-main {
     width: 100%;
-    min-height: calc(100dvh - 88px);
+    min-height: calc(100dvh - 76px);
+    margin-top: 76px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1329,9 +1330,10 @@ button.top {
         margin-bottom: 50px;
         h1 {
             font-size: 65;
+
             font-weight: 800;
             font-family: "Outfit", sans-serif;
-            color: #d6d318;
+
             margin-bottom: 0;
             padding-bottom: 0;
             text-align: center;

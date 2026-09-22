@@ -1,3 +1,3 @@
 export default function Page() {
-    return <div className="main">Profile locations</div>;
+    return <div className="main-container">Profile locations</div>;
 }

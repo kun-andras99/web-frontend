@@ -19,6 +19,7 @@ export const GUEST_ROUTES = {
     resetPassword: "/reset-password",
     home: "/",
     about: "/about",
+    loveWall: "/love-wall",
     contactUs: "/contact-us",
     ourTeam: "/our-team",
     jobs: "/jobs",

@@ -2,6 +2,7 @@
 
 import { GUEST_TOP_MENU_ROUTES } from "@/features/(app)/navigations/navigation.config";
 import { getMobilePageTitle } from "@/features/(app)/navigations/navigation.utils";
+import { DISPLAY_PAGE_TITLE } from "@/features/(app)/navigations/page-title";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
@@ -25,8 +26,7 @@ export function useMobileTopPageTitle(fallbackTitle = ""): string {
     const pathname = usePathname();
 
     return useMemo(
-        () =>
-            getMobilePageTitle(pathname, GUEST_TOP_MENU_ROUTES, fallbackTitle),
+        () => getMobilePageTitle(pathname, DISPLAY_PAGE_TITLE, fallbackTitle),
         [pathname, fallbackTitle],
     );
 }

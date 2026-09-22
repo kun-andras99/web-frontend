@@ -4,7 +4,7 @@ import {
     appMenus,
     publicMenus,
 } from "@/features/(app)/navigations/navigation.config";
-import SideDrawer from "@/features/_components/drawer/SideDrawer";
+import BaseDrawer from "@/features/_components/drawer/BaseDrawer";
 import { SessionUserProps } from "@/lib/utils/props";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -65,15 +65,7 @@ export default function TopBar({ user }: SessionUserProps) {
                         </div>
                     </section>
                 </section>
-                {user ? (
-                    <>
-                        <section className="user-options">
-                            <SideDrawer />
-                        </section>
-                    </>
-                ) : (
-                    <section className="nothing"></section>
-                )}
+                <BaseDrawer />
             </section>
         </header>
     );

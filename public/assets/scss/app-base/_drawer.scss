@@ -8,28 +8,22 @@
     // border-left: 0.05rem solid #303030;
 }
 
-.quest-drawer-content {
+.quest-drawer {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 15px;
+    padding-bottom: 25px;
     overflow: auto;
 
-    div {
+    &__content {
+        padding-left: 15px;
         display: flex;
         flex-direction: column;
         gap: 10px;
-    }
 
-    h2 {
-        font-size: 20px;
-        font-weight: 800;
-        color: #808080;
-    }
-
-    a {
-        color: #e0e0e0;
+        a {
+            padding-left: 10px;
+            color: #e0e0e0;
+        }
     }
 }

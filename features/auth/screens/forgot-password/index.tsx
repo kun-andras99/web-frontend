@@ -14,7 +14,7 @@ export function ForgotPasswordScreen() {
                     }}
                 />
             )} */}
-            <div className="auth-view">
+            <div className="main-container">
                 <ForgotPasswordForm />
             </div>
         </>

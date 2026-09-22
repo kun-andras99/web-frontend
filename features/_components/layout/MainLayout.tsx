@@ -1,17 +1,23 @@
-import BodySidebar from "@/features/(app)/navigations/body-sidebar";
-import TopBar from "@/features/(app)/navigations/top-bar";
+import DisplayHeaderTitle from "@/features/(app)/navigations/header-title";
+import BaseDrawer from "@/features/_components/drawer/BaseDrawer";
 import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
+
 export default function MainLayout({
     children,
     user,
 }: ChildrenProp & SessionUserProps) {
     return (
-        <div className="app-body">
+        <div className="main-layout-body">
             {/* <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} /> */}
-            <TopBar user={user} />
-            <BodySidebar user={user} />
+            <header className="header">
+                {/* leftmenu */}
+                <DisplayHeaderTitle />
+                <BaseDrawer />
+            </header>
+
+            {/* <BodySidebar user={user} /> */}
             <main>{children}</main>
-            <aside className="right-sidebar">
+            {/* <aside className="right-sidebar">
                 <section className="love-wall-container">
                     <div className="messages">
                         {Array.from({ length: 20 }, (_, index) => (
@@ -19,7 +25,6 @@ export default function MainLayout({
                                 <span>kep</span>
 
                                 <div className="wrapper">
-                                    {/* ikonokkal megjelenitve */}
                                     <div className="data">
                                         <span>nev</span>
                                         <span>ido</span>
@@ -37,7 +42,7 @@ export default function MainLayout({
                         <button type="submit">S</button>
                     </div>
                 </section>
-            </aside>
+            </aside> */}
         </div>
     );
 }

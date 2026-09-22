@@ -35,7 +35,7 @@ export default function MobileTopNav({ tabs }: MobileTopNavProps) {
     // console.log(activeTab);
 
     return (
-        <section className="mobile-top-header">
+        <section className="display-header-title">
             <div className={`top-wrap`}>
                 <div className={`top-bar`}>
                     <div className={`content`}>
