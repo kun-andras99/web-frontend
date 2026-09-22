@@ -18,7 +18,14 @@ export const AUTH_ROUTES = {
     about: "/about",
     contactUs: "/contact-us",
     ourTeam: "/our-team",
+    jobs: "/jobs",
     safetyWarning: "/safety-warning",
+    saferSex: "/safer-sex",
+    datingSafely: "/dating-safely",
+    profileLocations: "/profile-locations",
+    privacy: "/privacy",
+    terms: "/terms",
+    cookie: "/cookie",
 } as const satisfies Record<string, string>;
 
 /** Bejelentkezve NEM elérhető route-ok — ha van érvényes session, elirányítjuk innen. */

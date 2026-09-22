@@ -3191,13 +3191,15 @@ button {
 
 button.top {
   background: var(--background);
-  position: sticky;
+  position: fixed;
   padding: 15px 15px 10px 15px;
   top: 0;
   left: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 36px;
+  height: 36px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

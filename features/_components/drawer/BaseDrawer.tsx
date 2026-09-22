@@ -27,9 +27,9 @@ export default function BaseDrawer() {
             <DrawerContent className="my-drawer right-drawer">
                 <div className="quest-drawer-content">
                     <div>
-                        <Link href={`/`}>Home</Link>
-                        <Link href={`/`}>About</Link>
-                        <Link href={`/`}>Contact</Link>
+                        <Link href={AUTH_ROUTES.home}>Home</Link>
+                        <Link href={AUTH_ROUTES.about}>About</Link>
+                        <Link href={AUTH_ROUTES.contactUs}>Contact</Link>
                     </div>
                     <div>
                         <h2>Authentication</h2>
@@ -44,22 +44,24 @@ export default function BaseDrawer() {
                     </div>
                     <div>
                         <h2>Our team</h2>
-                        <Link href={`/team`}>Team</Link>
-                        <Link href={`/jobs`}>Jobs</Link>
+                        <Link href={AUTH_ROUTES.ourTeam}>Team</Link>
+                        <Link href={AUTH_ROUTES.jobs}>Jobs</Link>
                     </div>
                     <div>
                         <h2>Safety warning</h2>
-                        <Link href={`/dating-safely`}>Dating safely</Link>
-                        <Link href={`/profile-locations`}>
+                        <Link href={AUTH_ROUTES.datingSafely}>
+                            Dating safely
+                        </Link>
+                        <Link href={AUTH_ROUTES.profileLocations}>
                             Profile locations
                         </Link>
-                        <Link href={`/safer-sex`}>Safer sex</Link>
+                        <Link href={AUTH_ROUTES.saferSex}>Safer sex</Link>
                     </div>
                     <div>
                         <h2>Briefing</h2>
-                        <Link href={`/dating-safely`}>Privacy</Link>
-                        <Link href={`/profile-locations`}>Terms</Link>
-                        <Link href={`/safer-sex`}>Cookie</Link>
+                        <Link href={AUTH_ROUTES.privacy}>Privacy</Link>
+                        <Link href={AUTH_ROUTES.terms}>Terms</Link>
+                        <Link href={AUTH_ROUTES.cookie}>Cookie</Link>
                     </div>
                 </div>
             </DrawerContent>

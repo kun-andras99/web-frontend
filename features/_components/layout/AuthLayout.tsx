@@ -1,6 +1,5 @@
 import BodySidebar from "@/features/(app)/navigations/body-sidebar";
-import MobileTopNav from "@/features/(app)/navigations/mobile-top-nav";
-import { GUEST_TOP_MENU_ROUTES } from "@/features/(app)/navigations/navigation.config";
+import BaseDrawer from "@/features/_components/drawer/BaseDrawer";
 import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
 
 export default function AuthLayout({
@@ -9,7 +8,8 @@ export default function AuthLayout({
 }: ChildrenProp & SessionUserProps) {
     return (
         <div className="app-body">
-            <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} />
+            {/* <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} /> */}
+            <BaseDrawer />
             <BodySidebar user={user} />
             <main>{children}</main>
             <aside className="right-sidebar">psst...</aside>
