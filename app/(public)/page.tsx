@@ -8,10 +8,8 @@ export default function HomePage() {
     return (
         <div className="main-container">
             <span className="logo-text">
-                {/* <h1>KAMAFTU</h1>
-                <span>People. Places. Connections.</span> */}
-                <h1>SITENAME</h1>
-                <span>Slogan.</span>
+                <h1>KAMAFTU</h1>
+                <span>People. Places. Connections.</span>
             </span>
             <QuickLoginForm />
             <div className="not-registered">
