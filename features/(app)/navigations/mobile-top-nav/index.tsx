@@ -32,7 +32,7 @@ export default function MobileTopNav({ tabs }: MobileTopNavProps) {
 
     const activeTab = active?.tab;
 
-    console.log("unreadCount:", unreadCount);
+    // console.log("unreadCount:", unreadCount);
 
     return (
         <>

@@ -4,7 +4,6 @@ import {
     markRefreshTokenReplaced,
     revokeAllRefreshTokensForUser,
 } from "@/features/auth/data/refresh-token";
-import { getUserById } from "@/features/auth/data/user";
 import {
     ACCESS_TOKEN_COOKIE,
     ACCESS_TOKEN_TTL_SECONDS,
@@ -13,6 +12,7 @@ import {
 } from "@/features/auth/lib/constants";
 import { signAccessToken } from "@/features/auth/lib/jwt";
 import type { UserId } from "@/features/auth/types/auth-index";
+import { getUserById } from "@/features/user/repositories/user";
 import { NextRequest, NextResponse } from "next/server";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -89,7 +89,6 @@ export async function POST(request: NextRequest) {
 
     const accessToken = await signAccessToken({
         sub: user.id as UserId,
-        email: user.email,
     });
 
     const response = NextResponse.json({ success: true });

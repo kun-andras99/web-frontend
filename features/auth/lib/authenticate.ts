@@ -4,12 +4,12 @@ import type {
     RefreshToken,
     SignInFields,
 } from "@/features/auth/types/auth-index";
+import { getUserByIdentifier } from "@/features/user/repositories/user";
 import type { ClientMeta } from "./client-meta";
 import { AUTH_ROUTES } from "./constants";
 import { createSessionTokens } from "./create-session";
 import { verifyPassword } from "./password";
 import { signInSchema } from "./validation";
-import { getUserByIdentifier } from "@/features/auth/data/user";
 
 const GENERIC_ERROR = "Hibás email cím, felhasználónév vagy jelszó.";
 

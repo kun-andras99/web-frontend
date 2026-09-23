@@ -6,7 +6,7 @@ export default function HotOffersScreen() {
     return (
         <BottomPageWrapper>
             <div className="">
-                <h2 className="small-title">Hot offers</h2>
+                <h2>Hot offers</h2>
             </div>
         </BottomPageWrapper>
     );

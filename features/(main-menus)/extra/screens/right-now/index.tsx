@@ -6,7 +6,7 @@ export default function RightNowScreen() {
     return (
         <BottomPageWrapper>
             <div className="">
-                <h2 className="small-title">Right now</h2>
+                <h2>Right now</h2>
             </div>
         </BottomPageWrapper>
     );

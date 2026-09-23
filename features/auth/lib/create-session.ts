@@ -15,7 +15,6 @@ export async function createSessionTokens(
     });
     const accessToken = await signAccessToken({
         sub: userId,
-        email: user.email,
     });
 
     return { accessToken, refreshToken };

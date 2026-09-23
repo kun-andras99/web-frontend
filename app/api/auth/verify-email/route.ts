@@ -1,10 +1,10 @@
-import { markEmailAsVerified } from "@/features/auth/data/user";
 import {
     deleteVerificationTokenById,
     findValidVerificationToken,
 } from "@/features/auth/data/verification-token";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
 import type { UserId } from "@/features/auth/types/auth-index";
+import { markEmailAsVerified } from "@/features/user/repositories/user";
 import { NextRequest, NextResponse } from "next/server";
 
 // Node runtime (alapértelmezett Route Handlereknél) — a Prisma Client itt fut, nem Edge-en.

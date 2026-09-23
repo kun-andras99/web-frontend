@@ -6,7 +6,7 @@ export default function EyeCandyScreen() {
     return (
         <BottomPageWrapper>
             <div className="">
-                <h2 className="small-title">Eye candy</h2>
+                <h2>Eye candy</h2>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Voluptates corrupti molestiae tempora sit quasi! Laudantium

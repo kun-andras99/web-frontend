@@ -4,7 +4,6 @@ import {
     markRefreshTokenReplaced,
     revokeAllRefreshTokensForUser,
 } from "@/features/auth/data/refresh-token";
-import { getUserById } from "@/features/auth/data/user";
 import {
     ACCESS_TOKEN_COOKIE,
     ACCESS_TOKEN_TTL_SECONDS,
@@ -17,19 +16,33 @@ import { signAccessToken, verifyAccessToken } from "@/features/auth/lib/jwt";
 import type {
     AccessToken,
     RefreshToken,
+    SessionUser,
     UserId,
 } from "@/features/auth/types/auth-index";
+import { getUserById } from "@/features/user/repositories/user";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { UserRole } from "./prisma/generated/prisma";
 
-const PROTECTED_PREFIXES = [
-    "/love",
-    "/extra",
-    "/inbox",
-    "/cruise",
-    "/community",
-]; // bővítsd a saját védett route-jaiddal
+const ROUTE_PERMISSIONS = {
+    "/love": ["USER", "MODERATOR", "ADMIN"],
+    "/extra": ["USER", "MODERATOR", "ADMIN"],
+    "/inbox": ["USER", "MODERATOR", "ADMIN"],
+    "/cruise": ["USER", "MODERATOR", "ADMIN"],
+    "/community": ["USER", "MODERATOR", "ADMIN"],
 
+    "/me": ["USER", "MODERATOR", "ADMIN"],
+    "/map": ["USER", "MODERATOR", "ADMIN"],
+    "/travel": ["USER", "MODERATOR", "ADMIN"],
+    "/blog": ["USER", "MODERATOR", "ADMIN"],
+    "/group": ["USER", "MODERATOR", "ADMIN"],
+    "/settings": ["USER", "MODERATOR", "ADMIN"],
+
+    "/moderation": ["MODERATOR", "ADMIN"],
+    "/dashboard": ["ADMIN"],
+} as const satisfies Record<string, readonly UserRole[]>;
+
+// cookie
 const isProduction = process.env.NODE_ENV === "production";
 const cookieOptions = {
     httpOnly: true,
@@ -38,10 +51,14 @@ const cookieOptions = {
     path: "/",
 };
 
+interface RotatedTokens {
+    accesToken: AccessToken;
+    refreshToken: RefreshToken;
+}
 interface SessionResult {
     authenticated: boolean;
-    /** Csak akkor van kitöltve, ha az access token lejárt, de sikerült refresh tokennel frissíteni. */
-    rotatedTokens?: { accessToken: AccessToken; refreshToken: RefreshToken };
+    user?: SessionUser;
+    rotatedTokens?: RotatedTokens;
 }
 
 /**
@@ -51,58 +68,205 @@ interface SessionResult {
  * Route Handlert" kerülőútra. A rotáció/reuse-detection logika egy az
  * egyben ugyanaz, mint korábban a /api/auth/refresh route handlerben volt.
  */
-async function resolveSession(request: NextRequest): Promise<SessionResult> {
-    const accessToken = request.cookies.get(ACCESS_TOKEN_COOKIE)?.value;
-    const payload = accessToken ? await verifyAccessToken(accessToken) : null;
+/**
+ * ---------------------------------------------------------------------------
+ * ROUTE PERMISSION HELPERS
+ * ---------------------------------------------------------------------------
+ */
 
-    if (payload) {
-        return { authenticated: true };
+/**
+ * Megkeresi az adott pathname-hez tartozó permission szabályt.
+ *
+ * A leghosszabb egyező prefix nyer.
+ *
+ * Például:
+ *
+ * /community
+ * /community/groups
+ * /community/groups/123
+ *
+ * mind a "/community" szabály alá esnek,
+ * hacsak később nincs egy konkrétabb szabály.
+ */
+function getRoutePermissions(pathname: string): readonly UserRole[] | null {
+    let matchedRoute: string | null = null;
+
+    for (const route of Object.keys(ROUTE_PERMISSIONS)) {
+        const matches = pathname === route || pathname.startsWith(`${route}/`);
+
+        if (!matches) {
+            continue;
+        }
+
+        if (matchedRoute === null || route.length > matchedRoute.length) {
+            matchedRoute = route;
+        }
+    }
+
+    if (!matchedRoute) {
+        return null;
+    }
+
+    return ROUTE_PERMISSIONS[matchedRoute as keyof typeof ROUTE_PERMISSIONS];
+}
+
+/**
+ * Megnézi, hogy az adott user role-ja hozzáférhet-e
+ * az adott route-hoz.
+ */
+function hasRoutePermission(pathname: string, role: UserRole): boolean {
+    const permissions = getRoutePermissions(pathname);
+
+    if (!permissions) {
+        return false;
+    }
+
+    return permissions.includes(role);
+}
+
+/**
+ * ---------------------------------------------------------------------------
+ * ROUTE HELPERS
+ * ---------------------------------------------------------------------------
+ */
+
+function isGuestOnlyRoute(pathname: string): boolean {
+    return (GUEST_ONLY_ROUTES as readonly string[]).some(
+        (route) => pathname === route || pathname.startsWith(`${route}/`),
+    );
+}
+
+function isProtectedRoute(pathname: string): boolean {
+    return getRoutePermissions(pathname) !== null;
+}
+
+function getClientIp(request: NextRequest): string | null {
+    const forwardedFor = request.headers.get("x-forwarded-for");
+
+    if (forwardedFor) {
+        return forwardedFor.split(",")[0]?.trim() ?? null;
+    }
+
+    return request.headers.get("x-real-ip") ?? null;
+}
+
+/**
+ * ---------------------------------------------------------------------------
+ * SESSION RESOLUTION
+ * ---------------------------------------------------------------------------
+ *
+ * A session feloldásának sorrendje:
+ *
+ * 1. Access token keresése
+ * 2. Access token cryptographic verification
+ * 3. User lekérése DB-ből
+ * 4. Ha access token nem használható:
+ *      → refresh token
+ * 5. Refresh token DB ellenőrzése
+ * 6. Reuse detection
+ * 7. Lejárat ellenőrzése
+ * 8. User lekérése DB-ből
+ * 9. Refresh token rotáció
+ * 10. Új access token
+ *
+ * A role MINDIG a DB-ből érkezik.
+ */
+
+async function resolveSession(request: NextRequest): Promise<SessionResult> {
+    const rawAccessToken = request.cookies.get(ACCESS_TOKEN_COOKIE)?.value;
+
+    if (rawAccessToken) {
+        const payload = await verifyAccessToken(rawAccessToken);
+
+        if (payload) {
+            /**
+             * A JWT csak a user ID-t bizonyítja.
+             *
+             * A user aktuális állapotát és role-ját
+             * a DB-ből kérjük le.
+             */
+            const user = await getUserById(payload.sub);
+
+            if (user) {
+                return {
+                    authenticated: true,
+
+                    user: {
+                        id: user.id as UserId,
+                        email: user.email,
+                        username: user.username,
+                        emailVerified: user.emailVerified !== null,
+                        role: user.role,
+                    },
+                };
+            }
+        }
     }
 
     const rawRefreshToken = request.cookies.get(REFRESH_TOKEN_COOKIE)?.value;
+
     if (!rawRefreshToken) {
-        return { authenticated: false };
+        return {
+            authenticated: false,
+        };
     }
 
     const existing = await findRefreshTokenByRawValue(rawRefreshToken);
+
     if (!existing) {
-        return { authenticated: false };
+        return {
+            authenticated: false,
+        };
     }
 
-    // Reuse-detection: lezárt (elforgatott) token újrafelhasználása -> a user
-    // MINDEN munkamenetét azonnal érvénytelenítjük (session-lopás gyanúja).
     if (existing.revokedAt) {
         await revokeAllRefreshTokensForUser(existing.userId as UserId);
-        return { authenticated: false };
+
+        return {
+            authenticated: false,
+        };
     }
 
-    if (existing.expiresAt < new Date()) {
-        return { authenticated: false };
+    if (existing.expiresAt <= new Date()) {
+        return {
+            authenticated: false,
+        };
     }
 
     const user = await getUserById(existing.userId as UserId);
+
     if (!user) {
-        return { authenticated: false };
+        return {
+            authenticated: false,
+        };
     }
 
-    // Rotáció: a régi tokent lezárjuk, újat állítunk ki helyette.
     const { id: newTokenId, rawToken: newRefreshToken } =
         await createRefreshToken({
             userId: user.id as UserId,
             userAgent: request.headers.get("user-agent"),
-            ipAddress: request.headers.get("x-forwarded-for"),
+            ipAddress: getClientIp(request),
         });
+
     await markRefreshTokenReplaced(existing.id, newTokenId);
 
     const newAccessToken = await signAccessToken({
         sub: user.id as UserId,
-        email: user.email,
     });
 
     return {
         authenticated: true,
+
+        user: {
+            id: user.id as UserId,
+            email: user.email,
+            username: user.username,
+            emailVerified: user.emailVerified !== null,
+            role: user.role,
+        },
+
         rotatedTokens: {
-            accessToken: newAccessToken,
+            accesToken: newAccessToken,
             refreshToken: newRefreshToken,
         },
     };
@@ -112,16 +276,19 @@ function withRotatedTokens(
     response: NextResponse,
     session: SessionResult,
 ): NextResponse {
-    if (!session.rotatedTokens) return response;
+    if (!session.rotatedTokens) {
+        return response;
+    }
 
     response.cookies.set(
         ACCESS_TOKEN_COOKIE,
-        session.rotatedTokens.accessToken,
+        session.rotatedTokens.accesToken,
         {
             ...cookieOptions,
             maxAge: ACCESS_TOKEN_TTL_SECONDS,
         },
     );
+
     response.cookies.set(
         REFRESH_TOKEN_COOKIE,
         session.rotatedTokens.refreshToken,
@@ -130,54 +297,86 @@ function withRotatedTokens(
             maxAge: REFRESH_TOKEN_TTL_SECONDS,
         },
     );
+
     return response;
 }
 
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
-    const isGuestOnly = (GUEST_ONLY_ROUTES as readonly string[]).includes(
-        pathname,
-    );
-    const isProtected = PROTECTED_PREFIXES.some(
-        (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
-    );
+    const guestOnly = isGuestOnlyRoute(pathname);
 
-    if (!isGuestOnly && !isProtected) {
+    const protectedRoute = isProtectedRoute(pathname);
+
+    /**
+     * Nem auth-protected route.
+     *
+     * Nem kell sessiont feloldani.
+     */
+    if (!guestOnly && !protectedRoute) {
         return NextResponse.next();
     }
 
     const session = await resolveSession(request);
 
-    if (isGuestOnly) {
+    if (guestOnly) {
         if (!session.authenticated) {
             return NextResponse.next();
         }
-        // Már be van jelentkezve -> a sign-in/sign-up oldalaknak itt nincs keresnivalója.
-        return withRotatedTokens(
-            NextResponse.redirect(
-                new URL(AUTH_ROUTES.afterSignIn, request.url),
-            ),
-            session,
+
+        const response = NextResponse.redirect(
+            new URL(AUTH_ROUTES.afterSignIn, request.url),
         );
+
+        return withRotatedTokens(response, session);
     }
 
-    // isProtected
-    if (!session.authenticated) {
-        return NextResponse.redirect(new URL(AUTH_ROUTES.signIn, request.url));
+    if (!session.authenticated || !session.user) {
+        const signInUrl = new URL(AUTH_ROUTES.signIn, request.url);
+
+        signInUrl.searchParams.set(
+            "callbackUrl",
+            `${pathname}${request.nextUrl.search}`,
+        );
+
+        return NextResponse.redirect(signInUrl);
+    }
+
+    const allowed = hasRoutePermission(pathname, session.user.role);
+
+    if (!allowed) {
+        /**
+         * Ha később lesz /forbidden oldalad,
+         * ide érdemes majd arra redirectelni.
+         */
+        const response = NextResponse.redirect(
+            new URL(AUTH_ROUTES.afterSignIn, request.url),
+        );
+
+        return withRotatedTokens(response, session);
     }
 
     return withRotatedTokens(NextResponse.next(), session);
 }
 
 export const config = {
-    // Bővítsd a saját védett route-jaiddal (pl. "/dashboard/:path*", "/settings/:path*").
     matcher: [
         "/love/:path*",
         "/extra/:path*",
         "/inbox/:path*",
         "/cruise/:path*",
         "/community/:path*",
+
+        "/me/:path*",
+        "/map/:path*",
+        "/travel/:path*",
+        "/group/:path*",
+        "/blog/:path*",
+        "/settings/:path*",
+
+        "/moderation/:path*",
+        "/dashboard/:path*",
+
         "/sign-in",
         "/sign-up",
     ],

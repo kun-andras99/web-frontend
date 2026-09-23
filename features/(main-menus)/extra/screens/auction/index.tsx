@@ -6,7 +6,7 @@ export default function AuctionScreen() {
     return (
         <BottomPageWrapper>
             <div className="">
-                <h2 className="small-title">Auction</h2>
+                <h2>Auction</h2>
             </div>
         </BottomPageWrapper>
     );

@@ -1,9 +1,8 @@
+import type { SessionUser, UserId } from "@/features/auth/types/auth-index";
+import { prisma } from "@/lib/prisma";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { cache } from "react";
-
-import type { SessionUser } from "@/features/auth/types/auth-index";
-import { prisma } from "@/lib/prisma";
 
 const ACCESS_TOKEN_COOKIE = "access_token";
 
@@ -47,7 +46,7 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
                 email: true,
                 username: true,
                 emailVerified: true,
-
+                role: true,
                 userData: true,
                 userPreference: true,
             },
@@ -58,9 +57,10 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
         }
 
         return {
-            id: user.id,
+            id: user.id as UserId,
             email: user.email,
             username: user.username,
+            role: user.role,
             emailVerified: user.emailVerified !== null,
         };
     } catch (error) {

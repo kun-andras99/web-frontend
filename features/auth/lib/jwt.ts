@@ -20,7 +20,7 @@ const accessTokenSecret = () => getSecret("ACCESS_TOKEN_SECRET");
 export async function signAccessToken(
     payload: AccessTokenPayload,
 ): Promise<AccessToken> {
-    const token = await new SignJWT({ email: payload.email })
+    const token = await new SignJWT({})
         .setProtectedHeader({ alg: "HS256" })
         .setSubject(payload.sub)
         .setIssuedAt()
@@ -38,16 +38,15 @@ export async function signAccessToken(
  */
 export async function verifyAccessToken(
     token: string,
-): Promise<{ sub: UserId; email: string } | null> {
+): Promise<{ sub: UserId } | null> {
     try {
-        const { payload } = await jwtVerify(token, accessTokenSecret());
-        if (
-            typeof payload.sub !== "string" ||
-            typeof payload.email !== "string"
-        ) {
+        const { payload } = await jwtVerify(token, accessTokenSecret(), {
+            algorithms: ["HS256"],
+        });
+        if (typeof payload.sub !== "string") {
             return null;
         }
-        return { sub: payload.sub as UserId, email: payload.email };
+        return { sub: payload.sub as UserId };
     } catch {
         return null;
     }

@@ -1,8 +1,3 @@
-import {
-    createUser,
-    getUserByEmail,
-    getUserByUsername,
-} from "@/features/auth/data/user";
 import { createEmailVerificationToken } from "@/features/auth/data/verification-token";
 import type {
     AccessToken,
@@ -11,6 +6,11 @@ import type {
     SignUpFields,
     UserId,
 } from "@/features/auth/types/auth-index";
+import {
+    createUser,
+    getUserByEmail,
+    getUserByUsername,
+} from "@/features/user/repositories/user";
 import type { ClientMeta } from "./client-meta";
 import { AUTH_ROUTES } from "./constants";
 import { createSessionTokens } from "./create-session";

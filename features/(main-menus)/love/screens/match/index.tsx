@@ -6,7 +6,7 @@ export default function MatchScreen() {
     return (
         <BottomPageWrapper>
             <div className="">
-                <h2 className="small-title">Match users</h2>
+                <h2>Match users</h2>
             </div>
         </BottomPageWrapper>
     );

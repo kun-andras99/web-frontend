@@ -1,7 +1,6 @@
 "use server";
 
 import { revokeAllRefreshTokensForUser } from "@/features/auth/data/refresh-token";
-import { updateUserPassword } from "@/features/auth/data/user";
 import {
     deleteVerificationTokenById,
     findValidVerificationToken,
@@ -13,6 +12,7 @@ import type {
     ResetPasswordFields,
     UserId,
 } from "@/features/auth/types/auth-index";
+import { updateUserPassword } from "@/features/user/repositories/user";
 
 /**
  * A `token`-t a hívó oldalon `.bind(null, token)`-nel kötjük az action elé

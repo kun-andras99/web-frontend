@@ -1,6 +1,5 @@
 "use server";
 
-import { getUserByEmail } from "@/features/auth/data/user";
 import { createEmailVerificationToken } from "@/features/auth/data/verification-token";
 import {
     sendEmail,
@@ -8,6 +7,7 @@ import {
 } from "@/features/auth/lib/mailer";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import type { UserId } from "@/features/auth/types/auth-index";
+import { getUserByEmail } from "@/features/user/repositories/user";
 
 /**
  * Ez az action nem `action=` prop-on keresztül fut (nincs FormData paramétere),

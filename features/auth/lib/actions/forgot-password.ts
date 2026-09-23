@@ -1,6 +1,5 @@
 "use server";
 
-import { getUserByEmail } from "@/features/auth/data/user";
 import { createPasswordResetToken } from "@/features/auth/data/verification-token";
 import { GUEST_ROUTES } from "@/features/auth/lib/constants";
 import {
@@ -13,6 +12,7 @@ import type {
     ForgotPasswordFields,
     UserId,
 } from "@/features/auth/types/auth-index";
+import { getUserByEmail } from "@/features/user/repositories/user";
 
 const GENERIC_SUCCESS_MESSAGE =
     "Ha létezik fiók ezzel az email címmel, elküldtünk rá egy jelszó-visszaállító linket.";

@@ -19,7 +19,7 @@ export default function SharedAlbumsScreen() {
                     <div className="filter">Video</div>
                 </div>
             </TopFilter>
-            <h2 className="small-title">UPDATES</h2>
+            <h2>UPDATES</h2>
             <div className="first-shared-row">
                 <div className="shared-box box-inactive">
                     <p>+</p>
@@ -124,7 +124,7 @@ export default function SharedAlbumsScreen() {
                     <span>username</span>
                 </div>
             </div>
-            <h2 className="small-title">ALL ALBUMS</h2>
+            <h2>ALL ALBUMS</h2>
             <div className="second-shared-row">
                 <div className="shared-box ">
                     <Image

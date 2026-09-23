@@ -1,4 +1,4 @@
-import { Users } from "../../../prisma/generated/prisma";
+import { UserRole } from "../../../prisma/generated/prisma";
 
 /**
  * Nominal ("branded") típus-helper. Cél: két, egyébként strukturálisan azonos
@@ -11,19 +11,36 @@ export type UserId = Brand<string, "UserId">;
 export type AccessToken = Brand<string, "AccessToken">;
 export type RefreshToken = Brand<string, "RefreshToken">;
 
-/** A kliensnek/session-nek szánt user-alak — a jelszó-hash sosem hagyja el a data réteget. */
-export type PublicUser = Omit<Users, "passwordHash">;
+export function toUserId(value: string): UserId {
+    return value as UserId;
+}
 
-export interface SessionUser extends Pick<
-    PublicUser,
-    "id" | "email" | "username"
-> {
+export interface AccessTokenPayload {
+    /**
+     * Az access token kizárólag a user azonosítására szolgál.
+     * Emailt, role-t és egyéb useradatot nem tárolunk benne.
+     */
+    sub: UserId;
+}
+
+export interface SessionUser {
+    id: UserId;
+    email: string;
+    username: string;
     emailVerified: boolean;
+    role: UserRole;
+}
+
+export interface CurrentUserDTO {
+    id: UserId;
+    email: string;
+    username: string;
+    emailVerified: boolean;
+    role: UserRole;
 }
 
 export interface AccessTokenPayload {
     sub: UserId;
-    email: string;
 }
 
 /**

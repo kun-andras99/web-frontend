@@ -124,7 +124,7 @@ interface MessageScreenProps {
 export default function NotificationsScreen({
     user,
 }: MessageScreenProps & SessionUserProps) {
-    console.log("currentUser:", user);
+    // console.log("currentUser:", user);
 
     // const groups = {
     //     new: notificationsMock

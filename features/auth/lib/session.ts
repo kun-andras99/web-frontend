@@ -1,7 +1,7 @@
 "use server";
 
-import { getUserById } from "@/features/auth/data/user";
-import type { SessionUser } from "@/features/auth/types/auth-index";
+import type { SessionUser, UserId } from "@/features/auth/types/auth-index";
+import { getUserById } from "@/features/user/repositories/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
@@ -26,9 +26,10 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
     if (!user) return null;
 
     return {
-        id: user.id,
+        id: user.id as UserId,
         email: user.email,
         username: user.username,
+        role: user.role,
         emailVerified: Boolean(user.emailVerified),
     };
 });

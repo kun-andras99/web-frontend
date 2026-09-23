@@ -19,7 +19,7 @@ import { useCurrentUserFull } from "@/features/auth/hooks/useCurrentUserFull";
 export default function UsersNearbyScreen() {
     const { display } = useScreenStore();
     const { data: user } = useCurrentUserFull();
-    console.log({ user });
+    // console.log({ user });
     return (
         <div className="main">
             {/* <TopFilter>
