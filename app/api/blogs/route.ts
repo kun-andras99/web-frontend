@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { toBlogDTO } from "@/features/blogs/mapper/blogs.mapper";
-import { getBlogs } from "@/features/blogs/repository/blogs.rep";
+import { getBlogs, createBlog } from "@/features/blogs/repository/blogs.rep";
+import { BlogVisibility } from "../../../prisma/generated/prisma";
+
 
 const DEFAULT_LIMIT = 5;
 const MAX_LIMIT = 20;
@@ -58,6 +60,105 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(
             {
                 message: "Hiba történt a blogok lekérésekor.",
+            },
+            {
+                status: 500,
+            },
+        );
+    }
+}
+
+export async function POST(request: NextRequest) {
+    try {
+        const currentUser = await getCurrentUser();
+
+        if (!currentUser) {
+            return NextResponse.json(
+                {
+                    message: "Unauthorized",
+                },
+                {
+                    status: 401,
+                },
+            );
+        }
+
+        const body = await request.json();
+
+        const title = typeof body.title === "string" ? body.title.trim() : "";
+
+        const content =
+            typeof body.content === "string" ? body.content.trim() : "";
+
+        const visibility = body.visibility;
+
+        const tags = Array.isArray(body.tags)
+            ? body.tags
+                  .filter(
+                      (tag: unknown): tag is string => typeof tag === "string",
+                  )
+                  .map((tag: string) => tag.trim())
+                  .filter(Boolean)
+            : [];
+
+        if (!title) {
+            return NextResponse.json(
+                {
+                    message: "A blog címe kötelező.",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+
+        if (!content) {
+            return NextResponse.json(
+                {
+                    message: "A blog tartalma kötelező.",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+
+        if (
+            visibility !== BlogVisibility.PUBLIC &&
+            visibility !== BlogVisibility.PRIVATE
+        ) {
+            return NextResponse.json(
+                {
+                    message: "Érvénytelen láthatóság.",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+
+        const blog = await createBlog({
+            authorId: currentUser.id,
+            title,
+            content,
+            visibility,
+            tags,
+        });
+
+        return NextResponse.json(
+            {
+                blog: toBlogDTO(blog),
+            },
+            {
+                status: 201,
+            },
+        );
+    } catch (error) {
+        console.error("POST /api/blogs error:", error);
+
+        return NextResponse.json(
+            {
+                message: "Hiba történt a blog létrehozásakor.",
             },
             {
                 status: 500,

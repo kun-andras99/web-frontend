@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 import { useBlogs } from "@/features/blogs/hooks/useBlogs";
+import Link from "next/link";
 
 export default function BlogsScreen() {
     const {
@@ -77,6 +78,7 @@ export default function BlogsScreen() {
 
     return (
         <div className="blogs-list">
+            <Link href={`/blog/create`}>Új blog készítése</Link>
             {!hasBlogs ? (
                 <p>Még nincsenek blogok.</p>
             ) : (

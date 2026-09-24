@@ -1,6 +1,5 @@
-import type { Prisma } from "../../../prisma/generated/prisma";
-
 import { prisma } from "@/lib/prisma";
+import { BlogVisibility, type Prisma } from "../../../prisma/generated/prisma";
 
 export const blogListSelect = {
     id: true,
@@ -53,5 +52,38 @@ export async function getBlogs({ limit, cursor }: GetBlogsParams) {
         orderBy: {
             createdAt: "desc",
         },
+    });
+}
+
+interface CreateBlogParams {
+    authorId: string;
+    title: string;
+    content: string;
+    visibility: BlogVisibility;
+    tags?: string[];
+}
+
+export async function createBlog({
+    authorId,
+    title,
+    content,
+    visibility,
+    tags = [],
+}: CreateBlogParams) {
+    return prisma.blog.create({
+        data: {
+            authorId,
+            title,
+            content,
+            visibility,
+
+            tags: {
+                create: tags.map((name) => ({
+                    name,
+                })),
+            },
+        },
+
+        select: blogListSelect,
     });
 }
