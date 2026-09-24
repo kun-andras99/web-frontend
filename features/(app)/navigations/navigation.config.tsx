@@ -1,29 +1,29 @@
-import AuctionIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/AuctionIconSVG";
-import BlogsIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/BlogsIconSVG";
-import CityIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/CityIconSVG";
-import EyeCandyIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/EyeCandyIconSVG";
-import GroupsIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/GroupsIconSVG";
-import HotOffersIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/HotOffersIconSVG";
-import ManageUsersIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/ManageUsersIconSVG";
-import MatchIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/MatchIconSVG";
-import MessagesIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/MessagesIconSVG";
-import NearbyUsersIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/NearbyUsersIcon";
-import { RightNowIconSVG } from "@/features/(app)/navigations/mobile-top-nav/icons/RightNowIconSVG";
-import SharedAlbumIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/SharedAlbumIconSVG";
-import VisitedIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/VisitedIconSVG";
-import VisitorsIconSVG from "@/features/(app)/navigations/mobile-top-nav/icons/VisitorsIconSVG";
+import AuctionIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/AuctionIconSVG";
+import BlogsIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/BlogsIconSVG";
+import CityIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/CityIconSVG";
+import EyeCandyIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/EyeCandyIconSVG";
+import GroupsIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/GroupsIconSVG";
+import HotOffersIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/HotOffersIconSVG";
+import ManageUsersIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/ManageUsersIconSVG";
+import MatchIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/MatchIconSVG";
+import MessagesIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/MessagesIconSVG";
+import NearbyUsersIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/NearbyUsersIcon";
+import { RightNowIconSVG } from "@/features/(app)/(ui)/mobile-top-nav/icons/RightNowIconSVG";
+import SharedAlbumIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/SharedAlbumIconSVG";
+import VisitedIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/VisitedIconSVG";
+import VisitorsIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/VisitorsIconSVG";
+import AboutUsIconSVG from "@/features/(app)/(ui)/top-bar/icons/AboutUsIconSVG";
+import ContactUsIconSVG from "@/features/(app)/(ui)/top-bar/icons/ContactUsIconSVG";
+import HomeIconSVG from "@/features/(app)/(ui)/top-bar/icons/HomeIconSVG";
+import CommunityIconSVG from "@/features/(app)/(ui)/top-bar/icons/icons/CommunityIconSVG";
+import CruiseIconSVG from "@/features/(app)/(ui)/top-bar/icons/icons/CruiseIconSVG";
+import ExtraIconSVG from "@/features/(app)/(ui)/top-bar/icons/icons/ExtraIconSVG";
+import HeartIconSVG from "@/features/(app)/(ui)/top-bar/icons/icons/HeartIconSVG";
+import { BOTTOM_ICON_COLORS } from "@/features/(app)/(ui)/top-bar/icons/icons/icons.data";
+import InboxIconSVG from "@/features/(app)/(ui)/top-bar/icons/icons/InboxIconSVG";
+import OurTeamIconSVG from "@/features/(app)/(ui)/top-bar/icons/OurTeamIconSVG";
+import SafetyWarningIconSVG from "@/features/(app)/(ui)/top-bar/icons/SafetyWarningIconSVG";
 import { MobileTopNavigationConfig } from "@/features/(app)/navigations/navigation.types";
-import AboutUsIconSVG from "@/features/(app)/navigations/top-bar/icons/AboutUsIconSVG";
-import ContactUsIconSVG from "@/features/(app)/navigations/top-bar/icons/ContactUsIconSVG";
-import HomeIconSVG from "@/features/(app)/navigations/top-bar/icons/HomeIconSVG";
-import CommunityIconSVG from "@/features/(app)/navigations/top-bar/icons/icons/CommunityIconSVG";
-import CruiseIconSVG from "@/features/(app)/navigations/top-bar/icons/icons/CruiseIconSVG";
-import ExtraIconSVG from "@/features/(app)/navigations/top-bar/icons/icons/ExtraIconSVG";
-import HeartIconSVG from "@/features/(app)/navigations/top-bar/icons/icons/HeartIconSVG";
-import { BOTTOM_ICON_COLORS } from "@/features/(app)/navigations/top-bar/icons/icons/icons.data";
-import InboxIconSVG from "@/features/(app)/navigations/top-bar/icons/icons/InboxIconSVG";
-import OurTeamIconSVG from "@/features/(app)/navigations/top-bar/icons/OurTeamIconSVG";
-import SafetyWarningIconSVG from "@/features/(app)/navigations/top-bar/icons/SafetyWarningIconSVG";
 import { ComponentType, ReactNode } from "react";
 
 export interface NavigationScreen {
@@ -691,20 +691,42 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
     },
     {
         id: 11,
+        name: "community",
+        title: "Community",
+        bottomTitle: "Community",
+        url: "/community",
+        drawerMenu: true,
+        icon: <CommunityIconSVG size={26} strokeWidth={1.2} />,
+        activeIcon: (
+            <CommunityIconSVG
+                size={26}
+                startColor={BOTTOM_ICON_COLORS.active.startColor}
+                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
+                backgroundStartColor={
+                    BOTTOM_ICON_COLORS.active.backgroundStartColor
+                }
+                backgroundStopColor={
+                    BOTTOM_ICON_COLORS.active.backgroundStopColor
+                }
+            />
+        ),
+    },
+    {
+        id: 20,
         name: "sign in",
         title: "Sign In",
         bottomTitle: "Sign In",
         url: "/sign-in",
     },
     {
-        id: 12,
+        id: 21,
         name: "sign up",
         title: "Sign Up",
         bottomTitle: "Sign Up",
         url: "/sign-up",
     },
     {
-        id: 13,
+        id: 22,
         name: "forgot password",
         title: "Forgot password",
         bottomTitle: "Forgot password",

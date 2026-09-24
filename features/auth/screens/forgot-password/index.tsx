@@ -1,6 +1,6 @@
 "use client";
 
-import { useBackButton } from "@/features/_components/back-button";
+import { useBackButton } from "@/features/(app)/(ui)/back-button";
 import { ForgotPasswordForm } from "@/features/auth/components/forms/ForgotPasswordForm";
 
 export function ForgotPasswordScreen() {

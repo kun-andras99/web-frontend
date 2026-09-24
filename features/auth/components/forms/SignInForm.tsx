@@ -1,6 +1,6 @@
 "use client";
 
-import AppButton from "@/features/_components/button/AppButton";
+import AuthButton from "@/features/auth/components/AuthButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useSignInForm } from "@/features/auth/hooks/use-sign-in-form";
 
@@ -67,12 +67,12 @@ export function SignInForm() {
                             Keep me logged in
                         </label> */}
                     {/* </section> */}
-                    <AppButton
+                    <AuthButton
                         className="centered-button"
                         pendingText="Logging in..."
                         type="submit">
                         Login
-                    </AppButton>
+                    </AuthButton>
                 </form>
             </section>
         </>

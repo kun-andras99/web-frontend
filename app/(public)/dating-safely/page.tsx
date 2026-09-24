@@ -1,3 +1,5 @@
+import DatingSafelyScreen from "@/features/_public-screens/DatingSafelyScreen";
+
 export default function Page() {
-    return <div className="main-container">Dating safely</div>;
+    return <DatingSafelyScreen />;
 }

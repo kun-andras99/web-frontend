@@ -1,6 +1,6 @@
 "use client";
 
-import AppButton from "@/features/_components/button/AppButton";
+import AuthButton from "@/features/auth/components/AuthButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useSignUpForm } from "@/features/auth/hooks/use-sign-up-form";
 
@@ -97,12 +97,12 @@ export function SignUpForm() {
                     />
                 )}
 
-                <AppButton
+                <AuthButton
                     className="centered-button"
                     pendingText="Registrating..."
                     type="submit">
                     Registration
-                </AppButton>
+                </AuthButton>
             </form>
         </section>
     );

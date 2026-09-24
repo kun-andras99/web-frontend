@@ -1,5 +1,6 @@
 "use client";
 
+import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 import { SessionUserProps } from "@/lib/utils/props";
 import { Notification } from "../../../prisma/generated/prisma";
 
@@ -122,7 +123,7 @@ interface MessageScreenProps {
 }
 
 export default function NotificationsScreen({
-    user,
+    notifications,
 }: MessageScreenProps & SessionUserProps) {
     // console.log("currentUser:", user);
 
@@ -147,8 +148,9 @@ export default function NotificationsScreen({
     // };
 
     return (
-        <div className="page-with-bottom">
+        <BottomPageWrapper>
             <div className="notifications">
+                értesítés
                 {/* {notifications?.map((notification) => (
                     <div key={notification.id}>{notification.title}</div>
                 ))} */}
@@ -191,6 +193,6 @@ export default function NotificationsScreen({
                     </>
                 )} */}
             </div>
-        </div>
+        </BottomPageWrapper>
     );
 }

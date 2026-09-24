@@ -23,6 +23,7 @@ export interface MobileTopNavigationTab {
     activeIcon?: ReactNode;
     publicMenu?: boolean;
     appMenu?: boolean;
+    drawerMenu?: boolean;
     screens?: MobileTopNavigationScreen[];
 }
 

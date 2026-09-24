@@ -1,3 +1,5 @@
+import TermsScreen from "@/features/_public-screens/TermsScreen";
+
 export default function Page() {
-    return <div className="main-container">Terms</div>;
+    return <TermsScreen />;
 }

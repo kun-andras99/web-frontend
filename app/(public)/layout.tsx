@@ -1,4 +1,4 @@
-import MainLayout from "@/features/_components/layout/MainLayout";
+import MainLayout from "@/features/(app)/(ui)/_layout/MainLayout";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { ChildrenProp } from "@/lib/utils/props";
 

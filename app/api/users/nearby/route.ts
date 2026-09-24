@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getUsers } from "@/features/_api/user-api";
+// import { getUsers } from "@/features/_api/user-api";
 import { getCurrentUser } from "@/features/auth/lib/session";
 
 export async function GET(request: Request) {
@@ -25,11 +25,11 @@ export async function GET(request: Request) {
 
         const limit = Math.min(Number(searchParams.get("limit")) || 30, 30);
 
-        const users = await getUsers(user.id, page, limit);
+        // const users = await getUsers(user.id, page, limit);
 
         return NextResponse.json({
             success: true,
-            users,
+            // users,
         });
     } catch (error) {
         console.error("GET NEARBY USERS ERROR:", error);

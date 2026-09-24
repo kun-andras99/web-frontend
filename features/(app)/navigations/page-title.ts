@@ -96,7 +96,7 @@ export const DISPLAY_PAGE_TITLE: MobileTopNavigationConfig = [
 
     //authed
     {
-        id: 30,
+        id: 29,
         name: "nearby",
         title: "Nearby users",
         url: "/love/nearby",
@@ -178,5 +178,35 @@ export const DISPLAY_PAGE_TITLE: MobileTopNavigationConfig = [
         name: "blogs",
         title: "Blogs",
         url: "/community/blogs",
+    },
+    {
+        id: 43,
+        name: "travel",
+        title: "Travel",
+        url: "/travel",
+    },
+    {
+        id: 44,
+        name: "map",
+        title: "Map",
+        url: "/Map",
+    },
+    {
+        id: 45,
+        name: "customize-settings",
+        title: "Customize settings",
+        url: "/settings/customize",
+    },
+    {
+        id: 46,
+        name: "profile-settings",
+        title: "Profile settings",
+        url: "/settings/profile",
+    },
+    {
+        id: 47,
+        name: "manage-users",
+        title: "Manage users",
+        url: "/settings/manage-users",
     },
 ];

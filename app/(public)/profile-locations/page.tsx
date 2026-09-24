@@ -1,3 +1,5 @@
+import ProfileLocationsScreen from "@/features/_public-screens/ProfileLocationsScreen";
+
 export default function Page() {
-    return <div className="main-container">Profile locations</div>;
+    return <ProfileLocationsScreen />;
 }

@@ -1,4 +1,4 @@
-import AuthLayout from "@/features/_components/layout/AuthLayout";
+import AuthLayout from "@/features/(app)/(ui)/_layout/AuthLayout";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { ChildrenProp } from "@/lib/utils/props";
 

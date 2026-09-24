@@ -51,8 +51,6 @@ export default function MeUserHeader({ userId }: UserProfileProps) {
         return <div>{error.message}</div>;
     }
 
-    console.log(user);
-
     if (!user) {
         return null;
     }

@@ -2,8 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+import { useAuth } from "@/features/auth/components/provider/AuthProvider";
 import type { SessionUser } from "@/features/auth/types/auth-index";
-import { useAuth } from "@/features/auth/components/auth-provider";
 
 async function fetchCurrentUser(): Promise<SessionUser | null> {
     const response = await fetch("/api/auth/me", {
@@ -20,7 +20,7 @@ async function fetchCurrentUser(): Promise<SessionUser | null> {
 
 export function useCurrentUser() {
     const initialUser = useAuth();
-    
+
     return useQuery({
         queryKey: ["current-user"],
         queryFn: fetchCurrentUser,

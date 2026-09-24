@@ -1,6 +1,6 @@
 "use client";
 
-import AppButton from "@/features/_components/button/AppButton";
+import AuthButton from "@/features/auth/components/AuthButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useResetPasswordForm } from "@/features/auth/hooks/use-reset-password-form";
 import { AUTH_ROUTES } from "@/features/auth/lib/constants";
@@ -72,7 +72,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
                     <FormMessage status="error" message={state.message} />
                 )}
 
-                <AppButton pendingText="Mentés…">Jelszó módosítása</AppButton>
+                <AuthButton pendingText="Mentés…">Jelszó módosítása</AuthButton>
             </form>
         </section>
     );

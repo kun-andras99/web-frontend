@@ -1,6 +1,6 @@
 "use client";
 
-import AppButton from "@/features/_components/button/AppButton";
+import AuthButton from "@/features/auth/components/AuthButton";
 import { FormMessage } from "@/features/auth/components/forms/FormMessage";
 import { useForgotPasswordForm } from "@/features/auth/hooks/use-forgot-password-form";
 
@@ -38,12 +38,12 @@ export function ForgotPasswordForm() {
                 {state.status === "error" && !state.fieldErrors && (
                     <FormMessage status="error" message={state.message} />
                 )}
-                <AppButton
+                <AuthButton
                     className="centered-button"
                     type="submit"
                     pendingText="Requesting...">
                     Request password reset link
-                </AppButton>
+                </AuthButton>
             </form>
         </section>
     );

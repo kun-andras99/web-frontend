@@ -3,7 +3,7 @@ import {
     AvatarFallback,
     AvatarGroup,
     AvatarImage,
-} from "@/features/_components/ui/avatar";
+} from "@/features/(app)/(ui)/shadcn/ui/avatar";
 
 export default function ImageAvatarGroup() {
     return (
@@ -39,10 +39,10 @@ export default function ImageAvatarGroup() {
                 </Avatar>
             </AvatarGroup>
             <div className="text">
-                Több mint 150.000{" "}
                 <p>
-                    <span>aktív</span> felhasználó vár rád!
+                    More than 150,000 <span>active</span>
                 </p>
+                <p>users are waiting for you!</p>
             </div>
         </div>
     );
