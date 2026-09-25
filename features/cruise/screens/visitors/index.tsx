@@ -1,18 +1,19 @@
 "use client";
 
+import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 import { useScreenStore } from "@/features/_store/screen.store";
-import Image from "next/image";
 
 export default function VisitorsScreen() {
     const { display } = useScreenStore();
 
     return (
-        <div className="page-with-bottom">
+        <BottomPageWrapper>
+            <p>visitors list</p>
             {/* <TopFilter>
                     <ViewChange />
                 </TopFilter> */}
-            <div className={`screen-view`}>
-                {/* <div className={`screen-view ${display} `}> */}
+            {/* <div className={`screen-view`}>
+                <div className={`screen-view ${display} `}> 
                 {Array.from({ length: 20 }).map((_, index) => (
                     <div
                         key={index}
@@ -41,7 +42,7 @@ export default function VisitorsScreen() {
                             // }
                             alt={`Felhasználó ${index + 1}`}
                         />
-                        {/* {display === "list-grid-view" ? (
+                         {display === "list-grid-view" ? (
                             <div className="list-view-data">
                                 <h2 className="name">
                                     user {index}
@@ -58,10 +59,10 @@ export default function VisitorsScreen() {
                                     <span>Sexuality: {index}</span>
                                 </div>
                             </div>
-                        ) : null} */}
+                        ) : null}
                     </div>
-                ))}
-            </div>
-        </div>
+                ))} 
+            </div>*/}
+        </BottomPageWrapper>
     );
 }

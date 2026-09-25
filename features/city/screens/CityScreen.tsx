@@ -1,24 +1,25 @@
 "use client";
 
+import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 import { useCityStats } from "@/features/city/hooks/useCityStats";
 
 export default function CityScreen() {
     const { data, isLoading, isError } = useCityStats();
 
     if (isLoading) {
-        return <div className="city-page">Betöltés...</div>;
+        return <BottomPageWrapper>Loading city...</BottomPageWrapper>;
     }
 
     if (isError || !data) {
         return (
-            <div className="city-page">
+            <BottomPageWrapper>
                 Nem sikerült betölteni a városi adatokat.
-            </div>
+            </BottomPageWrapper>
         );
     }
 
     return (
-        <div className="city-page">
+        <BottomPageWrapper>
             <h1>{data.appCity}</h1>
 
             <p>Összes felhasználó: {data.total}</p>
@@ -42,6 +43,6 @@ export default function CityScreen() {
             <p>41–60: {data.age.age41To60}</p>
 
             <p>60+: {data.age.age60Plus}</p>
-        </div>
+        </BottomPageWrapper>
     );
 }

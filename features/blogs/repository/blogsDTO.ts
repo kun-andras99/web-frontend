@@ -29,3 +29,14 @@ export interface BlogsPageDTO {
     nextCursor: string | null;
     hasNextPage: boolean;
 }
+
+export interface BlogAuthorDTO {
+    id: string;
+    username: string;
+    nickname: string | null;
+    avatarUrl: string | null;
+}
+
+export interface BlogDetailDTO extends BlogDTO {
+    author: BlogAuthorDTO;
+}

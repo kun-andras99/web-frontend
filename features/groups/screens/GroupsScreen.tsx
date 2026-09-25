@@ -13,29 +13,21 @@ export default function GroupsScreen() {
 
     if (isLoading) {
         return (
-            <div>
-                <h2>Csoportok</h2>
-
-                <div className="groups-list">
-                    <p>Csoportok betöltése...</p>
-                </div>
-            </div>
+            <BottomPageWrapper>
+                <p>Loading groups...</p>
+            </BottomPageWrapper>
         );
     }
 
     if (isError) {
         return (
-            <div>
-                <h2>Csoportok</h2>
-
-                <div className="groups-list">
-                    <p>
-                        {error instanceof Error
-                            ? error.message
-                            : "Hiba történt a csoportok betöltésekor."}
-                    </p>
-                </div>
-            </div>
+            <BottomPageWrapper>
+                <p>
+                    {error instanceof Error
+                        ? error.message
+                        : "Hiba történt a csoportok betöltésekor."}
+                </p>
+            </BottomPageWrapper>
         );
     }
 

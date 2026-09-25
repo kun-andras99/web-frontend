@@ -6,7 +6,10 @@ const BLOGS_PER_PAGE = 5;
 
 export const blogKeys = {
     all: ["blogs"] as const,
-    list: () => [...blogKeys.all, "list"] as const,
+    lists: () => [...blogKeys.all, "list"] as const,
+    list: () => [...blogKeys.lists()] as const,
+    details: () => [...blogKeys.all, "detail"] as const,
+    detail: (id: string) => [...blogKeys.details(), id] as const,
 };
 
 export function useBlogs() {

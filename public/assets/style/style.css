@@ -1542,7 +1542,8 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background: var(--background);
+  background: rgba(16, 16, 17, 0.94);
+  backdrop-filter: blur(6px);
 }
 .main-bottom-navigation .content {
   width: calc(100% - 20px);
@@ -1803,7 +1804,6 @@ main {
       -ms-flex-pack: start;
           justify-content: flex-start;
   z-index: 12;
-  border-top: 0.015rem solid #303030;
   border-bottom: 0.015rem solid #303030;
 }
 .top-tab-links__container {
@@ -4665,10 +4665,7 @@ button {
   }
 }
 .page-with-bottom {
-  padding-bottom: calc(56px + 0.1rem);
-}
-.page-with-bottom .screen-view img {
-  border-radius: 5px;
+  padding-bottom: 56px;
 }
 
 @media (max-width: 720px) {

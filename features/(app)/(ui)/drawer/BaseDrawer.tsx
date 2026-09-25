@@ -40,7 +40,7 @@ export default function BaseDrawer() {
     };
 
     if (isLoading) {
-        return <div>Betöltés...</div>;
+        return <div></div>;
     }
 
     if (isError) {

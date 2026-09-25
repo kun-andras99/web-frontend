@@ -62,7 +62,7 @@ export default function MobileTopNav({ tabs }: MobileTopNavProps) {
                                             <div className="container">
                                                 {isActive
                                                     ? screen.activeIcon
-                                                    : screen.icon}
+                                                    : ""}
 
                                                 <span>
                                                     {name}{" "}

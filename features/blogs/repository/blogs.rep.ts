@@ -6,9 +6,9 @@ export const blogListSelect = {
     authorId: true,
     title: true,
     content: true,
-    visibility: true,
     createdAt: true,
     updatedAt: true,
+    visibility: true,
 
     tags: {
         select: {
@@ -85,5 +85,58 @@ export async function createBlog({
         },
 
         select: blogListSelect,
+    });
+}
+
+export const blogDetailSelect = {
+    id: true,
+    authorId: true,
+    title: true,
+    content: true,
+    visibility: true,
+    createdAt: true,
+    updatedAt: true,
+
+    author: {
+        select: {
+            id: true,
+            username: true,
+
+            userData: {
+                select: {
+                    nickname: true,
+                    avatarUrl: true,
+                },
+            },
+        },
+    },
+
+    tags: {
+        select: {
+            id: true,
+            name: true,
+        },
+        orderBy: {
+            name: "asc",
+        },
+    },
+
+    _count: {
+        select: {
+            likes: true,
+        },
+    },
+} satisfies Prisma.BlogSelect;
+
+export type BlogDetailData = Prisma.BlogGetPayload<{
+    select: typeof blogDetailSelect;
+}>;
+
+export async function findBlogById(blogId: string) {
+    return prisma.blog.findUnique({
+        where: {
+            id: blogId,
+        },
+        select: blogDetailSelect,
     });
 }

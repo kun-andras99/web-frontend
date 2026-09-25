@@ -5,9 +5,7 @@ import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 export default function AuctionsScreen() {
     return (
         <BottomPageWrapper>
-            <div className="">
-                <h2>Auction</h2>
-            </div>
+            <p>Auctions</p>
         </BottomPageWrapper>
     );
 }

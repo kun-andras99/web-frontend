@@ -4,6 +4,7 @@ import { useConversations } from "@/features/chat/hooks/useConversations";
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 function formatMessageDate(date: string) {
     return new Intl.DateTimeFormat("hu-HU", {
@@ -15,13 +16,22 @@ function formatMessageDate(date: string) {
 export default function ConversationList() {
     const { data: conversations = [], isLoading, isError } = useConversations();
 
+    useEffect(() => {
+        if (isLoading) {
+            window.scrollTo({
+                top: 0,
+                behavior: "instant",
+            });
+        }
+    }, [isLoading]);
+
     if (isLoading) {
         return (
-            <div className="space-y-2 p-4">
-                {Array.from({ length: 6 }).map((_, index) => (
+            <div className="flex flex-1 flex-col gap-[15px] ">
+                {Array.from({ length: 10 }).map((_, index) => (
                     <div
                         key={index}
-                        className="h-[76px] animate-pulse rounded-2xl bg-white/5"
+                        className="first:mt-[15px] las:mb-[15px] mx-[15px]  h-[69px] animate-pulse rounded-2xl  bg-white/5"
                     />
                 ))}
             </div>
@@ -30,7 +40,7 @@ export default function ConversationList() {
 
     if (isError) {
         return (
-            <div className="p-8 text-center">
+            <div className="text-center">
                 <p className="text-sm text-white/50">
                     Nem sikerült betölteni a beszélgetéseket.
                 </p>
@@ -40,7 +50,7 @@ export default function ConversationList() {
 
     if (!conversations.length) {
         return (
-            <div className="flex min-h-[400px] flex-col items-center justify-center px-6 text-center">
+            <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#1eb1eb]/10">
                     <MessageCircle size={28} className="text-[#1eb1eb]" />
                 </div>

@@ -1,11 +1,5 @@
 .page-with-bottom {
-    padding-bottom: calc(56px + 0.1rem);
-
-    .screen-view {
-        img {
-            border-radius: 5px;
-        }
-    }
+    padding-bottom: 56px;
 }
 
 @media (max-width: 720px) {

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 
+import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 import { useBlogs } from "@/features/blogs/hooks/useBlogs";
 import Link from "next/link";
 
@@ -51,25 +52,21 @@ export default function BlogsScreen() {
     console.log(blogs);
     if (isLoading) {
         return (
-            <div>
-                <h2 className="small-title">Blogok</h2>
-
-                <div className="blogs-list">
-                    <p>Blogok betöltése...</p>
-                </div>
-            </div>
+            <BottomPageWrapper>
+                <p>Loading blogs...</p>
+            </BottomPageWrapper>
         );
     }
 
     if (isError) {
         return (
-            <div>
+            <BottomPageWrapper>
                 <h2 className="small-title">Blogok</h2>
 
                 <div className="blogs-list">
                     <p>Nem sikerült betölteni a blogokat.</p>
                 </div>
-            </div>
+            </BottomPageWrapper>
         );
     }
 
@@ -77,44 +74,54 @@ export default function BlogsScreen() {
         blogs?.pages.some((page) => page.blogs.length > 0) ?? false;
 
     return (
-        <div className="blogs-list">
-            <Link href={`/blog/create`}>Új blog készítése</Link>
-            {!hasBlogs ? (
-                <p>Még nincsenek blogok.</p>
-            ) : (
-                blogs?.pages.map((page) =>
-                    page.blogs.map((blog) => (
-                        <article key={blog.id} className="blog-card">
-                            <div className="blog-card-content">
-                                <h3>{blog.title}</h3>
+        <BottomPageWrapper>
+            <div className="blogs-list">
+                <Link href={`/blog/create`}>Új blog készítése</Link>
+                {!hasBlogs ? (
+                    <p>Még nincsenek blogok.</p>
+                ) : (
+                    blogs?.pages.map((page) =>
+                        page.blogs.map((blog) => (
+                            <Fragment key={blog.id}>
+                                <Link href={`/blog/${blog.id}`}>
+                                    <article className="blog-card">
+                                        <div className="blog-card-content">
+                                            <h3>{blog.title}</h3>
 
-                                <p className="content">{blog.content}</p>
-                                <div className="blog-card-data">
-                                    <div className="blog-card-tags">
-                                        {blog.tags.map((tag) => (
-                                            <span
-                                                key={tag.id}
-                                                className="blog-tag">
-                                                #{tag.name}
-                                            </span>
-                                        ))}
-                                    </div>
+                                            <p className="content">
+                                                {blog.content}
+                                            </p>
+                                            <div className="blog-card-data">
+                                                <div className="blog-card-tags">
+                                                    {blog.tags.map((tag) => (
+                                                        <span
+                                                            key={tag.id}
+                                                            className="blog-tag">
+                                                            #{tag.name}
+                                                        </span>
+                                                    ))}
+                                                </div>
 
-                                    <div className="blog-card-meta">
-                                        <span>{blog.likeCount} like</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    )),
-                )
-            )}
+                                                <div className="blog-card-meta">
+                                                    <span>
+                                                        {blog.likeCount} like
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </Link>
+                            </Fragment>
+                        )),
+                    )
+                )}
 
-            {hasNextPage && (
-                <div ref={loadMoreRef} className="blogs-load-more">
-                    {isFetchingNextPage && <p>Blogok betöltése...</p>}
-                </div>
-            )}
-        </div>
+                {hasNextPage && (
+                    <div ref={loadMoreRef} className="blogs-load-more">
+                        {isFetchingNextPage && <p>Blogok betöltése...</p>}
+                    </div>
+                )}
+            </div>
+        </BottomPageWrapper>
     );
 }
