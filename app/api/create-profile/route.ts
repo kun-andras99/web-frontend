@@ -138,54 +138,6 @@ export async function POST(request: Request) {
                     weightKg: profile.weightKg ?? null,
                 },
             });
-
-            /*
-             * 3. LOOKING FOR
-             */
-            await tx.userLookingFor.deleteMany({
-                where: {
-                    userId: user.id,
-                },
-            });
-
-            await tx.userLookingFor.createMany({
-                data: profile.lookingFor.map((value) => ({
-                    userId: user.id,
-                    value,
-                })),
-            });
-
-            /*
-             * 4. GENDER INTEREST
-             */
-            await tx.userGenderInterest.deleteMany({
-                where: {
-                    userId: user.id,
-                },
-            });
-
-            await tx.userGenderInterest.createMany({
-                data: profile.genderInterest.map((value) => ({
-                    userId: user.id,
-                    value,
-                })),
-            });
-
-            /*
-             * 5. SEXUALITY INTEREST
-             */
-            await tx.userSexualityInterest.deleteMany({
-                where: {
-                    userId: user.id,
-                },
-            });
-
-            await tx.userSexualityInterest.createMany({
-                data: profile.sexualityInterest.map((value) => ({
-                    userId: user.id,
-                    value,
-                })),
-            });
         });
 
         return NextResponse.json(

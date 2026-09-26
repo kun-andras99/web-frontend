@@ -4,7 +4,7 @@ import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 // import TopFilter from "@/features/_components/ui/top-filter";
 // import ViewChange from "@/features/_components/ui/view-change";
 import { useScreenStore } from "@/features/_store/screen.store";
-import { useCurrentUserFull } from "@/features/auth/hooks/useCurrentUserFull";
+
 // import { useEffect, useState } from "react";
 
 // interface NearbyUser {
@@ -19,7 +19,7 @@ import { useCurrentUserFull } from "@/features/auth/hooks/useCurrentUserFull";
 
 export default function UsersNearbyScreen() {
     const { display } = useScreenStore();
-    const { data: user } = useCurrentUserFull();
+
     // console.log({ user });
     return (
         <BottomPageWrapper>

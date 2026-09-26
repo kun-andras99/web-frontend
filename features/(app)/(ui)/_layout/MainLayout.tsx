@@ -17,9 +17,6 @@ export default function MainLayout({
                 {/* leftmenu */}
                 <DisplayHeaderTitle />
                 <BaseDrawer />
-                {/* <BackButton className="back-button">
-                    <BackButtonIconSVG size={18} />
-                </BackButton> */}
             </header>
             {user && <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} />}
             {/* <BodySidebar user={user} /> */}

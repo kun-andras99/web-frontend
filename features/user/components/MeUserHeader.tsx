@@ -1,5 +1,6 @@
 "use client";
 
+import { useCurrentUserFull } from "@/features/auth/hooks/useCurrentUserFull";
 import { useUserHeaderDatas } from "@/features/user/hooks/useUserHeaderDatas";
 import Image from "next/image";
 type UserProfileProps = {
@@ -42,7 +43,8 @@ export default function MeUserHeader({ userId }: UserProfileProps) {
         isError,
         error,
     } = useUserHeaderDatas(userId);
-
+    const { data: fulluser } = useCurrentUserFull();
+    console.log(fulluser);
     if (isLoading) {
         return <div>Betöltés...</div>;
     }
@@ -77,6 +79,7 @@ export default function MeUserHeader({ userId }: UserProfileProps) {
             <p>{user.countryCode}</p>
             <p>{user.region}</p>
             <p>{user.city}</p>
+            <p>profilt létrehozta: {formatDate(fulluser.createdAt)}</p>
         </div>
     );
 }

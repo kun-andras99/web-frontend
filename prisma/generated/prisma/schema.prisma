@@ -8,8 +8,963 @@ datasource db {
 }
 
 /**
- * USER AND REGISTRATION - LOGIN
+ * ! MILYEN NYELVEKEN BESZÉL A FELHASZNÁLÓ?
  */
+enum Languages {
+  ABKHAZIAN
+  AFRIKAANS
+  ALBANIAN
+  AMHARIC
+  ARABIC
+  ARMENIAN
+  ASSAMESE
+  AYMARA
+  AZERBAIJANI
+  BASHKIR
+  BASQUE
+  BELARUSIAN
+  BENGALI
+  BIHARI
+  BISLAMA
+  BOSNIAN
+  BRETON
+  BULGARIAN
+  BURMESE
+  CATALAN
+  CHINESE
+  CORSICAN
+  CROATIAN
+  CZECH
+  DANISH
+  DUTCH
+  ENGLISH
+  ESPERANTO
+  ESTONIAN
+  EWE
+  FAROESE
+  FARSI
+  FIJIAN
+  FINNISH
+  FRENCH
+  FRISIAN
+  GALICIAN
+  GEORGIAN
+  GERMAN
+  GREEK
+  GUARANI
+  GUJARATI
+  HAITIAN
+  HAUSA
+  HEBREW
+  HERERO
+  HINDI
+  HIRI_MOTU
+  HUNGARIAN
+  ICELANDIC
+  IGBO
+  INDONESIAN
+  INTERLINGUA
+  INTERLINGUE
+  INUKTITUT
+  INUPIAQ
+  IRISH
+  ITALIAN
+  JAPANESE
+  JAVANESE
+  KANNADA
+  KANURI
+  KASHMIRI
+  KAZAKH
+  KHMER
+  KIKUYU
+  KINYARWANDA
+  KIRGHIZ
+  KOMI
+  KOREAN
+  KUANYAMA
+  KURDISH
+  LAO
+  LATIN
+  LATVIAN
+  LIMBURGISH
+  LINGALA
+  LITHUANIAN
+  LUXEMBOURGISH
+  MACEDONIAN
+  MALAGASY
+  MALAY
+  MALAYALAM
+  MALTESE
+  MANX
+  MAORI
+  MARATHI
+  MARSHALLESE
+  MOLDAVIAN
+  MONGOLIAN
+  NAURU
+  NAVAJO
+  NDONGA
+  NEPALI
+  NORWEGIAN
+  OCCITAN
+  OJIBWE
+  ORIYA
+  OROMO
+  OSSETIAN
+  PALI
+  PASHTO
+  POLISH
+  PORTUGUESE
+  PUNJABI
+  QUECHUA
+  ROMANIAN
+  ROMANSH
+  RUNDI
+  RUSSIAN
+  SAMOAN
+  SANGO
+  SANSKRIT
+  SARDINIAN
+  SERBIAN
+  SHONA
+  SINDHI
+  SINHALA
+  SLOVAK
+  SLOVENIAN
+  SOMALI
+  SOTHO
+  SPANISH
+  SUNDANESE
+  SWAHILI
+  SWATI
+  SWEDISH
+  TAGALOG
+  TAHITIAN
+  TAJIK
+  TAMIL
+  TATAR
+  TELUGU
+  THAI
+  TIBETAN
+  TIGRINYA
+  TONGA
+  TSONGA
+  TSWANA
+  TURKISH
+  TURKMEN
+  TWI
+  UIGUR
+  UKRAINIAN
+  URDU
+  UZBEK
+  VENDA
+  VIETNAMESE
+  VOLAPUK
+  WALLOON
+  WELSH
+  WOLOF
+  XHOSA
+  YIDDISH
+  YORUBA
+  ZHUANG
+  ZULU
+}
+
+/**
+ * ! FELHASZNÁLÓ USERDATA ADATAI
+ */
+enum HairColor {
+  BLACK
+  DARK_BROWN
+  BROWN
+  LIGHT_BROWN
+  CHESTNUT
+  AUBURN
+  RED
+  GINGER
+  BLONDE
+  DARK_BLONDE
+  LIGHT_BLONDE
+  PLATINUM_BLONDE
+  GREY
+  WHITE
+  SALT_AND_PEPPER
+  DYED
+  MULTICOLORED
+  OTHER
+}
+
+enum HairLength {
+  BALD
+  VERY_SHORT
+  SHORT
+  AVERAGE
+  LONG
+  PUNK
+}
+
+enum EyeColor {
+  BROWN
+  DARK_BROWN
+  LIGHT_BROWN
+  HAZEL
+  AMBER
+  GREEN
+  BLUE
+  LIGHT_BLUE
+  GREY
+  DARK_GREY
+  BLACK
+  HETEROCHROMIA
+  OTHER
+}
+
+enum BodyType {
+  SLIM
+  LEAN
+  FIT
+  CURVY
+  AVERAGE
+  ATHLETIC
+  MUSCULAR
+  BELLY
+  STOCKY
+  PLUS_SIZE
+}
+
+enum Beard {
+  CLEAN_SHAVEN
+  DESIGNER_STUBBLE
+  SHORT
+  MEDIUM
+  LONG
+  FULL
+  MOUSTACHE
+  MUSTACHE_AND_BEARD
+  GOATEE
+  NO_BEARD
+}
+
+enum BodyHair {
+  SMOOTH
+  SHAVED
+  NOT_VERY_HAIR
+  HAIRY
+  VERY_HAIRY
+}
+
+enum Ethnicity {
+  ASIAN
+  BLACK
+  EAST_ASIAN
+  SOUTH_ASIAN
+  SOUTHEAST_ASIAN
+  CENTRAL_ASIAN
+  WEST_ASIAN
+  MIDDLE_EASTERN
+  NORTH_AFRICAN
+  LATINO
+  HISPANIC
+  NATIVE_AMERICAN
+  INDIGENOUS
+  PACIFIC_ISLANDER
+  WHITE
+  SOUTHERN_EUROPEAN
+  NORTHERN_EUROPEAN
+  EASTERN_EUROPEAN
+  WESTERN_EUROPEAN
+  MIXED
+  MULTIRACIAL
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum Smoker {
+  NO
+  SOCIALLY
+  YES
+}
+
+enum Tattoos {
+  A_FEW
+  A_LOT
+  NO_TATTOOS
+}
+
+enum Piercings {
+  A_FEW
+  A_LOT
+  NO_PIERCINGS
+}
+
+enum Position {
+  TOP_ONLY
+  MORE_TOP
+  VERSATILE
+  MORE_BOTTOM
+  BOTTOM_ONLY
+}
+
+enum DickSize {
+  S
+  M
+  L
+  XL
+  XXL
+}
+
+enum DickCircumcision {
+  CLEAN_CUT
+  UNCUT
+}
+
+enum Fetish {
+  NONE
+  BDSM
+  BONDAGE
+  DOMINANCE
+  SUBMISSION
+  ROLEPLAY
+  LEATHER
+  LATEX
+  UNIFORM
+  LINGERIE
+  STOCKINGS
+  HIGH_HEELS
+  FEET
+  SOCKS
+  PIERCINGS
+  TATTOOS
+  MUSCLES
+  BODY_HAIR
+  VOYEURISM
+  EXHIBITIONISM
+  GROUP_PLAY
+  PUBLIC_PLAY
+  TOYS
+  SENSORY_PLAY
+  LIGHT_FETISH
+  MEDIUM_FETISH
+  EXTREME_FETISH
+  OTHER
+}
+
+enum SexualOpenness {
+  NOT_AT_ALL
+  SLIGHTLY
+  MODERATELY
+  VERY
+  EXTREMELY
+  WS_ONLY
+}
+
+enum Fisting {
+  NOT_INTERESTED
+  CURIOUS
+  OPEN_TO_IT
+  EXPERIENCED
+}
+
+enum Sadism {
+  NOT_INTERESTED
+  CURIOUS
+  OPEN_TO_IT
+  EXPERIENCED
+}
+
+enum Masochism {
+  NOT_INTERESTED
+  CURIOUS
+  OPEN_TO_IT
+  EXPERIENCED
+}
+
+enum SaferSex {
+  SAFE
+  LETS_TALK
+  CONSOM
+  PREP
+  PREP_AND_CONSOM
+  TASP
+}
+
+enum OpenTo {
+  SEX
+  FRIENDS
+  RELATIONSHIP
+}
+
+enum GoingOutInterest {
+  ARTS
+  BARS
+  CLUBS
+  PUBS
+  RESTAURANTS
+  CAFES
+  COFFEE_SHOPS
+  CINEMAS
+  THEATERS
+  CONCERTS
+  FESTIVALS
+  LIVE_MUSIC
+  KARAOKE
+  NIGHTLIFE
+  PARTIES
+  BEACHES
+  POOLS
+  SPA
+  GYMS
+  SPORTS_EVENTS
+  ART_GALLERIES
+  MUSEUMS
+  SHOPPING
+  OUTDOOR_EVENTS
+  FOOD_EVENTS
+  PRIDE_EVENTS
+  COMMUNITY_EVENTS
+  OTHER
+}
+
+enum LifestyleInterest {
+  LIFESTYLE
+  SELF_CARE
+  WELLNESS
+  MINIMALISM
+  LUXURY
+  FASHION
+  BEAUTY
+  SHOPPING
+  INTERIOR_DESIGN
+  DIY
+  COLLECTING
+}
+
+enum MusicInterest {
+  MUSIC
+  POP
+  ROCK
+  METAL
+  PUNK
+  INDIE
+  ALTERNATIVE
+  ELECTRONIC
+  TECHNO
+  HOUSE
+  TRANCE
+  HIP_HOP
+  RAP
+  RNB
+  SOUL
+  FUNK
+  JAZZ
+  BLUES
+  CLASSICAL_MUSIC
+  COUNTRY_MUSIC
+  REGGAE
+  LATIN_MUSIC
+  K_POP
+  J_POP
+  DISCO
+  DANCE_MUSIC
+  LIVE_MUSIC
+  SINGING
+  DJING
+  PLAYING_INSTRUMENTS
+}
+
+enum MoviesInterest {
+  MOVIES
+  TV_SERIES
+  DOCUMENTARIES
+  ANIME
+  MANGA
+  HORROR
+  THRILLER
+  ACTION
+  ADVENTURE
+  COMEDY
+  DRAMA
+  ROMANCE
+  SCI_FI
+  FANTASY
+  MYSTERY
+  CRIME
+  PSYCHOLOGICAL
+  SUPERHEROES
+  ANIMATION
+  CLASSIC_MOVIES
+  FILMMAKING
+  ACTING
+}
+
+enum BooksInterest {
+  READING
+  BOOKS
+  FICTION
+  NON_FICTION
+  FANTASY_BOOKS
+  SCI_FI_BOOKS
+  ROMANCE_BOOKS
+  HORROR_BOOKS
+  CRIME_BOOKS
+  THRILLER_BOOKS
+  POETRY
+  PHILOSOPHY
+  PSYCHOLOGY
+  HISTORY
+  BIOGRAPHIES
+  COMICS
+  GRAPHIC_NOVELS
+  WRITING
+  JOURNALING
+}
+
+enum GamingInterest {
+  GAMING
+  PC_GAMING
+  CONSOLE_GAMING
+  MOBILE_GAMING
+  PLAYSTATION
+  XBOX
+  NINTENDO
+  MMORPG
+  RPG
+  FPS
+  STRATEGY_GAMES
+  SIMULATION_GAMES
+  SURVIVAL_GAMES
+  HORROR_GAMES
+  SPORTS_GAMES
+  RACING_GAMES
+  BOARD_GAMES
+  CARD_GAMES
+  TABLETOP_GAMES
+  ESPORTS
+  STREAMING
+  GAME_DEVELOPMENT
+}
+
+enum SportsInterest {
+  SPORTS
+  FOOTBALL
+  BASKETBALL
+  VOLLEYBALL
+  TENNIS
+  TABLE_TENNIS
+  BADMINTON
+  SWIMMING
+  DIVING
+  RUNNING
+  CYCLING
+  MOUNTAIN_BIKING
+  HIKING
+  CLIMBING
+  SURFING
+  SKATEBOARDING
+  ROLLERBLADING
+  SKIING
+  SNOWBOARDING
+  ICE_SKATING
+  BOXING
+  KICKBOXING
+  MARTIAL_ARTS
+  WRESTLING
+  YOGA
+  PILATES
+  GYM
+  FITNESS
+  BODYBUILDING
+  CROSSFIT
+  DANCING
+  HORSE_RIDING
+  MOTORSPORT
+  FISHING
+  GOLF
+}
+
+enum TravelInterest {
+  TRAVEL
+  BACKPACKING
+  CITY_TRIPS
+  ROAD_TRIPS
+  BEACH_HOLIDAYS
+  MOUNTAIN_TRIPS
+  CAMPING
+  LUXURY_TRAVEL
+  SOLO_TRAVEL
+  GROUP_TRAVEL
+  CRUISES
+  CULTURAL_TRAVEL
+  ADVENTURE_TRAVEL
+  FOOD_TRAVEL
+  PHOTOGRAPHY_TRAVEL
+  EXPLORING_NEW_PLACES
+}
+
+enum FoodInterest {
+  FOOD
+  COOKING
+  BAKING
+  GRILLING
+  VEGETARIAN_FOOD
+  VEGAN_FOOD
+  HEALTHY_FOOD
+  STREET_FOOD
+  FAST_FOOD
+  FINE_DINING
+  INTERNATIONAL_CUISINE
+  ITALIAN_FOOD
+  ASIAN_FOOD
+  MEXICAN_FOOD
+  JAPANESE_FOOD
+  INDIAN_FOOD
+  MEDITERRANEAN_FOOD
+  HUNGARIAN_FOOD
+  DESSERTS
+  CHOCOLATE
+  COFFEE
+  TEA
+  WINE
+  COCKTAILS
+  CRAFT_BEER
+  WINE_TASTING
+  COFFEE_TASTING
+}
+
+enum ArtInterest {
+  ART
+  PAINTING
+  DRAWING
+  DIGITAL_ART
+  PHOTOGRAPHY
+  VIDEOGRAPHY
+  GRAPHIC_DESIGN
+  FASHION_DESIGN
+  SCULPTURE
+  POTTERY
+  CRAFTS
+  KNITTING
+  SEWING
+  WOODWORKING
+  JEWELRY_MAKING
+  CALLIGRAPHY
+  COSPLAY
+}
+
+enum TechnologyInterest {
+  TECHNOLOGY
+  COMPUTERS
+  PROGRAMMING
+  WEB_DEVELOPMENT
+  APP_DEVELOPMENT
+  ARTIFICIAL_INTELLIGENCE
+  ROBOTICS
+  ELECTRONICS
+  CRYPTOCURRENCY
+  BLOCKCHAIN
+  GAMING_TECHNOLOGY
+  GADGETS
+  SMART_HOME
+  CYBERSECURITY
+  SCIENCE
+  ASTRONOMY
+  SPACE
+  PHYSICS
+  CHEMISTRY
+  BIOLOGY
+  ENGINEERING
+}
+
+enum NatureInterest {
+  NATURE
+  ANIMALS
+  DOGS
+  CATS
+  HORSES
+  BIRDS
+  AQUARIUMS
+  FISH
+  REPTILES
+  WILDLIFE
+  PETS
+  GARDENING
+  PLANTS
+  FLOWERS
+  FORESTS
+  MOUNTAINS
+  OCEANS
+  LAKES
+  CAMPING
+  ENVIRONMENT
+  SUSTAINABILITY
+}
+
+enum SocialInterest {
+  SOCIALIZING
+  FRIENDS
+  PARTIES
+  NIGHTLIFE
+  CLUBBING
+  BARS
+  PUBS
+  KARAOKE
+  DANCING
+  CONCERTS
+  FESTIVALS
+  LIVE_MUSIC
+  PUB_QUIZZES
+  MEETUPS
+  COMMUNITY_EVENTS
+}
+
+enum CultureInterest {
+  CULTURE
+  HISTORY
+  ARCHITECTURE
+  MUSEUMS
+  ART_GALLERIES
+  THEATER
+  OPERA
+  BALLET
+  LITERATURE
+  LANGUAGES
+  CULTURAL_EVENTS
+  RELIGION
+  MYTHOLOGY
+  ANCIENT_CULTURES
+}
+
+enum LearningInterest {
+  LEARNING
+  ONLINE_COURSES
+  LANGUAGES
+  PSYCHOLOGY
+  PHILOSOPHY
+  HISTORY
+  ECONOMICS
+  BUSINESS
+  ENTREPRENEURSHIP
+  MARKETING
+  FINANCE
+  INVESTING
+  PERSONAL_DEVELOPMENT
+  SELF_IMPROVEMENT
+  PUBLIC_SPEAKING
+  SCIENCE
+}
+
+enum AutomotiveInterest {
+  CARS
+  CLASSIC_CARS
+  SPORTS_CARS
+  SUPERCARS
+  MOTORCYCLES
+  MOTORSPORT
+  FORMULA_1
+  RACING
+  CAR_TUNING
+  CAR_MEETUPS
+  BOATS
+  SAILING
+  AVIATION
+  PLANES
+  TRAINS
+}
+
+enum OutdoorInterest {
+  OUTDOORS
+  HIKING
+  CAMPING
+  TREKKING
+  CLIMBING
+  FISHING
+  HUNTING
+  CYCLING
+  MOUNTAIN_BIKING
+  KAYAKING
+  CANOEING
+  RAFTING
+  SURFING
+  SAILING
+  DIVING
+  SNORKELING
+  PARAGLIDING
+  SKYDIVING
+}
+
+enum PersonalInterest {
+  MEDITATION
+  MINDFULNESS
+  ASTROLOGY
+  HOROSCOPES
+  SPIRITUALITY
+  MOTIVATION
+  PERSONAL_GROWTH
+  HUMAN_BEHAVIOR
+  RELATIONSHIPS
+  DATING
+  SOCIAL_PSYCHOLOGY
+}
+
+enum CollectingInterest {
+  COIN_COLLECTING
+  STAMP_COLLECTING
+  VINYL_RECORDS
+  BOOK_COLLECTION
+  ART_COLLECTION
+  SNEAKER_COLLECTION
+  WATCHES
+  PERFUMES
+  MEMORABILIA
+}
+
+enum FashionInterest {
+  STREETWEAR
+  VINTAGE_FASHION
+  DESIGNER_FASHION
+  SNEAKERS
+  JEWELRY
+  WATCHES
+  TATTOOS
+  PIERCINGS
+  ALTERNATIVE_FASHION
+  COSPLAY
+  VINTAGE
+}
+
+enum EventsInterest {
+  FESTIVALS
+  CONCERTS
+  PRIDE_EVENTS
+  CULTURAL_EVENTS
+  FOOD_FESTIVALS
+  MUSIC_FESTIVALS
+  FILM_FESTIVALS
+  SPORTS_EVENTS
+  COMIC_CONVENTIONS
+  GAMING_EVENTS
+}
+
+enum OtherInterest {
+  VOLUNTEERING
+  CHARITY
+  ACTIVISM
+  COMMUNITY
+  SOCIAL_CAUSES
+  ENTREPRENEURSHIP
+  BUSINESS
+  CAREER
+  NETWORKING
+  OTHER
+}
+
+enum BreastDevelopment {
+  NONE
+  DEVELOPING
+  SMALL
+  AVERAGE
+  LARGE
+}
+
+enum BreastImplant {
+  NONE
+  IMPLANTS
+  FAT_TRANSFER
+  OTHER
+}
+
+enum CupSize {
+  AAA
+  AA
+  A
+  B
+  C
+  D
+  DD
+  DDD
+  E
+  F
+  FF
+  G
+  GG
+  H
+  HH
+  I
+  J
+  K
+  L
+  M
+  N
+  O
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum BraSize {
+  AAA
+  AA
+  A
+  B
+  C
+  D
+  DD
+  DDD
+  E
+  F
+  FF
+  G
+  GG
+  H
+  HH
+  I
+  J
+  K
+  L
+  M
+  N
+  O
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum BraSizeSystem {
+  EU
+  UK
+  US
+  FR
+  IT
+  AU
+  JP
+}
+
+enum BinderSize {
+  XS
+  S
+  M
+  L
+  XL
+  XXL
+  XXXL
+}
+
+/**
+ * fontos adatok:
+ * regisztrációnál csak username, email és password-ot kérünk
+ * első belépésnél egy CreateAccountType oldalra visszük a usert
+ * itt elsődlegesen a fiókokat jelenítjük meg, itt választható
+ * hogy dating (ismerkedni szeretnék) vagy business (eseményeket
+ * hirdetek) - mert itt különböző adatokat adunk meg és láthatóságokat
+ * is szűrünk majd az AccountType alapján.
+ * egy usernek csak egy BUSINESS és egy DATING profilja lehet, ezek
+ * között majd válthat hogy melyikbe szeretne átlépni. belépés után alapból
+ * DATING profilra irányítjuk, ha csak BUSINESS profil van, akkor arra irányítjuk.
+ * ha DATINGOT választott akkor UserDatas-al töljük fel az adatait,
+ * ha BUSINESS akkor BusinessDatas-al.
+ * ! MEGJEGYZÉS: a BusinessDatas modell és a hozzá tartozó fiókváltás
+ * ! még nincs implementálva ebben a sémában, csak a DATING oldal kész.
+ */
+
+// tudjuk ki felhasználó, moderátor vagy admin. ez alapján is ellenőrzünk.
 enum UserRole {
   USER
   ADMIN
@@ -27,25 +982,31 @@ enum VerificationTokenType {
 enum Gender {
   MAN
   WOMAN
-  TRANS_MAN
-  TRANS_WOMAN
 }
 
 enum GenderInterest {
   MAN
   WOMAN
-  TRANS_MAN
-  TRANS_WOMAN
+}
+
+enum GenderCanSee {
+  MAN
+  WOMAN
 }
 
 enum Sexuality {
   STRAIGHT
-  BISEXUAL
   GAY
   LESBIAN
+  BISEXUAL
   PANSEXUAL
   ASEXUAL
+  DEMISEXUAL
+  QUEER
+  OMNISEXUAL
+  QUESTIONING
   OTHER
+  PREFER_NOT_TO_SAY
 }
 
 enum SexualityInterest {
@@ -58,6 +1019,37 @@ enum SexualityInterest {
   OTHER
 }
 
+enum SexualityCanSee {
+  STRAIGHT
+  BISEXUAL
+  GAY
+  LESBIAN
+  PANSEXUAL
+  ASEXUAL
+  OTHER
+}
+
+enum TransStatus {
+  // a személy neme megegyezik a születéskor kijelölt nemével
+  CIS
+  // a személy neme eltér a születéskor kijelölt nemétől
+  TRANS
+}
+
+enum TransStatusInterest {
+  // a személy neme megegyezik a születéskor kijelölt nemével
+  CIS
+  // a személy neme eltér a születéskor kijelölt nemétől
+  TRANS
+}
+
+enum TransStatusCanSee {
+  // a személy neme megegyezik a születéskor kijelölt nemével
+  CIS
+  // a személy neme eltér a születéskor kijelölt nemétől
+  TRANS
+}
+
 enum LookingFor {
   CHAT
   FRIENDSHIP
@@ -68,6 +1060,7 @@ enum LookingFor {
   NOTHING_SPECIFIC
 }
 
+// kapcsolati státuszok
 enum RelationshipStatus {
   SINGLE
   IN_RELATION
@@ -80,11 +1073,6 @@ enum RelationshipStatus {
   OPEN
 }
 
-enum TransStatus {
-  CIS
-  TRANS
-}
-
 enum AppCity {
   CENTRUM
   STRAIGHT
@@ -94,10 +1082,7 @@ enum AppCity {
   TRANS
 }
 
-// ============================================================
-// GALLERY
-// ============================================================
-
+// alap profilképek galéria és olyan galéria amit user hoz létere és tud kezelni
 enum GalleryType {
   PROFILE
   USER
@@ -108,10 +1093,6 @@ enum GalleryVisibility {
   PRIVATE
 }
 
-// ============================================================
-// GROUP
-// ============================================================
-
 enum GroupVisibility {
   PUBLIC
   PRIVATE
@@ -119,7 +1100,6 @@ enum GroupVisibility {
 
 enum GroupMemberRole {
   MEMBER
-  MODERATOR
   ADMIN
 }
 
@@ -137,25 +1117,21 @@ enum GroupInvitationStatus {
   EXPIRED
 }
 
-// ============================================================
-// BLOG
-// ============================================================
-
 enum BlogVisibility {
   PUBLIC
   PRIVATE
 }
 
+// első figyelmeztetés után felfüggesztjük, ilyenkor következő
+// belépésnél újra aktiválódik és üzenetben küldünk neki egy
+// adat változtatásra figyelmeztetést, második figyelmeztetés
+// bann, harmadik nincs, ott töröljük a felhasználót.
 enum UserAccountStatus {
   ACTIVE
   SUSPENDED
   BANNED
   DELETED
 }
-
-// ============================================================
-// SOCIAL RELATIONS
-// ============================================================
 
 enum FriendRequestStatus {
   PENDING
@@ -179,18 +1155,10 @@ enum MatchStatus {
   UNMATCHED
 }
 
-// ============================================================
-// EYE CANDY
-// ============================================================
-
 enum EyeCandyAction {
   RATE
   SKIP
 }
-
-// ============================================================
-// MESSAGING
-// ============================================================
 
 enum MessageType {
   TEXT
@@ -198,20 +1166,23 @@ enum MessageType {
   SYSTEM
 }
 
-// ============================================================
-// QUICK DISPLAY
-// ============================================================
-
-enum QuickDisplayType {
+enum RightNowDisplayType {
   ONE_HOUR
+  THREE_HOUR
 }
 
-// ============================================================
-// NOTIFICATIONS
-// ============================================================
-
+/**
+ * értesítés típusok
+ * új profil megtekintés, új profil megtekintő, favorizáltak,
+ * barátnak jelöltek, barát jelölést elfogadták, csoportba meghívás,
+ * csatlakozási kérés fogadás-törlés, megosztott privát albumot kap user,
+ * user blogját kedvelték (ki kedvelte, melyik blogot)
+ * matcheltek (kivel)
+ * rendszer értesítés (admin tud küldeni csak)
+ */
 enum NotificationType {
   PROFILE_VISIT
+  PROFILE_VIEW
   NEW_FAVORITE
   FRIEND_REQUEST
   FRIEND_ACCEPTED
@@ -221,14 +1192,10 @@ enum NotificationType {
   GALLERY_SHARED
   BLOG_LIKE
   MATCH
-  NEW_MESSAGE
-  SYSTEM
+  SYSTEM_MESSAGE
 }
 
-// ============================================================
-// MODERATION
-// ============================================================
-
+// moderáció
 enum ReportType {
   USER
   BLOG
@@ -254,15 +1221,10 @@ enum ModerationActionType {
   USER_UNBLOCKED
 }
 
-// ============================================================
-// VIP
-// ============================================================
-
+// vip
 enum VipTier {
   FREE
-  VIP1
-  VIP2
-  VIP3
+  VIP
 }
 
 enum SubscriptionStatus {
@@ -279,6 +1241,12 @@ enum PaymentStatus {
   REFUNDED
 }
 
+/**
+ * randi szolgalátatást használó profil
+ * a username azért kell mert azt csak a regisztrációnál kérjük,
+ * a nickname lesz az a név amit beállíthat a user magának
+ * mint negjelenített név, azzal lesz megjelenítve.
+ */
 model Users {
   id String @id @default(cuid())
 
@@ -297,92 +1265,94 @@ model Users {
   locationUpdatedAt DateTime?
   lastActiveAt      DateTime?
 
-  // AUTH
   refreshTokens      RefreshToken[]
   verificationTokens VerificationToken[]
 
-  // PROFILE
-  lookingFor        UserLookingFor[]
-  genderInterest    UserGenderInterest[]
-  sexualityInterest UserSexualityInterest[]
-
   userData       UserData?
   userPreference UserPreference?
+  userFilter     UserFilter?
 
-  // REGISTERED PARTNER - Optional registered partner.
   relationshipStatus RelationshipStatus?
   partnerUserId      String?             @unique
   partnerUser        Users?              @relation("UserPartner", fields: [partnerUserId], references: [id], onDelete: SetNull)
   partnerOf          Users?              @relation("UserPartner")
 
-  // SOCIAL / USER RELATIONS
+  // elküldött barát kérelmek
   sentFriendRequests     FriendRequest[] @relation("FriendRequestSender")
+  // barátnak jelölés kérelmek
   receivedFriendRequests FriendRequest[] @relation("FriendRequestReceiver")
 
+  // egy usernek több barátja is lehet...
   friendshipsAsUser1 Friendship[] @relation("FriendshipUser1")
   friendshipsAsUser2 Friendship[] @relation("FriendshipUser2")
 
+  // usert favorizálták
   favoritesGiven    UserFavorite[] @relation("FavoriteFrom")
+  // user favorizált
   favoritesReceived UserFavorite[] @relation("FavoriteTo")
 
+  // usert blokkolták
   blocksGiven    UserBlock[] @relation("BlockFrom")
+  // user blokkolt
   blocksReceived UserBlock[] @relation("BlockTo")
 
-  // VISITS
+  // más user megtekintés
   profileVisitsReceived ProfileVisit[] @relation("ProfileVisitedUser")
+  // user megtekint más usert
   profileVisitsMade     ProfileVisit[] @relation("ProfileVisitor")
+  // user megtekint egy csoportot
   groupVisits           GroupVisit[]   @relation("GroupVisitor")
 
-  // GALLERIES
+  // user galériái
   galleries             Gallery[]      @relation("GalleryOwner")
+  // user más userrel megosztott galériája(?)
   gallerySharesGiven    GalleryShare[] @relation("GalleryShareOwner")
+  // más usertől kapott galéria megosztás
   gallerySharesReceived GalleryShare[] @relation("GalleryShareRecipient")
 
-  // GROUPS
+  // user csoportjai - admin
   groupsCreated Group[]       @relation("GroupCreator")
+  // user csoportjai - csatlakozott
   groupMembers  GroupMember[]
 
+  // user elküldött csoport csatlakozási kérelmei
   groupJoinRequestsSent     GroupJoinRequest[] @relation("GroupJoinRequester")
+  // user csoport meghívói
   groupJoinRequestsReceived GroupJoinRequest[] @relation("GroupJoinTarget")
 
+  // csoport meghívók
   groupInvitationsSent     GroupInvitation[] @relation("GroupInvitationSender")
   groupInvitationsReceived GroupInvitation[] @relation("GroupInvitationReceiver")
 
-  // BLOG
+  // blogok és kedvelt blogok(?)
   blogs     Blog[]
   blogLikes BlogLike[]
 
-  // MATCHING
+  // match
   matchActionsGiven    MatchAction[] @relation("MatchActionFrom")
   matchActionsReceived MatchAction[] @relation("MatchActionTo")
 
   matchesAsUser1 Match[] @relation("MatchUser1")
   matchesAsUser2 Match[] @relation("MatchUser2")
 
-  // EYE CANDY
   eyeCandyParticipations EyeCandyParticipant[]
   eyeCandyVotesGiven     EyeCandyVote[]        @relation("EyeCandyVoter")
   eyeCandyVotesReceived  EyeCandyVote[]        @relation("EyeCandyCandidate")
 
-  // QUICK DISPLAY
-  quickDisplays QuickDisplay[]
+  rightNowDisplay RightNowDisplay[]
 
-  // CHAT
   conversationParticipants ConversationParticipant[]
   messagesSent             Message[]                 @relation("MessageSender")
+  messageReads             MessageRead[]
 
-  messageReads MessageRead[]
-
-  // NOTIF 
+  // értesítések
   notifications          Notification[] @relation("NotificationRecipient")
   notificationsTriggered Notification[] @relation("NotificationActor")
 
-  // MODERATION
   reportsCreated         Report[]           @relation("ReportCreator")
   reportsAgainst         Report[]           @relation("ReportTargetUser")
   moderationActionsGiven ModerationAction[] @relation("Moderator")
 
-  // VIP
   subscriptions UserSubscription[]
   payments      SubscriptionPayment[]
 
@@ -426,13 +1396,16 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
+/**
+ * ! randi szolgáltatást használó profil adatok
+ * ! ez a legfontosabb
+ */
 model UserData {
   id     Int    @id @default(autoincrement())
   userId String @unique
 
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  avatar      String?
   avatarUrl   String?
   nickname    String?
   description String?
@@ -440,22 +1413,127 @@ model UserData {
 
   birth DateTime
 
-  heightCm Int?
-  weightKg Int?
+  heightCm               Int?
+  weightKg               Int?
+  // Vállszélesség
+  shoulderWidth          Int?
+  // Nyakkörméret
+  neckCircumference      Int?
+  // Mellkas körmérete
+  chestCircumference     Int?
+  // Mellbőség
+  bustCircumference      Int?
+  // Mell alatti körméret
+  underbustCircumference Int?
+  // Derékbőség
+  waistCircumference     Int?
+  // Csípőbőség
+  hipCircumference       Int?
+  // Felkar körmérete
+  upperArmCircumference  Int?
+  // Alkar körmérete
+  forearmCircumference   Int?
+  // Csukló körmérete
+  wristCircumference     Int?
+  // Karhossz
+  armLength              Int?
+  // Felkar hossza
+  upperArmLength         Int?
+  // Alkar hossza
+  forearmLength          Int?
+  // Comb körmérete
+  thighCircumference     Int?
+  // Térd körmérete
+  kneeCircumference      Int?
+  // Vádli körmérete
+  calfCircumference      Int?
+  // Boka körmérete
+  ankleCircumference     Int?
+  // Lábhossz
+  legLength              Int?
+  // Belső lábhossz
+  inseamLength           Int?
+  // Külső lábhossz
+  outseamLength          Int?
+  // Kézhossz
+  handLength             Int?
+  // Kézszélesség
+  handWidth              Int?
+  // Ujjhossz
+  fingerLength           Int?
+  // NŐKNEK | TRANSNŐKNEK
+  // Melltartóméret
+  braSize                BraSize?
+  braSizeSystem          BraSizeSystem?
+  // Kosárméret
+  cupSize                CupSize?
+  // Mellimplantátum
+  breastImplant          BreastImplant?
+  // Mellfejlődés
+  breastDevelopment      BreastDevelopment?
+  // TRANS FÉRFI
+  // Binder mérete
+  binderSize             BinderSize?
 
-  gender    Gender?
-  sexuality Sexuality?
+  // ez fontos, ez az applikáció városa!
+  appCity           AppCity?
+  gender            Gender?
+  genderCanSee      GenderCanSee[]
+  sexuality         Sexuality?
+  sexualityCanSee   SexualityCanSee[]
+  transStatus       TransStatus?
+  transStatusCanSee TransStatusCanSee[]
 
-  /**
-   * Location displayed on profile.
-   * These are intentionally strings rather than enums.
-   */
+  // több nyelven is beszélhet valaki
+  languages Languages[]
+
+  hairLength       HairLength?
+  hairColor        HairColor?
+  eyeColor         EyeColor?
+  bodyType         BodyType?
+  beard            Beard?
+  bodyHair         BodyHair?
+  ethnicity        Ethnicity?
+  smoker           Smoker?
+  tattoos          Tattoos?
+  piercings        Piercings?
+  position         Position?
+  dickSize         DickSize?
+  dickCircumcision DickCircumcision?
+  fetish           Fetish?
+  sexualOpenness   SexualOpenness?
+  fisting          Fisting?
+  sadism           Sadism?
+  masochism        Masochism?
+  saferSex         SaferSex?
+  openTo           OpenTo?
+
+  goingOutInterests   GoingOutInterest[]
+  lifestyleInterests  LifestyleInterest[]
+  musicInterests      MusicInterest[]
+  movieInterests      MoviesInterest[]
+  gamingInterests     GamingInterest[]
+  sportsInterests     SportsInterest[]
+  booksInterests      BooksInterest[]
+  travelInterests     TravelInterest[]
+  foodInterests       FoodInterest[]
+  artInterests        ArtInterest[]
+  technologyInterests TechnologyInterest[]
+  natureInterests     NatureInterest[]
+  cultureInterests    CultureInterest[]
+  learningInterests   LearningInterest[]
+  socialInterests     SocialInterest[]
+  automotiveInterests AutomotiveInterest[]
+  outdoorInterests    OutdoorInterest[]
+  personalInterests   PersonalInterest[]
+  collectingInterests CollectingInterest[]
+  fashionInterests    FashionInterest[]
+  eventsInterests     EventsInterest[]
+  otherInterests      OtherInterest[]
+
   countryCode String?
   region      String?
   city        String?
-  appCity     AppCity?
-
-  transStatus TransStatus?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -469,22 +1547,122 @@ model UserData {
   @@map("user_data")
 }
 
+/**
+ * ! ez a "kereső / filter" beállítás — ide mentjük a felhasználó
+ * ! swipe/nearby szűrőit, hogy eszközök között is megmaradjon és
+ * ! a szerveroldali matching logika is elérje. Kliens oldalon (pl.
+ * ! Zustand) csak a piszkozat / UI állapot legyen tartva, a "forrás
+ * ! igazság" ez a tábla.
+ */
 model UserPreference {
   id     Int    @id @default(autoincrement())
   userId String @unique
 
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  minAge Int?
-  maxAge Int?
+  minAge                      Int?
+  maxAge                      Int?
+  minHeightCm                 Int?
+  maxHeightCm                 Int?
+  minShoulderWidthCm          Int?
+  maxShoulderWidthCm          Int?
+  minNeckCircumferenceCm      Int?
+  maxNeckCircumferenceCm      Int?
+  minChestCircumferenceCm     Int?
+  maxChestCircumferenceCm     Int?
+  minBustCircumferenceCm      Int?
+  maxBustCircumferenceCm      Int?
+  minUnderbustCircumferenceCm Int?
+  maxUnderbustCircumferenceCm Int?
+  minWaistCircumferenceCm     Int?
+  maxWaistCircumferenceCm     Int?
+  minHipCircumferenceCm       Int?
+  maxHipCircumferenceCm       Int?
+  minUpperArmCircumferenceCm  Int?
+  maxUpperArmCircumferenceCm  Int?
+  minForearmCircumferenceCm   Int?
+  maxForearmCircumferenceCm   Int?
+  minWristCircumferenceCm     Int?
+  maxWristCircumferenceCm     Int?
+  minArmLengthCm              Int?
+  maxArmLengthCm              Int?
+  minUpperArmLengthCm         Int?
+  maxUpperArmLengthCm         Int?
+  minForearmLengthCm          Int?
+  maxForearmLengthCm          Int?
+  minThighCircumferenceCm     Int?
+  maxThighCircumferenceCm     Int?
+  minKneeCircumferenceCm      Int?
+  maxKneeCircumferenceCm      Int?
+  minCalfCircumferenceCm      Int?
+  maxCalfCircumferenceCm      Int?
+  minAnkleCircumferenceCm     Int?
+  maxAnkleCircumferenceCm     Int?
+  minLegLengthCm              Int?
+  maxLegLengthCm              Int?
+  minInseamLengthCm           Int?
+  maxInseamLengthCm           Int?
+  minOutseamLengthCm          Int?
+  maxOutseamLengthCm          Int?
+  minHandLengthCm             Int?
+  maxHandLengthCm             Int?
+  minHandWidthCm              Int?
+  maxHandWidthCm              Int?
+  minFingerLengthCm           Int?
+  maxFingerLengthCm           Int?
 
-  minHeightCm Int?
-  maxHeightCm Int?
+  lookingFor       LookingFor[]
+  gender           GenderInterest[]
+  sexuality        SexualityInterest[]
+  transStatus      TransStatusInterest[]
+  hairLength       HairLength[]
+  hairColor        HairColor[]
+  eyeColor         EyeColor[]
+  bodyType         BodyType[]
+  beard            Beard[]
+  bodyHair         BodyHair[]
+  ethnicity        Ethnicity[]
+  smoker           Smoker[]
+  tattoos          Tattoos[]
+  piercings        Piercings[]
+  position         Position[]
+  dickSize         DickSize[]
+  dickCircumcision DickCircumcision[]
+  fetish           Fetish[]
+  sexualOpenness   SexualOpenness[]
+  fisting          Fisting[]
+  sadism           Sadism[]
+  masochism        Masochism[]
+  saferSex         SaferSex[]
+  openTo           OpenTo[]
+  cupSizes         CupSize[]
+  braSizes         BraSize[]
+  binderSizes      BinderSize[]
 
-  maxDistanceKm Int?
-
-  verifiedOnly     Boolean @default(false)
-  locationRequired Boolean @default(true)
+  // érdeklődési kör szűrők — eddig hiányoztak, most az alap
+  // (Looking* nélküli) enumokat használva, konzisztensen a UserData-val
+  goingOutInterests   GoingOutInterest[]
+  lifestyleInterests  LifestyleInterest[]
+  musicInterests      MusicInterest[]
+  movieInterests      MoviesInterest[]
+  gamingInterests     GamingInterest[]
+  sportsInterests     SportsInterest[]
+  booksInterests      BooksInterest[]
+  travelInterests     TravelInterest[]
+  foodInterests       FoodInterest[]
+  artInterests        ArtInterest[]
+  technologyInterests TechnologyInterest[]
+  natureInterests     NatureInterest[]
+  cultureInterests    CultureInterest[]
+  learningInterests   LearningInterest[]
+  socialInterests     SocialInterest[]
+  automotiveInterests AutomotiveInterest[]
+  outdoorInterests    OutdoorInterest[]
+  personalInterests   PersonalInterest[]
+  collectingInterests CollectingInterest[]
+  fashionInterests    FashionInterest[]
+  eventsInterests     EventsInterest[]
+  otherInterests      OtherInterest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -492,52 +1670,125 @@ model UserPreference {
   @@map("user_preferences")
 }
 
-model UserLookingFor {
-  id Int @id @default(autoincrement())
-
-  userId String
-  value  LookingFor
+model UserFilter {
+  id     Int    @id @default(autoincrement())
+  userId String @unique
 
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, value])
-  @@index([userId])
-  @@index([value])
-  @@map("user_looking_for")
-}
+  minAge                      Int?
+  maxAge                      Int?
+  minHeightCm                 Int?
+  maxHeightCm                 Int?
+  minShoulderWidthCm          Int?
+  maxShoulderWidthCm          Int?
+  minNeckCircumferenceCm      Int?
+  maxNeckCircumferenceCm      Int?
+  minChestCircumferenceCm     Int?
+  maxChestCircumferenceCm     Int?
+  minBustCircumferenceCm      Int?
+  maxBustCircumferenceCm      Int?
+  minUnderbustCircumferenceCm Int?
+  maxUnderbustCircumferenceCm Int?
+  minWaistCircumferenceCm     Int?
+  maxWaistCircumferenceCm     Int?
+  minHipCircumferenceCm       Int?
+  maxHipCircumferenceCm       Int?
+  minUpperArmCircumferenceCm  Int?
+  maxUpperArmCircumferenceCm  Int?
+  minForearmCircumferenceCm   Int?
+  maxForearmCircumferenceCm   Int?
+  minWristCircumferenceCm     Int?
+  maxWristCircumferenceCm     Int?
+  minArmLengthCm              Int?
+  maxArmLengthCm              Int?
+  minUpperArmLengthCm         Int?
+  maxUpperArmLengthCm         Int?
+  minForearmLengthCm          Int?
+  maxForearmLengthCm          Int?
+  minThighCircumferenceCm     Int?
+  maxThighCircumferenceCm     Int?
+  minKneeCircumferenceCm      Int?
+  maxKneeCircumferenceCm      Int?
+  minCalfCircumferenceCm      Int?
+  maxCalfCircumferenceCm      Int?
+  minAnkleCircumferenceCm     Int?
+  maxAnkleCircumferenceCm     Int?
+  minLegLengthCm              Int?
+  maxLegLengthCm              Int?
+  minInseamLengthCm           Int?
+  maxInseamLengthCm           Int?
+  minOutseamLengthCm          Int?
+  maxOutseamLengthCm          Int?
+  minHandLengthCm             Int?
+  maxHandLengthCm             Int?
+  minHandWidthCm              Int?
+  maxHandWidthCm              Int?
+  minFingerLengthCm           Int?
+  maxFingerLengthCm           Int?
 
-model UserGenderInterest {
-  id Int @id @default(autoincrement())
+  lookingFor       LookingFor[]
+  gender           GenderInterest[]
+  sexuality        SexualityInterest[]
+  transStatus      TransStatusInterest[]
+  hairLength       HairLength[]
+  hairColor        HairColor[]
+  eyeColor         EyeColor[]
+  bodyType         BodyType[]
+  beard            Beard[]
+  bodyHair         BodyHair[]
+  ethnicity        Ethnicity[]
+  smoker           Smoker[]
+  tattoos          Tattoos[]
+  piercings        Piercings[]
+  position         Position[]
+  dickSize         DickSize[]
+  dickCircumcision DickCircumcision[]
+  fetish           Fetish[]
+  sexualOpenness   SexualOpenness[]
+  fisting          Fisting[]
+  sadism           Sadism[]
+  masochism        Masochism[]
+  saferSex         SaferSex[]
+  openTo           OpenTo[]
+  cupSizes         CupSize[]
+  braSizes         BraSize[]
+  binderSizes      BinderSize[]
 
-  userId String
-  value  GenderInterest
+  // érdeklődési kör szűrők — eddig hiányoztak, most az alap
+  // (Looking* nélküli) enumokat használva, konzisztensen a UserData-val
+  goingOutInterests   GoingOutInterest[]
+  lifestyleInterests  LifestyleInterest[]
+  musicInterests      MusicInterest[]
+  movieInterests      MoviesInterest[]
+  gamingInterests     GamingInterest[]
+  sportsInterests     SportsInterest[]
+  booksInterests      BooksInterest[]
+  travelInterests     TravelInterest[]
+  foodInterests       FoodInterest[]
+  artInterests        ArtInterest[]
+  technologyInterests TechnologyInterest[]
+  natureInterests     NatureInterest[]
+  cultureInterests    CultureInterest[]
+  learningInterests   LearningInterest[]
+  socialInterests     SocialInterest[]
+  automotiveInterests AutomotiveInterest[]
+  outdoorInterests    OutdoorInterest[]
+  personalInterests   PersonalInterest[]
+  collectingInterests CollectingInterest[]
+  fashionInterests    FashionInterest[]
+  eventsInterests     EventsInterest[]
+  otherInterests      OtherInterest[]
 
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@unique([userId, value])
-  @@index([userId])
-  @@index([value])
-  @@map("user_gender_interest")
-}
-
-model UserSexualityInterest {
-  id Int @id @default(autoincrement())
-
-  userId String
-  value  SexualityInterest
-
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, value])
-  @@index([userId])
-  @@index([value])
-  @@map("user_sexuality_interest")
+  @@map("user_filters")
 }
 
 /**
- * PROFILE VISITS
- * When user A opens user B's profile,
- * one record is created.
+ * profil megtekintéseket mentük amikor egy user
+ * megtekinti egy másik user profilját.
  */
 model ProfileVisit {
   id String @id @default(cuid())
@@ -556,9 +1807,8 @@ model ProfileVisit {
 }
 
 /**
- * VISITED ITEMS
- * Stores when a user viewed another user
- * or a group.
+ * ez arra szolgál amikor egy user megtekint csoportot,
+ * azt ide mentjük, mert megjelenítjük.
  */
 model GroupVisit {
   id String @id @default(cuid())
@@ -577,7 +1827,15 @@ model GroupVisit {
 }
 
 /**
- * GALLERIES
+ * egy user tud létrehozni galériákat. kiválaszthatja
+ * hogy a galéria publikus vagy privát legyen.
+ * ha usernek van egy privát albumja, akkor azt megtudja
+ * osztani más userrel. alapból egy órára, de választható:
+ * * három óra
+ * * egy nap
+ * * egy hét
+ * alapból van neki egy Profilképek galériája, ami
+ * nem tartalmaz képeket.
  */
 model Gallery {
   id String @id @default(cuid())
@@ -594,21 +1852,19 @@ model Gallery {
   updatedAt DateTime @updatedAt
 
   images GalleryImage[]
-
   shares GalleryShare[] @relation("GalleryShared")
 
-  @@unique([ownerId, type])
+  @@unique([ownerId, name])
   @@index([ownerId])
   @@index([visibility])
   @@map("galleries")
 }
 
 /**
- * GALLERY IMAGES
+ * galéria képek
  */
 model GalleryImage {
-  id String @id @default(cuid())
-
+  id        String @id @default(cuid())
   galleryId String
 
   gallery Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
@@ -634,9 +1890,7 @@ model GalleryImage {
 }
 
 /**
- * PRIVATE GALLERY ACCESS
- * A private gallery can be shared with another user
- * for 1-3 hours or until manually revoked.
+ * privát album megosztására,
  */
 model GalleryShare {
   id String @id @default(cuid())
@@ -645,10 +1899,9 @@ model GalleryShare {
   ownerId     String
   recipientId String
 
-  gallery Gallery @relation("GalleryShared", fields: [galleryId], references: [id], onDelete: Cascade)
-
-  owner     Users @relation("GalleryShareOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  recipient Users @relation("GalleryShareRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  gallery   Gallery @relation("GalleryShared", fields: [galleryId], references: [id], onDelete: Cascade)
+  owner     Users   @relation("GalleryShareOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  recipient Users   @relation("GalleryShareRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
 
   grantedAt DateTime @default(now())
   expiresAt DateTime
@@ -665,15 +1918,18 @@ model GalleryShare {
 }
 
 /**
- * GROUP
+ * egy user tud létrehozni csoportot. itt mint creator
+ * kapcsolódik a userhez. be tudja állítani a láthatóságát,
+ * members - csoport tagok tároslása
+ * joinRequests - ha pricát a user, ide mentjük a csatlakozási
+ * kérelmeket.
+ * invitations - amennyiben a csoport adminja küld meghívót
+ * egy usernek aki nem tagja a csoportnak.
  */
 model Group {
-  id String @id @default(cuid())
-
+  id          String  @id @default(cuid())
   name        String
   description String?
-
-  visibility GroupVisibility @default(PUBLIC)
 
   creatorId String
   creator   Users  @relation("GroupCreator", fields: [creatorId], references: [id], onDelete: Cascade)
@@ -681,8 +1937,8 @@ model Group {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  members GroupMember[]
-
+  visibility   GroupVisibility    @default(PUBLIC)
+  members      GroupMember[]
   joinRequests GroupJoinRequest[]
   invitations  GroupInvitation[]
 
@@ -695,11 +1951,10 @@ model Group {
 }
 
 /**
- * GROUP MEMBERS
+ * csoport tag - egy csoport és user közötti kapcsolathoz.
  */
 model GroupMember {
-  id String @id @default(cuid())
-
+  id      String @id @default(cuid())
   groupId String
   userId  String
 
@@ -716,7 +1971,8 @@ model GroupMember {
 }
 
 /**
- * GROUP JOIN REQUEST
+ * csatlakozás egy csoporthoz kérés amennyiben privát
+ * egy csoport, tud a user kérni csatlakozási kérelmet.
  */
 model GroupJoinRequest {
   id String @id @default(cuid())
@@ -724,8 +1980,7 @@ model GroupJoinRequest {
   groupId     String
   requesterId String
 
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
-
+  group     Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
   requester Users @relation("GroupJoinRequester", fields: [requesterId], references: [id], onDelete: Cascade)
 
   status GroupJoinRequestStatus @default(PENDING)
@@ -734,8 +1989,7 @@ model GroupJoinRequest {
   respondedAt DateTime?
 
   respondedById String?
-
-  respondedBy Users? @relation("GroupJoinTarget", fields: [respondedById], references: [id], onDelete: SetNull)
+  respondedBy   Users?  @relation("GroupJoinTarget", fields: [respondedById], references: [id], onDelete: SetNull)
 
   @@unique([groupId, requesterId])
   @@index([groupId, status])
@@ -744,20 +1998,21 @@ model GroupJoinRequest {
 }
 
 /**
- * GROUP INVITATION
+ * most van egy user akinek van egy csoportja ami privát.
+ * ugye oda egy másik user csak úgy tud csatlakozni ha
+ * jelentkezik ebbe a csoportba, vagy a csoport adminja küld
+ * neki egy meghívót. ezt a meghívót akár elfogadhatja,
+ * akár elutasíthatja.
  */
 model GroupInvitation {
-  id String @id @default(cuid())
-
+  id      String @id @default(cuid())
   groupId String
 
   senderId   String
   receiverId String
 
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
-
-  sender Users @relation("GroupInvitationSender", fields: [senderId], references: [id], onDelete: Cascade)
-
+  group    Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sender   Users @relation("GroupInvitationSender", fields: [senderId], references: [id], onDelete: Cascade)
   receiver Users @relation("GroupInvitationReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
 
   status GroupInvitationStatus @default(PENDING)
@@ -771,7 +2026,12 @@ model GroupInvitation {
 }
 
 /**
- * BLOG
+ * egy user tud létrehozni blogot.
+ * be tudja állítani hogy publikus vagy privát legyen.
+ * ha privát, akkor más userek nem látják, ellenben ő látja
+ * a saját profilján, ahol aktiválhatja újra publikussá.
+ * kellenek a blognak a tagjei ha meg szeretném őket jeleteni.
+ * likeok az összes like kiírása végett.
  */
 model Blog {
   id String @id @default(cuid())
@@ -779,9 +2039,8 @@ model Blog {
   authorId String
   author   Users  @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
-  title   String
-  content String
-
+  title      String
+  content    String
   visibility BlogVisibility @default(PUBLIC)
 
   createdAt DateTime @default(now())
@@ -796,16 +2055,17 @@ model Blog {
 }
 
 /**
- * BLOG TAG
+ * ha lehet legyen egy külön model ahol előre megadott blog
+ * tag-ek vannak, legalább 40 tag-et írj bele angolul, mert
+ * ezeket a user külön kiválaszthatja a blogjához
+ * egy blognak vannak tagjei, ez alapján akár szűrhetünk is.
  */
 model BlogTag {
-  id String @id @default(cuid())
+  id   String @id @default(cuid())
+  name String
 
   blogId String
-
-  blog Blog @relation(fields: [blogId], references: [id], onDelete: Cascade)
-
-  name String
+  blog   Blog   @relation(fields: [blogId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 
@@ -815,7 +2075,7 @@ model BlogTag {
 }
 
 /**
- * BLOG LIKE
+ * egy user tudja like-olni egy másik user blogját. ha a sajátja akkor ne tudja. egy user csak egyszer likeolhat egy blogot, és unlikeolhat.
  */
 model BlogLike {
   id String @id @default(cuid())
@@ -828,16 +2088,13 @@ model BlogLike {
 
   createdAt DateTime @default(now())
 
-  /**
-   * One user can like a blog only once.
-   */
   @@unique([blogId, userId])
   @@index([userId])
   @@map("blog_likes")
 }
 
 /**
- * FAVORITES
+ * egy usernek több user is lehet favoritja, rájuk egy gombnyomással szűrhet, külön megjelenítés adatlapon...
  */
 model UserFavorite {
   id String @id @default(cuid())
@@ -856,7 +2113,7 @@ model UserFavorite {
 }
 
 /**
- * BLOCKS
+ * egy user blockolhat egy felhasználót, ilyenkor annak a usernek az adatlapját nem éri el. amelyik blokkolt, ha szeretné vissza is tudja oldani a tiltást.
  */
 model UserBlock {
   id String @id @default(cuid())
@@ -875,7 +2132,7 @@ model UserBlock {
 }
 
 /**
- * FRIEND REQUESTS
+ * egy user tud küldeni a jelenleg bejelentkezett usernek egy barátkérést, ilyenkor azt megjelenítjük neki notificationban
  */
 model FriendRequest {
   id String @id @default(cuid())
@@ -897,6 +2154,9 @@ model FriendRequest {
   @@map("friend_requests")
 }
 
+/**
+ * a már aktív, mind a két usertől elfogadott barátság.
+ */
 model Friendship {
   id String @id @default(cuid())
 
@@ -911,6 +2171,9 @@ model Friendship {
   createdAt DateTime  @default(now())
   endedAt   DateTime?
 
+  // normalizált "userId1_userId2" kulcs (mindig kisebb id elöl), hogy
+  // egy párra csak egy sor létezhessen, mert a user1/user2 sorrendje
+  // önmagában nem véd az A-B / B-A duplikáció ellen
   pairKey String @unique
 
   @@index([user1Id])
@@ -920,12 +2183,7 @@ model Friendship {
 }
 
 /**
- * MATCH ACTION
- * A user can express interest in another user.
- * Example:
- * User A likes User B.
- * User B likes User A.
- * Then a Match record can be created.
+ * jelenlegi user tud likeolni/match szivezni egy másik usert aki beállította hogy megjelenhet a matchek-ben
  */
 model MatchAction {
   id String @id @default(cuid())
@@ -945,8 +2203,11 @@ model MatchAction {
 }
 
 /**
- * MATCH
- * Created when both users have expressed interest.
+ * ha a jelenlegi user likeolt valakit, és az nem likeolta, akkor:
+ * * megy tovább a matchekben, másokait likeolhat
+ * különben ha likeolta
+ * * matcheltek, így közös matchük van.
+ * erről értesítést küldünk mind a 2 usernek.
  */
 model Match {
   id String @id @default(cuid())
@@ -962,6 +2223,7 @@ model Match {
   matchedAt   DateTime  @default(now())
   unmatchedAt DateTime?
 
+  // ugyanaz a normalizált pár-kulcs elve mint a Friendship-nél
   pairKey String @unique
 
   @@unique([user1Id, user2Id])
@@ -971,31 +2233,35 @@ model Match {
 }
 
 /**
- * EYE CANDY CONTEST
- * Example:
- * startAt  = Monday 00:00
- * endAt    = Sunday 23:59
- * After the contest ends, voting records can be cleaned.
+ * az admin létre tud hozni egy amolyan eye candy contestet, amit minden user lát
+ * és külön lehet rá jelentkezni a megadott jelentkezési időtől.
+ * példa:
+ * jelentkezés kezdete
+ * kezdődik  = Monday 00:00
+ * végződik    = Sunday 23:59
+ * miután vége, töröljük az adatokat.
  */
 model EyeCandyContest {
-  id String @id @default(cuid())
-
+  id   String  @id @default(cuid())
   name String?
 
   startAt DateTime
   endAt   DateTime
 
-  createdAt DateTime @default(now())
-
   participants EyeCandyParticipant[]
   votes        EyeCandyVote[]
+
+  createdAt DateTime @default(now())
 
   @@index([startAt, endAt])
   @@map("eye_candy_contests")
 }
 
 /**
- * EYE CANDY PARTICIPANT
+ * ezen a "versenyen" résztvevő userek, itt mentjük azt
+ * hogy countyCode, region alapján az első 20 leg értékeltebb usert,
+ * amit a user profil adataiba is mentünk hogy később ki tudjuk írni
+ * hogy pl 3x ért el helyezést, 1: 14., 2: 10., 3: 16
  */
 model EyeCandyParticipant {
   id String @id @default(cuid())
@@ -1006,24 +2272,13 @@ model EyeCandyParticipant {
   contest EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
   user    Users           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  /**
-   * Snapshot of the participant's region.
-   * Important because the user's region can change later.
-   */
   countryCode String?
   region      String?
   city        String?
 
-  /**
-   * Maximum 3 images.
-   * Minimum 1 image.
-   * Application logic validates 1-3.
-   */
   images EyeCandyImage[]
 
-  /**
-   * Stored after contest calculation.
-   */
+  // contest kalkuláció után mentjük
   totalScore Int @default(0)
   voteCount  Int @default(0)
 
@@ -1038,9 +2293,12 @@ model EyeCandyParticipant {
   @@map("eye_candy_participants")
 }
 
+/**
+ * egy ilyen versenyre 3 képet lehet feltölteni amik alapján
+ * más user értékelheti a verseny résztvevőjét.
+ */
 model EyeCandyImage {
-  id String @id @default(cuid())
-
+  id            String @id @default(cuid())
   participantId String
 
   participant EyeCandyParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
@@ -1048,8 +2306,7 @@ model EyeCandyImage {
   url        String
   storageKey String?
 
-  sortOrder Int @default(0)
-
+  sortOrder  Int      @default(0)
   uploadedAt DateTime @default(now())
 
   @@index([participantId, sortOrder])
@@ -1057,14 +2314,15 @@ model EyeCandyImage {
 }
 
 /**
- * EYE CANDY VOTE
+ * jelenlegi user szavaz egy eye candyban résztvevő userre
+ * ha skippeljük akkor nulla
+ * egy user csak egyszer szavazhat egy contesten résztvevő userre
  */
 model EyeCandyVote {
   id String @id @default(cuid())
 
   contestId String
-
-  contest EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  contest   EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
 
   voterId     String
   candidateId String
@@ -1074,24 +2332,13 @@ model EyeCandyVote {
 
   action EyeCandyAction
 
-  /**
-   * Rating is null when action = SKIP.
-   * Rating: 1-5.
-   */
   rating Int?
 
-  /**
-   * Snapshot of candidate's region.
-   */
   candidateCountryCode String?
   candidateRegion      String?
 
   createdAt DateTime @default(now())
 
-  /**
-   * A voter can process a candidate only once
-   * during one contest.
-   */
   @@unique([contestId, voterId, candidateId])
   @@index([contestId, candidateId])
   @@index([contestId, voterId])
@@ -1100,17 +2347,15 @@ model EyeCandyVote {
 }
 
 /**
- * QUICK DISPLAY
- * User pays/activates a one-hour
- * highlighted visibility period.
+ * ezen az oldalon a user egy egy órás kimagasló megjelenítést kap
  */
-model QuickDisplay {
+model RightNowDisplay {
   id String @id @default(cuid())
 
   userId String
   user   Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  type QuickDisplayType @default(ONE_HOUR)
+  type RightNowDisplayType @default(ONE_HOUR)
 
   startedAt DateTime
   expiresAt DateTime
@@ -1123,8 +2368,9 @@ model QuickDisplay {
 }
 
 /**
- * CONVERSATION
- * A conversation belongs to exactly two users.
+ * két (vagy több) user közötti beszélgetés konténere.
+ * a résztvevőket a ConversationParticipant köti hozzá, hogy
+ * a jövőben csoportos chat is elférjen ugyanezen a modellen.
  */
 model Conversation {
   id String @id @default(cuid())
@@ -1140,8 +2386,10 @@ model Conversation {
 }
 
 /**
- * CONVERSATION PARTICIPANTS
- * Per-user chat deletion state lives here.
+ * egy user és egy beszélgetés közötti kapcsolat: mikor
+ * csatlakozott, törölte-e (csak) magának a beszélgetést,
+ * és meddig olvasta el az üzeneteket (lastReadAt) — ez adja
+ * az "olvasatlan üzenetek száma" számítás alapját.
  */
 model ConversationParticipant {
   id String @id @default(cuid())
@@ -1154,10 +2402,6 @@ model ConversationParticipant {
 
   joinedAt DateTime @default(now())
 
-  /**
-   * User deleted/cleared the conversation
-   * from their own inbox.
-   */
   deletedAt DateTime?
 
   lastReadAt DateTime?
@@ -1168,7 +2412,9 @@ model ConversationParticipant {
 }
 
 /**
- * MESSAGE
+ * két user közötti beszélgetés üzenete. az olvasottságot
+ * a MessageRead táblában mentjük soronként (ki, mikor olvasta),
+ * ebből számolható ki az olvasatlan üzenetek száma is.
  */
 model Message {
   id String @id @default(cuid())
@@ -1181,21 +2427,11 @@ model Message {
 
   type MessageType @default(TEXT)
 
-  content String?
-
-  sentAt DateTime @default(now())
-
-  /**
-   * Message was read by the other participant.
-   */
-  reads MessageRead[]
-
-  /**
-   * Message withdrawal.
-   * We keep the record but hide/replace its content.
-   */
+  content   String?
+  sentAt    DateTime  @default(now())
   revokedAt DateTime?
 
+  reads       MessageRead[]
   attachments MessageAttachment[]
 
   @@index([conversationId, sentAt])
@@ -1203,6 +2439,9 @@ model Message {
   @@map("messages")
 }
 
+/**
+ * egy user egy üzenetet csak egyszer tud "láttamozni"
+ */
 model MessageRead {
   id String @id @default(cuid())
 
@@ -1210,21 +2449,18 @@ model MessageRead {
   userId    String
 
   message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   readAt DateTime @default(now())
 
-  /**
-   * A user can mark a message as read only once.
-   */
   @@unique([messageId, userId])
   @@index([userId, readAt])
   @@map("message_reads")
 }
 
 /**
- * MESSAGE ATTACHMENT
+ * üzenetben lehetőség van kép küldésére is, nem
+ * csak szöveges üzenet küldésére.
  */
 model MessageAttachment {
   id String @id @default(cuid())
@@ -1246,26 +2482,28 @@ model MessageAttachment {
   @@map("message_attachments")
 }
 
+/**
+ * értesítés | értesített<>értesítő | értesítés típusa
+ * pl. ha user likeolt egy usert, akkor az a user értesítést
+ * kap hogy a likeoló user likeolta őt.
+ * entityId/entityType: generikus hivatkozás arra az entitásra,
+ * ami az értesítést kiváltotta (pl. type=MATCH -> entityType="Match",
+ * entityId=<matchId>); az alkalmazás értelmezi type szerint.
+ */
 model Notification {
   id String @id @default(cuid())
 
   recipientId String
   actorId     String?
 
-  recipient Users @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
-
-  actor Users? @relation("NotificationActor", fields: [actorId], references: [id], onDelete: SetNull)
+  recipient Users  @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  actor     Users? @relation("NotificationActor", fields: [actorId], references: [id], onDelete: SetNull)
 
   type NotificationType
 
   title   String?
   message String?
 
-  /**
-   * Generic references to the entity that caused
-   * the notification.
-   * The application interprets these according to type.
-   */
   entityId   String?
   entityType String?
 
@@ -1281,17 +2519,14 @@ model Notification {
 model Report {
   id String @id @default(cuid())
 
-  reporterId String
-
-  reporter Users @relation("ReportCreator", fields: [reporterId], references: [id], onDelete: Cascade)
-
-  type ReportType
-
+  reporterId   String
+  targetId     String?
   targetUserId String?
 
+  reporter   Users  @relation("ReportCreator", fields: [reporterId], references: [id], onDelete: Cascade)
   targetUser Users? @relation("ReportTargetUser", fields: [targetUserId], references: [id], onDelete: SetNull)
 
-  targetId String?
+  type ReportType
 
   reason      String
   description String?
@@ -1328,46 +2563,48 @@ model ModerationAction {
   @@map("moderation_actions")
 }
 
-// ============================================================
-// VIP PLANS
-// ============================================================
-
+/**
+ * egy vip lehetőség van, egy ár. egy hónapra.
+ * alap user:
+ * - alapból 60 usert lát a nearby users oldalon
+ * - heti 2 alaklommal tud a RightNow-ban megjelenni
+ * - az utolsó 15 látogatóját látja,
+ * VIP felhasználó:
+ * mindenre korlátlan felhasználási engedélyt kap.
+ * ! és akkor itt jön a csavar...
+ * nem egy user nem ér el minden funkciót teljesen..
+ * a users nearby oldalon 120 usert tud megjeleníteni,
+ * többihez VIP tagság kell.
+ * vip tagság esetén 1-3 órás megjelenítés között tud
+ * indítani ahol több user éri el. egy héten egy sima
+ * user kettő alkalommal tudjon indítani ilyen
+ * megjelenítést csak egy órában. VIP user egy nap háromszor is tud.
+ * sima user csak egy privát galériát hozhat létre 5 fotóval.
+ * vip user korlátlan mennyiségű mappát. itt figyelni kell hogy a
+ * mappa vip tagság idején lett-e létrehozva, mert ha lejár akkor
+ * lezárjuk azokat a mappákat.
+ * ! MEGJEGYZÉS: a business-fiókos VIP terv (BusinessSubscription /
+ * ! BusinessPayment) egyelőre nincs a sémában — ha a business-oldal
+ * ! elkészül, ugyanezzel a mintával (külön subscription+payment pár,
+ * ! saját VipPlan reláció) érdemes hozzáadni.
+ */
 model VipPlan {
-  id String @id @default(cuid())
-
-  tier VipTier @unique
-
-  name String
-
-  price Decimal @db.Decimal(10, 2)
-
+  id           String  @id @default(cuid())
+  tier         VipTier @unique
+  name         String
+  price        Decimal @db.Decimal(10, 2)
   durationDays Int
-
-  /**
-   * Feature configuration.
-   * Example:
-   * {
-   * "maxGalleryShares": 10,
-   * "eyeCandy": true
-   * }
-   */
-  features Json
-
-  active Boolean @default(true)
+  active       Boolean @default(true)
+  features     Json
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   subscriptions UserSubscription[]
-
-  payments SubscriptionPayment[]
+  payments      SubscriptionPayment[]
 
   @@map("vip_plans")
 }
-
-// ============================================================
-// USER SUBSCRIPTION
-// ============================================================
 
 model UserSubscription {
   id String @id @default(cuid())
@@ -1375,10 +2612,8 @@ model UserSubscription {
   userId String
   planId String
 
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  plan VipPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
-
+  user   Users              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan   VipPlan            @relation(fields: [planId], references: [id], onDelete: Restrict)
   status SubscriptionStatus @default(PENDING)
 
   startedAt DateTime
@@ -1397,27 +2632,19 @@ model UserSubscription {
   @@map("user_subscriptions")
 }
 
-// ============================================================
-// SUBSCRIPTION PAYMENTS
-// ============================================================
-
 model SubscriptionPayment {
   id String @id @default(cuid())
 
-  userId String
-  planId String
-
+  userId         String
+  planId         String
   subscriptionId String?
 
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  plan VipPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
-
+  user         Users             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan         VipPlan           @relation(fields: [planId], references: [id], onDelete: Restrict)
   subscription UserSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
 
-  amount Decimal @db.Decimal(10, 2)
-
-  currency String @default("HUF")
+  amount   Decimal @db.Decimal(10, 2)
+  currency String  @default("HUF")
 
   status PaymentStatus @default(PENDING)
 

@@ -1,5 +1,4 @@
 import { QueryProvider } from "@/features/(app)/(ui)/_providers/QueryProvider";
-import NavigationHistoryProvider from "@/features/(app)/(ui)/back-button/NavigationHistoryProvider";
 import { AuthProvider } from "@/features/auth/components/provider/AuthProvider";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { cn } from "@/lib/utils/cn";
@@ -45,7 +44,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             )}>
             <body className="min-h-full">
                 <QueryProvider>
-                    <NavigationHistoryProvider />
                     <AuthProvider user={user}>{children}</AuthProvider>
                 </QueryProvider>
             </body>

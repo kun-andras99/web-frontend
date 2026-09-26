@@ -4,9 +4,6 @@ import { Prisma } from "../../../prisma/generated/prisma";
 const userInclude = {
     userData: true,
     userPreference: true,
-    lookingFor: true,
-    genderInterest: true,
-    sexualityInterest: true,
 } satisfies Prisma.UsersInclude;
 
 export type UserWithProfile = Prisma.UsersGetPayload<{

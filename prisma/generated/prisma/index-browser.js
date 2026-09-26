@@ -163,7 +163,6 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
 exports.Prisma.UserDataScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  avatar: 'avatar',
   avatarUrl: 'avatarUrl',
   nickname: 'nickname',
   description: 'description',
@@ -171,13 +170,88 @@ exports.Prisma.UserDataScalarFieldEnum = {
   birth: 'birth',
   heightCm: 'heightCm',
   weightKg: 'weightKg',
+  shoulderWidth: 'shoulderWidth',
+  neckCircumference: 'neckCircumference',
+  chestCircumference: 'chestCircumference',
+  bustCircumference: 'bustCircumference',
+  underbustCircumference: 'underbustCircumference',
+  waistCircumference: 'waistCircumference',
+  hipCircumference: 'hipCircumference',
+  upperArmCircumference: 'upperArmCircumference',
+  forearmCircumference: 'forearmCircumference',
+  wristCircumference: 'wristCircumference',
+  armLength: 'armLength',
+  upperArmLength: 'upperArmLength',
+  forearmLength: 'forearmLength',
+  thighCircumference: 'thighCircumference',
+  kneeCircumference: 'kneeCircumference',
+  calfCircumference: 'calfCircumference',
+  ankleCircumference: 'ankleCircumference',
+  legLength: 'legLength',
+  inseamLength: 'inseamLength',
+  outseamLength: 'outseamLength',
+  handLength: 'handLength',
+  handWidth: 'handWidth',
+  fingerLength: 'fingerLength',
+  braSize: 'braSize',
+  braSizeSystem: 'braSizeSystem',
+  cupSize: 'cupSize',
+  breastImplant: 'breastImplant',
+  breastDevelopment: 'breastDevelopment',
+  binderSize: 'binderSize',
+  appCity: 'appCity',
   gender: 'gender',
+  genderCanSee: 'genderCanSee',
   sexuality: 'sexuality',
+  sexualityCanSee: 'sexualityCanSee',
+  transStatus: 'transStatus',
+  transStatusCanSee: 'transStatusCanSee',
+  languages: 'languages',
+  hairLength: 'hairLength',
+  hairColor: 'hairColor',
+  eyeColor: 'eyeColor',
+  bodyType: 'bodyType',
+  beard: 'beard',
+  bodyHair: 'bodyHair',
+  ethnicity: 'ethnicity',
+  smoker: 'smoker',
+  tattoos: 'tattoos',
+  piercings: 'piercings',
+  position: 'position',
+  dickSize: 'dickSize',
+  dickCircumcision: 'dickCircumcision',
+  fetish: 'fetish',
+  sexualOpenness: 'sexualOpenness',
+  fisting: 'fisting',
+  sadism: 'sadism',
+  masochism: 'masochism',
+  saferSex: 'saferSex',
+  openTo: 'openTo',
+  goingOutInterests: 'goingOutInterests',
+  lifestyleInterests: 'lifestyleInterests',
+  musicInterests: 'musicInterests',
+  movieInterests: 'movieInterests',
+  gamingInterests: 'gamingInterests',
+  sportsInterests: 'sportsInterests',
+  booksInterests: 'booksInterests',
+  travelInterests: 'travelInterests',
+  foodInterests: 'foodInterests',
+  artInterests: 'artInterests',
+  technologyInterests: 'technologyInterests',
+  natureInterests: 'natureInterests',
+  cultureInterests: 'cultureInterests',
+  learningInterests: 'learningInterests',
+  socialInterests: 'socialInterests',
+  automotiveInterests: 'automotiveInterests',
+  outdoorInterests: 'outdoorInterests',
+  personalInterests: 'personalInterests',
+  collectingInterests: 'collectingInterests',
+  fashionInterests: 'fashionInterests',
+  eventsInterests: 'eventsInterests',
+  otherInterests: 'otherInterests',
   countryCode: 'countryCode',
   region: 'region',
   city: 'city',
-  appCity: 'appCity',
-  transStatus: 'transStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -189,29 +263,209 @@ exports.Prisma.UserPreferenceScalarFieldEnum = {
   maxAge: 'maxAge',
   minHeightCm: 'minHeightCm',
   maxHeightCm: 'maxHeightCm',
-  maxDistanceKm: 'maxDistanceKm',
-  verifiedOnly: 'verifiedOnly',
-  locationRequired: 'locationRequired',
+  minShoulderWidthCm: 'minShoulderWidthCm',
+  maxShoulderWidthCm: 'maxShoulderWidthCm',
+  minNeckCircumferenceCm: 'minNeckCircumferenceCm',
+  maxNeckCircumferenceCm: 'maxNeckCircumferenceCm',
+  minChestCircumferenceCm: 'minChestCircumferenceCm',
+  maxChestCircumferenceCm: 'maxChestCircumferenceCm',
+  minBustCircumferenceCm: 'minBustCircumferenceCm',
+  maxBustCircumferenceCm: 'maxBustCircumferenceCm',
+  minUnderbustCircumferenceCm: 'minUnderbustCircumferenceCm',
+  maxUnderbustCircumferenceCm: 'maxUnderbustCircumferenceCm',
+  minWaistCircumferenceCm: 'minWaistCircumferenceCm',
+  maxWaistCircumferenceCm: 'maxWaistCircumferenceCm',
+  minHipCircumferenceCm: 'minHipCircumferenceCm',
+  maxHipCircumferenceCm: 'maxHipCircumferenceCm',
+  minUpperArmCircumferenceCm: 'minUpperArmCircumferenceCm',
+  maxUpperArmCircumferenceCm: 'maxUpperArmCircumferenceCm',
+  minForearmCircumferenceCm: 'minForearmCircumferenceCm',
+  maxForearmCircumferenceCm: 'maxForearmCircumferenceCm',
+  minWristCircumferenceCm: 'minWristCircumferenceCm',
+  maxWristCircumferenceCm: 'maxWristCircumferenceCm',
+  minArmLengthCm: 'minArmLengthCm',
+  maxArmLengthCm: 'maxArmLengthCm',
+  minUpperArmLengthCm: 'minUpperArmLengthCm',
+  maxUpperArmLengthCm: 'maxUpperArmLengthCm',
+  minForearmLengthCm: 'minForearmLengthCm',
+  maxForearmLengthCm: 'maxForearmLengthCm',
+  minThighCircumferenceCm: 'minThighCircumferenceCm',
+  maxThighCircumferenceCm: 'maxThighCircumferenceCm',
+  minKneeCircumferenceCm: 'minKneeCircumferenceCm',
+  maxKneeCircumferenceCm: 'maxKneeCircumferenceCm',
+  minCalfCircumferenceCm: 'minCalfCircumferenceCm',
+  maxCalfCircumferenceCm: 'maxCalfCircumferenceCm',
+  minAnkleCircumferenceCm: 'minAnkleCircumferenceCm',
+  maxAnkleCircumferenceCm: 'maxAnkleCircumferenceCm',
+  minLegLengthCm: 'minLegLengthCm',
+  maxLegLengthCm: 'maxLegLengthCm',
+  minInseamLengthCm: 'minInseamLengthCm',
+  maxInseamLengthCm: 'maxInseamLengthCm',
+  minOutseamLengthCm: 'minOutseamLengthCm',
+  maxOutseamLengthCm: 'maxOutseamLengthCm',
+  minHandLengthCm: 'minHandLengthCm',
+  maxHandLengthCm: 'maxHandLengthCm',
+  minHandWidthCm: 'minHandWidthCm',
+  maxHandWidthCm: 'maxHandWidthCm',
+  minFingerLengthCm: 'minFingerLengthCm',
+  maxFingerLengthCm: 'maxFingerLengthCm',
+  lookingFor: 'lookingFor',
+  gender: 'gender',
+  sexuality: 'sexuality',
+  transStatus: 'transStatus',
+  hairLength: 'hairLength',
+  hairColor: 'hairColor',
+  eyeColor: 'eyeColor',
+  bodyType: 'bodyType',
+  beard: 'beard',
+  bodyHair: 'bodyHair',
+  ethnicity: 'ethnicity',
+  smoker: 'smoker',
+  tattoos: 'tattoos',
+  piercings: 'piercings',
+  position: 'position',
+  dickSize: 'dickSize',
+  dickCircumcision: 'dickCircumcision',
+  fetish: 'fetish',
+  sexualOpenness: 'sexualOpenness',
+  fisting: 'fisting',
+  sadism: 'sadism',
+  masochism: 'masochism',
+  saferSex: 'saferSex',
+  openTo: 'openTo',
+  cupSizes: 'cupSizes',
+  braSizes: 'braSizes',
+  binderSizes: 'binderSizes',
+  goingOutInterests: 'goingOutInterests',
+  lifestyleInterests: 'lifestyleInterests',
+  musicInterests: 'musicInterests',
+  movieInterests: 'movieInterests',
+  gamingInterests: 'gamingInterests',
+  sportsInterests: 'sportsInterests',
+  booksInterests: 'booksInterests',
+  travelInterests: 'travelInterests',
+  foodInterests: 'foodInterests',
+  artInterests: 'artInterests',
+  technologyInterests: 'technologyInterests',
+  natureInterests: 'natureInterests',
+  cultureInterests: 'cultureInterests',
+  learningInterests: 'learningInterests',
+  socialInterests: 'socialInterests',
+  automotiveInterests: 'automotiveInterests',
+  outdoorInterests: 'outdoorInterests',
+  personalInterests: 'personalInterests',
+  collectingInterests: 'collectingInterests',
+  fashionInterests: 'fashionInterests',
+  eventsInterests: 'eventsInterests',
+  otherInterests: 'otherInterests',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserLookingForScalarFieldEnum = {
+exports.Prisma.UserFilterScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  value: 'value'
-};
-
-exports.Prisma.UserGenderInterestScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  value: 'value'
-};
-
-exports.Prisma.UserSexualityInterestScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  value: 'value'
+  minAge: 'minAge',
+  maxAge: 'maxAge',
+  minHeightCm: 'minHeightCm',
+  maxHeightCm: 'maxHeightCm',
+  minShoulderWidthCm: 'minShoulderWidthCm',
+  maxShoulderWidthCm: 'maxShoulderWidthCm',
+  minNeckCircumferenceCm: 'minNeckCircumferenceCm',
+  maxNeckCircumferenceCm: 'maxNeckCircumferenceCm',
+  minChestCircumferenceCm: 'minChestCircumferenceCm',
+  maxChestCircumferenceCm: 'maxChestCircumferenceCm',
+  minBustCircumferenceCm: 'minBustCircumferenceCm',
+  maxBustCircumferenceCm: 'maxBustCircumferenceCm',
+  minUnderbustCircumferenceCm: 'minUnderbustCircumferenceCm',
+  maxUnderbustCircumferenceCm: 'maxUnderbustCircumferenceCm',
+  minWaistCircumferenceCm: 'minWaistCircumferenceCm',
+  maxWaistCircumferenceCm: 'maxWaistCircumferenceCm',
+  minHipCircumferenceCm: 'minHipCircumferenceCm',
+  maxHipCircumferenceCm: 'maxHipCircumferenceCm',
+  minUpperArmCircumferenceCm: 'minUpperArmCircumferenceCm',
+  maxUpperArmCircumferenceCm: 'maxUpperArmCircumferenceCm',
+  minForearmCircumferenceCm: 'minForearmCircumferenceCm',
+  maxForearmCircumferenceCm: 'maxForearmCircumferenceCm',
+  minWristCircumferenceCm: 'minWristCircumferenceCm',
+  maxWristCircumferenceCm: 'maxWristCircumferenceCm',
+  minArmLengthCm: 'minArmLengthCm',
+  maxArmLengthCm: 'maxArmLengthCm',
+  minUpperArmLengthCm: 'minUpperArmLengthCm',
+  maxUpperArmLengthCm: 'maxUpperArmLengthCm',
+  minForearmLengthCm: 'minForearmLengthCm',
+  maxForearmLengthCm: 'maxForearmLengthCm',
+  minThighCircumferenceCm: 'minThighCircumferenceCm',
+  maxThighCircumferenceCm: 'maxThighCircumferenceCm',
+  minKneeCircumferenceCm: 'minKneeCircumferenceCm',
+  maxKneeCircumferenceCm: 'maxKneeCircumferenceCm',
+  minCalfCircumferenceCm: 'minCalfCircumferenceCm',
+  maxCalfCircumferenceCm: 'maxCalfCircumferenceCm',
+  minAnkleCircumferenceCm: 'minAnkleCircumferenceCm',
+  maxAnkleCircumferenceCm: 'maxAnkleCircumferenceCm',
+  minLegLengthCm: 'minLegLengthCm',
+  maxLegLengthCm: 'maxLegLengthCm',
+  minInseamLengthCm: 'minInseamLengthCm',
+  maxInseamLengthCm: 'maxInseamLengthCm',
+  minOutseamLengthCm: 'minOutseamLengthCm',
+  maxOutseamLengthCm: 'maxOutseamLengthCm',
+  minHandLengthCm: 'minHandLengthCm',
+  maxHandLengthCm: 'maxHandLengthCm',
+  minHandWidthCm: 'minHandWidthCm',
+  maxHandWidthCm: 'maxHandWidthCm',
+  minFingerLengthCm: 'minFingerLengthCm',
+  maxFingerLengthCm: 'maxFingerLengthCm',
+  lookingFor: 'lookingFor',
+  gender: 'gender',
+  sexuality: 'sexuality',
+  transStatus: 'transStatus',
+  hairLength: 'hairLength',
+  hairColor: 'hairColor',
+  eyeColor: 'eyeColor',
+  bodyType: 'bodyType',
+  beard: 'beard',
+  bodyHair: 'bodyHair',
+  ethnicity: 'ethnicity',
+  smoker: 'smoker',
+  tattoos: 'tattoos',
+  piercings: 'piercings',
+  position: 'position',
+  dickSize: 'dickSize',
+  dickCircumcision: 'dickCircumcision',
+  fetish: 'fetish',
+  sexualOpenness: 'sexualOpenness',
+  fisting: 'fisting',
+  sadism: 'sadism',
+  masochism: 'masochism',
+  saferSex: 'saferSex',
+  openTo: 'openTo',
+  cupSizes: 'cupSizes',
+  braSizes: 'braSizes',
+  binderSizes: 'binderSizes',
+  goingOutInterests: 'goingOutInterests',
+  lifestyleInterests: 'lifestyleInterests',
+  musicInterests: 'musicInterests',
+  movieInterests: 'movieInterests',
+  gamingInterests: 'gamingInterests',
+  sportsInterests: 'sportsInterests',
+  booksInterests: 'booksInterests',
+  travelInterests: 'travelInterests',
+  foodInterests: 'foodInterests',
+  artInterests: 'artInterests',
+  technologyInterests: 'technologyInterests',
+  natureInterests: 'natureInterests',
+  cultureInterests: 'cultureInterests',
+  learningInterests: 'learningInterests',
+  socialInterests: 'socialInterests',
+  automotiveInterests: 'automotiveInterests',
+  outdoorInterests: 'outdoorInterests',
+  personalInterests: 'personalInterests',
+  collectingInterests: 'collectingInterests',
+  fashionInterests: 'fashionInterests',
+  eventsInterests: 'eventsInterests',
+  otherInterests: 'otherInterests',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProfileVisitScalarFieldEnum = {
@@ -267,10 +521,10 @@ exports.Prisma.GroupScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  visibility: 'visibility',
   creatorId: 'creatorId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  visibility: 'visibility'
 };
 
 exports.Prisma.GroupMemberScalarFieldEnum = {
@@ -313,8 +567,8 @@ exports.Prisma.BlogScalarFieldEnum = {
 
 exports.Prisma.BlogTagScalarFieldEnum = {
   id: 'id',
-  blogId: 'blogId',
   name: 'name',
+  blogId: 'blogId',
   createdAt: 'createdAt'
 };
 
@@ -419,7 +673,7 @@ exports.Prisma.EyeCandyVoteScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.QuickDisplayScalarFieldEnum = {
+exports.Prisma.RightNowDisplayScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   type: 'type',
@@ -488,9 +742,9 @@ exports.Prisma.NotificationScalarFieldEnum = {
 exports.Prisma.ReportScalarFieldEnum = {
   id: 'id',
   reporterId: 'reporterId',
-  type: 'type',
-  targetUserId: 'targetUserId',
   targetId: 'targetId',
+  targetUserId: 'targetUserId',
+  type: 'type',
   reason: 'reason',
   description: 'description',
   status: 'status',
@@ -514,8 +768,8 @@ exports.Prisma.VipPlanScalarFieldEnum = {
   name: 'name',
   price: 'price',
   durationDays: 'durationDays',
-  features: 'features',
   active: 'active',
+  features: 'features',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -605,21 +859,93 @@ exports.VerificationTokenType = exports.$Enums.VerificationTokenType = {
   PASSWORD_RESET: 'PASSWORD_RESET'
 };
 
-exports.Gender = exports.$Enums.Gender = {
-  MAN: 'MAN',
-  WOMAN: 'WOMAN',
-  TRANS_MAN: 'TRANS_MAN',
-  TRANS_WOMAN: 'TRANS_WOMAN'
+exports.BraSize = exports.$Enums.BraSize = {
+  AAA: 'AAA',
+  AA: 'AA',
+  A: 'A',
+  B: 'B',
+  C: 'C',
+  D: 'D',
+  DD: 'DD',
+  DDD: 'DDD',
+  E: 'E',
+  F: 'F',
+  FF: 'FF',
+  G: 'G',
+  GG: 'GG',
+  H: 'H',
+  HH: 'HH',
+  I: 'I',
+  J: 'J',
+  K: 'K',
+  L: 'L',
+  M: 'M',
+  N: 'N',
+  O: 'O',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
 };
 
-exports.Sexuality = exports.$Enums.Sexuality = {
-  STRAIGHT: 'STRAIGHT',
-  BISEXUAL: 'BISEXUAL',
-  GAY: 'GAY',
-  LESBIAN: 'LESBIAN',
-  PANSEXUAL: 'PANSEXUAL',
-  ASEXUAL: 'ASEXUAL',
+exports.BraSizeSystem = exports.$Enums.BraSizeSystem = {
+  EU: 'EU',
+  UK: 'UK',
+  US: 'US',
+  FR: 'FR',
+  IT: 'IT',
+  AU: 'AU',
+  JP: 'JP'
+};
+
+exports.CupSize = exports.$Enums.CupSize = {
+  AAA: 'AAA',
+  AA: 'AA',
+  A: 'A',
+  B: 'B',
+  C: 'C',
+  D: 'D',
+  DD: 'DD',
+  DDD: 'DDD',
+  E: 'E',
+  F: 'F',
+  FF: 'FF',
+  G: 'G',
+  GG: 'GG',
+  H: 'H',
+  HH: 'HH',
+  I: 'I',
+  J: 'J',
+  K: 'K',
+  L: 'L',
+  M: 'M',
+  N: 'N',
+  O: 'O',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
+};
+
+exports.BreastImplant = exports.$Enums.BreastImplant = {
+  NONE: 'NONE',
+  IMPLANTS: 'IMPLANTS',
+  FAT_TRANSFER: 'FAT_TRANSFER',
   OTHER: 'OTHER'
+};
+
+exports.BreastDevelopment = exports.$Enums.BreastDevelopment = {
+  NONE: 'NONE',
+  DEVELOPING: 'DEVELOPING',
+  SMALL: 'SMALL',
+  AVERAGE: 'AVERAGE',
+  LARGE: 'LARGE'
+};
+
+exports.BinderSize = exports.$Enums.BinderSize = {
+  XS: 'XS',
+  S: 'S',
+  M: 'M',
+  L: 'L',
+  XL: 'XL',
+  XXL: 'XXL',
+  XXXL: 'XXXL'
 };
 
 exports.AppCity = exports.$Enums.AppCity = {
@@ -631,9 +957,894 @@ exports.AppCity = exports.$Enums.AppCity = {
   TRANS: 'TRANS'
 };
 
+exports.Gender = exports.$Enums.Gender = {
+  MAN: 'MAN',
+  WOMAN: 'WOMAN'
+};
+
+exports.Sexuality = exports.$Enums.Sexuality = {
+  STRAIGHT: 'STRAIGHT',
+  GAY: 'GAY',
+  LESBIAN: 'LESBIAN',
+  BISEXUAL: 'BISEXUAL',
+  PANSEXUAL: 'PANSEXUAL',
+  ASEXUAL: 'ASEXUAL',
+  DEMISEXUAL: 'DEMISEXUAL',
+  QUEER: 'QUEER',
+  OMNISEXUAL: 'OMNISEXUAL',
+  QUESTIONING: 'QUESTIONING',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
+};
+
 exports.TransStatus = exports.$Enums.TransStatus = {
   CIS: 'CIS',
   TRANS: 'TRANS'
+};
+
+exports.HairLength = exports.$Enums.HairLength = {
+  BALD: 'BALD',
+  VERY_SHORT: 'VERY_SHORT',
+  SHORT: 'SHORT',
+  AVERAGE: 'AVERAGE',
+  LONG: 'LONG',
+  PUNK: 'PUNK'
+};
+
+exports.HairColor = exports.$Enums.HairColor = {
+  BLACK: 'BLACK',
+  DARK_BROWN: 'DARK_BROWN',
+  BROWN: 'BROWN',
+  LIGHT_BROWN: 'LIGHT_BROWN',
+  CHESTNUT: 'CHESTNUT',
+  AUBURN: 'AUBURN',
+  RED: 'RED',
+  GINGER: 'GINGER',
+  BLONDE: 'BLONDE',
+  DARK_BLONDE: 'DARK_BLONDE',
+  LIGHT_BLONDE: 'LIGHT_BLONDE',
+  PLATINUM_BLONDE: 'PLATINUM_BLONDE',
+  GREY: 'GREY',
+  WHITE: 'WHITE',
+  SALT_AND_PEPPER: 'SALT_AND_PEPPER',
+  DYED: 'DYED',
+  MULTICOLORED: 'MULTICOLORED',
+  OTHER: 'OTHER'
+};
+
+exports.EyeColor = exports.$Enums.EyeColor = {
+  BROWN: 'BROWN',
+  DARK_BROWN: 'DARK_BROWN',
+  LIGHT_BROWN: 'LIGHT_BROWN',
+  HAZEL: 'HAZEL',
+  AMBER: 'AMBER',
+  GREEN: 'GREEN',
+  BLUE: 'BLUE',
+  LIGHT_BLUE: 'LIGHT_BLUE',
+  GREY: 'GREY',
+  DARK_GREY: 'DARK_GREY',
+  BLACK: 'BLACK',
+  HETEROCHROMIA: 'HETEROCHROMIA',
+  OTHER: 'OTHER'
+};
+
+exports.BodyType = exports.$Enums.BodyType = {
+  SLIM: 'SLIM',
+  LEAN: 'LEAN',
+  FIT: 'FIT',
+  CURVY: 'CURVY',
+  AVERAGE: 'AVERAGE',
+  ATHLETIC: 'ATHLETIC',
+  MUSCULAR: 'MUSCULAR',
+  BELLY: 'BELLY',
+  STOCKY: 'STOCKY',
+  PLUS_SIZE: 'PLUS_SIZE'
+};
+
+exports.Beard = exports.$Enums.Beard = {
+  CLEAN_SHAVEN: 'CLEAN_SHAVEN',
+  DESIGNER_STUBBLE: 'DESIGNER_STUBBLE',
+  SHORT: 'SHORT',
+  MEDIUM: 'MEDIUM',
+  LONG: 'LONG',
+  FULL: 'FULL',
+  MOUSTACHE: 'MOUSTACHE',
+  MUSTACHE_AND_BEARD: 'MUSTACHE_AND_BEARD',
+  GOATEE: 'GOATEE',
+  NO_BEARD: 'NO_BEARD'
+};
+
+exports.BodyHair = exports.$Enums.BodyHair = {
+  SMOOTH: 'SMOOTH',
+  SHAVED: 'SHAVED',
+  NOT_VERY_HAIR: 'NOT_VERY_HAIR',
+  HAIRY: 'HAIRY',
+  VERY_HAIRY: 'VERY_HAIRY'
+};
+
+exports.Ethnicity = exports.$Enums.Ethnicity = {
+  ASIAN: 'ASIAN',
+  BLACK: 'BLACK',
+  EAST_ASIAN: 'EAST_ASIAN',
+  SOUTH_ASIAN: 'SOUTH_ASIAN',
+  SOUTHEAST_ASIAN: 'SOUTHEAST_ASIAN',
+  CENTRAL_ASIAN: 'CENTRAL_ASIAN',
+  WEST_ASIAN: 'WEST_ASIAN',
+  MIDDLE_EASTERN: 'MIDDLE_EASTERN',
+  NORTH_AFRICAN: 'NORTH_AFRICAN',
+  LATINO: 'LATINO',
+  HISPANIC: 'HISPANIC',
+  NATIVE_AMERICAN: 'NATIVE_AMERICAN',
+  INDIGENOUS: 'INDIGENOUS',
+  PACIFIC_ISLANDER: 'PACIFIC_ISLANDER',
+  WHITE: 'WHITE',
+  SOUTHERN_EUROPEAN: 'SOUTHERN_EUROPEAN',
+  NORTHERN_EUROPEAN: 'NORTHERN_EUROPEAN',
+  EASTERN_EUROPEAN: 'EASTERN_EUROPEAN',
+  WESTERN_EUROPEAN: 'WESTERN_EUROPEAN',
+  MIXED: 'MIXED',
+  MULTIRACIAL: 'MULTIRACIAL',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
+};
+
+exports.Smoker = exports.$Enums.Smoker = {
+  NO: 'NO',
+  SOCIALLY: 'SOCIALLY',
+  YES: 'YES'
+};
+
+exports.Tattoos = exports.$Enums.Tattoos = {
+  A_FEW: 'A_FEW',
+  A_LOT: 'A_LOT',
+  NO_TATTOOS: 'NO_TATTOOS'
+};
+
+exports.Piercings = exports.$Enums.Piercings = {
+  A_FEW: 'A_FEW',
+  A_LOT: 'A_LOT',
+  NO_PIERCINGS: 'NO_PIERCINGS'
+};
+
+exports.Position = exports.$Enums.Position = {
+  TOP_ONLY: 'TOP_ONLY',
+  MORE_TOP: 'MORE_TOP',
+  VERSATILE: 'VERSATILE',
+  MORE_BOTTOM: 'MORE_BOTTOM',
+  BOTTOM_ONLY: 'BOTTOM_ONLY'
+};
+
+exports.DickSize = exports.$Enums.DickSize = {
+  S: 'S',
+  M: 'M',
+  L: 'L',
+  XL: 'XL',
+  XXL: 'XXL'
+};
+
+exports.DickCircumcision = exports.$Enums.DickCircumcision = {
+  CLEAN_CUT: 'CLEAN_CUT',
+  UNCUT: 'UNCUT'
+};
+
+exports.Fetish = exports.$Enums.Fetish = {
+  NONE: 'NONE',
+  BDSM: 'BDSM',
+  BONDAGE: 'BONDAGE',
+  DOMINANCE: 'DOMINANCE',
+  SUBMISSION: 'SUBMISSION',
+  ROLEPLAY: 'ROLEPLAY',
+  LEATHER: 'LEATHER',
+  LATEX: 'LATEX',
+  UNIFORM: 'UNIFORM',
+  LINGERIE: 'LINGERIE',
+  STOCKINGS: 'STOCKINGS',
+  HIGH_HEELS: 'HIGH_HEELS',
+  FEET: 'FEET',
+  SOCKS: 'SOCKS',
+  PIERCINGS: 'PIERCINGS',
+  TATTOOS: 'TATTOOS',
+  MUSCLES: 'MUSCLES',
+  BODY_HAIR: 'BODY_HAIR',
+  VOYEURISM: 'VOYEURISM',
+  EXHIBITIONISM: 'EXHIBITIONISM',
+  GROUP_PLAY: 'GROUP_PLAY',
+  PUBLIC_PLAY: 'PUBLIC_PLAY',
+  TOYS: 'TOYS',
+  SENSORY_PLAY: 'SENSORY_PLAY',
+  LIGHT_FETISH: 'LIGHT_FETISH',
+  MEDIUM_FETISH: 'MEDIUM_FETISH',
+  EXTREME_FETISH: 'EXTREME_FETISH',
+  OTHER: 'OTHER'
+};
+
+exports.SexualOpenness = exports.$Enums.SexualOpenness = {
+  NOT_AT_ALL: 'NOT_AT_ALL',
+  SLIGHTLY: 'SLIGHTLY',
+  MODERATELY: 'MODERATELY',
+  VERY: 'VERY',
+  EXTREMELY: 'EXTREMELY',
+  WS_ONLY: 'WS_ONLY'
+};
+
+exports.Fisting = exports.$Enums.Fisting = {
+  NOT_INTERESTED: 'NOT_INTERESTED',
+  CURIOUS: 'CURIOUS',
+  OPEN_TO_IT: 'OPEN_TO_IT',
+  EXPERIENCED: 'EXPERIENCED'
+};
+
+exports.Sadism = exports.$Enums.Sadism = {
+  NOT_INTERESTED: 'NOT_INTERESTED',
+  CURIOUS: 'CURIOUS',
+  OPEN_TO_IT: 'OPEN_TO_IT',
+  EXPERIENCED: 'EXPERIENCED'
+};
+
+exports.Masochism = exports.$Enums.Masochism = {
+  NOT_INTERESTED: 'NOT_INTERESTED',
+  CURIOUS: 'CURIOUS',
+  OPEN_TO_IT: 'OPEN_TO_IT',
+  EXPERIENCED: 'EXPERIENCED'
+};
+
+exports.SaferSex = exports.$Enums.SaferSex = {
+  SAFE: 'SAFE',
+  LETS_TALK: 'LETS_TALK',
+  CONSOM: 'CONSOM',
+  PREP: 'PREP',
+  PREP_AND_CONSOM: 'PREP_AND_CONSOM',
+  TASP: 'TASP'
+};
+
+exports.OpenTo = exports.$Enums.OpenTo = {
+  SEX: 'SEX',
+  FRIENDS: 'FRIENDS',
+  RELATIONSHIP: 'RELATIONSHIP'
+};
+
+exports.GenderCanSee = exports.$Enums.GenderCanSee = {
+  MAN: 'MAN',
+  WOMAN: 'WOMAN'
+};
+
+exports.SexualityCanSee = exports.$Enums.SexualityCanSee = {
+  STRAIGHT: 'STRAIGHT',
+  BISEXUAL: 'BISEXUAL',
+  GAY: 'GAY',
+  LESBIAN: 'LESBIAN',
+  PANSEXUAL: 'PANSEXUAL',
+  ASEXUAL: 'ASEXUAL',
+  OTHER: 'OTHER'
+};
+
+exports.TransStatusCanSee = exports.$Enums.TransStatusCanSee = {
+  CIS: 'CIS',
+  TRANS: 'TRANS'
+};
+
+exports.Languages = exports.$Enums.Languages = {
+  ABKHAZIAN: 'ABKHAZIAN',
+  AFRIKAANS: 'AFRIKAANS',
+  ALBANIAN: 'ALBANIAN',
+  AMHARIC: 'AMHARIC',
+  ARABIC: 'ARABIC',
+  ARMENIAN: 'ARMENIAN',
+  ASSAMESE: 'ASSAMESE',
+  AYMARA: 'AYMARA',
+  AZERBAIJANI: 'AZERBAIJANI',
+  BASHKIR: 'BASHKIR',
+  BASQUE: 'BASQUE',
+  BELARUSIAN: 'BELARUSIAN',
+  BENGALI: 'BENGALI',
+  BIHARI: 'BIHARI',
+  BISLAMA: 'BISLAMA',
+  BOSNIAN: 'BOSNIAN',
+  BRETON: 'BRETON',
+  BULGARIAN: 'BULGARIAN',
+  BURMESE: 'BURMESE',
+  CATALAN: 'CATALAN',
+  CHINESE: 'CHINESE',
+  CORSICAN: 'CORSICAN',
+  CROATIAN: 'CROATIAN',
+  CZECH: 'CZECH',
+  DANISH: 'DANISH',
+  DUTCH: 'DUTCH',
+  ENGLISH: 'ENGLISH',
+  ESPERANTO: 'ESPERANTO',
+  ESTONIAN: 'ESTONIAN',
+  EWE: 'EWE',
+  FAROESE: 'FAROESE',
+  FARSI: 'FARSI',
+  FIJIAN: 'FIJIAN',
+  FINNISH: 'FINNISH',
+  FRENCH: 'FRENCH',
+  FRISIAN: 'FRISIAN',
+  GALICIAN: 'GALICIAN',
+  GEORGIAN: 'GEORGIAN',
+  GERMAN: 'GERMAN',
+  GREEK: 'GREEK',
+  GUARANI: 'GUARANI',
+  GUJARATI: 'GUJARATI',
+  HAITIAN: 'HAITIAN',
+  HAUSA: 'HAUSA',
+  HEBREW: 'HEBREW',
+  HERERO: 'HERERO',
+  HINDI: 'HINDI',
+  HIRI_MOTU: 'HIRI_MOTU',
+  HUNGARIAN: 'HUNGARIAN',
+  ICELANDIC: 'ICELANDIC',
+  IGBO: 'IGBO',
+  INDONESIAN: 'INDONESIAN',
+  INTERLINGUA: 'INTERLINGUA',
+  INTERLINGUE: 'INTERLINGUE',
+  INUKTITUT: 'INUKTITUT',
+  INUPIAQ: 'INUPIAQ',
+  IRISH: 'IRISH',
+  ITALIAN: 'ITALIAN',
+  JAPANESE: 'JAPANESE',
+  JAVANESE: 'JAVANESE',
+  KANNADA: 'KANNADA',
+  KANURI: 'KANURI',
+  KASHMIRI: 'KASHMIRI',
+  KAZAKH: 'KAZAKH',
+  KHMER: 'KHMER',
+  KIKUYU: 'KIKUYU',
+  KINYARWANDA: 'KINYARWANDA',
+  KIRGHIZ: 'KIRGHIZ',
+  KOMI: 'KOMI',
+  KOREAN: 'KOREAN',
+  KUANYAMA: 'KUANYAMA',
+  KURDISH: 'KURDISH',
+  LAO: 'LAO',
+  LATIN: 'LATIN',
+  LATVIAN: 'LATVIAN',
+  LIMBURGISH: 'LIMBURGISH',
+  LINGALA: 'LINGALA',
+  LITHUANIAN: 'LITHUANIAN',
+  LUXEMBOURGISH: 'LUXEMBOURGISH',
+  MACEDONIAN: 'MACEDONIAN',
+  MALAGASY: 'MALAGASY',
+  MALAY: 'MALAY',
+  MALAYALAM: 'MALAYALAM',
+  MALTESE: 'MALTESE',
+  MANX: 'MANX',
+  MAORI: 'MAORI',
+  MARATHI: 'MARATHI',
+  MARSHALLESE: 'MARSHALLESE',
+  MOLDAVIAN: 'MOLDAVIAN',
+  MONGOLIAN: 'MONGOLIAN',
+  NAURU: 'NAURU',
+  NAVAJO: 'NAVAJO',
+  NDONGA: 'NDONGA',
+  NEPALI: 'NEPALI',
+  NORWEGIAN: 'NORWEGIAN',
+  OCCITAN: 'OCCITAN',
+  OJIBWE: 'OJIBWE',
+  ORIYA: 'ORIYA',
+  OROMO: 'OROMO',
+  OSSETIAN: 'OSSETIAN',
+  PALI: 'PALI',
+  PASHTO: 'PASHTO',
+  POLISH: 'POLISH',
+  PORTUGUESE: 'PORTUGUESE',
+  PUNJABI: 'PUNJABI',
+  QUECHUA: 'QUECHUA',
+  ROMANIAN: 'ROMANIAN',
+  ROMANSH: 'ROMANSH',
+  RUNDI: 'RUNDI',
+  RUSSIAN: 'RUSSIAN',
+  SAMOAN: 'SAMOAN',
+  SANGO: 'SANGO',
+  SANSKRIT: 'SANSKRIT',
+  SARDINIAN: 'SARDINIAN',
+  SERBIAN: 'SERBIAN',
+  SHONA: 'SHONA',
+  SINDHI: 'SINDHI',
+  SINHALA: 'SINHALA',
+  SLOVAK: 'SLOVAK',
+  SLOVENIAN: 'SLOVENIAN',
+  SOMALI: 'SOMALI',
+  SOTHO: 'SOTHO',
+  SPANISH: 'SPANISH',
+  SUNDANESE: 'SUNDANESE',
+  SWAHILI: 'SWAHILI',
+  SWATI: 'SWATI',
+  SWEDISH: 'SWEDISH',
+  TAGALOG: 'TAGALOG',
+  TAHITIAN: 'TAHITIAN',
+  TAJIK: 'TAJIK',
+  TAMIL: 'TAMIL',
+  TATAR: 'TATAR',
+  TELUGU: 'TELUGU',
+  THAI: 'THAI',
+  TIBETAN: 'TIBETAN',
+  TIGRINYA: 'TIGRINYA',
+  TONGA: 'TONGA',
+  TSONGA: 'TSONGA',
+  TSWANA: 'TSWANA',
+  TURKISH: 'TURKISH',
+  TURKMEN: 'TURKMEN',
+  TWI: 'TWI',
+  UIGUR: 'UIGUR',
+  UKRAINIAN: 'UKRAINIAN',
+  URDU: 'URDU',
+  UZBEK: 'UZBEK',
+  VENDA: 'VENDA',
+  VIETNAMESE: 'VIETNAMESE',
+  VOLAPUK: 'VOLAPUK',
+  WALLOON: 'WALLOON',
+  WELSH: 'WELSH',
+  WOLOF: 'WOLOF',
+  XHOSA: 'XHOSA',
+  YIDDISH: 'YIDDISH',
+  YORUBA: 'YORUBA',
+  ZHUANG: 'ZHUANG',
+  ZULU: 'ZULU'
+};
+
+exports.GoingOutInterest = exports.$Enums.GoingOutInterest = {
+  ARTS: 'ARTS',
+  BARS: 'BARS',
+  CLUBS: 'CLUBS',
+  PUBS: 'PUBS',
+  RESTAURANTS: 'RESTAURANTS',
+  CAFES: 'CAFES',
+  COFFEE_SHOPS: 'COFFEE_SHOPS',
+  CINEMAS: 'CINEMAS',
+  THEATERS: 'THEATERS',
+  CONCERTS: 'CONCERTS',
+  FESTIVALS: 'FESTIVALS',
+  LIVE_MUSIC: 'LIVE_MUSIC',
+  KARAOKE: 'KARAOKE',
+  NIGHTLIFE: 'NIGHTLIFE',
+  PARTIES: 'PARTIES',
+  BEACHES: 'BEACHES',
+  POOLS: 'POOLS',
+  SPA: 'SPA',
+  GYMS: 'GYMS',
+  SPORTS_EVENTS: 'SPORTS_EVENTS',
+  ART_GALLERIES: 'ART_GALLERIES',
+  MUSEUMS: 'MUSEUMS',
+  SHOPPING: 'SHOPPING',
+  OUTDOOR_EVENTS: 'OUTDOOR_EVENTS',
+  FOOD_EVENTS: 'FOOD_EVENTS',
+  PRIDE_EVENTS: 'PRIDE_EVENTS',
+  COMMUNITY_EVENTS: 'COMMUNITY_EVENTS',
+  OTHER: 'OTHER'
+};
+
+exports.LifestyleInterest = exports.$Enums.LifestyleInterest = {
+  LIFESTYLE: 'LIFESTYLE',
+  SELF_CARE: 'SELF_CARE',
+  WELLNESS: 'WELLNESS',
+  MINIMALISM: 'MINIMALISM',
+  LUXURY: 'LUXURY',
+  FASHION: 'FASHION',
+  BEAUTY: 'BEAUTY',
+  SHOPPING: 'SHOPPING',
+  INTERIOR_DESIGN: 'INTERIOR_DESIGN',
+  DIY: 'DIY',
+  COLLECTING: 'COLLECTING'
+};
+
+exports.MusicInterest = exports.$Enums.MusicInterest = {
+  MUSIC: 'MUSIC',
+  POP: 'POP',
+  ROCK: 'ROCK',
+  METAL: 'METAL',
+  PUNK: 'PUNK',
+  INDIE: 'INDIE',
+  ALTERNATIVE: 'ALTERNATIVE',
+  ELECTRONIC: 'ELECTRONIC',
+  TECHNO: 'TECHNO',
+  HOUSE: 'HOUSE',
+  TRANCE: 'TRANCE',
+  HIP_HOP: 'HIP_HOP',
+  RAP: 'RAP',
+  RNB: 'RNB',
+  SOUL: 'SOUL',
+  FUNK: 'FUNK',
+  JAZZ: 'JAZZ',
+  BLUES: 'BLUES',
+  CLASSICAL_MUSIC: 'CLASSICAL_MUSIC',
+  COUNTRY_MUSIC: 'COUNTRY_MUSIC',
+  REGGAE: 'REGGAE',
+  LATIN_MUSIC: 'LATIN_MUSIC',
+  K_POP: 'K_POP',
+  J_POP: 'J_POP',
+  DISCO: 'DISCO',
+  DANCE_MUSIC: 'DANCE_MUSIC',
+  LIVE_MUSIC: 'LIVE_MUSIC',
+  SINGING: 'SINGING',
+  DJING: 'DJING',
+  PLAYING_INSTRUMENTS: 'PLAYING_INSTRUMENTS'
+};
+
+exports.MoviesInterest = exports.$Enums.MoviesInterest = {
+  MOVIES: 'MOVIES',
+  TV_SERIES: 'TV_SERIES',
+  DOCUMENTARIES: 'DOCUMENTARIES',
+  ANIME: 'ANIME',
+  MANGA: 'MANGA',
+  HORROR: 'HORROR',
+  THRILLER: 'THRILLER',
+  ACTION: 'ACTION',
+  ADVENTURE: 'ADVENTURE',
+  COMEDY: 'COMEDY',
+  DRAMA: 'DRAMA',
+  ROMANCE: 'ROMANCE',
+  SCI_FI: 'SCI_FI',
+  FANTASY: 'FANTASY',
+  MYSTERY: 'MYSTERY',
+  CRIME: 'CRIME',
+  PSYCHOLOGICAL: 'PSYCHOLOGICAL',
+  SUPERHEROES: 'SUPERHEROES',
+  ANIMATION: 'ANIMATION',
+  CLASSIC_MOVIES: 'CLASSIC_MOVIES',
+  FILMMAKING: 'FILMMAKING',
+  ACTING: 'ACTING'
+};
+
+exports.GamingInterest = exports.$Enums.GamingInterest = {
+  GAMING: 'GAMING',
+  PC_GAMING: 'PC_GAMING',
+  CONSOLE_GAMING: 'CONSOLE_GAMING',
+  MOBILE_GAMING: 'MOBILE_GAMING',
+  PLAYSTATION: 'PLAYSTATION',
+  XBOX: 'XBOX',
+  NINTENDO: 'NINTENDO',
+  MMORPG: 'MMORPG',
+  RPG: 'RPG',
+  FPS: 'FPS',
+  STRATEGY_GAMES: 'STRATEGY_GAMES',
+  SIMULATION_GAMES: 'SIMULATION_GAMES',
+  SURVIVAL_GAMES: 'SURVIVAL_GAMES',
+  HORROR_GAMES: 'HORROR_GAMES',
+  SPORTS_GAMES: 'SPORTS_GAMES',
+  RACING_GAMES: 'RACING_GAMES',
+  BOARD_GAMES: 'BOARD_GAMES',
+  CARD_GAMES: 'CARD_GAMES',
+  TABLETOP_GAMES: 'TABLETOP_GAMES',
+  ESPORTS: 'ESPORTS',
+  STREAMING: 'STREAMING',
+  GAME_DEVELOPMENT: 'GAME_DEVELOPMENT'
+};
+
+exports.SportsInterest = exports.$Enums.SportsInterest = {
+  SPORTS: 'SPORTS',
+  FOOTBALL: 'FOOTBALL',
+  BASKETBALL: 'BASKETBALL',
+  VOLLEYBALL: 'VOLLEYBALL',
+  TENNIS: 'TENNIS',
+  TABLE_TENNIS: 'TABLE_TENNIS',
+  BADMINTON: 'BADMINTON',
+  SWIMMING: 'SWIMMING',
+  DIVING: 'DIVING',
+  RUNNING: 'RUNNING',
+  CYCLING: 'CYCLING',
+  MOUNTAIN_BIKING: 'MOUNTAIN_BIKING',
+  HIKING: 'HIKING',
+  CLIMBING: 'CLIMBING',
+  SURFING: 'SURFING',
+  SKATEBOARDING: 'SKATEBOARDING',
+  ROLLERBLADING: 'ROLLERBLADING',
+  SKIING: 'SKIING',
+  SNOWBOARDING: 'SNOWBOARDING',
+  ICE_SKATING: 'ICE_SKATING',
+  BOXING: 'BOXING',
+  KICKBOXING: 'KICKBOXING',
+  MARTIAL_ARTS: 'MARTIAL_ARTS',
+  WRESTLING: 'WRESTLING',
+  YOGA: 'YOGA',
+  PILATES: 'PILATES',
+  GYM: 'GYM',
+  FITNESS: 'FITNESS',
+  BODYBUILDING: 'BODYBUILDING',
+  CROSSFIT: 'CROSSFIT',
+  DANCING: 'DANCING',
+  HORSE_RIDING: 'HORSE_RIDING',
+  MOTORSPORT: 'MOTORSPORT',
+  FISHING: 'FISHING',
+  GOLF: 'GOLF'
+};
+
+exports.BooksInterest = exports.$Enums.BooksInterest = {
+  READING: 'READING',
+  BOOKS: 'BOOKS',
+  FICTION: 'FICTION',
+  NON_FICTION: 'NON_FICTION',
+  FANTASY_BOOKS: 'FANTASY_BOOKS',
+  SCI_FI_BOOKS: 'SCI_FI_BOOKS',
+  ROMANCE_BOOKS: 'ROMANCE_BOOKS',
+  HORROR_BOOKS: 'HORROR_BOOKS',
+  CRIME_BOOKS: 'CRIME_BOOKS',
+  THRILLER_BOOKS: 'THRILLER_BOOKS',
+  POETRY: 'POETRY',
+  PHILOSOPHY: 'PHILOSOPHY',
+  PSYCHOLOGY: 'PSYCHOLOGY',
+  HISTORY: 'HISTORY',
+  BIOGRAPHIES: 'BIOGRAPHIES',
+  COMICS: 'COMICS',
+  GRAPHIC_NOVELS: 'GRAPHIC_NOVELS',
+  WRITING: 'WRITING',
+  JOURNALING: 'JOURNALING'
+};
+
+exports.TravelInterest = exports.$Enums.TravelInterest = {
+  TRAVEL: 'TRAVEL',
+  BACKPACKING: 'BACKPACKING',
+  CITY_TRIPS: 'CITY_TRIPS',
+  ROAD_TRIPS: 'ROAD_TRIPS',
+  BEACH_HOLIDAYS: 'BEACH_HOLIDAYS',
+  MOUNTAIN_TRIPS: 'MOUNTAIN_TRIPS',
+  CAMPING: 'CAMPING',
+  LUXURY_TRAVEL: 'LUXURY_TRAVEL',
+  SOLO_TRAVEL: 'SOLO_TRAVEL',
+  GROUP_TRAVEL: 'GROUP_TRAVEL',
+  CRUISES: 'CRUISES',
+  CULTURAL_TRAVEL: 'CULTURAL_TRAVEL',
+  ADVENTURE_TRAVEL: 'ADVENTURE_TRAVEL',
+  FOOD_TRAVEL: 'FOOD_TRAVEL',
+  PHOTOGRAPHY_TRAVEL: 'PHOTOGRAPHY_TRAVEL',
+  EXPLORING_NEW_PLACES: 'EXPLORING_NEW_PLACES'
+};
+
+exports.FoodInterest = exports.$Enums.FoodInterest = {
+  FOOD: 'FOOD',
+  COOKING: 'COOKING',
+  BAKING: 'BAKING',
+  GRILLING: 'GRILLING',
+  VEGETARIAN_FOOD: 'VEGETARIAN_FOOD',
+  VEGAN_FOOD: 'VEGAN_FOOD',
+  HEALTHY_FOOD: 'HEALTHY_FOOD',
+  STREET_FOOD: 'STREET_FOOD',
+  FAST_FOOD: 'FAST_FOOD',
+  FINE_DINING: 'FINE_DINING',
+  INTERNATIONAL_CUISINE: 'INTERNATIONAL_CUISINE',
+  ITALIAN_FOOD: 'ITALIAN_FOOD',
+  ASIAN_FOOD: 'ASIAN_FOOD',
+  MEXICAN_FOOD: 'MEXICAN_FOOD',
+  JAPANESE_FOOD: 'JAPANESE_FOOD',
+  INDIAN_FOOD: 'INDIAN_FOOD',
+  MEDITERRANEAN_FOOD: 'MEDITERRANEAN_FOOD',
+  HUNGARIAN_FOOD: 'HUNGARIAN_FOOD',
+  DESSERTS: 'DESSERTS',
+  CHOCOLATE: 'CHOCOLATE',
+  COFFEE: 'COFFEE',
+  TEA: 'TEA',
+  WINE: 'WINE',
+  COCKTAILS: 'COCKTAILS',
+  CRAFT_BEER: 'CRAFT_BEER',
+  WINE_TASTING: 'WINE_TASTING',
+  COFFEE_TASTING: 'COFFEE_TASTING'
+};
+
+exports.ArtInterest = exports.$Enums.ArtInterest = {
+  ART: 'ART',
+  PAINTING: 'PAINTING',
+  DRAWING: 'DRAWING',
+  DIGITAL_ART: 'DIGITAL_ART',
+  PHOTOGRAPHY: 'PHOTOGRAPHY',
+  VIDEOGRAPHY: 'VIDEOGRAPHY',
+  GRAPHIC_DESIGN: 'GRAPHIC_DESIGN',
+  FASHION_DESIGN: 'FASHION_DESIGN',
+  SCULPTURE: 'SCULPTURE',
+  POTTERY: 'POTTERY',
+  CRAFTS: 'CRAFTS',
+  KNITTING: 'KNITTING',
+  SEWING: 'SEWING',
+  WOODWORKING: 'WOODWORKING',
+  JEWELRY_MAKING: 'JEWELRY_MAKING',
+  CALLIGRAPHY: 'CALLIGRAPHY',
+  COSPLAY: 'COSPLAY'
+};
+
+exports.TechnologyInterest = exports.$Enums.TechnologyInterest = {
+  TECHNOLOGY: 'TECHNOLOGY',
+  COMPUTERS: 'COMPUTERS',
+  PROGRAMMING: 'PROGRAMMING',
+  WEB_DEVELOPMENT: 'WEB_DEVELOPMENT',
+  APP_DEVELOPMENT: 'APP_DEVELOPMENT',
+  ARTIFICIAL_INTELLIGENCE: 'ARTIFICIAL_INTELLIGENCE',
+  ROBOTICS: 'ROBOTICS',
+  ELECTRONICS: 'ELECTRONICS',
+  CRYPTOCURRENCY: 'CRYPTOCURRENCY',
+  BLOCKCHAIN: 'BLOCKCHAIN',
+  GAMING_TECHNOLOGY: 'GAMING_TECHNOLOGY',
+  GADGETS: 'GADGETS',
+  SMART_HOME: 'SMART_HOME',
+  CYBERSECURITY: 'CYBERSECURITY',
+  SCIENCE: 'SCIENCE',
+  ASTRONOMY: 'ASTRONOMY',
+  SPACE: 'SPACE',
+  PHYSICS: 'PHYSICS',
+  CHEMISTRY: 'CHEMISTRY',
+  BIOLOGY: 'BIOLOGY',
+  ENGINEERING: 'ENGINEERING'
+};
+
+exports.NatureInterest = exports.$Enums.NatureInterest = {
+  NATURE: 'NATURE',
+  ANIMALS: 'ANIMALS',
+  DOGS: 'DOGS',
+  CATS: 'CATS',
+  HORSES: 'HORSES',
+  BIRDS: 'BIRDS',
+  AQUARIUMS: 'AQUARIUMS',
+  FISH: 'FISH',
+  REPTILES: 'REPTILES',
+  WILDLIFE: 'WILDLIFE',
+  PETS: 'PETS',
+  GARDENING: 'GARDENING',
+  PLANTS: 'PLANTS',
+  FLOWERS: 'FLOWERS',
+  FORESTS: 'FORESTS',
+  MOUNTAINS: 'MOUNTAINS',
+  OCEANS: 'OCEANS',
+  LAKES: 'LAKES',
+  CAMPING: 'CAMPING',
+  ENVIRONMENT: 'ENVIRONMENT',
+  SUSTAINABILITY: 'SUSTAINABILITY'
+};
+
+exports.CultureInterest = exports.$Enums.CultureInterest = {
+  CULTURE: 'CULTURE',
+  HISTORY: 'HISTORY',
+  ARCHITECTURE: 'ARCHITECTURE',
+  MUSEUMS: 'MUSEUMS',
+  ART_GALLERIES: 'ART_GALLERIES',
+  THEATER: 'THEATER',
+  OPERA: 'OPERA',
+  BALLET: 'BALLET',
+  LITERATURE: 'LITERATURE',
+  LANGUAGES: 'LANGUAGES',
+  CULTURAL_EVENTS: 'CULTURAL_EVENTS',
+  RELIGION: 'RELIGION',
+  MYTHOLOGY: 'MYTHOLOGY',
+  ANCIENT_CULTURES: 'ANCIENT_CULTURES'
+};
+
+exports.LearningInterest = exports.$Enums.LearningInterest = {
+  LEARNING: 'LEARNING',
+  ONLINE_COURSES: 'ONLINE_COURSES',
+  LANGUAGES: 'LANGUAGES',
+  PSYCHOLOGY: 'PSYCHOLOGY',
+  PHILOSOPHY: 'PHILOSOPHY',
+  HISTORY: 'HISTORY',
+  ECONOMICS: 'ECONOMICS',
+  BUSINESS: 'BUSINESS',
+  ENTREPRENEURSHIP: 'ENTREPRENEURSHIP',
+  MARKETING: 'MARKETING',
+  FINANCE: 'FINANCE',
+  INVESTING: 'INVESTING',
+  PERSONAL_DEVELOPMENT: 'PERSONAL_DEVELOPMENT',
+  SELF_IMPROVEMENT: 'SELF_IMPROVEMENT',
+  PUBLIC_SPEAKING: 'PUBLIC_SPEAKING',
+  SCIENCE: 'SCIENCE'
+};
+
+exports.SocialInterest = exports.$Enums.SocialInterest = {
+  SOCIALIZING: 'SOCIALIZING',
+  FRIENDS: 'FRIENDS',
+  PARTIES: 'PARTIES',
+  NIGHTLIFE: 'NIGHTLIFE',
+  CLUBBING: 'CLUBBING',
+  BARS: 'BARS',
+  PUBS: 'PUBS',
+  KARAOKE: 'KARAOKE',
+  DANCING: 'DANCING',
+  CONCERTS: 'CONCERTS',
+  FESTIVALS: 'FESTIVALS',
+  LIVE_MUSIC: 'LIVE_MUSIC',
+  PUB_QUIZZES: 'PUB_QUIZZES',
+  MEETUPS: 'MEETUPS',
+  COMMUNITY_EVENTS: 'COMMUNITY_EVENTS'
+};
+
+exports.AutomotiveInterest = exports.$Enums.AutomotiveInterest = {
+  CARS: 'CARS',
+  CLASSIC_CARS: 'CLASSIC_CARS',
+  SPORTS_CARS: 'SPORTS_CARS',
+  SUPERCARS: 'SUPERCARS',
+  MOTORCYCLES: 'MOTORCYCLES',
+  MOTORSPORT: 'MOTORSPORT',
+  FORMULA_1: 'FORMULA_1',
+  RACING: 'RACING',
+  CAR_TUNING: 'CAR_TUNING',
+  CAR_MEETUPS: 'CAR_MEETUPS',
+  BOATS: 'BOATS',
+  SAILING: 'SAILING',
+  AVIATION: 'AVIATION',
+  PLANES: 'PLANES',
+  TRAINS: 'TRAINS'
+};
+
+exports.OutdoorInterest = exports.$Enums.OutdoorInterest = {
+  OUTDOORS: 'OUTDOORS',
+  HIKING: 'HIKING',
+  CAMPING: 'CAMPING',
+  TREKKING: 'TREKKING',
+  CLIMBING: 'CLIMBING',
+  FISHING: 'FISHING',
+  HUNTING: 'HUNTING',
+  CYCLING: 'CYCLING',
+  MOUNTAIN_BIKING: 'MOUNTAIN_BIKING',
+  KAYAKING: 'KAYAKING',
+  CANOEING: 'CANOEING',
+  RAFTING: 'RAFTING',
+  SURFING: 'SURFING',
+  SAILING: 'SAILING',
+  DIVING: 'DIVING',
+  SNORKELING: 'SNORKELING',
+  PARAGLIDING: 'PARAGLIDING',
+  SKYDIVING: 'SKYDIVING'
+};
+
+exports.PersonalInterest = exports.$Enums.PersonalInterest = {
+  MEDITATION: 'MEDITATION',
+  MINDFULNESS: 'MINDFULNESS',
+  ASTROLOGY: 'ASTROLOGY',
+  HOROSCOPES: 'HOROSCOPES',
+  SPIRITUALITY: 'SPIRITUALITY',
+  MOTIVATION: 'MOTIVATION',
+  PERSONAL_GROWTH: 'PERSONAL_GROWTH',
+  HUMAN_BEHAVIOR: 'HUMAN_BEHAVIOR',
+  RELATIONSHIPS: 'RELATIONSHIPS',
+  DATING: 'DATING',
+  SOCIAL_PSYCHOLOGY: 'SOCIAL_PSYCHOLOGY'
+};
+
+exports.CollectingInterest = exports.$Enums.CollectingInterest = {
+  COIN_COLLECTING: 'COIN_COLLECTING',
+  STAMP_COLLECTING: 'STAMP_COLLECTING',
+  VINYL_RECORDS: 'VINYL_RECORDS',
+  BOOK_COLLECTION: 'BOOK_COLLECTION',
+  ART_COLLECTION: 'ART_COLLECTION',
+  SNEAKER_COLLECTION: 'SNEAKER_COLLECTION',
+  WATCHES: 'WATCHES',
+  PERFUMES: 'PERFUMES',
+  MEMORABILIA: 'MEMORABILIA'
+};
+
+exports.FashionInterest = exports.$Enums.FashionInterest = {
+  STREETWEAR: 'STREETWEAR',
+  VINTAGE_FASHION: 'VINTAGE_FASHION',
+  DESIGNER_FASHION: 'DESIGNER_FASHION',
+  SNEAKERS: 'SNEAKERS',
+  JEWELRY: 'JEWELRY',
+  WATCHES: 'WATCHES',
+  TATTOOS: 'TATTOOS',
+  PIERCINGS: 'PIERCINGS',
+  ALTERNATIVE_FASHION: 'ALTERNATIVE_FASHION',
+  COSPLAY: 'COSPLAY',
+  VINTAGE: 'VINTAGE'
+};
+
+exports.EventsInterest = exports.$Enums.EventsInterest = {
+  FESTIVALS: 'FESTIVALS',
+  CONCERTS: 'CONCERTS',
+  PRIDE_EVENTS: 'PRIDE_EVENTS',
+  CULTURAL_EVENTS: 'CULTURAL_EVENTS',
+  FOOD_FESTIVALS: 'FOOD_FESTIVALS',
+  MUSIC_FESTIVALS: 'MUSIC_FESTIVALS',
+  FILM_FESTIVALS: 'FILM_FESTIVALS',
+  SPORTS_EVENTS: 'SPORTS_EVENTS',
+  COMIC_CONVENTIONS: 'COMIC_CONVENTIONS',
+  GAMING_EVENTS: 'GAMING_EVENTS'
+};
+
+exports.OtherInterest = exports.$Enums.OtherInterest = {
+  VOLUNTEERING: 'VOLUNTEERING',
+  CHARITY: 'CHARITY',
+  ACTIVISM: 'ACTIVISM',
+  COMMUNITY: 'COMMUNITY',
+  SOCIAL_CAUSES: 'SOCIAL_CAUSES',
+  ENTREPRENEURSHIP: 'ENTREPRENEURSHIP',
+  BUSINESS: 'BUSINESS',
+  CAREER: 'CAREER',
+  NETWORKING: 'NETWORKING',
+  OTHER: 'OTHER'
 };
 
 exports.LookingFor = exports.$Enums.LookingFor = {
@@ -648,9 +1859,7 @@ exports.LookingFor = exports.$Enums.LookingFor = {
 
 exports.GenderInterest = exports.$Enums.GenderInterest = {
   MAN: 'MAN',
-  WOMAN: 'WOMAN',
-  TRANS_MAN: 'TRANS_MAN',
-  TRANS_WOMAN: 'TRANS_WOMAN'
+  WOMAN: 'WOMAN'
 };
 
 exports.SexualityInterest = exports.$Enums.SexualityInterest = {
@@ -661,6 +1870,11 @@ exports.SexualityInterest = exports.$Enums.SexualityInterest = {
   PANSEXUAL: 'PANSEXUAL',
   ASEXUAL: 'ASEXUAL',
   OTHER: 'OTHER'
+};
+
+exports.TransStatusInterest = exports.$Enums.TransStatusInterest = {
+  CIS: 'CIS',
+  TRANS: 'TRANS'
 };
 
 exports.GalleryType = exports.$Enums.GalleryType = {
@@ -680,7 +1894,6 @@ exports.GroupVisibility = exports.$Enums.GroupVisibility = {
 
 exports.GroupMemberRole = exports.$Enums.GroupMemberRole = {
   MEMBER: 'MEMBER',
-  MODERATOR: 'MODERATOR',
   ADMIN: 'ADMIN'
 };
 
@@ -730,8 +1943,9 @@ exports.EyeCandyAction = exports.$Enums.EyeCandyAction = {
   SKIP: 'SKIP'
 };
 
-exports.QuickDisplayType = exports.$Enums.QuickDisplayType = {
-  ONE_HOUR: 'ONE_HOUR'
+exports.RightNowDisplayType = exports.$Enums.RightNowDisplayType = {
+  ONE_HOUR: 'ONE_HOUR',
+  THREE_HOUR: 'THREE_HOUR'
 };
 
 exports.MessageType = exports.$Enums.MessageType = {
@@ -742,6 +1956,7 @@ exports.MessageType = exports.$Enums.MessageType = {
 
 exports.NotificationType = exports.$Enums.NotificationType = {
   PROFILE_VISIT: 'PROFILE_VISIT',
+  PROFILE_VIEW: 'PROFILE_VIEW',
   NEW_FAVORITE: 'NEW_FAVORITE',
   FRIEND_REQUEST: 'FRIEND_REQUEST',
   FRIEND_ACCEPTED: 'FRIEND_ACCEPTED',
@@ -751,8 +1966,7 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   GALLERY_SHARED: 'GALLERY_SHARED',
   BLOG_LIKE: 'BLOG_LIKE',
   MATCH: 'MATCH',
-  NEW_MESSAGE: 'NEW_MESSAGE',
-  SYSTEM: 'SYSTEM'
+  SYSTEM_MESSAGE: 'SYSTEM_MESSAGE'
 };
 
 exports.ReportType = exports.$Enums.ReportType = {
@@ -782,9 +1996,7 @@ exports.ModerationActionType = exports.$Enums.ModerationActionType = {
 
 exports.VipTier = exports.$Enums.VipTier = {
   FREE: 'FREE',
-  VIP1: 'VIP1',
-  VIP2: 'VIP2',
-  VIP3: 'VIP3'
+  VIP: 'VIP'
 };
 
 exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
@@ -807,9 +2019,7 @@ exports.Prisma.ModelName = {
   VerificationToken: 'VerificationToken',
   UserData: 'UserData',
   UserPreference: 'UserPreference',
-  UserLookingFor: 'UserLookingFor',
-  UserGenderInterest: 'UserGenderInterest',
-  UserSexualityInterest: 'UserSexualityInterest',
+  UserFilter: 'UserFilter',
   ProfileVisit: 'ProfileVisit',
   GroupVisit: 'GroupVisit',
   Gallery: 'Gallery',
@@ -832,7 +2042,7 @@ exports.Prisma.ModelName = {
   EyeCandyParticipant: 'EyeCandyParticipant',
   EyeCandyImage: 'EyeCandyImage',
   EyeCandyVote: 'EyeCandyVote',
-  QuickDisplay: 'QuickDisplay',
+  RightNowDisplay: 'RightNowDisplay',
   Conversation: 'Conversation',
   ConversationParticipant: 'ConversationParticipant',
   Message: 'Message',

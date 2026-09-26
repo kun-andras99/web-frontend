@@ -33,9 +33,6 @@ export async function getProfileByUserId(userId: string) {
         include: {
             userData: true,
             userPreference: true,
-            lookingFor: true,
-            genderInterest: true,
-            sexualityInterest: true,
         },
     });
 }

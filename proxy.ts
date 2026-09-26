@@ -4,6 +4,7 @@ import {
     markRefreshTokenReplaced,
     revokeAllRefreshTokensForUser,
 } from "@/features/auth/data/refresh-token";
+
 import {
     ACCESS_TOKEN_COOKIE,
     ACCESS_TOKEN_TTL_SECONDS,
@@ -12,17 +13,27 @@ import {
     REFRESH_TOKEN_COOKIE,
     REFRESH_TOKEN_TTL_SECONDS,
 } from "@/features/auth/lib/constants";
+
 import { signAccessToken, verifyAccessToken } from "@/features/auth/lib/jwt";
+
 import type {
     AccessToken,
     RefreshToken,
     SessionUser,
     UserId,
 } from "@/features/auth/types/auth-index";
+
 import { getUserById } from "@/features/user/repositories/user";
+
+import { prisma } from "@/lib/prisma";
+
 import type { NextRequest } from "next/server";
+
 import { NextResponse } from "next/server";
+
 import { UserRole } from "./prisma/generated/prisma";
+
+const PROFILE_CREATE_ROUTE = "/profile/create";
 
 const ROUTE_PERMISSIONS = {
     "/love": ["USER", "MODERATOR", "ADMIN"],
@@ -39,11 +50,12 @@ const ROUTE_PERMISSIONS = {
     "/settings": ["USER", "MODERATOR", "ADMIN"],
 
     "/moderation": ["MODERATOR", "ADMIN"],
+
     "/dashboard": ["ADMIN"],
 } as const satisfies Record<string, readonly UserRole[]>;
 
-// cookie
 const isProduction = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
     httpOnly: true,
     secure: isProduction,
@@ -55,39 +67,20 @@ interface RotatedTokens {
     accesToken: AccessToken;
     refreshToken: RefreshToken;
 }
+
 interface SessionResult {
     authenticated: boolean;
     user?: SessionUser;
+    hasUserPreference?: boolean;
     rotatedTokens?: RotatedTokens;
 }
 
-/**
- * A Proxy Next.js 16 óta mindig Node.js runtime-on fut (az Edge Middleware
- * deprecated), ezért itt MÁR KÖZVETLENÜL használható a Prisma Client és az
- * argon2 is — nincs szükség a régi "Edge middleware -> fetch egy Node
- * Route Handlert" kerülőútra. A rotáció/reuse-detection logika egy az
- * egyben ugyanaz, mint korábban a /api/auth/refresh route handlerben volt.
- */
 /**
  * ---------------------------------------------------------------------------
  * ROUTE PERMISSION HELPERS
  * ---------------------------------------------------------------------------
  */
 
-/**
- * Megkeresi az adott pathname-hez tartozó permission szabályt.
- *
- * A leghosszabb egyező prefix nyer.
- *
- * Például:
- *
- * /community
- * /community/groups
- * /community/groups/123
- *
- * mind a "/community" szabály alá esnek,
- * hacsak később nincs egy konkrétabb szabály.
- */
 function getRoutePermissions(pathname: string): readonly UserRole[] | null {
     let matchedRoute: string | null = null;
 
@@ -110,10 +103,6 @@ function getRoutePermissions(pathname: string): readonly UserRole[] | null {
     return ROUTE_PERMISSIONS[matchedRoute as keyof typeof ROUTE_PERMISSIONS];
 }
 
-/**
- * Megnézi, hogy az adott user role-ja hozzáférhet-e
- * az adott route-hoz.
- */
 function hasRoutePermission(pathname: string, role: UserRole): boolean {
     const permissions = getRoutePermissions(pathname);
 
@@ -140,6 +129,13 @@ function isProtectedRoute(pathname: string): boolean {
     return getRoutePermissions(pathname) !== null;
 }
 
+function isProfileCreateRoute(pathname: string): boolean {
+    return (
+        pathname === PROFILE_CREATE_ROUTE ||
+        pathname.startsWith(`${PROFILE_CREATE_ROUTE}/`)
+    );
+}
+
 function getClientIp(request: NextRequest): string | null {
     const forwardedFor = request.headers.get("x-forwarded-for");
 
@@ -152,24 +148,27 @@ function getClientIp(request: NextRequest): string | null {
 
 /**
  * ---------------------------------------------------------------------------
+ * USER PROFILE STATUS
+ * ---------------------------------------------------------------------------
+ */
+
+async function hasUserPreference(userId: string): Promise<boolean> {
+    const userPreference = await prisma.userPreference.findUnique({
+        where: {
+            userId,
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    return userPreference !== null;
+}
+
+/**
+ * ---------------------------------------------------------------------------
  * SESSION RESOLUTION
  * ---------------------------------------------------------------------------
- *
- * A session feloldásának sorrendje:
- *
- * 1. Access token keresése
- * 2. Access token cryptographic verification
- * 3. User lekérése DB-ből
- * 4. Ha access token nem használható:
- *      → refresh token
- * 5. Refresh token DB ellenőrzése
- * 6. Reuse detection
- * 7. Lejárat ellenőrzése
- * 8. User lekérése DB-ből
- * 9. Refresh token rotáció
- * 10. Új access token
- *
- * A role MINDIG a DB-ből érkezik.
  */
 
 async function resolveSession(request: NextRequest): Promise<SessionResult> {
@@ -179,12 +178,6 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
         const payload = await verifyAccessToken(rawAccessToken);
 
         if (payload) {
-            /**
-             * A JWT csak a user ID-t bizonyítja.
-             *
-             * A user aktuális állapotát és role-ját
-             * a DB-ből kérjük le.
-             */
             const user = await getUserById(payload.sub);
 
             if (user) {
@@ -198,6 +191,8 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
                         emailVerified: user.emailVerified !== null,
                         role: user.role,
                     },
+
+                    hasUserPreference: user.userPreference !== null,
                 };
             }
         }
@@ -265,12 +260,20 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
             role: user.role,
         },
 
+        hasUserPreference: user.userPreference !== null,
+
         rotatedTokens: {
             accesToken: newAccessToken,
             refreshToken: newRefreshToken,
         },
     };
 }
+
+/**
+ * ---------------------------------------------------------------------------
+ * ROTATED TOKENS
+ * ---------------------------------------------------------------------------
+ */
 
 function withRotatedTokens(
     response: NextResponse,
@@ -301,6 +304,12 @@ function withRotatedTokens(
     return response;
 }
 
+/**
+ * ---------------------------------------------------------------------------
+ * PROXY
+ * ---------------------------------------------------------------------------
+ */
+
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
@@ -308,30 +317,33 @@ export async function proxy(request: NextRequest) {
 
     const protectedRoute = isProtectedRoute(pathname);
 
-    /**
-     * Nem auth-protected route.
-     *
-     * Nem kell sessiont feloldani.
-     */
-    if (!guestOnly && !protectedRoute) {
-        return NextResponse.next();
-    }
+    const profileCreate = isProfileCreateRoute(pathname);
 
     const session = await resolveSession(request);
 
-    if (guestOnly) {
-        if (!session.authenticated) {
-            return NextResponse.next();
-        }
-
-        const response = NextResponse.redirect(
-            new URL(AUTH_ROUTES.afterSignIn, request.url),
-        );
-
-        return withRotatedTokens(response, session);
-    }
+    /**
+     * -----------------------------------------------------------------------
+     * NOT AUTHENTICATED
+     * -----------------------------------------------------------------------
+     */
 
     if (!session.authenticated || !session.user) {
+        if (profileCreate) {
+            const signInUrl = new URL(AUTH_ROUTES.signIn, request.url);
+
+            signInUrl.searchParams.set("callbackUrl", PROFILE_CREATE_ROUTE);
+
+            return NextResponse.redirect(signInUrl);
+        }
+
+        if (guestOnly) {
+            return withRotatedTokens(NextResponse.next(), session);
+        }
+
+        if (!protectedRoute) {
+            return withRotatedTokens(NextResponse.next(), session);
+        }
+
         const signInUrl = new URL(AUTH_ROUTES.signIn, request.url);
 
         signInUrl.searchParams.set(
@@ -342,13 +354,31 @@ export async function proxy(request: NextRequest) {
         return NextResponse.redirect(signInUrl);
     }
 
-    const allowed = hasRoutePermission(pathname, session.user.role);
+    /**
+     * -----------------------------------------------------------------------
+     * AUTHENTICATED BUT PROFILE IS NOT CREATED
+     * -----------------------------------------------------------------------
+     */
 
-    if (!allowed) {
-        /**
-         * Ha később lesz /forbidden oldalad,
-         * ide érdemes majd arra redirectelni.
-         */
+    if (session.hasUserPreference === false) {
+        if (!profileCreate) {
+            const response = NextResponse.redirect(
+                new URL(PROFILE_CREATE_ROUTE, request.url),
+            );
+
+            return withRotatedTokens(response, session);
+        }
+
+        return withRotatedTokens(NextResponse.next(), session);
+    }
+
+    /**
+     * -----------------------------------------------------------------------
+     * AUTHENTICATED + PROFILE COMPLETED
+     * -----------------------------------------------------------------------
+     */
+
+    if (profileCreate) {
         const response = NextResponse.redirect(
             new URL(AUTH_ROUTES.afterSignIn, request.url),
         );
@@ -356,28 +386,51 @@ export async function proxy(request: NextRequest) {
         return withRotatedTokens(response, session);
     }
 
+    /**
+     * Guest-only route:
+     * /sign-in
+     * /sign-up
+     */
+    if (guestOnly) {
+        const response = NextResponse.redirect(
+            new URL(AUTH_ROUTES.afterSignIn, request.url),
+        );
+
+        return withRotatedTokens(response, session);
+    }
+
+    /**
+     * -----------------------------------------------------------------------
+     * NORMAL ROLE PERMISSION
+     * -----------------------------------------------------------------------
+     */
+
+    if (protectedRoute) {
+        const allowed = hasRoutePermission(pathname, session.user.role);
+
+        if (!allowed) {
+            const response = NextResponse.redirect(
+                new URL(AUTH_ROUTES.afterSignIn, request.url),
+            );
+
+            return withRotatedTokens(response, session);
+        }
+    }
+
     return withRotatedTokens(NextResponse.next(), session);
 }
 
+/**
+ * ---------------------------------------------------------------------------
+ * MATCHER
+ * ---------------------------------------------------------------------------
+ *
+ * A profile completion nélküli authenticated user
+ * ténylegesen csak a /profile/create oldalt érheti el.
+ *
+ * Ezért nem csak a protected route-okat figyeljük,
+ * hanem az összes page route-ot.
+ */
 export const config = {
-    matcher: [
-        "/love/:path*",
-        "/extra/:path*",
-        "/inbox/:path*",
-        "/cruise/:path*",
-        "/community/:path*",
-
-        "/me/:path*",
-        "/map/:path*",
-        "/travel/:path*",
-        "/group/:path*",
-        "/blog/:path*",
-        "/settings/:path*",
-
-        "/moderation/:path*",
-        "/dashboard/:path*",
-
-        "/sign-in",
-        "/sign-up",
-    ],
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };

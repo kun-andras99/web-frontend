@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-
 import { getCurrentUser } from "@/features/auth/lib/session";
+import { USE_BLOG_MOCK } from "@/features/blogs/config";
 import { toBlogDTO } from "@/features/blogs/mapper/blogs.mapper";
-import { getBlogs, createBlog } from "@/features/blogs/repository/blogs.rep";
+import { findMockBlogs } from "@/features/blogs/repository/blogs.mock.repository";
+import { createBlog, getBlogs } from "@/features/blogs/repository/blogs.rep";
+import { NextRequest, NextResponse } from "next/server";
 import { BlogVisibility } from "../../../prisma/generated/prisma";
-
 
 const DEFAULT_LIMIT = 5;
 const MAX_LIMIT = 20;
@@ -34,6 +34,22 @@ export async function GET(request: NextRequest) {
 
         const cursor = searchParams.get("cursor") ?? undefined;
 
+        console.log(USE_BLOG_MOCK);
+        /*
+         * MOCK
+         */
+        if (USE_BLOG_MOCK) {
+            const result = await findMockBlogs({
+                limit,
+                cursor,
+            });
+
+            return NextResponse.json(result);
+        }
+
+        /*
+         * DATABASE
+         */
         const blogs = await getBlogs({
             limit,
             cursor,
@@ -43,7 +59,7 @@ export async function GET(request: NextRequest) {
 
         const pageBlogs = hasNextPage ? blogs.slice(0, limit) : blogs;
 
-        const blogsDTO = pageBlogs.map((blog) => toBlogDTO(blog));
+        const blogsDTO = pageBlogs.map(toBlogDTO);
 
         const nextCursor = hasNextPage
             ? (pageBlogs[pageBlogs.length - 1]?.id ?? null)
@@ -133,6 +149,24 @@ export async function POST(request: NextRequest) {
                 },
                 {
                     status: 400,
+                },
+            );
+        }
+
+        /*
+         * A MOCK módot itt is kezelhetjük.
+         *
+         * Jelenleg a mock csak olvasásra szolgál,
+         * ezért létrehozáskor jelezzük, hogy
+         * mock módban ez nincs engedélyezve.
+         */
+        if (USE_BLOG_MOCK) {
+            return NextResponse.json(
+                {
+                    message: "Blog létrehozása mock módban nem érhető el.",
+                },
+                {
+                    status: 503,
                 },
             );
         }

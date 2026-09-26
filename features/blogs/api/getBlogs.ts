@@ -10,7 +10,6 @@ export async function getBlogs({
     cursor,
 }: GetBlogsParams = {}): Promise<BlogsPageDTO> {
     const searchParams = new URLSearchParams();
-
     searchParams.set("limit", String(limit));
 
     if (cursor) {
@@ -22,9 +21,11 @@ export async function getBlogs({
         credentials: "include",
     });
 
+    const result: BlogsPageDTO = await response.json();
+
     if (!response.ok) {
         throw new Error("A blogok betöltése sikertelen.");
     }
 
-    return response.json();
+    return result;
 }

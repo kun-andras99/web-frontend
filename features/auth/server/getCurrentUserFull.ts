@@ -25,16 +25,19 @@ export const getCurrentUserFull = cache(async () => {
                 id: payload.sub,
             },
             omit: {
+                username: true,
+                email: true,
+                emailVerified: true,
                 passwordHash: true,
+                lat: true,
+                lng: true,
+                locationEnabled: true,
+                locationUpdatedAt: true,
+                updatedAt: true,
             },
             include: {
                 userData: true,
                 userPreference: true,
-                lookingFor: true,
-                genderInterest: true,
-                sexualityInterest: true,
-                partnerUser: true,
-                galleries: true,
             },
         });
 

@@ -23,6 +23,12 @@ export function getUserById(id: UserId) {
             username: true,
             emailVerified: true,
             role: true,
+
+            userPreference: {
+                select: {
+                    id: true,
+                },
+            },
         },
     });
 }
@@ -52,13 +58,13 @@ export type UserProfileHeaderData = Prisma.UsersGetPayload<{
     select: typeof userProfileHeaderDataSelect;
 }>;
 
-export function getUserProfileHeaderDataById( id: UserId) {
+export function getUserProfileHeaderDataById(id: UserId) {
     return prisma.users.findUnique({
         where: {
             id,
         },
-        select: userProfileHeaderDataSelect
-    })
+        select: userProfileHeaderDataSelect,
+    });
 }
 
 export function createUser(input: {

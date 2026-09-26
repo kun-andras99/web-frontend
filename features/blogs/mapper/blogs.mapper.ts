@@ -9,6 +9,13 @@ export function toBlogDTO(blog: BlogListData): BlogDTO {
         id: blog.id,
         authorId: blog.authorId,
 
+        author: {
+            id: blog.author.id,
+            username: blog.author.username ?? null,
+            nickname: blog.author.userData?.nickname ?? null,
+            avatarUrl: blog.author.userData?.avatarUrl ?? null,
+        },
+
         title: blog.title,
         content: blog.content,
 
@@ -48,10 +55,8 @@ export function toBlogDetailDTO(blog: BlogDetailData): BlogDetailDTO {
 
         author: {
             id: blog.author.id,
-            username: blog.author.username,
-
+            username: blog.author.username ?? null,
             nickname: blog.author.userData?.nickname ?? null,
-
             avatarUrl: blog.author.userData?.avatarUrl ?? null,
         },
     };

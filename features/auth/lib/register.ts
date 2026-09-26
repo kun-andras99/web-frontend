@@ -90,21 +90,21 @@ export async function registerCredentials(
         const user = await createUser({ username, email, passwordHash });
         const userId = user.id as UserId;
 
-        try {
-            const verificationToken =
-                await createEmailVerificationToken(userId);
-            const appUrl =
-                process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-            const verifyLink = `${appUrl}/api/auth/verify-email?token=${verificationToken}`;
+        // try {
+        //     const verificationToken =
+        //         await createEmailVerificationToken(userId);
+        //     const appUrl =
+        //         process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+        //     const verifyLink = `${appUrl}/api/auth/verify-email?token=${verificationToken}`;
 
-            await sendEmail({
-                to: email,
-                subject: "Erősítsd meg az email címed",
-                html: verificationEmailTemplate(verifyLink),
-            });
-        } catch (error) {
-            console.error("[SIGN-UP EMAIL ERROR]", error);
-        }
+        //     await sendEmail({
+        //         to: email,
+        //         subject: "Erősítsd meg az email címed",
+        //         html: verificationEmailTemplate(verifyLink),
+        //     });
+        // } catch (error) {
+        //     console.error("[SIGN-UP EMAIL ERROR]", error);
+        // }
 
         const tokens = await createSessionTokens(user, meta);
 

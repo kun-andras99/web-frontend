@@ -1,14 +1,23 @@
 "use client";
 
-import { Fragment, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
 import { useBlogs } from "@/features/blogs/hooks/useBlogs";
+import Image from "next/image";
 import Link from "next/link";
+
+export function formatDate(date: string | Date) {
+    return new Intl.DateTimeFormat("en-EN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    }).format(new Date(date));
+}
 
 export default function BlogsScreen() {
     const {
-        data: blogs,
+        data: apiBlogs,
         isLoading,
         isError,
         fetchNextPage,
@@ -49,7 +58,6 @@ export default function BlogsScreen() {
         };
     }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-    console.log(blogs);
     if (isLoading) {
         return (
             <BottomPageWrapper>
@@ -71,51 +79,64 @@ export default function BlogsScreen() {
     }
 
     const hasBlogs =
-        blogs?.pages.some((page) => page.blogs.length > 0) ?? false;
+        apiBlogs?.pages.some((page) => page.blogs.length > 0) ?? false;
+    const blogs = apiBlogs?.pages.flatMap((page) => page.blogs) ?? [];
 
     return (
         <BottomPageWrapper>
             <div className="blogs-list">
-                <Link href={`/blog/create`}>Új blog készítése</Link>
+                {/* <Link href={`/blog/create`}>Új blog készítése</Link> */}
                 {!hasBlogs ? (
                     <p>Még nincsenek blogok.</p>
                 ) : (
-                    blogs?.pages.map((page) =>
-                        page.blogs.map((blog) => (
-                            <Fragment key={blog.id}>
-                                <Link href={`/blog/${blog.id}`}>
-                                    <article className="blog-card">
-                                        <div className="blog-card-content">
+                    blogs.map((blog) => (
+                        <article className="blog-card" key={blog.id}>
+                            <div className="blog-card-content">
+                                <div>
+                                    <div className="blog-author">
+                                        <Image
+                                            src={
+                                                blog.author.avatarUrl ??
+                                                "/assets/images/user-blank-1.png"
+                                            }
+                                            alt={
+                                                blog.author.nickname ??
+                                                blog.author.username
+                                            }
+                                            width={42}
+                                            height={42}
+                                            className={"rounded-full"}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Link href={`/blog/${blog.id}`}>
                                             <h3>{blog.title}</h3>
-
-                                            <p className="content">
-                                                {blog.content}
-                                            </p>
-                                            <div className="blog-card-data">
-                                                <div className="blog-card-tags">
-                                                    {blog.tags.map((tag) => (
-                                                        <span
-                                                            key={tag.id}
-                                                            className="blog-tag">
-                                                            #{tag.name}
-                                                        </span>
-                                                    ))}
-                                                </div>
-
-                                                <div className="blog-card-meta">
-                                                    <span>
-                                                        {blog.likeCount} like
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </Link>
-                            </Fragment>
-                        )),
-                    )
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <p>{blog.author.nickname}</p>
+                                        <p>{formatDate(blog.createdAt)}</p>
+                                    </div>
+                                </div>
+                                <div className="blog-card-data">
+                                    <div className="blog-card-tags">
+                                        {blog.tags.map((tag) => (
+                                            <span
+                                                key={tag.id}
+                                                className="blog-tag">
+                                                #{tag.name}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div className="blog-card-meta">
+                                        <span>{blog.likeCount} like</span>
+                                    </div>
+                                </div>
+                                <p className="content">{blog.content}</p>
+                            </div>
+                        </article>
+                    ))
                 )}
-
                 {hasNextPage && (
                     <div ref={loadMoreRef} className="blogs-load-more">
                         {isFetchingNextPage && <p>Blogok betöltése...</p>}

@@ -3,7 +3,22 @@ import { BlogVisibility, type Prisma } from "../../../prisma/generated/prisma";
 
 export const blogListSelect = {
     id: true,
+
     authorId: true,
+    author: {
+        select: {
+            id: true,
+            username: true,
+
+            userData: {
+                select: {
+                    nickname: true,
+                    avatarUrl: true,
+                },
+            },
+        },
+    },
+
     title: true,
     content: true,
     createdAt: true,

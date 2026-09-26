@@ -37,8 +37,8 @@ export async function getCurrentUserCityStats(userId: string) {
 
     let male = 0;
     let female = 0;
-    let transMale = 0;
-    let transFemale = 0;
+    const transMale = 0;
+    const transFemale = 0;
 
     let age18To25 = 0;
     let age26To40 = 0;
@@ -57,14 +57,6 @@ export async function getCurrentUserCityStats(userId: string) {
 
             case Gender.WOMAN:
                 female++;
-                break;
-
-            case Gender.TRANS_MAN:
-                transMale++;
-                break;
-
-            case Gender.TRANS_WOMAN:
-                transFemale++;
                 break;
         }
 

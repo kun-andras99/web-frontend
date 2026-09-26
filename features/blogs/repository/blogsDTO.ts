@@ -15,6 +15,7 @@ export interface BlogTagDTO {
 export interface BlogDTO {
     id: string;
     authorId: string;
+    author: BlogAuthorDTO;
     title: string;
     content: string;
     visibility: BlogVisibility;

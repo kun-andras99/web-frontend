@@ -1,10 +1,7 @@
 import {
     UserData,
-    UserGenderInterest,
-    UserLookingFor,
     UserPreference,
     Users,
-    UserSexualityInterest,
 } from "../../../prisma/generated/prisma";
 
 export type ProfileTab = "statistics" | "dress" | "datas" | "albums" | "pin";
@@ -27,7 +24,4 @@ export interface ProfileUser {
 export type ProfileWithRelations = Users & {
     userData: UserData | null;
     userPreference: UserPreference | null;
-    lookingFor: UserLookingFor[];
-    genderInterest: UserGenderInterest[];
-    sexualityInteres: UserSexualityInterest[];
 };

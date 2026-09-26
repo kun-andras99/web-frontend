@@ -94,6 +94,15 @@ export const DISPLAY_PAGE_TITLE: MobileTopNavigationConfig = [
         url: "/reset-password",
     },
 
+    //
+
+    {
+        id: 24,
+        name: "create-profile",
+        title: "Create profile",
+        url: "/profile/create",
+    },
+
     //authed
     {
         id: 29,
