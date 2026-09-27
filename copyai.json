@@ -1,0 +1,14 @@
+{
+    "contexts": [
+        {
+            "name": "Profile create",
+            "description": "Nextjs feature",
+            "files": [
+                "features/profile-create/**/*.jsx",
+                "features/profile-create/**/*.tsx",
+                "features/profile-create/**/*.tsx",
+                "features/profile-create/**/*.ts"
+            ]
+        }
+    ]
+}

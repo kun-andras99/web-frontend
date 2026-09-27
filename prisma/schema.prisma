@@ -933,14 +933,20 @@ enum VerificationTokenType {
 enum Gender {
     MAN
     WOMAN
+    TRANS_MAN
+    TRANS_WOMAN
 }
 enum GenderInterest {
     MAN
     WOMAN
+    TRANS_MAN
+    TRANS_WOMAN
 }
 enum GenderCanSee {
-  MAN
-  WOMAN
+    MAN
+    WOMAN
+    TRANS_MAN
+    TRANS_WOMAN
 }
 enum Sexuality {
     STRAIGHT

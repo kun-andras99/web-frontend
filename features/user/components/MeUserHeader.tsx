@@ -44,7 +44,7 @@ export default function MeUserHeader({ userId }: UserProfileProps) {
         error,
     } = useUserHeaderDatas(userId);
     const { data: fulluser } = useCurrentUserFull();
-    console.log(fulluser);
+    // console.log(fulluser);
     if (isLoading) {
         return <div>Betöltés...</div>;
     }
@@ -79,7 +79,7 @@ export default function MeUserHeader({ userId }: UserProfileProps) {
             <p>{user.countryCode}</p>
             <p>{user.region}</p>
             <p>{user.city}</p>
-            <p>profilt létrehozta: {formatDate(fulluser.createdAt)}</p>
+            {/* <p>profilt létrehozta: {formatDate(fulluser.createdAt)}</p> */}
         </div>
     );
 }

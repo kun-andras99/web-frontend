@@ -4,8 +4,6 @@ import type { Dispatch, SetStateAction } from "react";
 
 import type { ProfileCreateForm } from "../types/profileCreate";
 
-import { ProfileAvatarUploader } from "./ProfileAvatarUploader";
-
 interface ProfileBasicsFormProps {
     form: ProfileCreateForm;
     setForm: Dispatch<SetStateAction<ProfileCreateForm>>;
@@ -33,50 +31,40 @@ export function ProfileBasicsForm({
         }));
     }
 
-    function updateAvatar(file: File) {
-        const preview = URL.createObjectURL(file);
+    // function updateAvatar(file: File) {
+    //     const preview = URL.createObjectURL(file);
 
-        setForm((current) => ({
-            ...current,
-            avatar: file,
-            avatarPreview: preview,
-        }));
-    }
+    //     setForm((current) => ({
+    //         ...current,
+    //         avatar: file,
+    //         avatarPreview: preview,
+    //     }));
+    // }
 
     return (
         <div className="profile-create-form">
-            <div className="profile-create-form__header">
+            {/* <div className="profile-create-form__header">
                 <span className="profile-create-form__step">1 / 2</span>
-
-                <h2>Alapadatok</h2>
-
-                <p>Néhány alapadat, hogy létrehozhassuk a profilodat.</p>
-            </div>
+            </div> */}
 
             <div className="profile-create-field">
-                <label htmlFor="nickname">Megjelenített név</label>
-
+                <h2>Hogyan szólíthatunk?</h2>
                 <input
                     id="nickname"
                     type="text"
                     value={form.nickname}
                     onChange={(event) => updateNickname(event.target.value)}
-                    placeholder="Pl. Andris"
+                    placeholder="Nickname"
                     minLength={3}
                     maxLength={8}
                     autoComplete="nickname"
+                    className={`app-input`}
                 />
-
-                <div className="profile-create-field__meta">
-                    <span>Minimum 3, maximum 8 karakter</span>
-
-                    <span>{nicknameLength}/8</span>
-                </div>
+                <p>Más felhasználók ezt a nevet fogják látni.</p>
             </div>
 
             <div className="profile-create-field">
-                <label htmlFor="birth">Születési idő</label>
-
+                <h2>Mikor születtél?</h2>
                 <input
                     id="birth"
                     type="date"
@@ -91,20 +79,18 @@ export function ProfileBasicsForm({
                 />
             </div>
 
-            <div className="profile-create-field">
-                <label>Profilkép</label>
-
+            {/* <div className="profile-create-field">
                 <ProfileAvatarUploader
                     preview={form.avatarPreview}
                     onChange={updateAvatar}
                 />
-            </div>
+            </div> */}
 
             <button
                 type="button"
                 disabled={!isValid}
                 onClick={onNext}
-                className="profile-create-button">
+                className="app-button">
                 Tovább
             </button>
         </div>

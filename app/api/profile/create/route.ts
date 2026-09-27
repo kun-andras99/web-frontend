@@ -1,12 +1,13 @@
-import { clientMetaFromHeaders } from "@/features/auth/lib/client-meta";
-import { attachAuthCookies } from "@/features/auth/lib/cookies";
-import { registerCredentials } from "@/features/auth/lib/register";
 import { getCurrentUser } from "@/features/auth/lib/session";
+import { mapProfileCreateToDTO } from "@/features/profile-create/mappers/profileCreate.mapper";
+import { createProfile } from "@/features/profile-create/repositories/profileCreate";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { Gender, Sexuality } from "../../../../prisma/generated/prisma";
-import { createProfile } from "@/features/profile-create/repositories/profileCreate";
-import { mapProfileCreateToDTO } from "@/features/profile-create/mappers/profileCreate.mapper";
+import {
+    AppCity,
+    Gender,
+    Sexuality,
+} from "../../../../prisma/generated/prisma";
 
 const profileCreateSchema = z.object({
     nickname: z
@@ -16,22 +17,145 @@ const profileCreateSchema = z.object({
         .max(8, "A megjelenített név maximum 8 karakter lehet."),
 
     birth: z.string().min(1, "A születési dátum kötelező."),
-
     gender: z.enum(Object.values(Gender) as [Gender, ...Gender[]]),
-
     sexuality: z.enum(Object.values(Sexuality) as [Sexuality, ...Sexuality[]]),
+    appCity: z.enum(Object.values(AppCity) as [AppCity, ...AppCity[]]),
 });
 
-function isSexualityAllowed(gender: Gender, sexuality: Sexuality) {
+export function isValidDateString(value: string): boolean {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+
+    if (!match) {
+        return false;
+    }
+
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+
+    const date = new Date(year, month - 1, day);
+
+    return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+    );
+}
+
+export function isAtLeast18(birth: string): boolean {
+    if (!isValidDateString(birth)) {
+        return false;
+    }
+
+    const [year, month, day] = birth.split("-").map(Number);
+
+    const today = new Date();
+
+    let age = today.getFullYear() - year;
+
+    const birthdayPassed =
+        today.getMonth() + 1 > month ||
+        (today.getMonth() + 1 === month && today.getDate() >= day);
+
+    if (!birthdayPassed) {
+        age--;
+    }
+
+    return age >= 18;
+}
+
+function getAllowedAppCities(gender: Gender, sexuality: Sexuality): AppCity[] {
     if (gender === Gender.MAN) {
-        return sexuality !== Sexuality.LESBIAN;
+        if (sexuality === Sexuality.STRAIGHT) {
+            return [AppCity.CENTRUM, AppCity.STRAIGHT, AppCity.BISEXUAL];
+        }
+
+        if (sexuality === Sexuality.BISEXUAL) {
+            return [AppCity.CENTRUM, AppCity.BISEXUAL, AppCity.GAY];
+        }
+
+        return [
+            AppCity.CENTRUM,
+            AppCity.STRAIGHT,
+            AppCity.BISEXUAL,
+            AppCity.GAY,
+        ];
     }
 
     if (gender === Gender.WOMAN) {
-        return sexuality !== Sexuality.GAY;
+        if (sexuality === Sexuality.STRAIGHT) {
+            return [AppCity.CENTRUM, AppCity.STRAIGHT, AppCity.BISEXUAL];
+        }
+
+        if (sexuality === Sexuality.BISEXUAL) {
+            return [AppCity.CENTRUM, AppCity.BISEXUAL, AppCity.LESBIAN];
+        }
+
+        return [
+            AppCity.CENTRUM,
+            AppCity.STRAIGHT,
+            AppCity.BISEXUAL,
+            AppCity.LESBIAN,
+        ];
     }
 
-    return false;
+    if (gender === Gender.TRANS_MAN) {
+        if (sexuality === Sexuality.STRAIGHT) {
+            return [
+                AppCity.CENTRUM,
+                AppCity.STRAIGHT,
+                AppCity.BISEXUAL,
+                AppCity.TRANS,
+            ];
+        }
+
+        if (sexuality === Sexuality.BISEXUAL) {
+            return [
+                AppCity.CENTRUM,
+                AppCity.BISEXUAL,
+                AppCity.GAY,
+                AppCity.TRANS,
+            ];
+        }
+
+        return [
+            AppCity.CENTRUM,
+            AppCity.STRAIGHT,
+            AppCity.BISEXUAL,
+            AppCity.GAY,
+            AppCity.TRANS,
+        ];
+    }
+
+    if (gender === Gender.TRANS_WOMAN) {
+        if (sexuality === Sexuality.STRAIGHT) {
+            return [
+                AppCity.CENTRUM,
+                AppCity.STRAIGHT,
+                AppCity.LESBIAN,
+                AppCity.TRANS,
+            ];
+        }
+
+        if (sexuality === Sexuality.BISEXUAL) {
+            return [
+                AppCity.CENTRUM,
+                AppCity.BISEXUAL,
+                AppCity.LESBIAN,
+                AppCity.TRANS,
+            ];
+        }
+
+        return [
+            AppCity.CENTRUM,
+            AppCity.STRAIGHT,
+            AppCity.BISEXUAL,
+            AppCity.LESBIAN,
+            AppCity.TRANS,
+        ];
+    }
+
+    return [];
 }
 
 export async function POST(request: Request) {
@@ -50,22 +174,19 @@ export async function POST(request: Request) {
         }
 
         const formData = await request.formData();
-
         const nickname = formData.get("nickname");
-
         const birth = formData.get("birth");
-
         const gender = formData.get("gender");
-
         const sexuality = formData.get("sexuality");
-
-        const avatar = formData.get("avatar");
+        const appCity = formData.get("appCity");
+        // const avatar = formData.get("avatar");
 
         const parsed = profileCreateSchema.safeParse({
             nickname,
             birth,
             gender,
             sexuality,
+            appCity,
         });
 
         if (!parsed.success) {
@@ -80,11 +201,16 @@ export async function POST(request: Request) {
             );
         }
 
-        if (!isSexualityAllowed(parsed.data.gender, parsed.data.sexuality)) {
+        const allowedAppCities = getAllowedAppCities(
+            parsed.data.gender,
+            parsed.data.sexuality,
+        );
+
+        if (!allowedAppCities.includes(parsed.data.appCity)) {
             return NextResponse.json(
                 {
                     message:
-                        "A kiválasztott szexualitás nem használható a megadott nemmel.",
+                        "A kiválasztott negyed nem használható a megadott nemmel és szexualitással.",
                 },
                 {
                     status: 400,
@@ -116,6 +242,18 @@ export async function POST(request: Request) {
             );
         }
 
+        if (!isAtLeast18(parsed.data.birth)) {
+            return NextResponse.json(
+                {
+                    message:
+                        "A regisztrációhoz be kell töltened a 18. életévedet.",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+
         /*
          * Avatar kezelés:
          *
@@ -128,39 +266,39 @@ export async function POST(request: Request) {
          *     );
          */
 
-        let avatarUrl: string | null = null;
+        // const avatarUrl: string | null = null;
 
-        if (avatar instanceof File && avatar.size > 0) {
-            if (!avatar.type.startsWith("image/")) {
-                return NextResponse.json(
-                    {
-                        message: "Csak képfájl tölthető fel.",
-                    },
-                    {
-                        status: 400,
-                    },
-                );
-            }
+        // if (avatar instanceof File && avatar.size > 0) {
+        //     if (!avatar.type.startsWith("image/")) {
+        //         return NextResponse.json(
+        //             {
+        //                 message: "Csak képfájl tölthető fel.",
+        //             },
+        //             {
+        //                 status: 400,
+        //             },
+        //         );
+        //     }
 
-            const maxSize = 5 * 1024 * 1024;
+        // const maxSize = 5 * 1024 * 1024;
 
-            if (avatar.size > maxSize) {
-                return NextResponse.json(
-                    {
-                        message: "A kép maximum 5 MB lehet.",
-                    },
-                    {
-                        status: 400,
-                    },
-                );
-            }
+        // if (avatar.size > maxSize) {
+        //     return NextResponse.json(
+        //         {
+        //             message: "A kép maximum 5 MB lehet.",
+        //         },
+        //         {
+        //             status: 400,
+        //         },
+        //     );
+        // }
 
-            /*
-             * Itt még nincs storage.
-             *
-             * avatarUrl marad null.
-             */
-        }
+        /*
+         * Itt még nincs storage.
+         *
+         * avatarUrl marad null.
+         */
+        // }
 
         const dto = mapProfileCreateToDTO(
             {
@@ -168,10 +306,10 @@ export async function POST(request: Request) {
                 birth: parsed.data.birth,
                 gender: parsed.data.gender,
                 sexuality: parsed.data.sexuality,
-                avatar: avatar instanceof File ? avatar : null,
+                appCity: parsed.data.appCity,
             },
             currentUser.id,
-            avatarUrl,
+            // avatarUrl,
         );
 
         await createProfile(dto);

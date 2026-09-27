@@ -23,7 +23,8 @@ export async function createProfile(data: CreateProfileDTO) {
                 birth: data.birth,
                 gender: data.gender,
                 sexuality: data.sexuality,
-                avatarUrl: data.avatarUrl,
+                appCity: data.appCity,
+                // avatarUrl: data.avatarUrl,
             },
         });
 

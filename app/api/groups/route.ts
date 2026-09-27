@@ -16,7 +16,7 @@ export async function GET() {
 
         const groups = await getGroups();
 
-        console.log(groups);
+        // console.log(groups);
 
         const groupsDTO = groups.map((group) => toGroupDTO(group));
 

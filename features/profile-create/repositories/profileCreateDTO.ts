@@ -1,4 +1,4 @@
-import { Gender, Sexuality } from "../../../prisma/generated/prisma";
+import { AppCity, Gender, Sexuality } from "../../../prisma/generated/prisma";
 
 export interface CreateProfileDTO {
     userId: string;
@@ -6,5 +6,5 @@ export interface CreateProfileDTO {
     birth: Date;
     gender: Gender;
     sexuality: Sexuality;
-    avatarUrl: string | null;
+    appCity: AppCity;
 }

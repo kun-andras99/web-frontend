@@ -25,8 +25,6 @@ import type {
 
 import { getUserById } from "@/features/user/repositories/user";
 
-import { prisma } from "@/lib/prisma";
-
 import type { NextRequest } from "next/server";
 
 import { NextResponse } from "next/server";
@@ -71,7 +69,7 @@ interface RotatedTokens {
 interface SessionResult {
     authenticated: boolean;
     user?: SessionUser;
-    hasUserPreference?: boolean;
+    hasUserPreference?: boolean | undefined;
     rotatedTokens?: RotatedTokens;
 }
 
@@ -152,19 +150,6 @@ function getClientIp(request: NextRequest): string | null {
  * ---------------------------------------------------------------------------
  */
 
-async function hasUserPreference(userId: string): Promise<boolean> {
-    const userPreference = await prisma.userPreference.findUnique({
-        where: {
-            userId,
-        },
-        select: {
-            id: true,
-        },
-    });
-
-    return userPreference !== null;
-}
-
 /**
  * ---------------------------------------------------------------------------
  * SESSION RESOLUTION
@@ -192,7 +177,7 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
                         role: user.role,
                     },
 
-                    hasUserPreference: user.userPreference !== null,
+                    hasUserPreference: user.userPreference,
                 };
             }
         }
@@ -360,7 +345,7 @@ export async function proxy(request: NextRequest) {
      * -----------------------------------------------------------------------
      */
 
-    if (session.hasUserPreference === false) {
+    if (!session.hasUserPreference) {
         if (!profileCreate) {
             const response = NextResponse.redirect(
                 new URL(PROFILE_CREATE_ROUTE, request.url),

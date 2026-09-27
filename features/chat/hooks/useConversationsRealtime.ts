@@ -32,7 +32,7 @@ export function useConversationsRealtime() {
                         return;
                     }
 
-                    console.log("MESSAGES REALTIME:", event);
+                    // console.log("MESSAGES REALTIME:", event);
 
                     void queryClient.invalidateQueries({
                         queryKey: conversationKeys.list(),
@@ -40,7 +40,7 @@ export function useConversationsRealtime() {
                 },
             )
             .subscribe((status) => {
-                console.log("Messages realtime status:", status);
+                // console.log("Messages realtime status:", status);
             });
 
         return () => {

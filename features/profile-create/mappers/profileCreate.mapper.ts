@@ -4,7 +4,6 @@ import type { CreateProfilePayload } from "@/features/profile-create/types/profi
 export function mapProfileCreateToDTO(
     payload: CreateProfilePayload,
     userId: string,
-    avatarUrl: string | null,
 ): CreateProfileDTO {
     return {
         userId,
@@ -12,6 +11,6 @@ export function mapProfileCreateToDTO(
         birth: new Date(payload.birth),
         gender: payload.gender,
         sexuality: payload.sexuality,
-        avatarUrl,
+        appCity: payload.appCity,
     };
 }

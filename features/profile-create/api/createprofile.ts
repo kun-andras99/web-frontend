@@ -1,4 +1,7 @@
-import type { CreateProfilePayload, CreateProfileResponse } from "@/features/profile-create/types/profileCreate";
+import type {
+    CreateProfilePayload,
+    CreateProfileResponse,
+} from "@/features/profile-create/types/profileCreate";
 
 export async function createProfile(
     payload: CreateProfilePayload,
@@ -6,12 +9,10 @@ export async function createProfile(
     const formData = new FormData();
 
     formData.append("nickname", payload.nickname);
-
     formData.append("birth", payload.birth);
-
     formData.append("gender", payload.gender);
-
     formData.append("sexuality", payload.sexuality);
+    formData.append("appCity", payload.appCity);
 
     if (payload.avatar) {
         formData.append("avatar", payload.avatar);

@@ -959,7 +959,9 @@ exports.AppCity = exports.$Enums.AppCity = {
 
 exports.Gender = exports.$Enums.Gender = {
   MAN: 'MAN',
-  WOMAN: 'WOMAN'
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 };
 
 exports.Sexuality = exports.$Enums.Sexuality = {
@@ -1205,7 +1207,9 @@ exports.OpenTo = exports.$Enums.OpenTo = {
 
 exports.GenderCanSee = exports.$Enums.GenderCanSee = {
   MAN: 'MAN',
-  WOMAN: 'WOMAN'
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 };
 
 exports.SexualityCanSee = exports.$Enums.SexualityCanSee = {
@@ -1859,7 +1863,9 @@ exports.LookingFor = exports.$Enums.LookingFor = {
 
 exports.GenderInterest = exports.$Enums.GenderInterest = {
   MAN: 'MAN',
-  WOMAN: 'WOMAN'
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 };
 
 exports.SexualityInterest = exports.$Enums.SexualityInterest = {

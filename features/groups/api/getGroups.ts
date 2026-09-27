@@ -6,7 +6,7 @@ export async function getGroups(): Promise<GroupDTO[]> {
         credentials: "include",
     });
 
-    console.log(response);
+    // console.log(response);
 
     if (!response.ok) {
         throw new Error("A csoportok betöltése sikertelen.");

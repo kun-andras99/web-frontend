@@ -1,10 +1,10 @@
 "use client";
 
 import { basicInfoSchema } from "@/lib/_lib/validations/profile";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useProfileWizardStore } from "../store/useProfileWizardStore";
 import { AvatarUploader } from "./AvatarUploader";
-import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = basicInfoSchema.omit({ avatarUrl: true });
 type FormValues = { nickname: string; birth: string };
@@ -39,11 +39,6 @@ export function StepBasicInfo() {
             <AvatarUploader />
 
             <div>
-                <label
-                    htmlFor="nickname"
-                    className="mb-1 block text-sm font-medium">
-                    Megjelenített név
-                </label>
                 <input
                     id="nickname"
                     {...register("nickname")}

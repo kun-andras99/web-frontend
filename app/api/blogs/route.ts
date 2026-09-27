@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
 
         const cursor = searchParams.get("cursor") ?? undefined;
 
-        console.log(USE_BLOG_MOCK);
+        // console.log(USE_BLOG_MOCK);
         /*
          * MOCK
          */

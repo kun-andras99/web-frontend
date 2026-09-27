@@ -12,7 +12,6 @@ export default function BottomNavigation() {
         <section className="main-bottom-navigation">
             <div className="content">
                 {appMenus.map((route) => {
-                    console.log(route.activeIcon);
                     const isActive =
                         pathname === route.url ||
                         pathname.startsWith(`${route.url}/`);

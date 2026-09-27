@@ -1,12 +1,15 @@
 "use client";
 
+import { ProfileAppCitySelector } from "@/features/profile-create/components/ProfileAppCitySelector";
+import { AnimatePresence, motion } from "framer-motion";
 import type { Dispatch, SetStateAction } from "react";
-
-
+import type {
+    AppCity,
+    Gender,
+    Sexuality,
+} from "../../../prisma/generated/prisma";
 import type { ProfileCreateForm } from "../types/profileCreate";
-
 import { ProfileSexualitySelector } from "./ProfileSexualitySelector";
-import { Gender } from "../../../prisma/generated/prisma";
 
 interface ProfileIdentityFormProps {
     form: ProfileCreateForm;
@@ -19,9 +22,26 @@ interface ProfileIdentityFormProps {
 const genderLabels: Record<Gender, string> = {
     MAN: "Férfi",
     WOMAN: "Nő",
+    TRANS_MAN: "Trans Férfi",
+    TRANS_WOMAN: "Trans Nő",
 };
 
-const genders: Gender[] = ["MAN", "WOMAN"];
+const genders: Gender[] = ["MAN", "WOMAN", "TRANS_MAN", "TRANS_WOMAN"];
+
+const boxAnimation = {
+    initial: {
+        opacity: 0,
+        y: 20,
+    },
+    animate: {
+        opacity: 1,
+        y: 0,
+    },
+    exit: {
+        opacity: 0,
+        y: -20,
+    },
+};
 
 export function ProfileIdentityForm({
     form,
@@ -30,72 +50,186 @@ export function ProfileIdentityForm({
     onSubmit,
     isPending,
 }: ProfileIdentityFormProps) {
-    const isValid = Boolean(form.gender) && Boolean(form.sexuality);
+    const isGenderStep = !form.gender;
+    const isSexualityStep = Boolean(form.gender) && !form.sexuality;
+    const isAppCityStep = Boolean(form.gender && form.sexuality);
+
+    const isValid =
+        Boolean(form.gender) &&
+        Boolean(form.sexuality) &&
+        Boolean(form.appCity);
 
     function handleGenderChange(gender: Gender) {
         setForm((current) => ({
             ...current,
             gender,
             sexuality: null,
+            appCity: null,
+        }));
+    }
+
+    function handleSexualityChange(sexuality: Sexuality) {
+        setForm((current) => ({
+            ...current,
+            sexuality,
+            appCity: null,
+        }));
+    }
+
+    function handleAppCityChange(appCity: AppCity) {
+        setForm((current) => ({
+            ...current,
+            appCity,
+        }));
+    }
+
+    function handleBackToGender() {
+        setForm((current) => ({
+            ...current,
+            gender: null,
+            sexuality: null,
+            appCity: null,
+        }));
+    }
+
+    function handleBackToSexuality() {
+        setForm((current) => ({
+            ...current,
+            sexuality: null,
+            appCity: null,
         }));
     }
 
     return (
         <div className="profile-create-form">
-            <div className="profile-create-form__header">
-                <span className="profile-create-form__step">2 / 2</span>
+            <div className="profile-create-identity">
+                <AnimatePresence mode="wait" initial={false}>
+                    {isGenderStep && (
+                        <motion.div
+                            key="gender"
+                            className="profile-create-identity__box"
+                            initial={boxAnimation.initial}
+                            animate={boxAnimation.animate}
+                            exit={boxAnimation.exit}
+                            transition={{
+                                duration: 0.3,
+                                ease: "easeOut",
+                            }}>
+                            <div className="profile-create-field">
+                                <h2>Mi a nemed?</h2>
 
-                <h2>Ki vagy?</h2>
+                                <div className="profile-gender-options">
+                                    {genders.map((gender) => {
+                                        const selected = form.gender === gender;
 
-                <p>Válaszd ki a nemedet és a szexualitásodat.</p>
+                                        return (
+                                            <button
+                                                key={gender}
+                                                type="button"
+                                                className={
+                                                    selected
+                                                        ? "is-selected"
+                                                        : ""
+                                                }
+                                                onClick={() =>
+                                                    handleGenderChange(gender)
+                                                }>
+                                                {genderLabels[gender]}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {isSexualityStep && form.gender && (
+                        <motion.div
+                            key="sexuality"
+                            className="profile-create-identity__box"
+                            initial={boxAnimation.initial}
+                            animate={boxAnimation.animate}
+                            exit={boxAnimation.exit}
+                            transition={{
+                                duration: 0.3,
+                                ease: "easeOut",
+                            }}>
+                            <ProfileSexualitySelector
+                                gender={form.gender}
+                                value={form.sexuality}
+                                onChange={handleSexualityChange}
+                            />
+
+                            <button
+                                type="button"
+                                className="app-back-button"
+                                onClick={handleBackToGender}
+                                disabled={isPending}>
+                                ← Vissza
+                            </button>
+                        </motion.div>
+                    )}
+
+                    {isAppCityStep && form.gender && form.sexuality && (
+                        <motion.div
+                            key="app-city"
+                            className="profile-create-identity__box"
+                            initial={boxAnimation.initial}
+                            animate={boxAnimation.animate}
+                            exit={boxAnimation.exit}
+                            transition={{
+                                duration: 0.3,
+                                ease: "easeOut",
+                            }}>
+                            <ProfileAppCitySelector
+                                gender={form.gender}
+                                sexuality={form.sexuality}
+                                value={form.appCity}
+                                onChange={handleAppCityChange}
+                            />
+
+                            <button
+                                type="button"
+                                className="app-back-button"
+                                onClick={handleBackToSexuality}
+                                disabled={isPending}>
+                                ← Vissza
+                            </button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
-            <div className="profile-create-field">
-                <label>Nem</label>
-
-                <div className="profile-gender-options">
-                    {genders.map((gender) => (
+            <AnimatePresence>
+                {isAppCityStep && (
+                    <motion.div
+                        className="profile-create-form__actions"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{
+                            duration: 0.25,
+                        }}>
                         <button
-                            key={gender}
                             type="button"
-                            className={
-                                form.gender === gender ? "is-selected" : ""
-                            }
-                            onClick={() => handleGenderChange(gender)}>
-                            {genderLabels[gender]}
+                            onClick={onBack}
+                            disabled={isPending}
+                            className="app-back-button">
+                            ← Vissza
                         </button>
-                    ))}
-                </div>
-            </div>
 
-            <ProfileSexualitySelector
-                gender={form.gender}
-                value={form.sexuality}
-                onChange={(sexuality) =>
-                    setForm((current) => ({
-                        ...current,
-                        sexuality,
-                    }))
-                }
-            />
-
-            <div className="profile-create-form__actions">
-                <button
-                    type="button"
-                    onClick={onBack}
-                    disabled={isPending}
-                    className="profile-create-button profile-create-button--secondary">
-                    Vissza
-                </button>
-
-                <button
-                    type="button"
-                    disabled={!isValid || isPending}
-                    onClick={onSubmit}
-                    className="profile-create-button">
-                    {isPending ? "Profil létrehozása..." : "Profil létrehozása"}
-                </button>
-            </div>
+                        <button
+                            type="button"
+                            disabled={!isValid || isPending}
+                            onClick={onSubmit}
+                            className="app-button">
+                            {isPending
+                                ? "Profil létrehozása..."
+                                : "Profil létrehozása"}
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

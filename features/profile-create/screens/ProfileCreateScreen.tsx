@@ -16,8 +16,6 @@ import type {
     ProfileCreateStep,
 } from "../types/profileCreate";
 
-
-
 export function ProfileCreateScreen() {
     const router = useRouter();
 
@@ -28,10 +26,10 @@ export function ProfileCreateScreen() {
     const [form, setForm] = useState<ProfileCreateForm>({
         nickname: "",
         birth: "",
-        avatar: null,
         avatarPreview: null,
         gender: null,
         sexuality: null,
+        appCity: null,
     });
 
     useEffect(() => {
@@ -43,7 +41,7 @@ export function ProfileCreateScreen() {
     }, [form.avatarPreview]);
 
     async function handleSubmit() {
-        if (!form.gender || !form.sexuality) {
+        if (!form.gender || !form.sexuality || !form.appCity) {
             return;
         }
 
@@ -53,7 +51,7 @@ export function ProfileCreateScreen() {
                 birth: form.birth,
                 gender: form.gender,
                 sexuality: form.sexuality,
-                avatar: form.avatar,
+                appCity: form.appCity,
             });
 
             router.replace("/love");
@@ -64,23 +62,26 @@ export function ProfileCreateScreen() {
         }
     }
 
+    // function handleAvatarChange(file: File) {
+    //     setForm((current) => {
+    //         if (current.avatarPreview) {
+    //             URL.revokeObjectURL(current.avatarPreview);
+    //         }
 
-    function handleAvatarChange(file: File) {
-        setForm((current) => {
-            if (current.avatarPreview) {
-                URL.revokeObjectURL(current.avatarPreview);
-            }
-
-            return {
-                ...current,
-                avatar: file,
-                avatarPreview: URL.createObjectURL(file),
-            };
-        });
-    }
+    //         return {
+    //             ...current,
+    //             avatar: file,
+    //             avatarPreview: URL.createObjectURL(file),
+    //         };
+    //     });
+    // }
 
     return (
-        <main className="profile-create">
+        <div className="profile-create">
+            <p>
+                Mielőtt engedélyt kapnál használatához, szükségünk van néhány
+                adatra a profilod létrehozásához.
+            </p>
             <div className="profile-create__container">
                 <motion.div layout className="profile-create__preview">
                     <ProfileCreateCard
@@ -89,6 +90,7 @@ export function ProfileCreateScreen() {
                         avatarPreview={form.avatarPreview}
                         gender={form.gender}
                         sexuality={form.sexuality}
+                        appCity={form.appCity}
                     />
                 </motion.div>
 
@@ -156,6 +158,6 @@ export function ProfileCreateScreen() {
                     )}
                 </div>
             </div>
-        </main>
+        </div>
     );
 }

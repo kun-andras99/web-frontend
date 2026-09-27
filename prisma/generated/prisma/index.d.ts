@@ -1417,7 +1417,9 @@ export type VerificationTokenType = (typeof VerificationTokenType)[keyof typeof 
 
 export const Gender: {
   MAN: 'MAN',
-  WOMAN: 'WOMAN'
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 };
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
@@ -1425,7 +1427,9 @@ export type Gender = (typeof Gender)[keyof typeof Gender]
 
 export const GenderInterest: {
   MAN: 'MAN',
-  WOMAN: 'WOMAN'
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 };
 
 export type GenderInterest = (typeof GenderInterest)[keyof typeof GenderInterest]
@@ -1433,7 +1437,9 @@ export type GenderInterest = (typeof GenderInterest)[keyof typeof GenderInterest
 
 export const GenderCanSee: {
   MAN: 'MAN',
-  WOMAN: 'WOMAN'
+  WOMAN: 'WOMAN',
+  TRANS_MAN: 'TRANS_MAN',
+  TRANS_WOMAN: 'TRANS_WOMAN'
 };
 
 export type GenderCanSee = (typeof GenderCanSee)[keyof typeof GenderCanSee]

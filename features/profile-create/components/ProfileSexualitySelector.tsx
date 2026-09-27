@@ -1,6 +1,6 @@
 "use client";
 
-import { Gender, Sexuality } from "../../../prisma/generated/prisma";
+import { AppCity, Gender, Sexuality } from "../../../prisma/generated/prisma";
 
 interface ProfileSexualitySelectorProps {
     gender: Gender | null;
@@ -23,41 +23,69 @@ const sexualityLabels: Record<Sexuality, string> = {
     PREFER_NOT_TO_SAY: "Nem árulom el",
 };
 
-const maleSexualities: Sexuality[] = [
-    "STRAIGHT",
-    "BISEXUAL",
-    "GAY",
-    "PANSEXUAL",
-    "ASEXUAL",
-    "QUEER",
-    "OMNISEXUAL",
-    "DEMISEXUAL",
-    "QUESTIONING",
-    "OTHER",
-    "PREFER_NOT_TO_SAY",
-];
-
-const femaleSexualities: Sexuality[] = [
-    "STRAIGHT",
-    "BISEXUAL",
-    "LESBIAN",
-    "PANSEXUAL",
-    "ASEXUAL",
-    "QUEER",
-    "OMNISEXUAL",
-    "DEMISEXUAL",
-    "QUESTIONING",
-    "OTHER",
-    "PREFER_NOT_TO_SAY",
-];
-
-function getAllowedSexualities(gender: Gender | null) {
-    if (gender === "MAN") {
-        return maleSexualities;
+function getAllowedSexualities(gender: Gender | null): Sexuality[] {
+    if (gender === Gender.MAN) {
+        return [
+            Sexuality.STRAIGHT,
+            Sexuality.BISEXUAL,
+            Sexuality.GAY,
+            Sexuality.PANSEXUAL,
+            Sexuality.ASEXUAL,
+            Sexuality.QUEER,
+            Sexuality.OMNISEXUAL,
+            Sexuality.DEMISEXUAL,
+            Sexuality.QUESTIONING,
+            Sexuality.OTHER,
+            Sexuality.PREFER_NOT_TO_SAY,
+        ];
     }
 
-    if (gender === "WOMAN") {
-        return femaleSexualities;
+    if (gender === Gender.WOMAN) {
+        return [
+            Sexuality.STRAIGHT,
+            Sexuality.BISEXUAL,
+            Sexuality.LESBIAN,
+            Sexuality.PANSEXUAL,
+            Sexuality.ASEXUAL,
+            Sexuality.QUEER,
+            Sexuality.OMNISEXUAL,
+            Sexuality.DEMISEXUAL,
+            Sexuality.QUESTIONING,
+            Sexuality.OTHER,
+            Sexuality.PREFER_NOT_TO_SAY,
+        ];
+    }
+
+    if (gender === Gender.TRANS_MAN) {
+        return [
+            Sexuality.STRAIGHT,
+            Sexuality.BISEXUAL,
+            Sexuality.GAY,
+            Sexuality.PANSEXUAL,
+            Sexuality.ASEXUAL,
+            Sexuality.QUEER,
+            Sexuality.OMNISEXUAL,
+            Sexuality.DEMISEXUAL,
+            Sexuality.QUESTIONING,
+            Sexuality.OTHER,
+            Sexuality.PREFER_NOT_TO_SAY,
+        ];
+    }
+
+    if (gender === Gender.TRANS_WOMAN) {
+        return [
+            Sexuality.STRAIGHT,
+            Sexuality.BISEXUAL,
+            Sexuality.LESBIAN,
+            Sexuality.PANSEXUAL,
+            Sexuality.ASEXUAL,
+            Sexuality.QUEER,
+            Sexuality.OMNISEXUAL,
+            Sexuality.DEMISEXUAL,
+            Sexuality.QUESTIONING,
+            Sexuality.OTHER,
+            Sexuality.PREFER_NOT_TO_SAY,
+        ];
     }
 
     return [];
@@ -72,11 +100,12 @@ export function ProfileSexualitySelector({
 
     return (
         <div className="profile-sexuality">
-            <div className="profile-sexuality__header">
-                <h3>Szexualitás</h3>
+            {/* <div className="profile-sexuality__header">
+                <h2>Szexualitás</h2>
 
                 <span>Válaszd ki a hozzád leginkább illőt.</span>
-            </div>
+            </div> */}
+            {gender ? <h2>Szexualitás</h2> : ""}
 
             <div className="profile-sexuality__options">
                 {sexualities.map((sexuality) => {

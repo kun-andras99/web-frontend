@@ -34,16 +34,11 @@ export function ProfileAvatarUploader({
                 className="profile-avatar-uploader__button"
                 onClick={() => inputRef.current?.click()}>
                 {preview ? (
-                    <img
-                        src={preview}
-                        alt="Profilkép előnézet"
-                        className="profile-avatar-uploader__preview"
-                    />
+                    <span>Másik fénykép kiválasztása</span>
                 ) : (
-                    <span>+ Kép feltöltése</span>
+                    <span>Profilfotó feltöltése</span>
                 )}
             </button>
-
             <input
                 ref={inputRef}
                 type="file"

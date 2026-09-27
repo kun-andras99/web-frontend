@@ -1,14 +1,14 @@
-import { Gender, Sexuality } from "../../../prisma/generated/prisma";
+import { AppCity, Gender, Sexuality } from "../../../prisma/generated/prisma";
 
 export type ProfileCreateStep = "basics" | "identity";
 
 export interface ProfileCreateForm {
     nickname: string;
     birth: string;
-    avatar: File | null;
     avatarPreview: string | null;
     gender: Gender | null;
     sexuality: Sexuality | null;
+    appCity: AppCity | null;
 }
 
 export interface CreateProfilePayload {
@@ -16,7 +16,7 @@ export interface CreateProfilePayload {
     birth: string;
     gender: Gender;
     sexuality: Sexuality;
-    avatar: File | null;
+    appCity: AppCity;
 }
 
 export interface CreateProfileResponse {

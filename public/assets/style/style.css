@@ -4104,14 +4104,6 @@ header .main-navigation-bar .content .icon:active {
 }
 button {
   all: unset;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 10px 24px;
-  background: #0b92c7;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 800;
 }
 
 .centered-button {
@@ -4507,6 +4499,226 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+button {
+  height: 42px;
+  text-align: center;
+}
+
+.app-button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 42px;
+  font-size: 17px;
+  font-weight: 700;
+  background: #1089b9;
+  text-align: center;
+  border-radius: 10px;
+  padding: 0 15px;
+}
+
+p {
+  line-height: 1.75;
+}
+
+.app-button:disabled {
+  background: #050505;
+  color: #303030;
+  border-radius: 0px;
+}
+
+.app-input {
+  padding: 0 15px;
+  width: calc(100% - 20px);
+  max-width: 250px;
+  height: 42px;
+  background: #101010;
+  border-radius: 10px;
+  border: 0.005rem solid #303030;
+}
+
+.app-back-button {
+  padding: 0 15px;
+  color: #f0f0f0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.profile-create {
+  margin: 10px auto;
+  width: calc(100% - 30px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 25px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.profile-create > p {
+  text-align: center;
+}
+.profile-create__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+}
+.profile-create__preview {
+  padding: 15px;
+  border-radius: 10px;
+  background: #303030;
+}
+.profile-create__preview .profile-create-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+}
+.profile-create__preview .profile-create-card__avatar img {
+  width: 92px;
+  border-radius: 50px;
+}
+.profile-create__preview .profile-create-card__content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.profile-create__preview .profile-create-card__content > h2 {
+  font-size: 17px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.profile-create__form {
+  width: 100%;
+}
+.profile-create__form .profile-create-form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+.profile-create__form .profile-create-form__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+}
+.profile-create__form .profile-create-form .profile-sexuality {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0 auto;
+  gap: 20px;
+}
+.profile-create__form .profile-create-form .profile-sexuality h2 {
+  font-size: 17px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+}
+.profile-create__form .profile-create-form .profile-sexuality .profile-sexuality__options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 540px;
+  margin: 0 auto;
+  gap: 15px;
+}
+.profile-create__form .profile-create-form .profile-sexuality .profile-sexuality__options button {
+  background: #050505;
+  color: #303030;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0 15px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+.profile-create__form .profile-create-form .profile-sexuality .profile-sexuality__options button.is-selected {
+  background: #1089b9;
+  color: #f0f0f0;
+}
+.profile-create__form .profile-create-form .profile-create-field {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+.profile-create__form .profile-create-form .profile-create-field .profile-gender-options {
+  width: 100%;
+  max-width: 540px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 auto;
+}
+.profile-create__form .profile-create-form .profile-create-field .profile-gender-options button {
+  background: #050505;
+  color: #303030;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0 15px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+.profile-create__form .profile-create-form .profile-create-field .profile-gender-options button.is-selected {
+  background: #1089b9;
+  color: #f0f0f0;
+}
+.profile-create__form .profile-create-form .profile-create-field > p {
+  font-size: 14px;
+  color: #afafaf;
+}
+.profile-create__form .profile-create-form .profile-create-field > h2 {
+  font-size: 17px;
+  font-weight: 700;
+  text-align: left;
 }
 
 .pagination {

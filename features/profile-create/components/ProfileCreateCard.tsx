@@ -1,9 +1,8 @@
 "use client";
 
-import { Gender, Sexuality } from "../../../prisma/generated/prisma";
 import UserAvatar from "@/features/(app)/(ui)/UserAvatar";
-import { motion } from 'framer-motion';
-
+import { motion } from "framer-motion";
+import { AppCity, Gender, Sexuality } from "../../../prisma/generated/prisma";
 
 interface ProfileCreateCardProps {
     nickname: string;
@@ -11,11 +10,14 @@ interface ProfileCreateCardProps {
     avatarPreview: string | null;
     gender: Gender | null;
     sexuality: Sexuality | null;
+    appCity: AppCity | null;
 }
 
 const genderLabels: Record<Gender, string> = {
     MAN: "Férfi",
     WOMAN: "Nő",
+    TRANS_MAN: "Trans Férfi",
+    TRANS_WOMAN: "Trans Nő",
 };
 const sexualityLabels: Record<Sexuality, string> = {
     STRAIGHT: "Heteroszexuális",
@@ -31,6 +33,34 @@ const sexualityLabels: Record<Sexuality, string> = {
     OTHER: "Egyéb",
     PREFER_NOT_TO_SAY: "Nem árulom el",
 };
+
+const appCityLabels: Record<AppCity, string> = {
+    CENTRUM: "Centrum",
+    STRAIGHT: "Heteroszexuális negyed",
+    BISEXUAL: "Biszexuális negyed",
+    GAY: "Meleg negyed",
+    LESBIAN: "Leszbikus negyed",
+    TRANS: "Trans negyed",
+};
+
+const heteroMaleCities: AppCity[] = ["CENTRUM", "STRAIGHT", "BISEXUAL"];
+const heteroFemaleCities: AppCity[] = ["CENTRUM", "STRAIGHT", "BISEXUAL"];
+const gayMaleCities: AppCity[] = ["CENTRUM", "BISEXUAL", "GAY"];
+const gayFemaleCities: AppCity[] = ["CENTRUM", "BISEXUAL", "LESBIAN"];
+const transMaleCities: AppCity[] = [
+    "CENTRUM",
+    "STRAIGHT",
+    "BISEXUAL",
+    "GAY",
+    "TRANS",
+];
+const transFemaleCities: AppCity[] = [
+    "CENTRUM",
+    "STRAIGHT",
+    "BISEXUAL",
+    "LESBIAN",
+    "TRANS",
+];
 
 function calculateAge(birth: string) {
     if (!birth) {
@@ -58,6 +88,7 @@ export function ProfileCreateCard({
     avatarPreview,
     gender,
     sexuality,
+    appCity,
 }: ProfileCreateCardProps) {
     const age = calculateAge(birth);
 
@@ -73,17 +104,14 @@ export function ProfileCreateCard({
 
             <motion.div layout className="profile-create-card__content">
                 <motion.h2 layout key={nickname}>
-                    {nickname || "Megjelenített név"}
+                    {nickname || ""}
+                    {age !== null ? `, ${age}` : ""}
                 </motion.h2>
 
                 <motion.div layout className="profile-create-card__details">
-                    <span>{age !== null ? `${age} éves` : "Életkor"}</span>
-
-                    <span>{gender ? genderLabels[gender] : "Nem"}</span>
-
-                    <span>
-                        {sexuality ? sexualityLabels[sexuality] : "Szexualitás"}
-                    </span>
+                    <span>{gender ? genderLabels[gender] : ""}</span>
+                    <span>{sexuality ? sexualityLabels[sexuality] : ""}</span>
+                    <span>{appCity ? appCityLabels[appCity] : ""}</span>
                 </motion.div>
             </motion.div>
         </motion.div>
