@@ -7,15 +7,20 @@ import StatisticsTabView from "@/features/profile/(pages)/user-profile/tabs/Stat
 import UserDatasView from "@/features/profile/(pages)/user-profile/tabs/UserDatasView";
 import UserDressView from "@/features/profile/(pages)/user-profile/tabs/UserDressView";
 import UserPinView from "@/features/profile/(pages)/user-profile/tabs/UserPinView";
+import { ProfileGallery } from "@/features/profile/types/gallery.types";
 
 interface ProfileTabContentProps {
     tab: ProfileTab;
     user: ProfileUser;
+    isOwnProfile: boolean;
+    galleries: ProfileGallery[];
 }
 
 export default function ProfileTabContent({
     tab,
     user,
+    galleries,
+    isOwnProfile,
 }: ProfileTabContentProps) {
     switch (tab) {
         case "statistics":
@@ -25,7 +30,13 @@ export default function ProfileTabContent({
         case "datas":
             return <UserDatasView user={user} />;
         case "albums":
-            return <AlbumsView user={user} />;
+            return (
+                <AlbumsView
+                    user={user}
+                    galleries={galleries}
+                    isOwnProfile={isOwnProfile}
+                />
+            );
 
         case "pin":
             return <UserPinView user={user} />;

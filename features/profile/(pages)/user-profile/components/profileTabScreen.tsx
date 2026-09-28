@@ -6,6 +6,7 @@ import { useProfileTabSwipe } from "@/features/profile/(pages)/user-profile/hook
 import { useProfileTabTranslate } from "@/features/profile/(pages)/user-profile/hooks/useProfileTabTranslate";
 import { useProfileTabWidth } from "@/features/profile/(pages)/user-profile/hooks/useProfileTabWidth";
 import { ProfileTabConfig } from "@/features/profile/data/constants";
+import { ProfileGallery } from "@/features/profile/types/gallery.types";
 import type {
     ProfileTab,
     ProfileUser,
@@ -14,10 +15,12 @@ import { useRef } from "react";
 
 interface ProfileTabScreenProps {
     user: ProfileUser;
+    isOwnProfile: boolean;
     tabs: readonly ProfileTabConfig[];
     activeTab: ProfileTab;
     activeIndex: number;
     goToTab: (tab: ProfileTab) => void;
+    galleries: ProfileGallery[];
 }
 
 export default function ProfileTabScreen({
@@ -26,6 +29,8 @@ export default function ProfileTabScreen({
     activeTab,
     activeIndex,
     goToTab,
+    galleries,
+    isOwnProfile,
 }: ProfileTabScreenProps) {
     const tabRefs = useRef<Partial<Record<ProfileTab, HTMLDivElement | null>>>(
         {},
@@ -106,7 +111,12 @@ export default function ProfileTabScreen({
                         style={{
                             width: `${tabWidth}px`,
                         }}>
-                        <ProfileTabContent tab={tab.id} user={user} />
+                        <ProfileTabContent
+                            user={user}
+                            isOwnProfile={isOwnProfile}
+                            galleries={galleries}
+                            tab={tab.id}
+                        />
                     </div>
                 ))}
             </div>

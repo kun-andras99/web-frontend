@@ -4,14 +4,21 @@ import { BOTTOM_ICON_COLORS } from "@/features/(app)/(ui)/top-bar/icons/icons/ic
 import ProfileTabScreen from "@/features/profile/(pages)/user-profile/components/profileTabScreen";
 import { useProfileTabNavigation } from "@/features/profile/(pages)/user-profile/hooks/useProfileTabNavigation";
 import { useProfileTabs } from "@/features/profile/(pages)/user-profile/hooks/useProfileTabs";
+import { ProfileGallery } from "@/features/profile/types/gallery.types";
 import type { ProfileUser } from "@/features/profile/types/profile.types";
 import { useRef } from "react";
 
 interface ProfileTabsProps {
     user: ProfileUser;
+    galleries: ProfileGallery[];
+    isOwnProfile: boolean;
 }
 
-export default function ProfileTabs({ user }: ProfileTabsProps) {
+export default function ProfileTabs({
+    user,
+    galleries,
+    isOwnProfile,
+}: ProfileTabsProps) {
     const tabsContainerRef = useRef<HTMLDivElement>(null);
 
     const { tabs, activeTab, activeIndex, goToTab } = useProfileTabs(
@@ -88,6 +95,8 @@ export default function ProfileTabs({ user }: ProfileTabsProps) {
 
             <ProfileTabScreen
                 user={user}
+                isOwnProfile={isOwnProfile}
+                galleries={galleries}
                 tabs={tabs}
                 activeTab={activeTab}
                 activeIndex={activeIndex}

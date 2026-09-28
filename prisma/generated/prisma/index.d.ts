@@ -1761,6 +1761,15 @@ export const PaymentStatus: {
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
+
+export const GalleryShareStatus: {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+export type GalleryShareStatus = (typeof GalleryShareStatus)[keyof typeof GalleryShareStatus]
+
 }
 
 export type Languages = $Enums.Languages
@@ -2102,6 +2111,10 @@ export const SubscriptionStatus: typeof $Enums.SubscriptionStatus
 export type PaymentStatus = $Enums.PaymentStatus
 
 export const PaymentStatus: typeof $Enums.PaymentStatus
+
+export type GalleryShareStatus = $Enums.GalleryShareStatus
+
+export const GalleryShareStatus: typeof $Enums.GalleryShareStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -23267,7 +23280,9 @@ export namespace Prisma {
     galleryId: string | null
     ownerId: string | null
     recipientId: string | null
-    grantedAt: Date | null
+    status: $Enums.GalleryShareStatus | null
+    createdAt: Date | null
+    approvedAt: Date | null
     expiresAt: Date | null
     revokedAt: Date | null
     purgeAfter: Date | null
@@ -23278,7 +23293,9 @@ export namespace Prisma {
     galleryId: string | null
     ownerId: string | null
     recipientId: string | null
-    grantedAt: Date | null
+    status: $Enums.GalleryShareStatus | null
+    createdAt: Date | null
+    approvedAt: Date | null
     expiresAt: Date | null
     revokedAt: Date | null
     purgeAfter: Date | null
@@ -23289,7 +23306,9 @@ export namespace Prisma {
     galleryId: number
     ownerId: number
     recipientId: number
-    grantedAt: number
+    status: number
+    createdAt: number
+    approvedAt: number
     expiresAt: number
     revokedAt: number
     purgeAfter: number
@@ -23302,7 +23321,9 @@ export namespace Prisma {
     galleryId?: true
     ownerId?: true
     recipientId?: true
-    grantedAt?: true
+    status?: true
+    createdAt?: true
+    approvedAt?: true
     expiresAt?: true
     revokedAt?: true
     purgeAfter?: true
@@ -23313,7 +23334,9 @@ export namespace Prisma {
     galleryId?: true
     ownerId?: true
     recipientId?: true
-    grantedAt?: true
+    status?: true
+    createdAt?: true
+    approvedAt?: true
     expiresAt?: true
     revokedAt?: true
     purgeAfter?: true
@@ -23324,7 +23347,9 @@ export namespace Prisma {
     galleryId?: true
     ownerId?: true
     recipientId?: true
-    grantedAt?: true
+    status?: true
+    createdAt?: true
+    approvedAt?: true
     expiresAt?: true
     revokedAt?: true
     purgeAfter?: true
@@ -23408,7 +23433,9 @@ export namespace Prisma {
     galleryId: string
     ownerId: string
     recipientId: string
-    grantedAt: Date
+    status: $Enums.GalleryShareStatus
+    createdAt: Date
+    approvedAt: Date | null
     expiresAt: Date
     revokedAt: Date | null
     purgeAfter: Date
@@ -23436,7 +23463,9 @@ export namespace Prisma {
     galleryId?: boolean
     ownerId?: boolean
     recipientId?: boolean
-    grantedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    approvedAt?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     purgeAfter?: boolean
@@ -23450,7 +23479,9 @@ export namespace Prisma {
     galleryId?: boolean
     ownerId?: boolean
     recipientId?: boolean
-    grantedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    approvedAt?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     purgeAfter?: boolean
@@ -23464,7 +23495,9 @@ export namespace Prisma {
     galleryId?: boolean
     ownerId?: boolean
     recipientId?: boolean
-    grantedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    approvedAt?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     purgeAfter?: boolean
@@ -23478,13 +23511,15 @@ export namespace Prisma {
     galleryId?: boolean
     ownerId?: boolean
     recipientId?: boolean
-    grantedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    approvedAt?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     purgeAfter?: boolean
   }
 
-  export type GalleryShareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "galleryId" | "ownerId" | "recipientId" | "grantedAt" | "expiresAt" | "revokedAt" | "purgeAfter", ExtArgs["result"]["galleryShare"]>
+  export type GalleryShareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "galleryId" | "ownerId" | "recipientId" | "status" | "createdAt" | "approvedAt" | "expiresAt" | "revokedAt" | "purgeAfter", ExtArgs["result"]["galleryShare"]>
   export type GalleryShareInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gallery?: boolean | GalleryDefaultArgs<ExtArgs>
     owner?: boolean | UsersDefaultArgs<ExtArgs>
@@ -23513,7 +23548,9 @@ export namespace Prisma {
       galleryId: string
       ownerId: string
       recipientId: string
-      grantedAt: Date
+      status: $Enums.GalleryShareStatus
+      createdAt: Date
+      approvedAt: Date | null
       expiresAt: Date
       revokedAt: Date | null
       purgeAfter: Date
@@ -23947,7 +23984,9 @@ export namespace Prisma {
     readonly galleryId: FieldRef<"GalleryShare", 'String'>
     readonly ownerId: FieldRef<"GalleryShare", 'String'>
     readonly recipientId: FieldRef<"GalleryShare", 'String'>
-    readonly grantedAt: FieldRef<"GalleryShare", 'DateTime'>
+    readonly status: FieldRef<"GalleryShare", 'GalleryShareStatus'>
+    readonly createdAt: FieldRef<"GalleryShare", 'DateTime'>
+    readonly approvedAt: FieldRef<"GalleryShare", 'DateTime'>
     readonly expiresAt: FieldRef<"GalleryShare", 'DateTime'>
     readonly revokedAt: FieldRef<"GalleryShare", 'DateTime'>
     readonly purgeAfter: FieldRef<"GalleryShare", 'DateTime'>
@@ -57185,7 +57224,9 @@ export namespace Prisma {
     galleryId: 'galleryId',
     ownerId: 'ownerId',
     recipientId: 'recipientId',
-    grantedAt: 'grantedAt',
+    status: 'status',
+    createdAt: 'createdAt',
+    approvedAt: 'approvedAt',
     expiresAt: 'expiresAt',
     revokedAt: 'revokedAt',
     purgeAfter: 'purgeAfter'
@@ -58601,6 +58642,20 @@ export namespace Prisma {
    * Reference to a field of type 'GalleryVisibility[]'
    */
   export type ListEnumGalleryVisibilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GalleryVisibility[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'GalleryShareStatus'
+   */
+  export type EnumGalleryShareStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GalleryShareStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'GalleryShareStatus[]'
+   */
+  export type ListEnumGalleryShareStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GalleryShareStatus[]'>
     
 
 
@@ -61150,7 +61205,9 @@ export namespace Prisma {
     galleryId?: StringFilter<"GalleryShare"> | string
     ownerId?: StringFilter<"GalleryShare"> | string
     recipientId?: StringFilter<"GalleryShare"> | string
-    grantedAt?: DateTimeFilter<"GalleryShare"> | Date | string
+    status?: EnumGalleryShareStatusFilter<"GalleryShare"> | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFilter<"GalleryShare"> | Date | string
+    approvedAt?: DateTimeNullableFilter<"GalleryShare"> | Date | string | null
     expiresAt?: DateTimeFilter<"GalleryShare"> | Date | string
     revokedAt?: DateTimeNullableFilter<"GalleryShare"> | Date | string | null
     purgeAfter?: DateTimeFilter<"GalleryShare"> | Date | string
@@ -61164,7 +61221,9 @@ export namespace Prisma {
     galleryId?: SortOrder
     ownerId?: SortOrder
     recipientId?: SortOrder
-    grantedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    approvedAt?: SortOrderInput | SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrderInput | SortOrder
     purgeAfter?: SortOrder
@@ -61175,27 +61234,32 @@ export namespace Prisma {
 
   export type GalleryShareWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    galleryId_recipientId?: GalleryShareGalleryIdRecipientIdCompoundUniqueInput
     AND?: GalleryShareWhereInput | GalleryShareWhereInput[]
     OR?: GalleryShareWhereInput[]
     NOT?: GalleryShareWhereInput | GalleryShareWhereInput[]
     galleryId?: StringFilter<"GalleryShare"> | string
     ownerId?: StringFilter<"GalleryShare"> | string
     recipientId?: StringFilter<"GalleryShare"> | string
-    grantedAt?: DateTimeFilter<"GalleryShare"> | Date | string
+    status?: EnumGalleryShareStatusFilter<"GalleryShare"> | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFilter<"GalleryShare"> | Date | string
+    approvedAt?: DateTimeNullableFilter<"GalleryShare"> | Date | string | null
     expiresAt?: DateTimeFilter<"GalleryShare"> | Date | string
     revokedAt?: DateTimeNullableFilter<"GalleryShare"> | Date | string | null
     purgeAfter?: DateTimeFilter<"GalleryShare"> | Date | string
     gallery?: XOR<GalleryScalarRelationFilter, GalleryWhereInput>
     owner?: XOR<UsersScalarRelationFilter, UsersWhereInput>
     recipient?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-  }, "id">
+  }, "id" | "galleryId_recipientId">
 
   export type GalleryShareOrderByWithAggregationInput = {
     id?: SortOrder
     galleryId?: SortOrder
     ownerId?: SortOrder
     recipientId?: SortOrder
-    grantedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    approvedAt?: SortOrderInput | SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrderInput | SortOrder
     purgeAfter?: SortOrder
@@ -61212,7 +61276,9 @@ export namespace Prisma {
     galleryId?: StringWithAggregatesFilter<"GalleryShare"> | string
     ownerId?: StringWithAggregatesFilter<"GalleryShare"> | string
     recipientId?: StringWithAggregatesFilter<"GalleryShare"> | string
-    grantedAt?: DateTimeWithAggregatesFilter<"GalleryShare"> | Date | string
+    status?: EnumGalleryShareStatusWithAggregatesFilter<"GalleryShare"> | $Enums.GalleryShareStatus
+    createdAt?: DateTimeWithAggregatesFilter<"GalleryShare"> | Date | string
+    approvedAt?: DateTimeNullableWithAggregatesFilter<"GalleryShare"> | Date | string | null
     expiresAt?: DateTimeWithAggregatesFilter<"GalleryShare"> | Date | string
     revokedAt?: DateTimeNullableWithAggregatesFilter<"GalleryShare"> | Date | string | null
     purgeAfter?: DateTimeWithAggregatesFilter<"GalleryShare"> | Date | string
@@ -66076,7 +66142,9 @@ export namespace Prisma {
 
   export type GalleryShareCreateInput = {
     id?: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -66090,7 +66158,9 @@ export namespace Prisma {
     galleryId: string
     ownerId: string
     recipientId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -66098,7 +66168,9 @@ export namespace Prisma {
 
   export type GalleryShareUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -66112,7 +66184,9 @@ export namespace Prisma {
     galleryId?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
     recipientId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -66123,7 +66197,9 @@ export namespace Prisma {
     galleryId: string
     ownerId: string
     recipientId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -66131,7 +66207,9 @@ export namespace Prisma {
 
   export type GalleryShareUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -66142,7 +66220,9 @@ export namespace Prisma {
     galleryId?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
     recipientId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -70943,12 +71023,26 @@ export namespace Prisma {
     sortOrder?: SortOrder
   }
 
+  export type EnumGalleryShareStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.GalleryShareStatus | EnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGalleryShareStatusFilter<$PrismaModel> | $Enums.GalleryShareStatus
+  }
+
+  export type GalleryShareGalleryIdRecipientIdCompoundUniqueInput = {
+    galleryId: string
+    recipientId: string
+  }
+
   export type GalleryShareCountOrderByAggregateInput = {
     id?: SortOrder
     galleryId?: SortOrder
     ownerId?: SortOrder
     recipientId?: SortOrder
-    grantedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    approvedAt?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrder
     purgeAfter?: SortOrder
@@ -70959,7 +71053,9 @@ export namespace Prisma {
     galleryId?: SortOrder
     ownerId?: SortOrder
     recipientId?: SortOrder
-    grantedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    approvedAt?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrder
     purgeAfter?: SortOrder
@@ -70970,10 +71066,22 @@ export namespace Prisma {
     galleryId?: SortOrder
     ownerId?: SortOrder
     recipientId?: SortOrder
-    grantedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    approvedAt?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrder
     purgeAfter?: SortOrder
+  }
+
+  export type EnumGalleryShareStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GalleryShareStatus | EnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGalleryShareStatusWithAggregatesFilter<$PrismaModel> | $Enums.GalleryShareStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGalleryShareStatusFilter<$PrismaModel>
+    _max?: NestedEnumGalleryShareStatusFilter<$PrismaModel>
   }
 
   export type EnumGroupVisibilityFilter<$PrismaModel = never> = {
@@ -75928,6 +76036,10 @@ export namespace Prisma {
     connect?: UsersWhereUniqueInput
   }
 
+  export type EnumGalleryShareStatusFieldUpdateOperationsInput = {
+    set?: $Enums.GalleryShareStatus
+  }
+
   export type GalleryUpdateOneRequiredWithoutSharesNestedInput = {
     create?: XOR<GalleryCreateWithoutSharesInput, GalleryUncheckedCreateWithoutSharesInput>
     connectOrCreate?: GalleryCreateOrConnectWithoutSharesInput
@@ -78231,6 +78343,23 @@ export namespace Prisma {
     _max?: NestedEnumGalleryVisibilityFilter<$PrismaModel>
   }
 
+  export type NestedEnumGalleryShareStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.GalleryShareStatus | EnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGalleryShareStatusFilter<$PrismaModel> | $Enums.GalleryShareStatus
+  }
+
+  export type NestedEnumGalleryShareStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GalleryShareStatus | EnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GalleryShareStatus[] | ListEnumGalleryShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGalleryShareStatusWithAggregatesFilter<$PrismaModel> | $Enums.GalleryShareStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGalleryShareStatusFilter<$PrismaModel>
+    _max?: NestedEnumGalleryShareStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumGroupVisibilityFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupVisibility | EnumGroupVisibilityFieldRefInput<$PrismaModel>
     in?: $Enums.GroupVisibility[] | ListEnumGroupVisibilityFieldRefInput<$PrismaModel>
@@ -79869,7 +79998,9 @@ export namespace Prisma {
 
   export type GalleryShareCreateWithoutOwnerInput = {
     id?: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -79881,7 +80012,9 @@ export namespace Prisma {
     id?: string
     galleryId: string
     recipientId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -79899,7 +80032,9 @@ export namespace Prisma {
 
   export type GalleryShareCreateWithoutRecipientInput = {
     id?: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -79911,7 +80046,9 @@ export namespace Prisma {
     id?: string
     galleryId: string
     ownerId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -81970,7 +82107,9 @@ export namespace Prisma {
     galleryId?: StringFilter<"GalleryShare"> | string
     ownerId?: StringFilter<"GalleryShare"> | string
     recipientId?: StringFilter<"GalleryShare"> | string
-    grantedAt?: DateTimeFilter<"GalleryShare"> | Date | string
+    status?: EnumGalleryShareStatusFilter<"GalleryShare"> | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFilter<"GalleryShare"> | Date | string
+    approvedAt?: DateTimeNullableFilter<"GalleryShare"> | Date | string | null
     expiresAt?: DateTimeFilter<"GalleryShare"> | Date | string
     revokedAt?: DateTimeNullableFilter<"GalleryShare"> | Date | string | null
     purgeAfter?: DateTimeFilter<"GalleryShare"> | Date | string
@@ -85076,7 +85215,9 @@ export namespace Prisma {
 
   export type GalleryShareCreateWithoutGalleryInput = {
     id?: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -85088,7 +85229,9 @@ export namespace Prisma {
     id?: string
     ownerId: string
     recipientId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -96973,7 +97116,9 @@ export namespace Prisma {
     id?: string
     galleryId: string
     recipientId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -96983,7 +97128,9 @@ export namespace Prisma {
     id?: string
     galleryId: string
     ownerId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -97553,7 +97700,9 @@ export namespace Prisma {
 
   export type GalleryShareUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -97565,7 +97714,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     galleryId?: StringFieldUpdateOperationsInput | string
     recipientId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -97575,7 +97726,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     galleryId?: StringFieldUpdateOperationsInput | string
     recipientId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -97583,7 +97736,9 @@ export namespace Prisma {
 
   export type GalleryShareUpdateWithoutRecipientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -97595,7 +97750,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     galleryId?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -97605,7 +97762,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     galleryId?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -98386,7 +98545,9 @@ export namespace Prisma {
     id?: string
     ownerId: string
     recipientId: string
-    grantedAt?: Date | string
+    status?: $Enums.GalleryShareStatus
+    createdAt?: Date | string
+    approvedAt?: Date | string | null
     expiresAt: Date | string
     revokedAt?: Date | string | null
     purgeAfter: Date | string
@@ -98433,7 +98594,9 @@ export namespace Prisma {
 
   export type GalleryShareUpdateWithoutGalleryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -98445,7 +98608,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
     recipientId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -98455,7 +98620,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
     recipientId?: StringFieldUpdateOperationsInput | string
-    grantedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumGalleryShareStatusFieldUpdateOperationsInput | $Enums.GalleryShareStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgeAfter?: DateTimeFieldUpdateOperationsInput | Date | string

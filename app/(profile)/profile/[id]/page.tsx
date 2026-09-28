@@ -3,7 +3,7 @@ import { getProfileUserFull } from "@/features/auth/server/getCurrentUserFull";
 import ProfileHeader from "@/features/profile/(pages)/user-profile/components/profileHeader";
 import ProfileName from "@/features/profile/(pages)/user-profile/components/ProfileName";
 import ProfileTabs from "@/features/profile/(pages)/user-profile/components/profileTabs";
-// import { getProfileByUserId } from "@/features/profile/data/profile";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -18,8 +18,45 @@ export default async function UserProfilePage({ params }: UserPageProps) {
     const currentUser = await getCurrentUser();
     const user = await getProfileUserFull(id);
 
-    if (!currentUser) redirect("/sign-in");
-    if (!user) redirect("/sign-in");
+    if (!currentUser) {
+        redirect("/sign-in");
+    }
+
+    if (!user) {
+        return null;
+    }
+
+    const isOwnProfile = currentUser.id === user.id;
+
+    const galleries = await prisma.gallery.findMany({
+        where: {
+            ownerId: id,
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+        include: {
+            images: {
+                orderBy: {
+                    uploadedAt: "asc",
+                },
+                select: {
+                    id: true,
+                    url: true,
+                    uploadedAt: true,
+
+                    gallery: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    if (!galleries) return null;
 
     return (
         <main>
@@ -34,13 +71,23 @@ export default async function UserProfilePage({ params }: UserPageProps) {
                     <ProfileHeader user={user} />
                     <div className="profile-card">
                         <div className="data-wrapper">
-                            <Image
-                                className="avatar-img"
-                                src={user.userData?.avatarUrl ?? ""}
-                                alt={user.userData?.nickname ?? ""}
-                                width={120}
-                                height={120}
-                            />
+                            {user.userData?.avatarUrl ? (
+                                <Image
+                                    className="avatar-img"
+                                    src={user.userData?.avatarUrl}
+                                    alt={user.userData?.nickname ?? ""}
+                                    width={120}
+                                    height={120}
+                                />
+                            ) : (
+                                <Image
+                                    className="avatar-img"
+                                    src={`/asstes/images/user-blank-1.png`}
+                                    alt={user.userData?.nickname ?? ""}
+                                    width={120}
+                                    height={120}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
@@ -51,7 +98,11 @@ export default async function UserProfilePage({ params }: UserPageProps) {
                     <div className="container"></div>
                 </div>
                 <div className="relative -top-[45px]">
-                    <ProfileTabs user={user} />
+                    <ProfileTabs
+                        user={user}
+                        galleries={galleries}
+                        isOwnProfile={isOwnProfile}
+                    />
                 </div>
             </div>
         </main>

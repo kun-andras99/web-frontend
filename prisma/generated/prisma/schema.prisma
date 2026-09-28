@@ -1832,6 +1832,12 @@ model GroupVisit {
   @@map("group_visits")
 }
 
+enum GalleryShareStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 /**
  * egy user tud létrehozni galériákat. kiválaszthatja
  * hogy a galéria publikus vagy privát legyen.
@@ -1909,14 +1915,17 @@ model GalleryShare {
   owner     Users   @relation("GalleryShareOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   recipient Users   @relation("GalleryShareRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
 
-  grantedAt DateTime @default(now())
-  expiresAt DateTime
+  status GalleryShareStatus @default(PENDING)
 
-  revokedAt DateTime?
-
+  createdAt  DateTime  @default(now())
+  approvedAt DateTime?
+  expiresAt  DateTime
+  revokedAt  DateTime?
   purgeAfter DateTime
 
+  @@unique([galleryId, recipientId])
   @@index([galleryId, recipientId])
+  @@index([recipientId, status])
   @@index([recipientId, expiresAt])
   @@index([expiresAt])
   @@index([purgeAfter])
