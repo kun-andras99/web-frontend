@@ -8,7 +8,7 @@ interface DrawerUserCardProps {
 
 export default function DrawerUserCard({ user }: DrawerUserCardProps) {
     return (
-        <Link href={`/me`}>
+        <Link href={`/profile/${user.id}`}>
             <div className="drawer-user-card">
                 <UserAvatar
                     url={user.avatarUrl ?? "/assets/images/user-blank-1.png"}

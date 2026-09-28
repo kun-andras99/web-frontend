@@ -1,15 +1,17 @@
-export function calculateAge(birth: Date | string): number {
+export function displayAge(birth: string): number | null {
+    if (!birth) {
+        return null;
+    }
+
     const birthDate = new Date(birth);
+
     const today = new Date();
 
     let age = today.getFullYear() - birthDate.getFullYear();
 
-    const monthDifference = today.getMonth() - birthDate.getMonth();
+    const month = today.getMonth() - birthDate.getMonth();
 
-    if (
-        monthDifference < 0 ||
-        (monthDifference === 0 && today.getDate() < birthDate.getDate())
-    ) {
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
 

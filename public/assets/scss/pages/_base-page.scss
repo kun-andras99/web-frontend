@@ -438,8 +438,6 @@
 
 .profile-icon-tabs-wrapper {
     background: var(--background);
-    border-top: 0.025rem solid #202020;
-    border-bottom: 0.025rem solid #202020;
     padding: 0px 0px 0px 0px;
 
     overflow-x: auto;
@@ -487,13 +485,13 @@
     .profile-icon-tabs-container {
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
         width: 100%;
         gap: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
 
         .profile-icon-button {
             font-size: 14px;
-            letter-spacing: 0.4px;
 
             .profile-icon-container {
                 display: flex;
@@ -505,59 +503,116 @@
                 // border-radius: 50px;
                 padding: 8px 8px 10px 8px;
             }
+
+            .active-profile-icon-container {
+                background: #032735;
+                color: #1dbdfc;
+                padding: 6px 19px 6px 14px;
+            }
+
+            .inactive-profile-icon-container {
+                padding: 5px 15px 5px 12px;
+            }
         }
 
         .profile-icon-container {
             display: flex;
             flex-direction: row;
             align-items: center;
-            color: #606060;
-            padding: 4px 8px;
+            color: #505050;
+            font-weight: 600;
+            border-radius: 50px;
         }
     }
 }
 
-.profile-tab-indicator {
-    background: #ffffff;
+.profile-header {
+    height: 56px;
+}
+
+.profile {
+    height: fit-content;
+    &__bg-box {
+        background: #090909;
+        display: flex;
+        flex-direction: column;
+
+        .description {
+            font-size: 13px;
+            text-align: right;
+            color: #707070;
+            padding-right: 20px;
+        }
+    }
+
+    &__full-data {
+        top: -60px;
+        background: var(--background);
+        position: relative;
+        padding-top: 6px;
+        border-radius: 25px 25px 0 0;
+        font-size: 15px;
+
+        .top-container {
+            display: flex;
+            flex-direction: column;
+
+            .data {
+                margin-left: 170px;
+            }
+            .nickname {
+                position: absolute;
+                top: -41px;
+                font-size: 22px;
+                font-weight: 700;
+                margin-left: 170px;
+            }
+
+            .age {
+                color: #777;
+                font-size: 14px;
+            }
+        }
+
+        .container {
+            width: calc(100% - 30px);
+            margin: 0 auto;
+
+            > p {
+                display: flex;
+                font-size: 14px;
+                color: #c7c7c7;
+            }
+        }
+
+        .bio {
+            font-size: 15px;
+        }
+    }
 }
 
 .profile-card {
     width: 100%;
     height: auto;
-    margin: 75px 0 25px 0;
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 25px;
 
     .data-wrapper {
+        z-index: 1;
+        width: calc(100% - 70px);
         display: flex;
-        gap: 15px;
+
+        .avatar-img {
+            border-radius: 100px;
+            border: 6px solid var(--background);
+        }
 
         .image-wrapper {
             width: auto;
-            margin: 0 0 0 25px;
             display: flex;
-            gap: 15px;
             align-items: center;
-
-            // .indicator-container {
-            //     width: 25px;
-            //     display: flex;
-            //     flex-direction: column;
-            //     gap: 12px;
-
-            //     .indicator {
-            //         width: 100%;
-            //         height: 5px;
-            //         background: #555;
-            //         border-radius: 2px;
-            //     }
-
-            //     .active-indicator {
-            //         background: #0d5c74;
-            //     }
-            // }
         }
     }
 
@@ -597,12 +652,12 @@
 }
 
 .profile-card {
-    .image-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    // .image-wrapper {
+    //     position: relative;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
 
     .indicator-container {
         position: absolute;
@@ -982,15 +1037,6 @@
     gap: 16px;
 
     padding: 18px 20px;
-
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.85),
-        rgba(0, 0, 0, 0.5)
-    );
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
 }
 
 .profile-avatar-like-button {

@@ -1,4 +1,5 @@
 import type { UserId } from "@/features/auth/types/auth-index";
+import { UserGalleries } from "@/features/user/types/user";
 import { prisma } from "@/lib/prisma";
 import "server-only";
 import { Prisma } from "../../../prisma/generated/prisma";
@@ -11,7 +12,7 @@ export function getUserByUsername(username: string) {
     return prisma.users.findUnique({ where: { username } });
 }
 
-export function getUserById(id: UserId) {
+export function getUserById(id: string) {
     return prisma.users.findUnique({
         where: {
             id,
@@ -24,13 +25,122 @@ export function getUserById(id: UserId) {
             emailVerified: true,
             role: true,
 
-            userPreference: {
+            userData: {
                 select: {
                     id: true,
                 },
             },
         },
     });
+}
+interface GetUserGalleriesParams {
+    profileUserId: string;
+    viewerUserId: string;
+}
+
+export async function getUserGalleries({
+    profileUserId,
+    viewerUserId,
+}: GetUserGalleriesParams): Promise<UserGalleries> {
+    const now = new Date();
+
+    const galleries = await prisma.gallery.findMany({
+        where: {
+            ownerId: profileUserId,
+        },
+
+        orderBy: {
+            createdAt: "asc",
+        },
+
+        select: {
+            id: true,
+            name: true,
+            type: true,
+            visibility: true,
+            createdAt: true,
+
+            shares: {
+                where: {
+                    recipientId: viewerUserId,
+                    revokedAt: null,
+                    expiresAt: {
+                        gt: now,
+                    },
+                    purgeAfter: {
+                        gt: now,
+                    },
+                },
+
+                select: {
+                    expiresAt: true,
+                },
+
+                take: 1,
+            },
+
+            images: {
+                orderBy: {
+                    sortOrder: "asc",
+                },
+
+                select: {
+                    id: true,
+                    url: true,
+                    mimeType: true,
+                    width: true,
+                    height: true,
+                    isAvatar: true,
+                    sortOrder: true,
+                },
+            },
+        },
+    });
+
+    const isOwner = profileUserId === viewerUserId;
+
+    return {
+        galleries: galleries.map((gallery) => {
+            const hasActiveShare = gallery.shares.length > 0;
+
+            let access: UserGalleries["galleries"][number]["access"];
+
+            if (isOwner) {
+                access = "OWNER";
+            } else if (gallery.visibility === "PUBLIC") {
+                access = "PUBLIC";
+            } else if (hasActiveShare) {
+                access = "GRANTED";
+            } else {
+                access = "REQUEST_AVAILABLE";
+            }
+
+            const canView =
+                isOwner || gallery.visibility === "PUBLIC" || hasActiveShare;
+
+            return {
+                id: gallery.id,
+                name: gallery.name,
+                type: gallery.type,
+                visibility: gallery.visibility,
+                createdAt: gallery.createdAt.toISOString(),
+
+                images: canView ? gallery.images : [],
+
+                access,
+                canView,
+
+                canRequestAccess:
+                    !isOwner &&
+                    gallery.visibility === "PRIVATE" &&
+                    !hasActiveShare,
+
+                accessExpiresAt: hasActiveShare
+                    ? gallery.shares[0].expiresAt.toISOString()
+                    : null,
+            };
+        }),
+    };
 }
 
 export const userProfileHeaderDataSelect = {

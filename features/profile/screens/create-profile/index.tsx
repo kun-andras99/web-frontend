@@ -1,4 +1,4 @@
-import CreateProfileForm from "@/features/profile/components/create-profile-form";
+import CreateProfileForm from "@/features/profile/(pages)/user-profile/components/create-profile-form";
 
 export default function CreateProfileScreen() {
     return (

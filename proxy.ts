@@ -69,7 +69,7 @@ interface RotatedTokens {
 interface SessionResult {
     authenticated: boolean;
     user?: SessionUser;
-    hasUserPreference?: boolean | undefined;
+    hasUserData?: boolean | undefined;
     rotatedTokens?: RotatedTokens;
 }
 
@@ -177,7 +177,7 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
                         role: user.role,
                     },
 
-                    hasUserPreference: user.userPreference,
+                    hasUserData: user.userData !== null,
                 };
             }
         }
@@ -245,7 +245,7 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
             role: user.role,
         },
 
-        hasUserPreference: user.userPreference !== null,
+        hasUserData: user.userData !== null,
 
         rotatedTokens: {
             accesToken: newAccessToken,
@@ -345,7 +345,7 @@ export async function proxy(request: NextRequest) {
      * -----------------------------------------------------------------------
      */
 
-    if (!session.hasUserPreference) {
+    if (!session.hasUserData) {
         if (!profileCreate) {
             const response = NextResponse.redirect(
                 new URL(PROFILE_CREATE_ROUTE, request.url),

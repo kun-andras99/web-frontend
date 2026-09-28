@@ -2,8 +2,20 @@ import { UserProfileHeaderData } from "@/features/user/repositories/user";
 import type {
     CurrentUserDTO,
     PublicUserDTO,
+    UserGalleries,
     UserHeaderDatasDTO,
 } from "@/features/user/types/user";
+
+export function mapUserGalleries(galleries: UserGalleries): UserGalleries {
+    return {
+        galleries: galleries.galleries.map((gallery) => ({
+            ...gallery,
+            images: gallery.images.map((image) => ({
+                ...image,
+            })),
+        })),
+    };
+}
 
 export function toCurrentUserDTO(user: {
     id: string;

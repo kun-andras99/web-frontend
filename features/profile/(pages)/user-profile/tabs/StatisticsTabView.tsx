@@ -1,0 +1,101 @@
+import { ProfileUser } from "@/features/profile/types/profile.types";
+
+export interface TabContentProps {
+    user: ProfileUser;
+}
+
+export default function StatisticsTabView({ user }: TabContentProps) {
+    return (
+        <div className="">
+            <p>{user.userData?.ankleCircumference}</p>
+            <p>{user.userData?.appCity}</p>
+            <p>{user.userData?.armLength}</p>
+            <p>{user.userData?.artInterests}</p>
+            <p>{user.userData?.automotiveInterests}</p>
+            <p>{user.userData?.avatarUrl}</p>
+            <p>{user.userData?.beard}</p>
+            <p>{user.userData?.binderSize}</p>
+            <p>{user.userData?.bio}</p>
+            <p>{user.userData?.bodyHair}</p>
+            <p>{user.userData?.bodyType}</p>
+            <p>{user.userData?.booksInterests}</p>
+            <p>{user.userData?.braSize}</p>
+            <p>{user.userData?.braSizeSystem}</p>
+            <p>{user.userData?.breastDevelopment}</p>
+            <p>{user.userData?.breastImplant}</p>
+            <p>{user.userData?.bustCircumference}</p>
+            <p>{user.userData?.calfCircumference}</p>
+            <p>{user.userData?.chestCircumference}</p>
+            <p>{user.userData?.city}</p>
+            <p>{user.userData?.collectingInterests}</p>
+            <p>{user.userData?.countryCode}</p>
+            <p>{user.userData?.cultureInterests}</p>
+            <p>{user.userData?.cupSize}</p>
+            <p>{user.userData?.description}</p>
+            <p>{user.userData?.dickCircumcision}</p>
+            <p>{user.userData?.dickSize}</p>
+            <p>{user.userData?.ethnicity}</p>
+            <p>{user.userData?.eventsInterests}</p>
+            <p>{user.userData?.eyeColor}</p>
+            <p>{user.userData?.fashionInterests}</p>
+            <p>{user.userData?.fetish}</p>
+            <p>{user.userData?.fingerLength}</p>
+            <p>{user.userData?.fisting}</p>
+            <p>{user.userData?.foodInterests}</p>
+            <p>{user.userData?.forearmCircumference}</p>
+            <p>{user.userData?.forearmLength}</p>
+            <p>{user.userData?.gamingInterests}</p>
+            <p>{user.userData?.gender}</p>
+            <p>{user.userData?.genderCanSee}</p>
+            <p>{user.userData?.goingOutInterests}</p>
+            <p>{user.userData?.hairColor}</p>
+            <p>{user.userData?.hairLength}</p>
+            <p>{user.userData?.handLength}</p>
+            <p>{user.userData?.handWidth}</p>
+            <p>{user.userData?.heightCm}</p>
+            <p>{user.userData?.hipCircumference}</p>
+            <p>{user.userData?.id}</p>
+            <p>{user.userData?.inseamLength}</p>
+            <p>{user.userData?.kneeCircumference}</p>
+            <p>{user.userData?.languages}</p>
+            <p>{user.userData?.learningInterests}</p>
+            <p>{user.userData?.legLength}</p>
+            <p>{user.userData?.lifestyleInterests}</p>
+            <p>{user.userData?.masochism}</p>
+            <p>{user.userData?.movieInterests}</p>
+            <p>{user.userData?.musicInterests}</p>
+            <p>{user.userData?.natureInterests}</p>
+            <p>{user.userData?.neckCircumference}</p>
+            <p>{user.userData?.nickname}</p>
+            <p>{user.userData?.openTo}</p>
+            <p>{user.userData?.otherInterests}</p>
+            <p>{user.userData?.outdoorInterests}</p>
+            <p>{user.userData?.outseamLength}</p>
+            <p>{user.userData?.personalInterests}</p>
+            <p>{user.userData?.piercings}</p>
+            <p>{user.userData?.position}</p>
+            <p>{user.userData?.region}</p>
+            <p>{user.userData?.sadism}</p>
+            <p>{user.userData?.saferSex}</p>
+            <p>{user.userData?.sexualOpenness}</p>
+            <p>{user.userData?.sexuality}</p>
+            <p>{user.userData?.sexualityCanSee}</p>
+            <p>{user.userData?.shoulderWidth}</p>
+            <p>{user.userData?.smoker}</p>
+            <p>{user.userData?.socialInterests}</p>
+            <p>{user.userData?.sportsInterests}</p>
+            <p>{user.userData?.tattoos}</p>
+            <p>{user.userData?.technologyInterests}</p>
+            <p>{user.userData?.thighCircumference}</p>
+            <p>{user.userData?.transStatus}</p>
+            <p>{user.userData?.transStatusCanSee}</p>
+            <p>{user.userData?.travelInterests}</p>
+            <p>{user.userData?.underbustCircumference}</p>
+            <p>{user.userData?.upperArmCircumference}</p>
+            <p>{user.userData?.upperArmLength}</p>
+            <p>{user.userData?.waistCircumference}</p>
+            <p>{user.userData?.weightKg}</p>
+            <p>{user.userData?.wristCircumference}</p>
+        </div>
+    );
+}

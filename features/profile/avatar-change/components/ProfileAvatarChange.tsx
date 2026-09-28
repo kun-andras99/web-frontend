@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 
-import { ProfileAvatarIndicators } from "@/features/profile/avatar-change/components/ProfileAvatarIndicators";
 import { ProfileAvatarLikesSheet } from "@/features/profile/avatar-change/components/ProfileAvatarLikesSheet";
 import { useProfileAvatar } from "@/features/profile/avatar-change/hooks/useProfileAvatar";
 import { ProfileAvatarChangeProps } from "@/features/profile/avatar-change/types/avatar-change.types";
@@ -43,12 +42,6 @@ export function ProfileAvatarChange({
     return (
         <>
             <div className="image-wrapper">
-                <ProfileAvatarIndicators
-                    count={localImages.length}
-                    activeIndex={activeIndex}
-                    onSelect={selectAvatar}
-                />
-
                 <button
                     type="button"
                     className="image-container"

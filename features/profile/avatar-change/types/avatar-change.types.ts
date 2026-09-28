@@ -38,7 +38,7 @@ export interface ProfileAvatarImage {
 }
 
 export interface ProfileAvatarChangeProps {
-    username: string;
+    username: string | null | undefined;
     images: ProfileAvatarImage[];
     autoPlay?: boolean;
     interval?: number;

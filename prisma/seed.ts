@@ -1,37 +1,57 @@
 import "dotenv/config";
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "../lib/prisma";
 import {
     AppCity,
+    ArtInterest,
+    AutomotiveInterest,
     Beard,
     BlogVisibility,
     BodyHair,
     BodyType,
+    BooksInterest,
     BraSize,
     BraSizeSystem,
     BreastDevelopment,
     BreastImplant,
+    CollectingInterest,
+    CultureInterest,
     CupSize,
     DickCircumcision,
     DickSize,
     Ethnicity,
+    EventsInterest,
     EyeColor,
+    FashionInterest,
     Fetish,
     Fisting,
+    FoodInterest,
     FriendRequestStatus,
     FriendshipStatus,
     GalleryType,
     GalleryVisibility,
+    GamingInterest,
     Gender,
     GenderCanSee,
+    GoingOutInterest,
     GroupJoinRequestStatus,
     GroupMemberRole,
     GroupVisibility,
     HairColor,
     HairLength,
+    Languages,
+    LearningInterest,
+    LifestyleInterest,
+    LookingFor,
     Masochism,
+    MoviesInterest,
+    MusicInterest,
+    NatureInterest,
     NotificationType,
     OpenTo,
+    OtherInterest,
+    OutdoorInterest,
+    PersonalInterest,
     Piercings,
     Position,
     Sadism,
@@ -40,9 +60,13 @@ import {
     SexualityCanSee,
     SexualOpenness,
     Smoker,
+    SocialInterest,
+    SportsInterest,
     Tattoos,
+    TechnologyInterest,
     TransStatus,
     TransStatusCanSee,
+    TravelInterest,
     UserAccountStatus,
     UserRole,
 } from "./generated/prisma/client";
@@ -63,124 +87,95 @@ function birthDate(age: number) {
 }
 
 async function clearDatabase() {
+    console.log("");
     console.log("🧹 Adatbázis ürítése...");
+    console.log("");
 
-    await prisma.$transaction(async (tx) => {
-        // ─────────────────────────────────────────────
-        // 1. Üzenetek / chat
-        // ─────────────────────────────────────────────
+    try {
+        console.log("  → Chat törlése...");
+        await prisma.messageRead.deleteMany();
+        await prisma.messageAttachment.deleteMany();
+        await prisma.message.deleteMany();
+        await prisma.conversationParticipant.deleteMany();
+        await prisma.conversation.deleteMany();
 
-        await tx.messageRead.deleteMany();
-        await tx.messageAttachment.deleteMany();
-        await tx.message.deleteMany();
-        await tx.conversationParticipant.deleteMany();
-        await tx.conversation.deleteMany();
+        console.log("  → Értesítések / moderáció törlése...");
+        await prisma.notification.deleteMany();
+        await prisma.moderationAction.deleteMany();
+        await prisma.report.deleteMany();
 
-        // ─────────────────────────────────────────────
-        // 2. Értesítések / moderáció / reportok
-        // ─────────────────────────────────────────────
+        console.log("  → Match / barátság / kapcsolat törlése...");
+        await prisma.match.deleteMany();
+        await prisma.matchAction.deleteMany();
+        await prisma.friendship.deleteMany();
+        await prisma.friendRequest.deleteMany();
+        await prisma.userFavorite.deleteMany();
+        await prisma.userBlock.deleteMany();
 
-        await tx.notification.deleteMany();
-        await tx.moderationAction.deleteMany();
-        await tx.report.deleteMany();
+        console.log("  → Eye Candy törlése...");
+        await prisma.eyeCandyVote.deleteMany();
+        await prisma.eyeCandyImage.deleteMany();
+        await prisma.eyeCandyParticipant.deleteMany();
+        await prisma.eyeCandyContest.deleteMany();
 
-        // ─────────────────────────────────────────────
-        // 3. Match / barátság / kapcsolat
-        // ─────────────────────────────────────────────
+        console.log("  → Right Now törlése...");
+        await prisma.rightNowDisplay.deleteMany();
 
-        await tx.match.deleteMany();
-        await tx.matchAction.deleteMany();
+        console.log("  → Profil látogatások törlése...");
+        await prisma.profileVisit.deleteMany();
+        await prisma.groupVisit.deleteMany();
 
-        await tx.friendship.deleteMany();
-        await tx.friendRequest.deleteMany();
+        console.log("  → Galériák törlése...");
+        await prisma.galleryShare.deleteMany();
+        await prisma.galleryImage.deleteMany();
+        await prisma.gallery.deleteMany();
 
-        await tx.userFavorite.deleteMany();
-        await tx.userBlock.deleteMany();
+        console.log("  → Csoportok törlése...");
+        await prisma.groupInvitation.deleteMany();
+        await prisma.groupJoinRequest.deleteMany();
+        await prisma.groupMember.deleteMany();
+        await prisma.group.deleteMany();
 
-        // ─────────────────────────────────────────────
-        // 4. Eye Candy
-        // ─────────────────────────────────────────────
+        console.log("  → Blogok törlése...");
+        await prisma.blogLike.deleteMany();
+        await prisma.blogTag.deleteMany();
+        await prisma.blog.deleteMany();
 
-        await tx.eyeCandyVote.deleteMany();
-        await tx.eyeCandyImage.deleteMany();
-        await tx.eyeCandyParticipant.deleteMany();
-        await tx.eyeCandyContest.deleteMany();
+        console.log("  → VIP / subscription törlése...");
+        await prisma.subscriptionPayment.deleteMany();
+        await prisma.userSubscription.deleteMany();
+        await prisma.vipPlan.deleteMany();
 
-        // ─────────────────────────────────────────────
-        // 5. Right Now
-        // ─────────────────────────────────────────────
+        console.log("  → User kapcsolódó adatok törlése...");
+        await prisma.userFilter.deleteMany();
+        await prisma.userPreference.deleteMany();
+        await prisma.userData.deleteMany();
 
-        await tx.rightNowDisplay.deleteMany();
+        console.log("  → Auth tokenek törlése...");
+        await prisma.refreshToken.deleteMany();
+        await prisma.verificationToken.deleteMany();
 
-        // ─────────────────────────────────────────────
-        // 6. Profil látogatások
-        // ─────────────────────────────────────────────
+        console.log("  → Felhasználók törlése...");
+        await prisma.users.deleteMany();
 
-        await tx.profileVisit.deleteMany();
-        await tx.groupVisit.deleteMany();
+        console.log("");
+        console.log("✅ Adatbázis sikeresen kiürítve.");
+        console.log("");
+    } catch (error) {
+        console.error("");
+        console.error("❌ Adatbázis ürítése közben hiba történt:");
+        console.error(error);
+        console.error("");
 
-        // ─────────────────────────────────────────────
-        // 7. Galériák
-        // ─────────────────────────────────────────────
-
-        await tx.galleryShare.deleteMany();
-        await tx.galleryImage.deleteMany();
-        await tx.gallery.deleteMany();
-
-        // ─────────────────────────────────────────────
-        // 8. Csoportok
-        // ─────────────────────────────────────────────
-
-        await tx.groupInvitation.deleteMany();
-        await tx.groupJoinRequest.deleteMany();
-        await tx.groupMember.deleteMany();
-        await tx.group.deleteMany();
-
-        // ─────────────────────────────────────────────
-        // 9. Blogok
-        // ─────────────────────────────────────────────
-
-        await tx.blogLike.deleteMany();
-        await tx.blogTag.deleteMany();
-        await tx.blog.deleteMany();
-
-        // ─────────────────────────────────────────────
-        // 10. VIP / előfizetés / fizetések
-        // ─────────────────────────────────────────────
-
-        await tx.subscriptionPayment.deleteMany();
-        await tx.userSubscription.deleteMany();
-
-        // A VipPlan szándékosan a UserSubscription és
-        // SubscriptionPayment után törlődik.
-        await tx.vipPlan.deleteMany();
-
-        // ─────────────────────────────────────────────
-        // 11. User kapcsolódó adatok
-        // ─────────────────────────────────────────────
-
-        await tx.userFilter.deleteMany();
-        await tx.userPreference.deleteMany();
-        await tx.userData.deleteMany();
-
-        // ─────────────────────────────────────────────
-        // 12. Auth tokenek
-        // ─────────────────────────────────────────────
-
-        await tx.refreshToken.deleteMany();
-        await tx.verificationToken.deleteMany();
-
-        // ─────────────────────────────────────────────
-        // 13. Végül maguk a userek
-        // ─────────────────────────────────────────────
-
-        await tx.users.deleteMany();
-    });
-
-    console.log("✅ Adatbázis sikeresen kiürítve.");
+        throw error;
+    }
 }
 
 async function main() {
+    console.log("");
+    console.log("🌱 SEED START");
+    console.log("==============================");
+
     await clearDatabase();
     /*
      * ------------------------------------------------------------
@@ -364,24 +359,42 @@ async function main() {
             heightCm: 182,
             weightKg: 82,
             shoulderWidth: 47,
+            underbustCircumference: 55,
+            waistCircumference: 55,
+            hipCircumference: 50,
+            upperArmCircumference: 18,
+            forearmCircumference: 17,
+            wristCircumference: 12,
+            armLength: 65,
+            upperArmLength: 22,
+            forearmLength: 30,
+            thighCircumference: 38,
+            kneeCircumference: 25,
+            calfCircumference: 22,
+            ankleCircumference: 16,
+            legLength: 25,
+            inseamLength: 56,
+            outseamLength: 60,
+            handLength: 14,
+            handWidth: 12,
+            fingerLength: 5,
             neckCircumference: 40,
             chestCircumference: 104,
-            waistCircumference: 86,
-            hipCircumference: 98,
 
             appCity: AppCity.CENTRUM,
             gender: Gender.MAN,
             genderCanSee: [GenderCanSee.MAN, GenderCanSee.WOMAN],
             sexuality: Sexuality.BISEXUAL,
+            transStatus: TransStatus.CIS,
             sexualityCanSee: [
                 SexualityCanSee.STRAIGHT,
                 SexualityCanSee.BISEXUAL,
                 SexualityCanSee.GAY,
                 SexualityCanSee.LESBIAN,
             ],
-            transStatus: TransStatus.CIS,
             transStatusCanSee: [TransStatusCanSee.CIS, TransStatusCanSee.TRANS],
 
+            languages: [Languages.ENGLISH, Languages.HUNGARIAN],
             hairLength: HairLength.SHORT,
             hairColor: HairColor.DARK_BROWN,
             eyeColor: EyeColor.BROWN,
@@ -397,7 +410,7 @@ async function main() {
             dickCircumcision: DickCircumcision.CLEAN_CUT,
             fetish: Fetish.NONE,
             sexualOpenness: SexualOpenness.VERY,
-            fisting: Fisting.CURIOUS,
+            fisting: Fisting.NOT_INTERESTED,
             sadism: Sadism.NOT_INTERESTED,
             masochism: Masochism.NOT_INTERESTED,
             saferSex: SaferSex.SAFE,
@@ -418,10 +431,27 @@ async function main() {
             heightCm: 182,
             weightKg: 82,
             shoulderWidth: 47,
+            underbustCircumference: 55,
+            waistCircumference: 55,
+            hipCircumference: 50,
+            upperArmCircumference: 18,
+            forearmCircumference: 17,
+            wristCircumference: 12,
+            armLength: 65,
+            upperArmLength: 22,
+            forearmLength: 30,
+            thighCircumference: 38,
+            kneeCircumference: 25,
+            calfCircumference: 22,
+            ankleCircumference: 16,
+            legLength: 25,
+            inseamLength: 56,
+            outseamLength: 60,
+            handLength: 14,
+            handWidth: 12,
+            fingerLength: 5,
             neckCircumference: 40,
             chestCircumference: 104,
-            waistCircumference: 86,
-            hipCircumference: 98,
 
             appCity: AppCity.CENTRUM,
             gender: Gender.MAN,
@@ -433,9 +463,9 @@ async function main() {
                 SexualityCanSee.GAY,
                 SexualityCanSee.LESBIAN,
             ],
-            transStatus: TransStatus.CIS,
             transStatusCanSee: [TransStatusCanSee.CIS, TransStatusCanSee.TRANS],
 
+            languages: [Languages.ENGLISH, Languages.HUNGARIAN],
             hairLength: HairLength.SHORT,
             hairColor: HairColor.DARK_BROWN,
             eyeColor: EyeColor.BROWN,
@@ -451,11 +481,99 @@ async function main() {
             dickCircumcision: DickCircumcision.CLEAN_CUT,
             fetish: Fetish.NONE,
             sexualOpenness: SexualOpenness.VERY,
-            fisting: Fisting.CURIOUS,
+            fisting: Fisting.NOT_INTERESTED,
             sadism: Sadism.NOT_INTERESTED,
             masochism: Masochism.NOT_INTERESTED,
             saferSex: SaferSex.SAFE,
             openTo: OpenTo.FRIENDS,
+
+            goingOutInterests: [
+                GoingOutInterest.BARS,
+                GoingOutInterest.CLUBS,
+                GoingOutInterest.RESTAURANTS,
+                GoingOutInterest.PUBS,
+            ],
+            lifestyleInterests: [
+                LifestyleInterest.SELF_CARE,
+                LifestyleInterest.WELLNESS,
+                LifestyleInterest.MINIMALISM,
+                LifestyleInterest.BEAUTY,
+            ],
+            musicInterests: [
+                MusicInterest.POP,
+                MusicInterest.ROCK,
+                MusicInterest.ELECTRONIC,
+                MusicInterest.HOUSE,
+            ],
+            movieInterests: [
+                MoviesInterest.ACTION,
+                MoviesInterest.COMEDY,
+                MoviesInterest.THRILLER,
+                MoviesInterest.SCI_FI,
+            ],
+            gamingInterests: [
+                GamingInterest.XBOX,
+                GamingInterest.NINTENDO,
+                GamingInterest.MMORPG,
+            ],
+            sportsInterests: [
+                SportsInterest.GYM,
+                SportsInterest.RUNNING,
+                SportsInterest.SWIMMING,
+                SportsInterest.FOOTBALL,
+            ],
+            booksInterests: [BooksInterest.FICTION, BooksInterest.READING],
+            travelInterests: [
+                TravelInterest.CITY_TRIPS,
+                TravelInterest.ROAD_TRIPS,
+            ],
+
+            foodInterests: [FoodInterest.GRILLING, FoodInterest.STREET_FOOD],
+            artInterests: [ArtInterest.PHOTOGRAPHY],
+            technologyInterests: [
+                TechnologyInterest.COMPUTERS,
+                TechnologyInterest.GADGETS,
+            ],
+            natureInterests: [
+                NatureInterest.MOUNTAINS,
+                NatureInterest.LAKES,
+                NatureInterest.FORESTS,
+            ],
+            cultureInterests: [CultureInterest.MUSEUMS],
+            learningInterests: [
+                LearningInterest.LANGUAGES,
+                LearningInterest.PSYCHOLOGY,
+                LearningInterest.HISTORY,
+            ],
+            socialInterests: [SocialInterest.FRIENDS, SocialInterest.PARTIES],
+            automotiveInterests: [
+                AutomotiveInterest.CARS,
+                AutomotiveInterest.MOTORCYCLES,
+            ],
+            outdoorInterests: [
+                OutdoorInterest.HIKING,
+                OutdoorInterest.CAMPING,
+                OutdoorInterest.CYCLING,
+            ],
+            personalInterests: [
+                PersonalInterest.MEDITATION,
+                PersonalInterest.ASTROLOGY,
+                PersonalInterest.HOROSCOPES,
+            ],
+            collectingInterests: [
+                CollectingInterest.BOOK_COLLECTION,
+                CollectingInterest.WATCHES,
+            ],
+            fashionInterests: [
+                FashionInterest.SNEAKERS,
+                FashionInterest.JEWELRY,
+            ],
+            eventsInterests: [
+                EventsInterest.CONCERTS,
+                EventsInterest.FESTIVALS,
+                EventsInterest.SPORTS_EVENTS,
+            ],
+            otherInterests: [OtherInterest.VOLUNTEERING],
 
             countryCode: "HU",
             region: "Budapest",
@@ -963,11 +1081,11 @@ async function main() {
         },
     });
 
-    const privateGallery = await prisma.gallery.upsert({
+    const adminPrivateGallery = await prisma.gallery.upsert({
         where: {
             ownerId_name: {
                 ownerId: admin.id,
-                name: "My private contect album",
+                name: "private admin album",
             },
         },
         update: {
@@ -976,7 +1094,7 @@ async function main() {
         },
         create: {
             ownerId: admin.id,
-            name: "My private contect album",
+            name: "private admin album",
             type: GalleryType.USER,
             visibility: GalleryVisibility.PRIVATE,
         },
@@ -999,10 +1117,6 @@ async function main() {
         skipDuplicates: true,
     });
 
-    /*
-     * Public album képek
-     */
-
     await prisma.galleryImage.createMany({
         data: [
             {
@@ -1021,23 +1135,25 @@ async function main() {
         skipDuplicates: true,
     });
 
-    /*
-     * Private album képek
-     */
-
     await prisma.galleryImage.createMany({
         data: [
             {
-                galleryId: privateGallery.id,
-                url: "https://i.pravatar.cc/600?img=14",
+                galleryId: adminPrivateGallery.id,
+                url: "https://i.pravatar.cc/600?img=15",
                 mimeType: "image/jpeg",
                 sortOrder: 0,
             },
             {
-                galleryId: privateGallery.id,
-                url: "https://i.pravatar.cc/600?img=15",
+                galleryId: adminPrivateGallery.id,
+                url: "https://i.pravatar.cc/600?img=16",
                 mimeType: "image/jpeg",
                 sortOrder: 1,
+            },
+            {
+                galleryId: adminPrivateGallery.id,
+                url: "https://i.pravatar.cc/600?img=17",
+                mimeType: "image/jpeg",
+                sortOrder: 2,
             },
         ],
         skipDuplicates: true,
@@ -1058,6 +1174,14 @@ async function main() {
             visibility: GroupVisibility.PUBLIC,
         },
     });
+    const publicGroup2 = await prisma.group.create({
+        data: {
+            name: "Admini csoport",
+            description: "Megintcsak nyilvános.",
+            creatorId: admin.id,
+            visibility: GroupVisibility.PUBLIC,
+        },
+    });
 
     await prisma.groupMember.createMany({
         data: [
@@ -1069,6 +1193,21 @@ async function main() {
             {
                 groupId: publicGroup.id,
                 userId: user2.id,
+                role: GroupMemberRole.MEMBER,
+            },
+            {
+                groupId: publicGroup.id,
+                userId: user3.id,
+                role: GroupMemberRole.MEMBER,
+            },
+            {
+                groupId: publicGroup2.id,
+                userId: user3.id,
+                role: GroupMemberRole.MEMBER,
+            },
+            {
+                groupId: publicGroup2.id,
+                userId: user4.id,
                 role: GroupMemberRole.MEMBER,
             },
         ],
@@ -1097,12 +1236,12 @@ async function main() {
         data: [
             {
                 groupId: privateGroup.id,
-                requesterId: user3.id,
+                requesterId: user4.id,
                 status: GroupJoinRequestStatus.PENDING,
             },
             {
                 groupId: privateGroup.id,
-                requesterId: user4.id,
+                requesterId: user1.id,
                 status: GroupJoinRequestStatus.PENDING,
             },
         ],
@@ -1299,7 +1438,7 @@ async function main() {
             title: "Galéria",
             message: "Teszt galéria esemény értesítés.",
             actorId: user4.id,
-            entityId: privateGallery.id,
+            entityId: adminPrivateGallery.id,
             entityType: "Gallery",
         },
         {
@@ -1324,6 +1463,287 @@ async function main() {
         });
     }
 
+    await prisma.userPreference.upsert({
+        where: {
+            userId: admin.id,
+        },
+
+        update: {
+            minAge: 18,
+            maxAge: 50,
+
+            minHeightCm: 160,
+            maxHeightCm: 200,
+
+            minShoulderWidthCm: 35,
+            maxShoulderWidthCm: 55,
+
+            minNeckCircumferenceCm: 30,
+            maxNeckCircumferenceCm: 45,
+
+            minChestCircumferenceCm: 80,
+            maxChestCircumferenceCm: 130,
+
+            minBustCircumferenceCm: null,
+            maxBustCircumferenceCm: null,
+
+            minUnderbustCircumferenceCm: null,
+            maxUnderbustCircumferenceCm: null,
+
+            minWaistCircumferenceCm: 60,
+            maxWaistCircumferenceCm: 120,
+
+            minHipCircumferenceCm: 80,
+            maxHipCircumferenceCm: 130,
+
+            minUpperArmCircumferenceCm: 20,
+            maxUpperArmCircumferenceCm: 45,
+
+            minForearmCircumferenceCm: 20,
+            maxForearmCircumferenceCm: 40,
+
+            minWristCircumferenceCm: 14,
+            maxWristCircumferenceCm: 25,
+
+            minArmLengthCm: 50,
+            maxArmLengthCm: 80,
+
+            minUpperArmLengthCm: 20,
+            maxUpperArmLengthCm: 40,
+
+            minForearmLengthCm: 20,
+            maxForearmLengthCm: 35,
+
+            minThighCircumferenceCm: 40,
+            maxThighCircumferenceCm: 80,
+
+            minKneeCircumferenceCm: 30,
+            maxKneeCircumferenceCm: 50,
+
+            minCalfCircumferenceCm: 25,
+            maxCalfCircumferenceCm: 50,
+
+            minAnkleCircumferenceCm: 18,
+            maxAnkleCircumferenceCm: 30,
+
+            minLegLengthCm: 70,
+            maxLegLengthCm: 110,
+
+            minInseamLengthCm: 65,
+            maxInseamLengthCm: 95,
+
+            minOutseamLengthCm: 80,
+            maxOutseamLengthCm: 120,
+
+            minHandLengthCm: 15,
+            maxHandLengthCm: 23,
+
+            minHandWidthCm: 7,
+            maxHandWidthCm: 12,
+
+            minFingerLengthCm: 6,
+            maxFingerLengthCm: 11,
+
+            lookingFor: [LookingFor.CHAT, LookingFor.FRIENDSHIP],
+
+            gender: [Gender.MAN],
+
+            sexuality: [
+                Sexuality.STRAIGHT,
+                Sexuality.GAY,
+                Sexuality.LESBIAN,
+                Sexuality.BISEXUAL,
+            ],
+
+            transStatus: [TransStatus.CIS, TransStatus.TRANS],
+
+            hairLength: [],
+            hairColor: [],
+            eyeColor: [],
+            bodyType: [],
+            beard: [],
+            bodyHair: [],
+            ethnicity: [],
+            smoker: [],
+            tattoos: [],
+            piercings: [],
+            position: [],
+            dickSize: [],
+            dickCircumcision: [],
+            fetish: [],
+            sexualOpenness: [],
+            fisting: [],
+            sadism: [],
+            masochism: [],
+            saferSex: [],
+            openTo: [],
+            cupSizes: [],
+            braSizes: [],
+            binderSizes: [],
+
+            goingOutInterests: [],
+            lifestyleInterests: [],
+            musicInterests: [],
+            movieInterests: [],
+            gamingInterests: [],
+            sportsInterests: [],
+            booksInterests: [],
+            travelInterests: [],
+            foodInterests: [],
+            artInterests: [],
+            technologyInterests: [],
+            natureInterests: [],
+            cultureInterests: [],
+            learningInterests: [],
+            socialInterests: [],
+            automotiveInterests: [],
+            outdoorInterests: [],
+            personalInterests: [],
+            collectingInterests: [],
+            fashionInterests: [],
+            eventsInterests: [],
+            otherInterests: [],
+        },
+
+        create: {
+            userId: admin.id,
+
+            minAge: 18,
+            maxAge: 50,
+
+            minHeightCm: 160,
+            maxHeightCm: 200,
+
+            minShoulderWidthCm: 35,
+            maxShoulderWidthCm: 55,
+
+            minNeckCircumferenceCm: 30,
+            maxNeckCircumferenceCm: 45,
+
+            minChestCircumferenceCm: 80,
+            maxChestCircumferenceCm: 130,
+
+            minBustCircumferenceCm: null,
+            maxBustCircumferenceCm: null,
+
+            minUnderbustCircumferenceCm: null,
+            maxUnderbustCircumferenceCm: null,
+
+            minWaistCircumferenceCm: 60,
+            maxWaistCircumferenceCm: 120,
+
+            minHipCircumferenceCm: 80,
+            maxHipCircumferenceCm: 130,
+
+            minUpperArmCircumferenceCm: 20,
+            maxUpperArmCircumferenceCm: 45,
+
+            minForearmCircumferenceCm: 20,
+            maxForearmCircumferenceCm: 40,
+
+            minWristCircumferenceCm: 14,
+            maxWristCircumferenceCm: 25,
+
+            minArmLengthCm: 50,
+            maxArmLengthCm: 80,
+
+            minUpperArmLengthCm: 20,
+            maxUpperArmLengthCm: 40,
+
+            minForearmLengthCm: 20,
+            maxForearmLengthCm: 35,
+
+            minThighCircumferenceCm: 40,
+            maxThighCircumferenceCm: 80,
+
+            minKneeCircumferenceCm: 30,
+            maxKneeCircumferenceCm: 50,
+
+            minCalfCircumferenceCm: 25,
+            maxCalfCircumferenceCm: 50,
+
+            minAnkleCircumferenceCm: 18,
+            maxAnkleCircumferenceCm: 30,
+
+            minLegLengthCm: 70,
+            maxLegLengthCm: 110,
+
+            minInseamLengthCm: 65,
+            maxInseamLengthCm: 95,
+
+            minOutseamLengthCm: 80,
+            maxOutseamLengthCm: 120,
+
+            minHandLengthCm: 15,
+            maxHandLengthCm: 23,
+
+            minHandWidthCm: 7,
+            maxHandWidthCm: 12,
+
+            minFingerLengthCm: 6,
+            maxFingerLengthCm: 11,
+
+            lookingFor: [LookingFor.CHAT, LookingFor.FRIENDSHIP],
+
+            gender: [Gender.MAN],
+
+            sexuality: [
+                Sexuality.STRAIGHT,
+                Sexuality.GAY,
+                Sexuality.LESBIAN,
+                Sexuality.BISEXUAL,
+            ],
+
+            transStatus: [TransStatus.CIS, TransStatus.TRANS],
+
+            hairLength: [],
+            hairColor: [],
+            eyeColor: [],
+            bodyType: [],
+            beard: [],
+            bodyHair: [],
+            ethnicity: [],
+            smoker: [],
+            tattoos: [],
+            piercings: [],
+            position: [],
+            dickSize: [],
+            dickCircumcision: [],
+            fetish: [],
+            sexualOpenness: [],
+            fisting: [],
+            sadism: [],
+            masochism: [],
+            saferSex: [],
+            openTo: [],
+            cupSizes: [],
+            braSizes: [],
+            binderSizes: [],
+
+            goingOutInterests: [],
+            lifestyleInterests: [],
+            musicInterests: [],
+            movieInterests: [],
+            gamingInterests: [],
+            sportsInterests: [],
+            booksInterests: [],
+            travelInterests: [],
+            foodInterests: [],
+            artInterests: [],
+            technologyInterests: [],
+            natureInterests: [],
+            cultureInterests: [],
+            learningInterests: [],
+            socialInterests: [],
+            automotiveInterests: [],
+            outdoorInterests: [],
+            personalInterests: [],
+            collectingInterests: [],
+            fashionInterests: [],
+            eventsInterests: [],
+            otherInterests: [],
+        },
+    });
     /*
      * ------------------------------------------------------------
      * 10. ADMIN LOOKING FOR / INTERESTS

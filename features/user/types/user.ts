@@ -1,4 +1,7 @@
-import { UserRole } from "../../../prisma/generated/prisma";
+import { GalleryType, GalleryVisibility, UserRole } from "../../../prisma/generated/prisma";
+
+export type GalleryAccessState =
+    "OWNER" | "PUBLIC" | "GRANTED" | "REQUEST_AVAILABLE" | "REQUEST_PENDING";
 
 export interface CurrentUserDTO {
     id: string;
@@ -39,4 +42,33 @@ export interface UserHeaderDatasDTO {
     countryCode: string | null;
     region: string | null;
     city: string | null;
+}
+
+export interface UserGalleryImage {
+    id: string;
+    url: string;
+    mimeType: string | null;
+    width: number | null;
+    height: number | null;
+    isAvatar: boolean;
+    sortOrder: number;
+}
+
+export interface UserGallery {
+    id: string;
+    name: string;
+    type: GalleryType;
+    visibility: GalleryVisibility;
+    createdAt: string;
+
+    images: UserGalleryImage[];
+
+    access: GalleryAccessState;
+    canView: boolean;
+    canRequestAccess: boolean;
+    accessExpiresAt: string | null;
+}
+
+export interface UserGalleries {
+    galleries: UserGallery[];
 }

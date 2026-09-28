@@ -112,7 +112,7 @@ export function ProfileIdentityForm({
                             animate={boxAnimation.animate}
                             exit={boxAnimation.exit}
                             transition={{
-                                duration: 0.3,
+                                duration: 0.125,
                                 ease: "easeOut",
                             }}>
                             <div className="profile-create-field">

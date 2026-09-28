@@ -3261,8 +3261,6 @@ header .main-navigation-bar .content .icon:active {
 
 .profile-icon-tabs-wrapper {
   background: var(--background);
-  border-top: 0.025rem solid #202020;
-  border-bottom: 0.025rem solid #202020;
   padding: 0px 0px 0px 0px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -3298,15 +3296,13 @@ header .main-navigation-bar .content .icon:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
   width: 100%;
   gap: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .profile-icon-tabs-wrapper .profile-icon-tabs-container .profile-icon-button {
   font-size: 14px;
-  letter-spacing: 0.4px;
 }
 .profile-icon-tabs-wrapper .profile-icon-tabs-container .profile-icon-button .profile-icon-container {
   display: -webkit-box;
@@ -3322,6 +3318,14 @@ header .main-navigation-bar .content .icon:active {
   gap: 7px;
   padding: 8px 8px 10px 8px;
 }
+.profile-icon-tabs-wrapper .profile-icon-tabs-container .profile-icon-button .active-profile-icon-container {
+  background: #032735;
+  color: #1dbdfc;
+  padding: 6px 19px 6px 14px;
+}
+.profile-icon-tabs-wrapper .profile-icon-tabs-container .profile-icon-button .inactive-profile-icon-container {
+  padding: 5px 15px 5px 12px;
+}
 .profile-icon-tabs-wrapper .profile-icon-tabs-container .profile-icon-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3333,21 +3337,91 @@ header .main-navigation-bar .content .icon:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #606060;
-  padding: 4px 8px;
+  color: #505050;
+  font-weight: 600;
+  border-radius: 50px;
 }
 
-.profile-tab-indicator {
-  background: #ffffff;
+.profile-header {
+  height: 56px;
+}
+
+.profile {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.profile__bg-box {
+  background: #090909;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.profile__bg-box .description {
+  font-size: 13px;
+  text-align: right;
+  color: #707070;
+  padding-right: 20px;
+}
+.profile__full-data {
+  top: -60px;
+  background: var(--background);
+  position: relative;
+  padding-top: 6px;
+  border-radius: 25px 25px 0 0;
+  font-size: 15px;
+}
+.profile__full-data .top-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.profile__full-data .top-container .data {
+  margin-left: 170px;
+}
+.profile__full-data .top-container .nickname {
+  position: absolute;
+  top: -41px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-left: 170px;
+}
+.profile__full-data .top-container .age {
+  color: #777;
+  font-size: 14px;
+}
+.profile__full-data .container {
+  width: calc(100% - 30px);
+  margin: 0 auto;
+}
+.profile__full-data .container > p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 14px;
+  color: #c7c7c7;
+}
+.profile__full-data .bio {
+  font-size: 15px;
 }
 
 .profile-card {
   width: 100%;
   height: auto;
-  margin: 75px 0 25px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -3355,21 +3429,23 @@ header .main-navigation-bar .content .icon:active {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 25px;
 }
 .profile-card .data-wrapper {
+  z-index: 1;
+  width: calc(100% - 70px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 15px;
+}
+.profile-card .data-wrapper .avatar-img {
+  border-radius: 100px;
+  border: 6px solid var(--background);
 }
 .profile-card .data-wrapper .image-wrapper {
   width: auto;
-  margin: 0 0 0 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 15px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3422,18 +3498,6 @@ header .main-navigation-bar .content .icon:active {
   position: relative;
 }
 
-.profile-card .image-wrapper {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
 .profile-card .indicator-container {
   position: absolute;
   bottom: -17px;
@@ -3777,10 +3841,6 @@ header .main-navigation-bar .content .icon:active {
           justify-content: space-between;
   gap: 16px;
   padding: 18px 20px;
-  background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.85)), to(rgba(0, 0, 0, 0.5)));
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .profile-avatar-like-button {

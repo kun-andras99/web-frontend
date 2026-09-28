@@ -1,18 +1,28 @@
 import { getCurrentUser } from "@/features/auth/lib/session";
+// import { getProfileUserFull } from "@/features/auth/server/getCurrentUserFull";
 // import { getProfileByUserId } from "@/features/profile/data/profile";
-import MeUserHeader from "@/features/user/components/MeUserHeader";
+// import UserProfileScreen from "@/features/profile/(pages)/user-profile";
+import { redirect } from "next/navigation";
 
-export default async function MePage() {
-    const user = await getCurrentUser();
+// interface UserPageProps {
+//     params: Promise<{
+//         id: string;
+//     }>;
+// }
 
-    if (!user) {
-        return null;
+export default async function MePage(
+    // { params }: UserPageProps
+) {
+    // const { id } = await params;
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+        redirect("/sign-in");
     }
 
-    return (
-        <main>
-            <h1>Felhasználó oldala</h1>
-            <MeUserHeader userId={user.id} />
-        </main>
-    );
+    // const user = await getProfileUserFull(id);
+
+    // if (!user) return;
+
+    // return <UserProfileScreen user={user} />;
 }
