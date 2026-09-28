@@ -1,32 +1,12 @@
 import { getCurrentUser } from "@/features/auth/lib/session";
-import { calculateAge } from "@/lib/_lib/validations/profile";
 import { prisma } from "@/lib/prisma";
+import { calculateDistanceKm } from "@/lib/utils/calculateDistanceMKm";
+import { formatDistance } from "@/lib/utils/formatDistanceMKm";
+import { formatGender } from "@/lib/utils/formatGender";
+import { formatVisitTime } from "@/lib/utils/formatVisitTime";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
-export function formatVisitTime(date: Date) {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-
-    const minutes = Math.floor(diffMs / (1000 * 60));
-    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (minutes < 1) {
-        return "épp most";
-    }
-
-    if (minutes < 60) {
-        return `${minutes} perce`;
-    }
-
-    if (hours < 24) {
-        return `${hours} órája`;
-    }
-
-    return `${days} napja`;
-}
 
 export default async function VisitorsPage() {
     const currentUser = await getCurrentUser();
@@ -34,6 +14,16 @@ export default async function VisitorsPage() {
     if (!currentUser) {
         redirect("/sign-in");
     }
+
+    const currentUserLocation = await prisma.users.findUnique({
+        where: {
+            id: currentUser.id,
+        },
+        select: {
+            lat: true,
+            lng: true,
+        },
+    });
 
     const visitors = await prisma.profileVisit.findMany({
         where: {
@@ -49,11 +39,13 @@ export default async function VisitorsPage() {
             visitor: {
                 select: {
                     id: true,
+                    lat: true,
+                    lng: true,
                     userData: {
                         select: {
                             nickname: true,
                             avatarUrl: true,
-                            birth: true,
+                            gender: true,
                         },
                     },
                 },
@@ -62,7 +54,7 @@ export default async function VisitorsPage() {
     });
 
     return (
-        <div className="p-[15px] sm:px-5">
+        <div>
             {visitors.length === 0 ? (
                 <div className="flex min-h-[220px] items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] px-5">
                     <div className="text-center">
@@ -79,21 +71,43 @@ export default async function VisitorsPage() {
                     </div>
                 </div>
             ) : (
-                <div className="grid grid-cols-3 gap-[15px] sm:gap-4">
+                <div className="grid grid-cols-2 gap-[1px]">
                     {visitors.map((visit) => {
                         const visitor = visit.visitor;
                         const userData = visitor.userData;
 
-                        const age = userData?.birth
-                            ? calculateAge(userData.birth)
-                            : null;
+                        const gender = formatGender(userData?.gender);
+
+                        const currentLat = currentUserLocation?.lat ?? null;
+                        const currentLng = currentUserLocation?.lng ?? null;
+
+                        const userLat = visitor.lat ?? null;
+                        const userLng = visitor.lng ?? null;
+
+                        const hasCurrentLocation =
+                            currentLat !== null && currentLng !== null;
+
+                        const hasUserLocation =
+                            userLat !== null && userLng !== null;
+
+                        const distanceKm =
+                            hasCurrentLocation && hasUserLocation
+                                ? calculateDistanceKm(
+                                      currentLat,
+                                      currentLng,
+                                      userLat,
+                                      userLng,
+                                  )
+                                : null;
+
+                        const distance = formatDistance(distanceKm);
 
                         return (
                             <Link
                                 key={visit.id}
                                 href={`/profile/${visitor.id}`}
-                                className="group overflow-hidden rounded-2xl border border-white/8 bg-white/[0.035] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1eb1eb]/30 hover:bg-white/[0.06]">
-                                <div className="relative aspect-square overflow-hidden bg-white/5">
+                                className="group overflow-hidden">
+                                <div className="relative aspect-square overflow-hidden">
                                     {userData?.avatarUrl ? (
                                         <Image
                                             src={userData.avatarUrl}
@@ -101,11 +115,11 @@ export default async function VisitorsPage() {
                                                 userData.nickname ?? "Profilkép"
                                             }
                                             fill
-                                            sizes="(max-width: 640px) 33vw, 200px"
+                                            sizes="(max-width: 640px) 50vw, 300px"
                                             className="object-cover transition-transform duration-300 group-hover:scale-105"
                                         />
                                     ) : (
-                                        <div className="flex h-full w-full items-center justify-center">
+                                        <div className="flex h-full w-full items-center justify-center bg-white/5">
                                             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-xl font-semibold text-white/40">
                                                 {userData?.nickname
                                                     ?.charAt(0)
@@ -114,24 +128,34 @@ export default async function VisitorsPage() {
                                         </div>
                                     )}
 
-                                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/80 to-transparent" />
+                                    {/* Alsó gradient */}
+                                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
 
-                                    <div className="absolute bottom-2 left-2 right-2">
+                                    {/* Bal alsó - profil adatok */}
+                                    <div className="absolute right-20 bottom-[10px] left-[10px]">
                                         <div className="truncate text-sm font-semibold text-white">
-                                            {userData?.nickname ?? "Ismeretlen"}
-                                            {age !== null && (
-                                                <span className="ml-1 font-normal text-white/70">
-                                                    {age}
+                                            {userData?.nickname ?? ""}
+                                        </div>
+
+                                        <div className="mt-0.5 flex items-center gap-1 truncate text-[10px] font-medium text-white/65">
+                                            {gender && <span>{gender}</span>}
+
+                                            {gender && distance && (
+                                                <span className="text-white/45">
+                                                    ·
                                                 </span>
+                                            )}
+
+                                            {distance && (
+                                                <span>{distance}</span>
                                             )}
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="px-2.5 py-2.5">
-                                    <p className="truncate text-[11px] text-white/40">
+                                    {/* Jobb alsó - megtekintési idő */}
+                                    <div className="absolute right-[10px] bottom-[10px] rounded-full bg-black/55 px-2 py-1 text-[10px] font-medium text-white backdrop-blur-sm">
                                         {formatVisitTime(visit.visitedAt)}
-                                    </p>
+                                    </div>
                                 </div>
                             </Link>
                         );
