@@ -6,7 +6,6 @@ import { useProfileTabNavigation } from "@/features/profile/(pages)/user-profile
 import { useProfileTabs } from "@/features/profile/(pages)/user-profile/hooks/useProfileTabs";
 import { ProfileGallery } from "@/features/profile/types/gallery.types";
 import type { ProfileUser } from "@/features/profile/types/profile.types";
-import { useRef } from "react";
 
 interface ProfileTabsProps {
     user: ProfileUser;
@@ -19,8 +18,6 @@ export default function ProfileTabs({
     galleries,
     isOwnProfile,
 }: ProfileTabsProps) {
-    const tabsContainerRef = useRef<HTMLDivElement>(null);
-
     const { tabs, activeTab, activeIndex, goToTab } = useProfileTabs(
         user.userData?.gender,
         undefined,
@@ -34,7 +31,6 @@ export default function ProfileTabs({
     return (
         <>
             <div
-                ref={tabsRef}
                 className="
                     sticky
                     top-[56px]
@@ -42,12 +38,10 @@ export default function ProfileTabs({
                     profile-icon-tabs-wrapper
                 ">
                 <div
-                    ref={tabsContainerRef}
+                    ref={tabsRef}
                     className="
                         overflow-x-auto
                         scrollbar-none
-                        sticky
-                        top-[56px]
                         profile-icon-tabs-container
                     ">
                     {tabs.map((tab) => {
@@ -61,7 +55,7 @@ export default function ProfileTabs({
                                 type="button"
                                 data-profile-tab={tab.id}
                                 onClick={() => navigateToTab(tab.id)}
-                                className="profile-icon-button">
+                                className="profile-icon-button shrink-0">
                                 <div
                                     className={`
                                         profile-icon-container

@@ -3,6 +3,7 @@ import { getProfileUserFull } from "@/features/auth/server/getCurrentUserFull";
 import ProfileHeader from "@/features/profile/(pages)/user-profile/components/profileHeader";
 import ProfileName from "@/features/profile/(pages)/user-profile/components/ProfileName";
 import ProfileTabs from "@/features/profile/(pages)/user-profile/components/profileTabs";
+import { recordProfileVisit } from "@/features/profile/repository/profile-visit";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -27,6 +28,10 @@ export default async function UserProfilePage({ params }: UserPageProps) {
     }
 
     const isOwnProfile = currentUser.id === user.id;
+
+    if (!isOwnProfile) {
+        await recordProfileVisit(currentUser.id, user.id);
+    }
 
     const galleries = await prisma.gallery.findMany({
         where: {

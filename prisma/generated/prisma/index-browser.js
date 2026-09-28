@@ -511,9 +511,7 @@ exports.Prisma.GalleryShareScalarFieldEnum = {
   galleryId: 'galleryId',
   ownerId: 'ownerId',
   recipientId: 'recipientId',
-  status: 'status',
-  createdAt: 'createdAt',
-  approvedAt: 'approvedAt',
+  grantedAt: 'grantedAt',
   expiresAt: 'expiresAt',
   revokedAt: 'revokedAt',
   purgeAfter: 'purgeAfter'
@@ -1893,12 +1891,6 @@ exports.GalleryType = exports.$Enums.GalleryType = {
 exports.GalleryVisibility = exports.$Enums.GalleryVisibility = {
   PUBLIC: 'PUBLIC',
   PRIVATE: 'PRIVATE'
-};
-
-exports.GalleryShareStatus = exports.$Enums.GalleryShareStatus = {
-  PENDING: 'PENDING',
-  APPROVED: 'APPROVED',
-  REJECTED: 'REJECTED'
 };
 
 exports.GroupVisibility = exports.$Enums.GroupVisibility = {

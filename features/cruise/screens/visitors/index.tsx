@@ -8,7 +8,7 @@ export default function VisitorsScreen() {
 
     return (
         <BottomPageWrapper>
-            <p>visitors list</p>
+            <p>visitors listcc</p>
             {/* <TopFilter>
                     <ViewChange />
                 </TopFilter> */}

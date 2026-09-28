@@ -458,7 +458,9 @@ model ProfileVisit {
   visitedUser   Users    @relation("ProfileVisitedUser", fields: [visitedUserId], references: [id], onDelete: Cascade)
   visitor       Users    @relation("ProfileVisitor", fields: [visitorId], references: [id], onDelete: Cascade)
 
+  @@unique([visitorId, visitedUserId])
   @@index([visitedUserId, visitedAt])
+  @@index([visitedUserId, visitorId])
   @@index([visitorId, visitedAt])
   @@map("profile_visits")
 }
