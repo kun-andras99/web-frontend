@@ -1,6 +1,7 @@
-import { QueryProvider } from "@/features/(app)/(ui)/_providers/QueryProvider";
+import { QueryProvider } from "@/features/(app)/(ui)/providers/QueryProvider";
 import { AuthProvider } from "@/features/auth/components/provider/AuthProvider";
 import { getCurrentUser } from "@/features/auth/lib/session";
+import { getQueryClient } from "@/lib/query/get-query-client";
 import { cn } from "@/lib/utils/cn";
 import type { Metadata } from "next";
 import { Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";

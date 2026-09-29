@@ -1,16 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+"use client";
 
-import { getGroups } from "@/features/groups/api/getGroups";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import type { GroupsFilters } from "@/features/groups/schemas/groups.schema";
+import { groupsInfiniteQueryOptions } from "@/features/groups/hooks/groups.queries";
 
-export const groupKeys = {
-    all: ["groups"] as const,
-    list: () => [...groupKeys.all, "list"] as const,
-};
-
-export function useGroups() {
-    return useQuery({
-        queryKey: groupKeys.list(),
-        queryFn: getGroups,
-        staleTime: 5 * 60 * 1000,
-    });
+export function useGroups(filters: GroupsFilters = {}) {
+    return useInfiniteQuery(groupsInfiniteQueryOptions(filters));
 }
+ 

@@ -126,7 +126,7 @@ model UserData {
   nickname               String?
   description            String?
   bio                    String?
-  birth                  DateTime
+  birth                  DateTime?
   heightCm               Int?
   weightKg               Int?
   shoulderWidth          Int?
@@ -567,7 +567,6 @@ model Group {
   invitations  GroupInvitation[]
   joinRequests GroupJoinRequest[]
   members      GroupMember[]
-  visits       GroupVisit[]
   creator      Users              @relation("GroupCreator", fields: [creatorId], references: [id], onDelete: Cascade)
 
   @@index([creatorId])

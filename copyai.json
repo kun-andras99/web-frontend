@@ -9,6 +9,27 @@
                 "features/profile-create/**/*.tsx",
                 "features/profile-create/**/*.ts"
             ]
+        },
+        {
+            "name": "Groups",
+            "description": "Groups feature full",
+            "files": [
+                "lib/api/*.js",
+                "lib/hooks/*.js",
+                "lib/http/*.js",
+                "lib/query/*.js",
+                "app/api/groups/*.ts",
+                "app/api/groups/**/*.ts",
+                "app/api/groups/**/**/*.ts",
+                "app/api/groups/**/**/**/*.ts",
+                "app/(authet)/group/**/*.tsx",
+                "app/(authet)/group/**/**/*.tsx",
+                "app/(mobile-bottom-navigation)/community/groups/*.tsx",
+                "features/groups/**/*.tsx",
+                "features/groups/**/*.ts",
+                "features/groups/**/**/*.tsx",
+                "features/groups/**/**/*.ts"
+            ]
         }
     ]
 }

@@ -1,7 +1,11 @@
-import { GalleryType, GalleryVisibility, UserRole } from "../../../prisma/generated/prisma";
+import {
+    GalleryType,
+    GalleryVisibility,
+    UserRole,
+} from "../../../prisma/generated/prisma";
 
 export type GalleryAccessState =
-    "OWNER" | "PUBLIC" | "GRANTED" | "REQUEST_AVAILABLE" | "REQUEST_PENDING";
+    "OWNER" | "PUBLIC" | "GRANTED" | "REQUEST_AVAILABLE" | "PENDING";
 
 export interface CurrentUserDTO {
     id: string;
