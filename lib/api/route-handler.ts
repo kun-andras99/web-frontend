@@ -104,3 +104,11 @@ export function parseSearchParams<T extends z.ZodType>(
     const params = Object.fromEntries(new URL(request.url).searchParams);
     return schema.parse(params);
 }
+
+/**
+ * Egységes 401 válasz azokhoz a route-okhoz, amik még nem `withAuth`-ot
+ * használnak. Ugyanaz a formátum, mint a `withApiHandler` hibáié.
+ */
+export function unauthorizedResponse() {
+    return errorResponse(401, "UNAUTHENTICATED", "Authentication required");
+}

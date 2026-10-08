@@ -165,7 +165,7 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
         if (payload) {
             const user = await getUserById(payload.sub);
 
-            if (user) {
+            if (user && user.status === "ACTIVE") {
                 return {
                     authenticated: true,
 
@@ -215,7 +215,7 @@ async function resolveSession(request: NextRequest): Promise<SessionResult> {
 
     const user = await getUserById(existing.userId as UserId);
 
-    if (!user) {
+    if (!user || user.status !== "ACTIVE") {
         return {
             authenticated: false,
         };

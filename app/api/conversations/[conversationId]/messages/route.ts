@@ -1,3 +1,4 @@
+import { unauthorizedResponse } from "@/lib/api/route-handler";
 import { NextResponse } from "next/server";
 
 import { getCurrentUser } from "@/features/auth/lib/session";
@@ -20,14 +21,7 @@ export async function GET(request: Request, context: RouteContext) {
         const currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
+            return unauthorizedResponse();
         }
 
         const { conversationId } = await context.params;
@@ -95,14 +89,7 @@ export async function POST(request: Request, context: RouteContext) {
         const currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
+            return unauthorizedResponse();
         }
 
         const { conversationId } = await context.params;

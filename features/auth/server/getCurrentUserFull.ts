@@ -28,6 +28,8 @@ export const getCurrentUserFull = cache(async () => {
             omit: {
                 username: true,
                 emailVerified: true,
+                // SOHA ne kerüljön a kliensre (a /api/auth/me/full ezt adja vissza)
+                passwordHash: true,
             },
             include: {
                 userData: true,

@@ -1,3 +1,4 @@
+import { unauthorizedResponse } from "@/lib/api/route-handler";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { USE_BLOG_MOCK } from "@/features/blogs/config";
 import { toBlogDTO } from "@/features/blogs/mapper/blogs.mapper";
@@ -14,14 +15,7 @@ export async function GET(request: NextRequest) {
         const currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
+            return unauthorizedResponse();
         }
 
         const { searchParams } = new URL(request.url);
@@ -89,14 +83,7 @@ export async function POST(request: NextRequest) {
         const currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
+            return unauthorizedResponse();
         }
 
         const body = await request.json();

@@ -1,7 +1,8 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import type { CityStatsDTO } from "@/features/city/repository/cityDTO";
 
 export async function getCityStats(): Promise<CityStatsDTO> {
-    const response = await fetch("/api/city", {
+    const response = await apiFetch("/api/city", {
         method: "GET",
         credentials: "include",
     });

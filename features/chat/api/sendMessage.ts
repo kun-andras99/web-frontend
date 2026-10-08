@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import {
     MessageDTO,
     SendMessageInput,
@@ -11,7 +12,7 @@ export async function sendMessage(
     conversationId: string,
     data: SendMessageInput,
 ): Promise<MessageDTO> {
-    const response = await fetch(
+    const response = await apiFetch(
         `/api/conversations/${conversationId}/messages`,
         {
             method: "POST",

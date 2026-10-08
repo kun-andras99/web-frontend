@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import { ConversationMessagesDTO } from "@/features/chat/repository/chatDTO";
 
 interface GetConversationParams {
@@ -19,7 +20,7 @@ export async function getConversation({
         searchParams.set("cursor", cursor);
     }
 
-    const response = await fetch(
+    const response = await apiFetch(
         `/api/conversations/${conversationId}/messages?${searchParams}`,
         {
             credentials: "include",

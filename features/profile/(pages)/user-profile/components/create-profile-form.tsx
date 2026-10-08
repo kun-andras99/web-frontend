@@ -1,5 +1,7 @@
 "use client";
 
+import { apiFetch } from "@/lib/http/auth-fetch";
+
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
@@ -58,7 +60,7 @@ export default function CreateProfileForm() {
 
             const formData = new FormData(form);
 
-            const response = await fetch("/api/create-profile", {
+            const response = await apiFetch("/api/create-profile", {
                 method: "POST",
                 body: formData,
             });

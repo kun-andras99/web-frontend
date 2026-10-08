@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import type { BlogsPageDTO } from "@/features/blogs/repository/blogsDTO";
 
 interface GetBlogsParams {
@@ -16,7 +17,7 @@ export async function getBlogs({
         searchParams.set("cursor", cursor);
     }
 
-    const response = await fetch(`/api/blogs?${searchParams.toString()}`, {
+    const response = await apiFetch(`/api/blogs?${searchParams.toString()}`, {
         method: "GET",
         credentials: "include",
     });

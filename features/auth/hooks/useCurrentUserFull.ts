@@ -1,10 +1,13 @@
 "use client";
 
+import { apiFetch } from "@/lib/http/auth-fetch";
+
 import { useQuery } from "@tanstack/react-query";
 
 async function fetchCurrentUserFull() {
-    const response = await fetch("/api/auth/me/full", {
-        credentials: "include",
+    const response = await apiFetch("/api/auth/me/full", {
+        // vendégként a null user nem hiba → ne irányítson át
+        redirectOnUnauthorized: false,
     });
 
     if (response.status === 401) {

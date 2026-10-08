@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import { ConversationDTO } from "@/features/chat/repository/chatDTO";
 
 interface GetConversationsResponse {
@@ -5,7 +6,7 @@ interface GetConversationsResponse {
 }
 
 export async function getConversations(): Promise<ConversationDTO[]> {
-    const response = await fetch("/api/conversations", {
+    const response = await apiFetch("/api/conversations", {
         method: "GET",
         credentials: "include",
     });

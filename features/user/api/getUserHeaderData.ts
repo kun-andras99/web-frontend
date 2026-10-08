@@ -1,17 +1,22 @@
 "use client";
 
+import { apiFetch } from "@/lib/http/auth-fetch";
+
 import { UserHeaderDatasDTO } from "@/features/user/types/user";
 
 export async function getUserHeaderDatas(
     userId: string,
 ): Promise<UserHeaderDatasDTO> {
-    const response = await fetch(`/api/users/${userId}/profile-header-data`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
+    const response = await apiFetch(
+        `/api/users/${userId}/profile-header-data`,
+        {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
         },
-    });
+    );
 
     if (!response.ok) {
         throw new Error("A felhasználó nem található.");

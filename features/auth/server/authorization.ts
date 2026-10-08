@@ -1,16 +1,23 @@
+import "server-only";
+
 import { getCurrentUser } from "@/features/auth/lib/session";
+import { HttpError } from "@/lib/api/route-handler";
 import { UserRole } from "../../../prisma/generated/prisma";
 
-export class UnauthorizedError extends Error {
+/**
+ * HttpError-ból származnak, így `withApiHandler` / `withAuth` alatt
+ * automatikusan 401 / 403 válasz lesz belőlük (korábban 500 lett).
+ */
+export class UnauthorizedError extends HttpError {
     constructor(message = "Unauthorized") {
-        super(message);
+        super(401, message, "UNAUTHENTICATED");
         this.name = "UnauthorizedError";
     }
 }
 
-export class ForbiddenError extends Error {
+export class ForbiddenError extends HttpError {
     constructor(message = "Forbidden") {
-        super(message);
+        super(403, message, "FORBIDDEN");
         this.name = "ForbiddenError";
     }
 }

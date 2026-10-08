@@ -14,6 +14,20 @@ export async function GET(_request: Request, context: RouteContext) {
     try {
         const currentUser = await getCurrentUser();
 
+        if (!currentUser) {
+            return NextResponse.json(
+                {
+                    error: {
+                        code: "UNAUTHENTICATED",
+                        message: "Authentication required",
+                    },
+                },
+                {
+                    status: 401,
+                },
+            );
+        }
+
         const { id } = await context.params;
 
         if (!id) {
