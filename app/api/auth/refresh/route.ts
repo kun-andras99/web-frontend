@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     }
 
     const user = await getUserById(existing.userId as UserId);
-    if (!user) {
+    if (!user || user.status !== "ACTIVE") {
         return NextResponse.json({ error: "user_not_found" }, { status: 401 });
     }
 
@@ -83,7 +83,9 @@ export async function POST(request: NextRequest) {
         await createRefreshToken({
             userId: user.id as UserId,
             userAgent: request.headers.get("user-agent"),
-            ipAddress: request.headers.get("x-forwarded-for"),
+            ipAddress:
+                request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+                request.headers.get("x-real-ip"),
         });
     await markRefreshTokenReplaced(existing.id, newTokenId);
 

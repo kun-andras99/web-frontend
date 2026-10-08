@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import type {
     BlogDTO,
     CreateBlogInput,
@@ -8,7 +9,7 @@ interface CreateBlogResponse {
 }
 
 export async function createBlog(data: CreateBlogInput): Promise<BlogDTO> {
-    const response = await fetch("/api/blogs", {
+    const response = await apiFetch("/api/blogs", {
         method: "POST",
         credentials: "include",
         headers: {

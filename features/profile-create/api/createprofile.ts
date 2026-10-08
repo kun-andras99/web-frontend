@@ -1,3 +1,4 @@
+import { apiFetch } from "@/lib/http/auth-fetch";
 import type {
     CreateProfilePayload,
     CreateProfileResponse,
@@ -14,7 +15,7 @@ export async function createProfile(
     formData.append("sexuality", payload.sexuality);
     formData.append("appCity", payload.appCity);
 
-    const response = await fetch("/api/profile/create", {
+    const response = await apiFetch("/api/profile/create", {
         method: "POST",
         body: formData,
     });

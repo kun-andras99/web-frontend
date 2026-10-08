@@ -1,55 +1,27 @@
-import { requireUser } from "@/features/auth/lib/requireUser";
+import { withAuth } from "@/features/auth/lib/requireUser";
 import {
-    // createGroup,
+    createGroupInputSchema,
+    listGroupsQuerySchema,
+} from "@/features/groups/schemas/groups.schema";
+import {
+    createGroup,
     listGroups,
 } from "@/features/groups/server/groups.service";
+import { parseJsonBody, parseSearchParams } from "@/lib/api/route-handler";
 import { NextResponse } from "next/server";
 
-// type Params = { groupId: string };
+/** GET /api/groups?cursor&limit&search — a bejelentkezett user szemszögéből. */
+export const GET = withAuth(async (request, _context, user) => {
+    const query = parseSearchParams(request, listGroupsQuerySchema);
 
-export async function GET() {
-    try {
-        const user = await requireUser();
-        // const query = parseSearchParams(request, listGroupsQuerySchema);
+    return NextResponse.json(await listGroups(user.id, query));
+});
 
-        return NextResponse.json(await listGroups(user.id), {
-            headers: { "Cache-Control": "private, no-store" }, // user-specifikus adat
-        });
-    } catch (error) {
-        console.error("GET /api/users failed:", error);
+/** POST /api/groups — új csoport létrehozása (a kliens ide küldi). */
+export const POST = withAuth(async (request, _context, user) => {
+    const input = await parseJsonBody(request, createGroupInputSchema);
 
-        return NextResponse.json(
-            {
-                message: "Failed to fetch users.",
-            },
-            {
-                status: 500,
-            },
-        );
-    }
-}
-
-// export const POST = withApiHandler(async (request) => {
-//     const user = await requireUser();
-//     const input = await parseJsonBody(request, createGroupInputSchema);
-
-//     return NextResponse.json(await createGroup(user.id, input), {
-//         status: 201,
-//     });
-// });
-
-// export const PATCH = withApiHandler<Params>(async (request, { params }) => {
-//     const user = await requireUser();
-//     const { groupId } = await params;
-//     const input = await parseJsonBody(request, updateGroupInputSchema);
-
-//     return NextResponse.json(await updateGroup(groupId, user.id, input));
-// });
-
-// export const DELETE = withApiHandler<Params>(async (_request, { params }) => {
-//     const user = await requireUser();
-//     const { groupId } = await params;
-
-//     await deleteGroup(groupId, user.id);
-//     return noContent();
-// });
+    return NextResponse.json(await createGroup(user.id, input), {
+        status: 201,
+    });
+});

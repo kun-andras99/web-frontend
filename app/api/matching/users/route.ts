@@ -1,3 +1,4 @@
+import { unauthorizedResponse } from "@/lib/api/route-handler";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
@@ -6,7 +7,7 @@ export async function GET() {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        return unauthorizedResponse();
     }
 
     const actions = await prisma.matchAction.findMany({

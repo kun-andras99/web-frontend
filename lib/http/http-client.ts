@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { apiFetch } from "./auth-fetch";
 import {
     ApiError,
     NetworkError,
@@ -113,7 +114,8 @@ async function request<TSchema extends z.ZodType>(
     let data: unknown;
 
     try {
-        response = await fetch(url, {
+        // apiFetch: 401 esetén egyszer refresh-el és újrapróbál (lásd auth-fetch.ts)
+        response = await apiFetch(url, {
             method,
             credentials: "include",
             signal: requestSignal,

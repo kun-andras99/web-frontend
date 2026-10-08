@@ -24,6 +24,8 @@ export function getUserById(id: string) {
             username: true,
             emailVerified: true,
             role: true,
+            // a session-ellenőrzés csak ACTIVE fiókot enged át
+            status: true,
 
             userData: {
                 select: {

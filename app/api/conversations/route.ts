@@ -1,3 +1,4 @@
+import { unauthorizedResponse } from "@/lib/api/route-handler";
 import { NextResponse } from "next/server";
 
 import { getCurrentUser } from "@/features/auth/lib/session";
@@ -9,14 +10,7 @@ export async function GET() {
         const currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
+            return unauthorizedResponse();
         }
 
         const conversations = await getUserConversations(currentUser.id);
