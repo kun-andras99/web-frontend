@@ -1,0 +1,39 @@
+/// * a user beállításai (1:1). Regisztrációkor hozd létre a sort (upsert),
+///  * az alapértékek a biztonságos / adatvédelmi oldalra hajlanak.
+///
+///  * felfedezés: showInMatches (opt-in!), showInNearby, showAge, showDistance
+///  * láthatóság: showOnlineStatus, showLastActive, incognitoMode (VIP: nem hagy ProfileVisit nyomot)
+///  * kapcsolatfelvétel: allowMessagesFrom, allowFriendRequests
+///  * értesítés: notifyByEmail, notifyPush, mutedNotificationTypes (némított NotificationType-ok)
+///  * nyelv: locale (UI nyelv, pl. "hu", "en"), timezone (pl. "Europe/Budapest")
+model UserSettings {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  showInMatches Boolean @default(false)
+  showInNearby  Boolean @default(true)
+  showAge       Boolean @default(true)
+  showDistance  Boolean @default(true)
+
+  showOnlineStatus Boolean @default(true)
+  showLastActive   Boolean @default(true)
+  incognitoMode    Boolean @default(false)
+
+  allowMessagesFrom   MessagePermission @default(EVERYONE)
+  allowFriendRequests Boolean           @default(true)
+
+  notifyByEmail          Boolean            @default(true)
+  notifyPush             Boolean            @default(true)
+  mutedNotificationTypes NotificationType[]
+
+  locale   String  @default("hu")
+  timezone String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([showInMatches])
+  @@index([showInNearby])
+  @@map("user_settings")
+}

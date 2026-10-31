@@ -1,0 +1,24 @@
+/// * a verseny végeredményének archívuma (top 20 globálisan / régiónként).
+///  * a contest törlése után is megmarad, ezért a contestKey NEM idegen kulcs.
+///  * megjelenítés: "3x ért el helyezést: 14., 10., 16."
+model EyeCandyResult {
+  id             String   @id @default(cuid())
+  userId         String
+  contestKey     String
+  contestName    String?
+  contestStartAt DateTime
+  contestEndAt   DateTime
+  countryCode    String?
+  region         String?
+  globalRank     Int?
+  regionalRank   Int?
+  totalScore     Int
+  voteCount      Int
+  createdAt      DateTime @default(now())
+  user           Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contestKey])
+  @@index([userId, contestEndAt])
+  @@index([contestKey])
+  @@map("eye_candy_results")
+}

@@ -1,13 +1,13 @@
 import { BottomTabIconSVGProps } from "@/features/(app)/(ui)/top-bar/icons/icons/icons.props";
-import ManBodyIconSVG from "@/features/profile/icons/ManBodyIconSVG";
-import ManChestIconSVG from "@/features/profile/icons/ManChestIconSVG";
-import UserAlbumIconSVG from "@/features/profile/icons/UserAlbumIconSVG";
-import UserPinIconSVG from "@/features/profile/icons/UserPinIconSVG";
-import WomanChestIconSVG from "@/features/profile/icons/WomanChestIconSVG";
+import ManBodyIconSVG from "@/features/profile/components/icons/ManBodyIconSVG";
+import ManChestIconSVG from "@/features/profile/components/icons/ManChestIconSVG";
+import UserAlbumIconSVG from "@/features/profile/components/icons/UserAlbumIconSVG";
+import UserPinIconSVG from "@/features/profile/components/icons/UserPinIconSVG";
+import WomanChestIconSVG from "@/features/profile/components/icons/WomanChestIconSVG";
 import { ProfileTab } from "@/features/profile/types/profile.types";
 import { ComponentType } from "react";
-import StatsIconSVG from "../icons/StatsIconSVG";
-import WomanDressIconSVG from "../icons/WomanDressIconSVG";
+import StatsIconSVG from "../components/icons/StatsIconSVG";
+import WomanDressIconSVG from "../components/icons/WomanDressIconSVG";
 
 export interface ProfileTabConfig {
     id: ProfileTab;

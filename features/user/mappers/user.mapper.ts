@@ -1,6 +1,10 @@
-import { UserProfileHeaderData } from "@/features/user/repositories/user";
+import {
+    MainProfileData,
+    UserProfileHeaderData,
+} from "@/features/user/repositories/user";
 import type {
     CurrentUserDTO,
+    MainProfileDatasDTO,
     PublicUserDTO,
     UserGalleries,
     UserHeaderDatasDTO,
@@ -60,5 +64,15 @@ export function toUserProfileHeaderDataDTO(
         countryCode: user.userData?.countryCode ?? null,
         region: user.userData?.region ?? null,
         city: user.userData?.city ?? null,
+    };
+}
+
+export function toMainProfileDataDTO(
+    user: MainProfileData,
+): MainProfileDatasDTO {
+    return {
+        id: user.id,
+        nickname: user.userData?.nickname ?? null,
+        avatarUrl: user.userData?.avatarUrl ?? null,
     };
 }

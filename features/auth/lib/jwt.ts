@@ -3,19 +3,32 @@ import type {
     AccessTokenPayload,
     UserId,
 } from "@/features/auth/types/auth-index";
-import { SignJWT, jwtVerify } from "jose";
+import { SignJWT, decodeJwt, jwtVerify } from "jose";
 import { ACCESS_TOKEN_TTL_SECONDS } from "./constants";
 
-function getSecret(name: "ACCESS_TOKEN_SECRET"): Uint8Array {
-    const value = process.env[name];
-    if (!value) {
-        throw new Error(`Missing required environment variable: ${name}`);
-    }
-    return new TextEncoder().encode(value);
-}
+const MIN_SECRET_LENGTH = 32;
+
+let cachedSecret: Uint8Array | undefined;
 
 // Lusta kiértékelés: build/import időben még nem feltétlenül elérhető az env var.
-const accessTokenSecret = () => getSecret("ACCESS_TOKEN_SECRET");
+function accessTokenSecret(): Uint8Array {
+    if (cachedSecret) return cachedSecret;
+
+    const value = process.env.ACCESS_TOKEN_SECRET;
+    if (!value) {
+        throw new Error(
+            "Missing required environment variable: ACCESS_TOKEN_SECRET",
+        );
+    }
+    if (value.length < MIN_SECRET_LENGTH) {
+        throw new Error(
+            `ACCESS_TOKEN_SECRET must be at least ${MIN_SECRET_LENGTH} characters`,
+        );
+    }
+
+    cachedSecret = new TextEncoder().encode(value);
+    return cachedSecret;
+}
 
 export async function signAccessToken(
     payload: AccessTokenPayload,
@@ -39,14 +52,33 @@ export async function signAccessToken(
 export async function verifyAccessToken(
     token: string,
 ): Promise<{ sub: UserId } | null> {
+    const secret = accessTokenSecret();
+
     try {
-        const { payload } = await jwtVerify(token, accessTokenSecret(), {
+        const { payload } = await jwtVerify(token, secret, {
             algorithms: ["HS256"],
         });
         if (typeof payload.sub !== "string") {
             return null;
         }
         return { sub: payload.sub as UserId };
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * A token lejárati ideje, ELLENŐRZÉS NÉLKÜL (csak dekódol).
+ *
+ * Kizárólag időzítési döntéshez használható (proaktív rotáció, cache-élettartam),
+ * hitelesítéshez soha. A `session.ts` mindkét hívásánál a token ugyanabban a kérésben
+ * már át lett ellenőrizve. Lejárt tokenre is a (múltbeli) lejáratot adja,
+ * hibás formátumra vagy `exp` nélkül null.
+ */
+export function getAccessTokenExpiresAt(token: string): Date | null {
+    try {
+        const { exp } = decodeJwt(token);
+        return typeof exp === "number" ? new Date(exp * 1000) : null;
     } catch {
         return null;
     }

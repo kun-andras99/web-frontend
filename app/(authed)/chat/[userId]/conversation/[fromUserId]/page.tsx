@@ -1,7 +1,6 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
-import { getCurrentUser } from "@/features/auth/lib/session";
-import ChatScreen from "@/features/chat/components/ChatScreen";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 import { prisma } from "@/lib/prisma";
 
 interface ChatPageProps {
@@ -12,11 +11,7 @@ interface ChatPageProps {
 }
 
 export default async function ChatPage({ params }: ChatPageProps) {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser) {
-        redirect("/sign-in");
-    }
+    const currentUser = await requireCurrentUser();
 
     const { userId, fromUserId } = await params;
 
@@ -86,15 +81,16 @@ export default async function ChatPage({ params }: ChatPageProps) {
     }
 
     return (
-        <ChatScreen
-            conversationId={conversation.id}
-            currentUserId={currentUser.id}
-            user={{
-                id: targetUser.id,
-                username: targetUser.username,
-                nickname: targetUser.userData?.nickname ?? null,
-                avatarUrl: targetUser.userData?.avatarUrl ?? null,
-            }}
-        />
+        // <ChatScreen
+        //     conversationId={conversation.id}
+        //     currentUserId={currentUser.id}
+        //     user={{
+        //         id: targetUser.id,
+        //         username: targetUser.username,
+        //         nickname: targetUser.userData?.nickname ?? null,
+        //         avatarUrl: targetUser.userData?.avatarUrl ?? null,
+        //     }}
+        // />
+        <span>chatScreen</span>
     );
 }

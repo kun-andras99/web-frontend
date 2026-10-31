@@ -1,13 +1,12 @@
-import { BOTTOM_ICON_COLORS } from "@/features/(app)/(ui)/top-bar/icons/icons/icons.data";
 import { BottomTabIconSVGProps } from "@/features/(app)/(ui)/top-bar/icons/icons/icons.props";
 import { useId } from "react";
 
 export function ExtraIconSVG({
     size = 28,
-    startColor = BOTTOM_ICON_COLORS.startColor,
-    stopColor = BOTTOM_ICON_COLORS.stopColor,
-    backgroundStartColor = BOTTOM_ICON_COLORS.backgroundStartColor,
-    backgroundStopColor = BOTTOM_ICON_COLORS.backgroundStopColor,
+    startColor = "var(--bottom-start-color)",
+    stopColor = "var(--bottom-stop-color)",
+    backgroundStartColor = "var(--bottom-frontStart-color)",
+    backgroundStopColor = "var(--bottom-frontStop-color)",
     strokeWidth = 1.25,
 }: BottomTabIconSVGProps) {
     const id = useId().replace(/:/g, "");

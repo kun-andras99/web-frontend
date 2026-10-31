@@ -1,0 +1,19 @@
+model UserSubscription {
+  id          String                @id @default(cuid())
+  userId      String
+  planId      String
+  status      SubscriptionStatus    @default(PENDING)
+  startedAt   DateTime
+  expiresAt   DateTime
+  cancelledAt DateTime?
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  payments    SubscriptionPayment[]
+  plan        VipPlan               @relation(fields: [planId], references: [id])
+  user        Users                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([userId, expiresAt])
+  @@index([expiresAt])
+  @@map("user_subscriptions")
+}

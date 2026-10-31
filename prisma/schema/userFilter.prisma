@@ -1,0 +1,113 @@
+// ez a "kereső / filter" beállítás — ide mentjük a felhasználó
+// swipe/nearby szűrőit, hogy eszközök között is megmaradjon és
+// a szerveroldali matching logika is elérje. Kliens oldalon (pl.
+// Zustand) csak a piszkozat / UI állapot legyen tartva, a "forrás
+// igazság" ez a tábla.
+model UserFilter {
+  id                          Int                   @id @default(autoincrement())
+  userId                      String                @unique
+  minAge                      Int?
+  maxAge                      Int?
+  minHeightCm                 Int?
+  maxHeightCm                 Int?
+  minShoulderWidthCm          Int?
+  maxShoulderWidthCm          Int?
+  minNeckCircumferenceCm      Int?
+  maxNeckCircumferenceCm      Int?
+  minChestCircumferenceCm     Int?
+  maxChestCircumferenceCm     Int?
+  minBustCircumferenceCm      Int?
+  maxBustCircumferenceCm      Int?
+  minUnderbustCircumferenceCm Int?
+  maxUnderbustCircumferenceCm Int?
+  minWaistCircumferenceCm     Int?
+  maxWaistCircumferenceCm     Int?
+  minHipCircumferenceCm       Int?
+  maxHipCircumferenceCm       Int?
+  minUpperArmCircumferenceCm  Int?
+  maxUpperArmCircumferenceCm  Int?
+  minForearmCircumferenceCm   Int?
+  maxForearmCircumferenceCm   Int?
+  minWristCircumferenceCm     Int?
+  maxWristCircumferenceCm     Int?
+  minArmLengthCm              Int?
+  maxArmLengthCm              Int?
+  minUpperArmLengthCm         Int?
+  maxUpperArmLengthCm         Int?
+  minForearmLengthCm          Int?
+  maxForearmLengthCm          Int?
+  minThighCircumferenceCm     Int?
+  maxThighCircumferenceCm     Int?
+  minKneeCircumferenceCm      Int?
+  maxKneeCircumferenceCm      Int?
+  minCalfCircumferenceCm      Int?
+  maxCalfCircumferenceCm      Int?
+  minAnkleCircumferenceCm     Int?
+  maxAnkleCircumferenceCm     Int?
+  minLegLengthCm              Int?
+  maxLegLengthCm              Int?
+  minInseamLengthCm           Int?
+  maxInseamLengthCm           Int?
+  minOutseamLengthCm          Int?
+  maxOutseamLengthCm          Int?
+  minHandLengthCm             Int?
+  maxHandLengthCm             Int?
+  minHandWidthCm              Int?
+  maxHandWidthCm              Int?
+  minFingerLengthCm           Int?
+  maxFingerLengthCm           Int?
+  lookingFor                  LookingFor[]
+  gender                      GenderInterest[]
+  sexuality                   SexualityInterest[]
+  transStatus                 TransStatusInterest[]
+  hairLength                  HairLength[]
+  hairColor                   HairColor[]
+  eyeColor                    EyeColor[]
+  bodyType                    BodyType[]
+  beard                       Beard[]
+  bodyHair                    BodyHair[]
+  ethnicity                   Ethnicity[]
+  smoker                      Smoker[]
+  tattoos                     Tattoos[]
+  piercings                   Piercings[]
+  position                    Position[]
+  dickSize                    DickSize[]
+  dickCircumcision            DickCircumcision[]
+  fetish                      Fetish[]
+  sexualOpenness              SexualOpenness[]
+  fisting                     Fisting[]
+  sadism                      Sadism[]
+  masochism                   Masochism[]
+  saferSex                    SaferSex[]
+  openTo                      OpenTo[]
+  cupSizes                    CupSize[]
+  braSizes                    BraSize[]
+  binderSizes                 BinderSize[]
+  goingOutInterests           GoingOutInterest[]
+  lifestyleInterests          LifestyleInterest[]
+  musicInterests              MusicInterest[]
+  movieInterests              MoviesInterest[]
+  gamingInterests             GamingInterest[]
+  sportsInterests             SportsInterest[]
+  booksInterests              BooksInterest[]
+  travelInterests             TravelInterest[]
+  foodInterests               FoodInterest[]
+  artInterests                ArtInterest[]
+  technologyInterests         TechnologyInterest[]
+  natureInterests             NatureInterest[]
+  cultureInterests            CultureInterest[]
+  learningInterests           LearningInterest[]
+  socialInterests             SocialInterest[]
+  automotiveInterests         AutomotiveInterest[]
+  outdoorInterests            OutdoorInterest[]
+  personalInterests           PersonalInterest[]
+  collectingInterests         CollectingInterest[]
+  fashionInterests            FashionInterest[]
+  eventsInterests             EventsInterest[]
+  otherInterests              OtherInterest[]
+  createdAt                   DateTime              @default(now())
+  updatedAt                   DateTime              @updatedAt
+  user                        Users                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_filters")
+}

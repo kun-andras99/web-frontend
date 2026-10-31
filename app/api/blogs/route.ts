@@ -1,55 +1,32 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
 import { USE_BLOG_MOCK } from "@/features/blogs/config";
 import { toBlogDTO } from "@/features/blogs/mapper/blogs.mapper";
 import { findMockBlogs } from "@/features/blogs/repository/blogs.mock.repository";
 import { createBlog, getBlogs } from "@/features/blogs/repository/blogs.rep";
-import { NextRequest, NextResponse } from "next/server";
-import { BlogVisibility } from "../../../prisma/generated/prisma";
+import {
+    blogsQuerySchema,
+    createBlogInputSchema,
+} from "@/features/blogs/schemas/blogs.schema";
+import {
+    HttpError,
+    parseJsonBody,
+    parseSearchParams,
+    withApiHandler,
+} from "@/lib/api/route-handler";
+import { enforceRateLimit } from "@/lib/security/enforce-rate-limit";
+import { NextResponse } from "next/server";
 
-const DEFAULT_LIMIT = 5;
-const MAX_LIMIT = 20;
+const NO_STORE = { "Cache-Control": "private, no-store" };
 
-export async function GET(request: NextRequest) {
-    try {
-        const currentUser = await getCurrentUser();
+export const GET = withApiHandler(
+    async (request, { user }) => {
+        const { limit, cursor } = parseSearchParams(request, blogsQuerySchema);
 
-        if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
-        }
-
-        const { searchParams } = new URL(request.url);
-
-        const requestedLimit = Number(
-            searchParams.get("limit") ?? DEFAULT_LIMIT,
-        );
-
-        const limit = Math.min(Math.max(requestedLimit, 1), MAX_LIMIT);
-
-        const cursor = searchParams.get("cursor") ?? undefined;
-
-        // console.log(USE_BLOG_MOCK);
-        /*
-         * MOCK
-         */
         if (USE_BLOG_MOCK) {
-            const result = await findMockBlogs({
-                limit,
-                cursor,
+            return NextResponse.json(await findMockBlogs({ limit, cursor }), {
+                headers: NO_STORE,
             });
-
-            return NextResponse.json(result);
         }
 
-        /*
-         * DATABASE
-         */
         const blogs = await getBlogs({
             limit,
             cursor,
@@ -57,126 +34,41 @@ export async function GET(request: NextRequest) {
 
         const hasNextPage = blogs.length > limit;
 
-        const pageBlogs = hasNextPage ? blogs.slice(0, limit) : blogs;
-
-        const blogsDTO = pageBlogs.map(toBlogDTO);
-
-        const nextCursor = hasNextPage
-            ? (pageBlogs[pageBlogs.length - 1]?.id ?? null)
-            : null;
-
-        return NextResponse.json({
-            blogs: blogsDTO,
-            nextCursor,
-            hasNextPage,
-        });
-    } catch (error) {
-        console.error("GET /api/blogs error:", error);
+        const page = hasNextPage ? blogs.slice(0, limit) : blogs;
 
         return NextResponse.json(
             {
-                message: "Hiba történt a blogok lekérésekor.",
+                blogs: page.map(toBlogDTO),
+                nextCursor: hasNextPage ? (page.at(-1)?.id ?? null) : null,
+                hasNextPage,
             },
             {
-                status: 500,
+                headers: NO_STORE,
             },
         );
-    }
-}
+    },
+    {
+        auth: "required",
+    },
+);
 
-export async function POST(request: NextRequest) {
-    try {
-        const currentUser = await getCurrentUser();
+export const POST = withApiHandler(
+    async (request, { user }) => {
+        await enforceRateLimit("blogWrite", `user:${user!.id}`);
 
-        if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
-        }
+        const input = await parseJsonBody(request, createBlogInputSchema);
 
-        const body = await request.json();
-
-        const title = typeof body.title === "string" ? body.title.trim() : "";
-
-        const content =
-            typeof body.content === "string" ? body.content.trim() : "";
-
-        const visibility = body.visibility;
-
-        const tags = Array.isArray(body.tags)
-            ? body.tags
-                  .filter(
-                      (tag: unknown): tag is string => typeof tag === "string",
-                  )
-                  .map((tag: string) => tag.trim())
-                  .filter(Boolean)
-            : [];
-
-        if (!title) {
-            return NextResponse.json(
-                {
-                    message: "A blog címe kötelező.",
-                },
-                {
-                    status: 400,
-                },
-            );
-        }
-
-        if (!content) {
-            return NextResponse.json(
-                {
-                    message: "A blog tartalma kötelező.",
-                },
-                {
-                    status: 400,
-                },
-            );
-        }
-
-        if (
-            visibility !== BlogVisibility.PUBLIC &&
-            visibility !== BlogVisibility.PRIVATE
-        ) {
-            return NextResponse.json(
-                {
-                    message: "Érvénytelen láthatóság.",
-                },
-                {
-                    status: 400,
-                },
-            );
-        }
-
-        /*
-         * A MOCK módot itt is kezelhetjük.
-         *
-         * Jelenleg a mock csak olvasásra szolgál,
-         * ezért létrehozáskor jelezzük, hogy
-         * mock módban ez nincs engedélyezve.
-         */
         if (USE_BLOG_MOCK) {
-            return NextResponse.json(
-                {
-                    message: "Blog létrehozása mock módban nem érhető el.",
-                },
-                {
-                    status: 503,
-                },
+            throw new HttpError(
+                503,
+                "Blog létrehozása mock módban nem érhető el.",
+                "MOCK_MODE",
             );
         }
 
         const blog = await createBlog({
-            authorId: currentUser.id,
-            title,
-            content,
-            visibility,
-            tags,
+            authorId: user!.id,
+            ...input,
         });
 
         return NextResponse.json(
@@ -187,16 +79,8 @@ export async function POST(request: NextRequest) {
                 status: 201,
             },
         );
-    } catch (error) {
-        console.error("POST /api/blogs error:", error);
-
-        return NextResponse.json(
-            {
-                message: "Hiba történt a blog létrehozásakor.",
-            },
-            {
-                status: 500,
-            },
-        );
-    }
-}
+    },
+    {
+        auth: "required",
+    },
+);

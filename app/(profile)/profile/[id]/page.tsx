@@ -1,11 +1,12 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 import { getProfileUserFull } from "@/features/auth/server/getCurrentUserFull";
-import ProfileHeader from "@/features/profile/(pages)/user-profile/components/profileHeader";
-import ProfileName from "@/features/profile/(pages)/user-profile/components/ProfileName";
-import ProfileTabs from "@/features/profile/(pages)/user-profile/components/profileTabs";
+import ProfileHeader from "@/features/profile/components/UserProfile/profileHeader";
+import ProfileName from "@/features/profile/components/UserProfile/ProfileName";
+import ProfileTabs from "@/features/profile/components/UserProfile/profileTabs";
 import { recordProfileVisit } from "@/features/profile/repository/profile-visit";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 interface UserPageProps {
@@ -16,7 +17,7 @@ interface UserPageProps {
 
 export default async function UserProfilePage({ params }: UserPageProps) {
     const { id } = await params;
-    const currentUser = await getCurrentUser();
+    const currentUser = await requireCurrentUser();
     const user = await getProfileUserFull(id);
 
     if (!currentUser) {
@@ -99,6 +100,11 @@ export default async function UserProfilePage({ params }: UserPageProps) {
                 <div className="profile__full-data">
                     <div className="top-container">
                         <ProfileName user={user} />
+                        {isOwnProfile && (
+                            <Link href={`/profile/${currentUser.id}/edit`}>
+                                <div>Profil szerkesztése</div>
+                            </Link>
+                        )}
                     </div>
                     <div className="container"></div>
                 </div>

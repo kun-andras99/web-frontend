@@ -2,15 +2,22 @@ html,
 body {
     width: 100%;
     height: 100%;
-
     margin: 0;
 }
 
 body {
     background: var(--background);
     color: var(--foreground);
+
+    display: flex;
+    flex-direction: row;
+
     font-family: "Plus Jakarta Sans", sans-serif;
-    // letter-spacing: 0.5;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: -0.2px;
+
+    overflow: hidden;
 }
 .app-body {
     display: grid;
@@ -28,9 +35,6 @@ body {
         z-index: 10;
     }
     > aside.left-sidebar {
-        grid-row: 2 / 3;
-        grid-column: 1 / 2;
-        align-self: start;
         position: sticky;
         top: 64px;
         background: var(--background);
@@ -57,6 +61,152 @@ body {
         z-index: 9;
         overflow: auto;
     }
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    gap: 15px;
+    margin: auto 0;
+
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-bottom: 50px;
+
+        h1 {
+            font-size: 65;
+            height: 80px;
+            font-weight: 800;
+            font-family: "Outfit", sans-serif;
+            color: var(--app-name-color);
+            margin-bottom: 0;
+            padding-bottom: 0;
+            text-align: center;
+        }
+
+        span {
+            color: var(--foreground);
+            font-size: 13px;
+            font-weight: 400;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            letter-spacing: 0.224rem;
+        }
+    }
+
+    .main-min {
+        position: relative;
+        top: -50px;
+    }
+
+    .not-registered {
+        flex-direction: column;
+        align-items: center;
+        margin-inline: 20px;
+        gap: 20px;
+        display: flex;
+        flex-direction: row;
+
+        .signup {
+            flex: 2;
+            background: linear-gradient(
+                130deg,
+                var(--primary-bg),
+                var(--primary-bg-dark)
+            );
+        }
+        .signin {
+            border: var(--border);
+            background: #121212b6;
+            flex-shrink: 0;
+            flex: 1;
+        }
+
+        button {
+            all: unset;
+            padding: 10px 0px 11px;
+            text-align: center;
+            width: 100%;
+            border-radius: 50px;
+        }
+
+        a {
+            width: 100%;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            // text-decoration: underline;
+        }
+    }
+
+    .more-than {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-block-start: 35px;
+
+        .text {
+            font-size: 13px;
+            text-align: center;
+            font-weight: 300;
+            color: var(--foreground);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            span {
+                font-weight: 700;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 20px;
+        font-weight: 800;
+        color: #808080;
+    }
+
+    .thing {
+        width: calc(100% - 20px);
+        margin: 0 auto;
+        font-size: 12px;
+        max-width: 390px;
+        text-align: center;
+        line-height: 2;
+        padding: 5px;
+        background: #303030;
+        text-shadow: 0 0 2px rgb(0, 0, 0, 0.25);
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.75);
+    }
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #fff;
+}
+
+.main-container.home-screen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.centered-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .app-header {
@@ -122,13 +272,13 @@ body {
             input {
                 padding: 12px 15px 12px 15px;
                 width: 100%;
-                background: #222222;
+                background: var(--card);
                 border-radius: 50px;
 
                 &::placeholder {
                     font-size: 15px;
                     font-weight: 500;
-                    color: #b0b0b0;
+                    color: var(--foreground);
                 }
             }
         }
@@ -192,8 +342,6 @@ body {
             // }
         }
     }
-
-  
 }
 
 .left-sidebar {
@@ -475,7 +623,7 @@ main {
     overflow-y: auto;
 
     scrollbar-width: none;
-    font-size: 15.5px;
+    font-size: 15px;
     // letter-spacing: 0.125px;
     // padding-top: 64px;
 }

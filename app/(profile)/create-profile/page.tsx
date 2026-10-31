@@ -1,4 +1,4 @@
-import CreateProfileScreen from "@/features/profile/screens/create-profile";
+import CreateProfileScreen from "@/features/profile/components/CreateProfileScreen";
 
 export default async function CreateProfilePage() {
     return <CreateProfileScreen />;

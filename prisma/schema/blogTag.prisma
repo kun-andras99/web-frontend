@@ -1,0 +1,16 @@
+/// * ha lehet legyen egy külön model ahol előre megadott blog
+///  * tag-ek vannak, legalább 40 tag-et írj bele angolul, mert
+///  * ezeket a user külön kiválaszthatja a blogjához
+///
+///  * egy blognak vannak tagjei, ez alapján akár szűrhetünk is.
+model BlogTag {
+  id        String   @id @default(cuid())
+  name      String
+  blogId    String
+  createdAt DateTime @default(now())
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@unique([blogId, name])
+  @@index([name])
+  @@map("blog_tags")
+}

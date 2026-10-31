@@ -1,8 +1,13 @@
 // import BlogsPage from "@/features/blog/components/BlogsPage";
 
+import ComingSoonAttempt from "@/features/(app)/(ui)/ComingSoonAttempt";
 import BlogsScreen from "@/features/blogs/screens/BlogsScreen";
 
 export default function BlogPage() {
+    const attempt = true;
+    if (attempt) {
+        return <ComingSoonAttempt />;
+    }
     return (
         <BlogsScreen />
         // <div className="">

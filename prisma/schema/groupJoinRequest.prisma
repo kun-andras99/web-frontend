@@ -1,0 +1,19 @@
+/// * csatlakozás egy csoporthoz kérés amennyiben privát
+///  * egy csoport, tud a user kérni csatlakozási kérelmet.
+model GroupJoinRequest {
+  id            String                 @id @default(cuid())
+  groupId       String
+  requesterId   String
+  status        GroupJoinRequestStatus @default(PENDING)
+  createdAt     DateTime               @default(now())
+  respondedAt   DateTime?
+  respondedById String?
+  group         Group                  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  requester     Users                  @relation("GroupJoinRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  respondedBy   Users?                 @relation("GroupJoinTarget", fields: [respondedById], references: [id], onDelete: SetNull)
+
+  @@unique([groupId, requesterId])
+  @@index([groupId, status])
+  @@index([requesterId, status])
+  @@map("group_join_requests")
+}

@@ -45,8 +45,6 @@ const compareEntries = (a: NearbyEntry, b: NearbyEntry) =>
 /** A page ezzel dönt, hogy a listát vagy a "kapcsold be a helymeghatározást" üzenetet mutassa. */
 export async function getNearbyAvailability(userId: string): Promise<boolean> {
     const viewer = await findViewerLocation(userId);
-    console.log("[nearby] availability", { userId, viewer });
-
     return Boolean(
         viewer?.locationEnabled && viewer.lat !== null && viewer.lng !== null,
     );

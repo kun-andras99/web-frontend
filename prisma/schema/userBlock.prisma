@@ -1,0 +1,13 @@
+// egy user blockolhat egy felhasználót, ilyenkor annak a usernek az adatlapját nem éri el. amelyik blokkolt, ha szeretné vissza is tudja oldani a tiltást.
+model UserBlock {
+  id        String   @id @default(cuid())
+  blockerId String
+  blockedId String
+  createdAt DateTime @default(now())
+  blocked   Users    @relation("BlockTo", fields: [blockedId], references: [id], onDelete: Cascade)
+  blocker   Users    @relation("BlockFrom", fields: [blockerId], references: [id], onDelete: Cascade)
+
+  @@unique([blockerId, blockedId])
+  @@index([blockedId])
+  @@map("user_blocks")
+}

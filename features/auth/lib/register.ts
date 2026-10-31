@@ -1,4 +1,5 @@
 import { createEmailVerificationToken } from "@/features/auth/data/verification-token";
+import { checkRateLimit } from "@/lib/security/rate-limit";
 import type {
     AccessToken,
     ActionState,
@@ -21,7 +22,7 @@ import { signUpSchema } from "./validation";
 export type SignUpResult =
     | {
           ok: false;
-          httpStatus: 400 | 409 | 500;
+          httpStatus: 400 | 409 | 429 | 500;
           state: Extract<ActionState<SignUpFields>, { status: "error" }>;
       }
     | {
@@ -51,6 +52,22 @@ export async function registerCredentials(
     }
 
     const { username, email, password } = parsed.data;
+
+    const rateLimit = await checkRateLimit(
+        "signUpIp",
+        meta.ipAddress ?? "unknown",
+    );
+    if (!rateLimit.success) {
+        return {
+            ok: false,
+            httpStatus: 429,
+            state: {
+                status: "error",
+                message:
+                    "Túl sok regisztrációs kísérlet. Kérjük, próbáld újra később.",
+            },
+        };
+    }
 
     try {
         const [existingEmail, existingUsername] = await Promise.all([

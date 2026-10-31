@@ -1039,46 +1039,7 @@ model ModerationAction {
   @@map("moderation_actions")
 }
 
-/// *
-///  * egy vip lehetőség van, egy ár. egy hónapra.
-///  * alap user:
-///  * - alapból 60 usert lát a nearby users oldalon
-///  * - heti 2 alaklommal tud a RightNow-ban megjelenni
-///  * - az utolsó 15 látogatóját látja,
-///  * VIP felhasználó:
-///  * mindenre korlátlan felhasználási engedélyt kap.
-///  * ! és akkor itt jön a csavar...
-///  * nem egy user nem ér el minden funkciót teljesen..
-///  * a users nearby oldalon 120 usert tud megjeleníteni,
-///  * többihez VIP tagság kell.
-///  * vip tagság esetén 1-3 órás megjelenítés között tud
-///  * indítani ahol több user éri el. egy héten egy sima
-///  * user kettő alkalommal tudjon indítani ilyen
-///  * megjelenítést csak egy órában. VIP user egy nap háromszor is tud.
-///  * sima user csak egy privát galériát hozhat létre 5 fotóval.
-///  * vip user korlátlan mennyiségű mappát. itt figyelni kell hogy a
-///  * mappa vip tagság idején lett-e létrehozva, mert ha lejár akkor
-///  * lezárjuk azokat a mappákat.
-///  *
-///  * ! MEGJEGYZÉS: a business-fiókos VIP terv (BusinessSubscription /
-///  * ! BusinessPayment) egyelőre nincs a sémában — ha a business-oldal
-///  * ! elkészül, ugyanezzel a mintával (külön subscription+payment pár,
-///  * ! saját VipPlan reláció) érdemes hozzáadni.
-model VipPlan {
-  id            String                @id @default(cuid())
-  tier          VipTier               @unique
-  name          String
-  price         Decimal               @db.Decimal(10, 2)
-  durationDays  Int
-  active        Boolean               @default(true)
-  features      Json
-  createdAt     DateTime              @default(now())
-  updatedAt     DateTime              @updatedAt
-  payments      SubscriptionPayment[]
-  subscriptions UserSubscription[]
 
-  @@map("vip_plans")
-}
 
 model UserSubscription {
   id          String                @id @default(cuid())

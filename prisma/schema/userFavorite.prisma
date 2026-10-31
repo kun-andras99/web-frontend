@@ -1,0 +1,14 @@
+/// *
+///  * egy usernek több user is lehet favoritja, rájuk egy gombnyomással szűrhet, külön megjelenítés adatlapon...
+model UserFavorite {
+  id         String   @id @default(cuid())
+  fromUserId String
+  toUserId   String
+  createdAt  DateTime @default(now())
+  fromUser   Users    @relation("FavoriteFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser     Users    @relation("FavoriteTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+  @@map("user_favorites")
+}

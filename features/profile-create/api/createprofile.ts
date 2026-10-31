@@ -2,6 +2,10 @@ import type {
     CreateProfilePayload,
     CreateProfileResponse,
 } from "@/features/profile-create/types/profileCreate";
+import { http } from "@/lib/http/http-client";
+import { z } from "zod";
+
+const createProfileResponseSchema = z.object({ success: z.boolean() });
 
 export async function createProfile(
     payload: CreateProfilePayload,
@@ -14,16 +18,8 @@ export async function createProfile(
     formData.append("sexuality", payload.sexuality);
     formData.append("appCity", payload.appCity);
 
-    const response = await fetch("/api/profile/create", {
-        method: "POST",
+    return http.post("/api/profile/create", {
+        schema: createProfileResponseSchema,
         body: formData,
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-        throw new Error(data.message ?? "A profil létrehozása sikertelen.");
-    }
-
-    return data;
 }

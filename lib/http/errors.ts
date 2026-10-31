@@ -4,6 +4,8 @@ export class ApiError extends Error {
         readonly status: number,
         readonly code?: string,
         readonly body?: unknown,
+        /** a Retry-After fejlécből (429 / 503); másodperc */
+        readonly retryAfterSeconds?: number,
     ) {
         super(message);
         this.name = "ApiError";
@@ -20,6 +22,19 @@ export class ApiError extends Error {
     }
     get isConflict() {
         return this.status === 409;
+    }
+    get isRateLimited() {
+        return this.status === 429;
+    }
+    /** A szerver zod hibái (VALIDATION_ERROR): [{ path, message }] */
+    get issues(): { path: string; message: string }[] {
+        const error =
+            typeof this.body === "object" && this.body !== null
+                ? (this.body as { error?: { issues?: unknown } }).error
+                : undefined;
+        return Array.isArray(error?.issues)
+            ? (error.issues as { path: string; message: string }[])
+            : [];
     }
 }
 

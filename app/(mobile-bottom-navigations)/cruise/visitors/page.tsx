@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
 import VisitorsScreen from "@/features/visitors/components/VisitorsScreen";
 import { visitorsInfiniteQueryOptions } from "@/features/visitors/hooks/visitors.queries";
 import { VISITORS_DEFAULT_PAGE_SIZE } from "@/features/visitors/schemas/visitors.schema";
@@ -7,6 +6,7 @@ import { getServerQueryClient } from "@/lib/query/server-query-client";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 
 export const metadata: Metadata = {
     title: "Látogatók",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function VisitorsPage() {
-    const currentUser = await getCurrentUser();
+    const currentUser = await requireCurrentUser();
 
     if (!currentUser) {
         redirect("/sign-in");

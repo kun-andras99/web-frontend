@@ -1,47 +1,21 @@
+import { requireUser } from "@/features/auth/lib/requireUser";
+import { getCurrentUserCityStats } from "@/features/city/repository/city.repository";
+import { HttpError, withApiHandler } from "@/lib/api/route-handler";
 import { NextResponse } from "next/server";
 
-import { getCurrentUser } from "@/features/auth/lib/session";
-import { getCurrentUserCityStats } from "@/features/city/repository/city.repository";
+export const GET = withApiHandler(async () => {
+    const user = await requireUser();
 
-export async function GET() {
-    try {
-        const currentUser = await getCurrentUser();
-
-        if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
-        }
-
-        const stats = await getCurrentUserCityStats(currentUser.id);
-
-        if (!stats) {
-            return NextResponse.json(
-                {
-                    message: "Nincs beállítva az alkalmazási város.",
-                },
-                {
-                    status: 404,
-                },
-            );
-        }
-
-        return NextResponse.json(stats);
-    } catch (error) {
-        console.error("GET /api/city error:", error);
-
-        return NextResponse.json(
-            {
-                message: "Hiba történt a városi statisztikák lekérésekor.",
-            },
-            {
-                status: 500,
-            },
+    const stats = await getCurrentUserCityStats(user.id);
+    if (!stats) {
+        throw new HttpError(
+            404,
+            "Nincs beállítva az alkalmazási város.",
+            "CITY_NOT_SET",
         );
     }
-}
+
+    return NextResponse.json(stats, {
+        headers: { "Cache-Control": "private, no-store" },
+    });
+});

@@ -1,8 +1,8 @@
 "use client";
 
 import VisitorCard from "@/features/visitors/components/VisitorCard";
-import VisitorsEmpty from "@/features/visitors/components/VisitorsEmpty";
 import VisitorsNewBanner from "@/features/visitors/components/VisitorsNewBanner";
+import VisitorsTab from "@/features/visitors/components/VisitorsTab";
 import { useNewVisitors } from "@/features/visitors/hooks/useNewVisitors";
 import { useVisitors } from "@/features/visitors/hooks/useVisitors";
 import { getVisitorsErrorMessage } from "@/features/visitors/utils/visitors-errors";
@@ -72,6 +72,8 @@ export default function VisitorsScreen() {
 
     return (
         <div>
+            <VisitorsTab />
+
             {hasNew && (
                 <VisitorsNewBanner
                     onClick={() => void handleShowNew()}
@@ -79,9 +81,7 @@ export default function VisitorsScreen() {
                 />
             )}
 
-            {visitors.length === 0 ? (
-                <VisitorsEmpty />
-            ) : (
+            {visitors.length === 0 ? null : ( // ) //     <VisitorsEmpty /> // (
                 <>
                     <div className="grid grid-cols-2 gap-[1px]">
                         {visitors.map((visitor) => (

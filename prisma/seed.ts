@@ -1746,6 +1746,249 @@ async function main() {
     });
     /*
      * ------------------------------------------------------------
+     * 10. ADMIN CHAT CONVERSATIONS
+     * ------------------------------------------------------------
+     *
+     * 3 tesztbeszélgetés:
+     *   - admin <-> user1: 15 üzenet
+     *   - admin <-> user2: 15 üzenet
+     *   - admin <-> user4: 15 üzenet
+     *
+     * Az üzenetek váltva követik egymást, így mindhárom
+     * beszélgetés valódi oda-vissza chatnek látszik.
+     */
+
+    async function createSeedConversation(
+        userAId: string,
+        userBId: string,
+        messages: Array<{
+            senderId: string;
+            content: string;
+        }>,
+    ) {
+        const conversation = await prisma.conversation.create({
+            data: {
+                participants: {
+                    create: [
+                        {
+                            userId: userAId,
+                        },
+                        {
+                            userId: userBId,
+                        },
+                    ],
+                },
+            },
+        });
+
+        await prisma.message.createMany({
+            data: messages.map((message, index) => ({
+                conversationId: conversation.id,
+                senderId: message.senderId,
+                content: message.content,
+                sentAt: new Date(
+                    now.getTime() - (messages.length - index) * 5 * 60 * 1000,
+                ),
+            })),
+        });
+
+        return conversation;
+    }
+
+    await createSeedConversation(admin.id, user1.id, [
+        {
+            senderId: admin.id,
+            content: "Szia Alex! Hogy telik a napod?",
+        },
+        {
+            senderId: user1.id,
+            content: "Szia! Köszönöm, egész jól. Nálad minden rendben?",
+        },
+        {
+            senderId: admin.id,
+            content: "Igen, köszi! Most éppen az alkalmazást tesztelem.",
+        },
+        {
+            senderId: user1.id,
+            content: "Akkor jókor írtam. Van valami érdekes újdonság?",
+        },
+        {
+            senderId: admin.id,
+            content: "Igen, több új közösségi funkció is készül.",
+        },
+        {
+            senderId: user1.id,
+            content: "Ez jól hangzik. A chatet is fejlesztitek még?",
+        },
+        {
+            senderId: admin.id,
+            content:
+                "Persze, most éppen a beszélgetések és az olvasottság tesztelése megy.",
+        },
+        {
+            senderId: user1.id,
+            content:
+                "A valós idejű üzenetek szerintem különösen hasznosak lesznek.",
+        },
+        {
+            senderId: admin.id,
+            content: "Pontosan ez a cél. Szeretnénk gyors és egyszerű élményt.",
+        },
+        {
+            senderId: user1.id,
+            content: "Remélem, a mobilos használat is kényelmes lesz.",
+        },
+        {
+            senderId: admin.id,
+            content: "Igen, arra külön figyelünk.",
+        },
+        {
+            senderId: user1.id,
+            content: "Szuper, akkor kíváncsian várom a következő verziót.",
+        },
+        {
+            senderId: admin.id,
+            content: "Köszi! Ha találsz hibát, mindenképpen szólj.",
+        },
+        {
+            senderId: user1.id,
+            content: "Rendben, tesztelés közben figyelek majd.",
+        },
+        {
+            senderId: admin.id,
+            content: "Nagyon köszönöm a segítséged!",
+        },
+    ]);
+
+    await createSeedConversation(admin.id, user2.id, [
+        {
+            senderId: admin.id,
+            content: "Szia Daniel! Mizujs?",
+        },
+        {
+            senderId: user2.id,
+            content: "Szia! Minden oké, éppen pihenek egy kicsit.",
+        },
+        {
+            senderId: admin.id,
+            content: "Jól teszed. Volt ma edzés?",
+        },
+        {
+            senderId: user2.id,
+            content: "Igen, reggel elmentem edzeni.",
+        },
+        {
+            senderId: admin.id,
+            content: "Akkor már megvolt a napi adag.",
+        },
+        {
+            senderId: user2.id,
+            content: "Így van, most már jöhet egy nyugodtabb este.",
+        },
+        {
+            senderId: admin.id,
+            content: "Van valami programod estére?",
+        },
+        {
+            senderId: user2.id,
+            content: "Még nincs konkrét tervem.",
+        },
+        {
+            senderId: admin.id,
+            content: "Néha a teljesen szabad este a legjobb.",
+        },
+        {
+            senderId: user2.id,
+            content: "Ezzel teljesen egyetértek.",
+        },
+        {
+            senderId: admin.id,
+            content: "Én valószínűleg filmet nézek majd.",
+        },
+        {
+            senderId: user2.id,
+            content: "Jó ötlet. Van valami film, amit ajánlasz?",
+        },
+        {
+            senderId: admin.id,
+            content: "Mostanában inkább régebbi thrillereket nézek.",
+        },
+        {
+            senderId: user2.id,
+            content: "Azokból én is szeretek néhányat.",
+        },
+        {
+            senderId: admin.id,
+            content: "Akkor majd küldök pár címet.",
+        },
+    ]);
+
+    await createSeedConversation(admin.id, user4.id, [
+        {
+            senderId: admin.id,
+            content: "Szia Sophie! Hogy vagy?",
+        },
+        {
+            senderId: user4.id,
+            content: "Szia! Jól vagyok, köszönöm. Te?",
+        },
+        {
+            senderId: admin.id,
+            content: "Én is jól. Mivel töltöd a napot?",
+        },
+        {
+            senderId: user4.id,
+            content: "Dolgozom egy kreatív projekten.",
+        },
+        {
+            senderId: admin.id,
+            content: "Ez érdekes. Milyen jellegű projekt?",
+        },
+        {
+            senderId: user4.id,
+            content: "Egy kisebb vizuális anyagot készítek.",
+        },
+        {
+            senderId: admin.id,
+            content: "Gondolom, szereted az ilyen alkotós feladatokat.",
+        },
+        {
+            senderId: user4.id,
+            content: "Igen, sokkal jobban, mint a rutinfeladatokat.",
+        },
+        {
+            senderId: admin.id,
+            content:
+                "Teljesen érthető. Jó érzés, amikor valami saját ötletből születik.",
+        },
+        {
+            senderId: user4.id,
+            content: "Pontosan. A végeredmény is sokkal személyesebb.",
+        },
+        {
+            senderId: admin.id,
+            content: "Szoktál közben zenét is hallgatni?",
+        },
+        {
+            senderId: user4.id,
+            content: "Mindig. Zene nélkül nehezen tudok dolgozni.",
+        },
+        {
+            senderId: admin.id,
+            content: "Én is így vagyok vele, főleg hosszabb munkánál.",
+        },
+        {
+            senderId: user4.id,
+            content: "Akkor ebben hasonlítunk.",
+        },
+        {
+            senderId: admin.id,
+            content: "Úgy tűnik, igen. Sok sikert a projekthez!",
+        },
+    ]);
+
+    /*
+     * ------------------------------------------------------------
      * 10. ADMIN LOOKING FOR / INTERESTS
      * ------------------------------------------------------------
      *

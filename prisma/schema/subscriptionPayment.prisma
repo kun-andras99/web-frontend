@@ -1,0 +1,21 @@
+model SubscriptionPayment {
+  id                String            @id @default(cuid())
+  userId            String
+  planId            String
+  subscriptionId    String?
+  amount            Decimal           @db.Decimal(10, 2)
+  currency          String            @default("HUF")
+  status            PaymentStatus     @default(PENDING)
+  provider          String?
+  providerPaymentId String?
+  createdAt         DateTime          @default(now())
+  completedAt       DateTime?
+  plan              VipPlan           @relation(fields: [planId], references: [id])
+  subscription      UserSubscription? @relation(fields: [subscriptionId], references: [id])
+  user              Users             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([subscriptionId])
+  @@index([providerPaymentId])
+  @@map("subscription_payments")
+}

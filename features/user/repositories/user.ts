@@ -24,6 +24,7 @@ export function getUserById(id: string) {
             username: true,
             emailVerified: true,
             role: true,
+            status: true,
 
             userData: {
                 select: {
@@ -143,6 +144,17 @@ export async function getUserGalleries({
     };
 }
 
+export const mainProfileSelect = {
+    id: true,
+
+    userData: {
+        select: {
+            nickname: true,
+            avatarUrl: true,
+        },
+    },
+} satisfies Prisma.UsersSelect;
+
 export const userProfileHeaderDataSelect = {
     id: true,
 
@@ -168,12 +180,24 @@ export type UserProfileHeaderData = Prisma.UsersGetPayload<{
     select: typeof userProfileHeaderDataSelect;
 }>;
 
+export type MainProfileData = Prisma.UsersGetPayload<{
+    select: typeof mainProfileSelect;
+}>;
+
 export function getUserProfileHeaderDataById(id: UserId) {
     return prisma.users.findUnique({
         where: {
             id,
         },
         select: userProfileHeaderDataSelect,
+    });
+}
+export function getMainProfileDataById(id: UserId) {
+    return prisma.users.findUnique({
+        where: {
+            id,
+        },
+        select: mainProfileSelect,
     });
 }
 

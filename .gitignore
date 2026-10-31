@@ -2,9 +2,6 @@
 
 # dependencies
 features/visited/
-prisma/
-prisma.config.ts
-proxy.ts
 postcss.config.mjs
 /node_modules
 /.pnp

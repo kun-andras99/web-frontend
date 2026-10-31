@@ -3,9 +3,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { markConversationAsRead } from "@/features/chat/api/markConversationAsRead";
-import { chatKeys } from "@/features/chat/hooks/useConversation";
 import { conversationKeys } from "@/features/chat/hooks/useConversations";
 import { ConversationDTO } from "@/features/chat/repository/chatDTO";
+import { chatKeys } from "@/features/chat/hooks/chat.keys";
 
 export function useMarkConversationAsRead() {
     const queryClient = useQueryClient();

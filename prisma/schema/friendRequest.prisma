@@ -1,0 +1,16 @@
+///  * egy user tud küldeni a jelenleg bejelentkezett usernek egy barátkérést, ilyenkor azt megjelenítjük neki notificationban
+model FriendRequest {
+  id          String              @id @default(cuid())
+  senderId    String
+  receiverId  String
+  status      FriendRequestStatus @default(PENDING)
+  createdAt   DateTime            @default(now())
+  respondedAt DateTime?
+  receiver    Users               @relation("FriendRequestReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  sender      Users               @relation("FriendRequestSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@unique([senderId, receiverId])
+  @@index([receiverId, status])
+  @@index([senderId, status])
+  @@map("friend_requests")
+}

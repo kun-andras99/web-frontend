@@ -4,7 +4,9 @@ import type {
     RefreshToken,
     SignInFields,
 } from "@/features/auth/types/auth-index";
+import { hashIdentifier } from "@/features/security/client-ip";
 import { getUserByIdentifier } from "@/features/user/repositories/user";
+import { checkRateLimits } from "@/lib/security/rate-limit";
 import type { ClientMeta } from "./client-meta";
 import { AUTH_ROUTES } from "./constants";
 import { createSessionTokens } from "./create-session";
@@ -16,7 +18,7 @@ const GENERIC_ERROR = "Hibás email cím, felhasználónév vagy jelszó.";
 export type SignInResult =
     | {
           ok: false;
-          httpStatus: 400 | 401 | 500;
+          httpStatus: 400 | 401 | 429 | 500;
           state: Extract<ActionState<SignInFields>, { status: "error" }>;
       }
     | {
@@ -45,8 +47,28 @@ export async function authenticateCredentials(
         };
     }
 
+    const { identifier, password } = parsed.data;
+
+    // Brute-force védelem: IP + azonosító páronként szigorúbb, IP-nként tágabb limit.
+    // A DB-lekérdezés és a jelszó-hash előtt fut, hogy a támadás ne terhelje őket.
+    const ip = meta.ipAddress ?? "unknown";
+    const rateLimit = await checkRateLimits([
+        ["login", `${ip}:${await hashIdentifier(identifier)}`],
+        ["loginIp", ip],
+    ]);
+    if (!rateLimit.success) {
+        return {
+            ok: false,
+            httpStatus: 429,
+            state: {
+                status: "error",
+                message:
+                    "Túl sok bejelentkezési kísérlet. Kérjük, próbáld újra később.",
+            },
+        };
+    }
+
     try {
-        const { identifier, password } = parsed.data;
 
         const user = await getUserByIdentifier(identifier);
 

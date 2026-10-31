@@ -1,0 +1,14 @@
+model ModerationAction {
+  id           String               @id @default(cuid())
+  moderatorId  String
+  targetUserId String?
+  action       ModerationActionType
+  reason       String?
+  metadata     Json?
+  createdAt    DateTime             @default(now())
+  moderator    Users                @relation("Moderator", fields: [moderatorId], references: [id], onDelete: Cascade)
+
+  @@index([moderatorId, createdAt])
+  @@index([targetUserId, createdAt])
+  @@map("moderation_actions")
+}

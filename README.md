@@ -36,3 +36,5 @@ külön elérés fizetős partnereinknek, nem csak fizetős partnereknek is!
 - `árverezés` - auction
 
 saját használt intim együttlétnél szexuális vágy kielégítésére alkalmas ruhák, használható tárgyak.
+
+csp: CSP_MODE beállítása env-ben

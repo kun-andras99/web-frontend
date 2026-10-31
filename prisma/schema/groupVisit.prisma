@@ -1,0 +1,14 @@
+// ez arra szolgál amikor egy user megtekint csoportot, azt ide mentjük,
+// mert megjelenítjük a usernak mikor tekintette meg melyik csoportot.
+model GroupVisit {
+  id        String   @id @default(cuid())
+  groupId   String
+  visitorId String
+  visitedAt DateTime @default(now())
+  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  visitor   Users    @relation("GroupVisitor", fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([groupId, visitedAt])
+  @@index([visitorId, visitedAt])
+  @@map("group_visits")
+}

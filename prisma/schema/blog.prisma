@@ -1,0 +1,22 @@
+/// * egy user tud létrehozni blogot.
+///  * be tudja állítani hogy publikus vagy privát legyen.
+///  * ha privát, akkor más userek nem látják, ellenben ő látja
+///  * a saját profilján, ahol aktiválhatja újra publikussá.
+///  * kellenek a blognak a tagjei ha meg szeretném őket jeleteni.
+///  * likeok az összes like kiírása végett.
+model Blog {
+  id         String         @id @default(cuid())
+  authorId   String
+  title      String
+  content    String
+  visibility BlogVisibility @default(PUBLIC)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  likes      BlogLike[]
+  tags       BlogTag[]
+  author     Users          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId, createdAt])
+  @@index([visibility, createdAt])
+  @@map("blogs")
+}

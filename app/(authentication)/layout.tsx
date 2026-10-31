@@ -1,9 +1,9 @@
-import AuthLayout from "@/features/(app)/(ui)/_layout/AuthLayout";
+import MainLayout from "@/features/(app)/(ui)/_layout/MainLayout";
 import { getCurrentUser } from "@/features/auth/lib/session";
 import { ChildrenProp } from "@/lib/utils/props";
 
 export default async function AuthenticationLayout({ children }: ChildrenProp) {
     const user = await getCurrentUser();
 
-    return <AuthLayout user={user}>{children}</AuthLayout>;
+    return <MainLayout user={user}>{children}</MainLayout>;
 }

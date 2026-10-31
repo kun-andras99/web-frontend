@@ -1,0 +1,22 @@
+/// * az admin létre tud hozni egy amolyan eye candy contestet, amit minden user lát
+///  * és külön lehet rá jelentkezni a megadott jelentkezési időtől.
+///  * példa:
+///  * jelentkezés kezdete
+///  * kezdődik  = Monday 00:00
+///  * végződik    = Sunday 23:59
+///  * miután vége, töröljük az adatokat.
+model EyeCandyContest {
+  id           String                @id @default(cuid())
+  name         String?
+  createdById  String?
+  startAt      DateTime
+  endAt        DateTime
+  createdAt    DateTime              @default(now())
+  participants EyeCandyParticipant[]
+  votes        EyeCandyVote[]
+
+  createdBy Users @relation("EyeCandyContestCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([startAt, endAt])
+  @@map("eye_candy_contests")
+}

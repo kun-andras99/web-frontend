@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
             static: 180,
         },
     },
-    allowedDevOrigins: ["192.168.0.115", "10.41.74.215"],
+    allowedDevOrigins: ["192.168.0.115", "10.105.149.215"],
     images: {
         remotePatterns: [
             {

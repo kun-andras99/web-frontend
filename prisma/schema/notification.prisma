@@ -1,0 +1,24 @@
+/// * értesítés | értesített<>értesítő | értesítés típusa
+///  * pl. ha user likeolt egy usert, akkor az a user értesítést
+///  * kap hogy a likeoló user likeolta őt.
+///  * entityId/entityType: generikus hivatkozás arra az entitásra,
+///  * ami az értesítést kiváltotta (pl. type=MATCH -> entityType="Match",
+///  * entityId=<matchId>); az alkalmazás értelmezi type szerint.
+model Notification {
+  id          String           @id @default(cuid())
+  recipientId String
+  actorId     String?
+  type        NotificationType
+  title       String?
+  message     String?
+  entityId    String?
+  entityType  String?
+  readAt      DateTime?
+  createdAt   DateTime         @default(now())
+  actor       Users?           @relation("NotificationActor", fields: [actorId], references: [id])
+  recipient   Users            @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId, readAt, createdAt])
+  @@index([actorId, createdAt])
+  @@map("notifications")
+}

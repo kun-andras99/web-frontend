@@ -1,71 +1,21 @@
+import { requireUser } from "@/features/auth/lib/requireUser";
+import { getBlogById } from "@/features/blogs/api/getBlog";
+import { HttpError, withApiHandler } from "@/lib/api/route-handler";
 import { NextResponse } from "next/server";
 
-import { getCurrentUser } from "@/features/auth/lib/session";
-import { getBlogById } from "@/features/blogs/api/getBlog";
-import { BlogVisibility } from "../../../../prisma/generated/prisma";
+type Params = { id: string };
 
-interface RouteContext {
-    params: Promise<{
-        id: string;
-    }>;
-}
+export const GET = withApiHandler<Params>(async (_request, { params }) => {
+    await requireUser();
+    const { id } = await params;
 
-export async function GET(_request: Request, context: RouteContext) {
-    try {
-        const currentUser = await getCurrentUser();
-
-        const { id } = await context.params;
-
-        if (!id) {
-            return NextResponse.json(
-                {
-                    message: "A blog azonosítója hiányzik.",
-                },
-                {
-                    status: 400,
-                },
-            );
-        }
-
-        const blog = await getBlogById(id);
-
-        if (!blog) {
-            return NextResponse.json(
-                {
-                    message: "A blog nem található.",
-                },
-                {
-                    status: 404,
-                },
-            );
-        }
-
-        const isOwner = currentUser?.id === blog.authorId;
-
-        if (blog.visibility === BlogVisibility.PRIVATE && !isOwner) {
-            return NextResponse.json(
-                {
-                    message: "Ez a blog privát.",
-                },
-                {
-                    status: 403,
-                },
-            );
-        }
-
-        return NextResponse.json({
-            blog,
-        });
-    } catch (error) {
-        console.error("[GET /api/blogs/[id]]", error);
-
-        return NextResponse.json(
-            {
-                message: "A blog lekérése sikertelen.",
-            },
-            {
-                status: 500,
-            },
-        );
+    const blog = await getBlogById(id);
+    if (!blog) {
+        throw new HttpError(404, "A blog nem található.", "NOT_FOUND");
     }
-}
+
+    return NextResponse.json(
+        { blog },
+        { headers: { "Cache-Control": "private, no-store" } },
+    );
+});

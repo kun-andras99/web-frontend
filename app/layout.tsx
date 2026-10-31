@@ -1,7 +1,6 @@
 import { QueryProvider } from "@/features/(app)/(ui)/providers/QueryProvider";
 import { AuthProvider } from "@/features/auth/components/provider/AuthProvider";
 import { getCurrentUser } from "@/features/auth/lib/session";
-import { getQueryClient } from "@/lib/query/get-query-client";
 import { cn } from "@/lib/utils/cn";
 import type { Metadata } from "next";
 import { Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
@@ -30,13 +29,14 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
+    // a getCurrentUser a headers()/cookies()-t olvassa, ezért a layout amúgy is dinamikus;
+    // a user a proxy aláírt fejlécéből jön, nincs DB-hívás.
     const user = await getCurrentUser();
 
     return (
         <html
             lang="en"
             className={cn(
-                "dark",
                 "h-full",
                 "antialiased",
                 outfit.variable,

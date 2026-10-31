@@ -1,21 +1,15 @@
 "use client";
 
-import { UserHeaderDatasDTO } from "@/features/user/types/user";
+import { profileHeaderSchema } from "@/features/user/schemas/profile-header.schema";
+import type { UserHeaderDatasDTO } from "@/features/user/types/user";
+import { http } from "@/lib/http/http-client";
 
-export async function getUserHeaderDatas(
+export function getUserHeaderDatas(
     userId: string,
+    signal?: AbortSignal,
 ): Promise<UserHeaderDatasDTO> {
-    const response = await fetch(`/api/users/${userId}/profile-header-data`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error("A felhasználó nem található.");
-    }
-
-    return response.json();
+    return http.get(
+        `/api/users/${encodeURIComponent(userId)}/profile-header-data`,
+        { schema: profileHeaderSchema, signal },
+    );
 }

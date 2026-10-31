@@ -1,3 +1,4 @@
+import BottomNavigationIcon from "@/features/(app)/(ui)/BottomNavigationIcon";
 import AuctionIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/AuctionIconSVG";
 import BlogsIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/BlogsIconSVG";
 import CityIconSVG from "@/features/(app)/(ui)/mobile-top-nav/icons/CityIconSVG";
@@ -49,7 +50,7 @@ export interface NavigationTab {
 
 export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
     {
-        id: 1,
+        id: 6,
         name: "home",
         title: "Home",
         bottomTitle: "Home",
@@ -72,7 +73,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         ),
     },
     {
-        id: 2,
+        id: 7,
         name: "about",
         title: "About",
         bottomTitle: "About",
@@ -98,7 +99,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         ),
     },
     {
-        id: 3,
+        id: 8,
         name: "contact",
         title: "Contact us",
         bottomTitle: "Contact",
@@ -123,7 +124,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         ),
     },
     {
-        id: 4,
+        id: 9,
         name: "our-team",
         title: "Our team",
         bottomTitle: "Team",
@@ -189,7 +190,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         ],
     },
     {
-        id: 5,
+        id: 10,
         name: "safety-warning",
         title: "Safety warning",
         bottomTitle: "Safety",
@@ -292,19 +293,15 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         title: "Extra",
         bottomTitle: "Extra",
         url: "/extra",
-        appMenu: true,
+        // appMenu: true,
         icon: <ExtraIconSVG size={26} />,
         activeIcon: (
             <ExtraIconSVG
                 size={26}
-                startColor={BOTTOM_ICON_COLORS.active.startColor}
-                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
-                backgroundStartColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStartColor
-                }
-                backgroundStopColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStopColor
-                }
+                startColor={`var(--active-bottom-start-color)`}
+                stopColor={`var(--active-bottom-stop-color)`}
+                backgroundStartColor={`var(--active-bottom-frontStart-color)`}
+                backgroundStopColor={`var(--active-bottom-frontStop-color)`}
             />
         ),
         screens: [
@@ -368,7 +365,26 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         ],
     },
     {
-        id: 7,
+        id: 11,
+        name: "community",
+        title: "Community",
+        bottomTitle: "Community",
+        url: "/community",
+        appMenu: true,
+        drawerMenu: true,
+        icon: <CommunityIconSVG size={26} strokeWidth={1.2} />,
+        activeIcon: (
+            <CommunityIconSVG
+                size={26}
+                startColor={`var(--active-bottom-start-color)`}
+                stopColor={`var(--active-bottom-stop-color)`}
+                backgroundStartColor={`var(--active-bottom-frontStart-color)`}
+                backgroundStopColor={`var(--active-bottom-frontStop-color)`}
+            />
+        ),
+    },
+    {
+        id: 2,
         name: "cruise",
         title: "Cruise",
         bottomTitle: "Cruise",
@@ -379,14 +395,10 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
             <CruiseIconSVG
                 size={26}
                 strokeWidth={1.2}
-                startColor={BOTTOM_ICON_COLORS.active.startColor}
-                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
-                backgroundStartColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStartColor
-                }
-                backgroundStopColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStopColor
-                }
+                startColor={`var(--active-bottom-start-color)`}
+                stopColor={`var(--active-bottom-stop-color)`}
+                backgroundStartColor={`var(--active-bottom-frontStart-color)`}
+                backgroundStopColor={`var(--active-bottom-frontStop-color)`}
             />
         ),
         screens: [
@@ -432,7 +444,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         ],
     },
     {
-        id: 8,
+        id: 1,
         name: "love",
         title: "Love",
         bottomTitle: "Love",
@@ -442,14 +454,10 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
         activeIcon: (
             <HeartIconSVG
                 size={26}
-                startColor={BOTTOM_ICON_COLORS.active.startColor}
-                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
-                backgroundStartColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStartColor
-                }
-                backgroundStopColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStopColor
-                }
+                startColor={`var(--active-bottom-start-color)`}
+                stopColor={`var(--active-bottom-stop-color)`}
+                backgroundStartColor={`var(--active-bottom-frontStart-color)`}
+                backgroundStopColor={`var(--active-bottom-frontStop-color)`}
             />
         ),
         screens: [
@@ -524,14 +532,10 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
             <InboxIconSVG
                 size={26}
                 strokeWidth={1.3}
-                startColor={BOTTOM_ICON_COLORS.active.startColor}
-                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
-                backgroundStartColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStartColor
-                }
-                backgroundStopColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStopColor
-                }
+                startColor={`var(--active-bottom-start-color)`}
+                stopColor={`var(--active-bottom-stop-color)`}
+                backgroundStartColor={`var(--active-bottom-frontStart-color)`}
+                backgroundStopColor={`var(--active-bottom-frontStop-color)`}
             />
         ),
         screens: [
@@ -594,26 +598,17 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
             },
         ],
     },
+
     {
         id: 10,
-        name: "community",
-        title: "Community",
-        bottomTitle: "Community",
-        url: "/community",
+        name: "profile-menu",
+        title: "Profile",
+        bottomTitle: "Profile",
+        url: "/profile-menu",
         appMenu: true,
-        icon: <CommunityIconSVG size={26} strokeWidth={1.2} />,
+        icon: <BottomNavigationIcon />,
         activeIcon: (
-            <CommunityIconSVG
-                size={26}
-                startColor={BOTTOM_ICON_COLORS.active.startColor}
-                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
-                backgroundStartColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStartColor
-                }
-                backgroundStopColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStopColor
-                }
-            />
+            <BottomNavigationIcon cls={`border-[1.5px] border-white`} />
         ),
         screens: [
             {
@@ -689,28 +684,7 @@ export const GUEST_TOP_MENU_ROUTES: MobileTopNavigationConfig = [
             },
         ],
     },
-    {
-        id: 11,
-        name: "community",
-        title: "Community",
-        bottomTitle: "Community",
-        url: "/community",
-        drawerMenu: true,
-        icon: <CommunityIconSVG size={26} strokeWidth={1.2} />,
-        activeIcon: (
-            <CommunityIconSVG
-                size={26}
-                startColor={BOTTOM_ICON_COLORS.active.startColor}
-                stopColor={BOTTOM_ICON_COLORS.active.stopColor}
-                backgroundStartColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStartColor
-                }
-                backgroundStopColor={
-                    BOTTOM_ICON_COLORS.active.backgroundStopColor
-                }
-            />
-        ),
-    },
+
     {
         id: 20,
         name: "sign in",

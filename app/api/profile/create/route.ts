@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
 import { mapProfileCreateToDTO } from "@/features/profile-create/mappers/profileCreate.mapper";
 import { createProfile } from "@/features/profile-create/repositories/profileCreate";
 import { NextResponse } from "next/server";
@@ -8,6 +7,9 @@ import {
     Gender,
     Sexuality,
 } from "../../../../prisma/generated/prisma";
+import { requireUser } from "@/features/auth/lib/requireUser";
+import { withApiHandler } from "@/lib/api/route-handler";
+import { enforceRateLimit } from "@/lib/security/enforce-rate-limit";
 
 const profileCreateSchema = z.object({
     nickname: z
@@ -158,21 +160,11 @@ function getAllowedAppCities(gender: Gender, sexuality: Sexuality): AppCity[] {
     return [];
 }
 
-export async function POST(request: Request) {
+export const POST = withApiHandler(async (request) => {
+    const currentUser = await requireUser();
+    await enforceRateLimit("profileCreate", `user:${currentUser.id}`);
+
     try {
-        const currentUser = await getCurrentUser();
-
-        if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Nincs bejelentkezve.",
-                },
-                {
-                    status: 401,
-                },
-            );
-        }
-
         const formData = await request.formData();
         const nickname = formData.get("nickname");
         const birth = formData.get("birth");
@@ -348,4 +340,4 @@ export async function POST(request: Request) {
             },
         );
     }
-}
+});

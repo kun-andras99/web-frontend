@@ -1,6 +1,6 @@
 "use client";
 
-import type { Gender } from "@/lib/_lib/validations/profile";
+import type { Gender } from "@/lib/validations/profile";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useCreateProfile } from "../hooks/useCreateProfile";

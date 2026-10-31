@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
 import { prisma } from "@/lib/prisma";
 import { calculateDistanceKm } from "@/lib/utils/calculateDistanceMKm";
 import { formatDistance } from "@/lib/utils/formatDistanceMKm";
@@ -7,9 +6,10 @@ import { formatVisitTime } from "@/lib/utils/formatVisitTime";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 
 export default async function VisitedPage() {
-    const currentUser = await getCurrentUser();
+    const currentUser = await requireCurrentUser();
 
     if (!currentUser) {
         redirect("/sign-in");

@@ -1,5 +1,5 @@
 import HomeScreen from "@/features/_public-screens/HomeScreen";
 
-export default function HomePage() {
+export default async function HomePage() {
     return <HomeScreen />;
 }

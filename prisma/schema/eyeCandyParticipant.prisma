@@ -1,0 +1,25 @@
+/// * ezen a "versenyen" résztvevő userek, itt mentjük azt
+///  * hogy countyCode, region alapján az első 20 leg értékeltebb usert,
+///  * amit a user profil adataiba is mentünk hogy később ki tudjuk írni
+///  * hogy pl 3x ért el helyezést, 1: 14., 2: 10., 3: 16
+model EyeCandyParticipant {
+  id             String          @id @default(cuid())
+  contestId      String
+  userId         String
+  countryCode    String?
+  region         String?
+  city           String?
+  totalScore     Int             @default(0)
+  voteCount      Int             @default(0)
+  globalRank     Int?
+  regionalRank   Int?
+  participatedAt DateTime        @default(now())
+  images         EyeCandyImage[]
+  contest        EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  user           Users           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([contestId, userId])
+  @@index([contestId, totalScore])
+  @@index([contestId, region, totalScore])
+  @@map("eye_candy_participants")
+}

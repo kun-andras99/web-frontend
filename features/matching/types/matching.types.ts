@@ -1,12 +1,12 @@
 "use server";
 
-import { getCurrentUser } from "@/features/auth/lib/session";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import {
     MatchActionType,
     NotificationType,
 } from "../../../prisma/generated/prisma";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 
 function createPairKey(userA: string, userB: string) {
     return [userA, userB].sort().join(":");
@@ -16,15 +16,8 @@ export async function handleMatchAction(
     targetUserId: string,
     type: MatchActionType,
 ): Promise<void> {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser) {
-        throw new Error("Unauthorized");
-    }
-
-    if (currentUser.id === targetUserId) {
-        throw new Error("Nem matchelhetsz saját magaddal.");
-    }
+    const currentUser = await requireCurrentUser();
+    if (currentUser.id === targetUserId) throw new Error("Nem matchelhetsz saját magaddal.");
 
     const [targetUser, currentUserData] = await Promise.all([
         prisma.users.findUnique({
@@ -40,7 +33,6 @@ export async function handleMatchAction(
                 },
             },
         }),
-
         prisma.users.findUnique({
             where: {
                 id: currentUser.id,
@@ -54,10 +46,7 @@ export async function handleMatchAction(
             },
         }),
     ]);
-
-    if (!targetUser) {
-        throw new Error("A felhasználó nem található.");
-    }
+    if (!targetUser) throw new Error("A felhasználó nem található.");
 
     const existingAction = await prisma.matchAction.findUnique({
         where: {
@@ -67,10 +56,8 @@ export async function handleMatchAction(
             },
         },
     });
-
-    if (existingAction) {
-        return;
-    }
+    if (existingAction) return;
+    
 
     if (type === MatchActionType.PASS) {
         await prisma.matchAction.create({

@@ -1,5 +1,4 @@
 import BottomPageWrapper from "@/features/(app)/(ui)/BottomPageWrapper";
-import { getCurrentUser } from "@/features/auth/lib/session";
 import NearbyLocationRequired from "@/features/nearby-users/components/NearbyLocationRequired";
 import NearbyScreen from "@/features/nearby-users/components/NearbyUsersScreen";
 import { nearbyInfiniteQueryOptions } from "@/features/nearby-users/hooks/nearby.queries";
@@ -12,6 +11,7 @@ import { getServerQueryClient } from "@/lib/query/server-query-client";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 
 export const metadata: Metadata = {
     title: "Közelben",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ExploreNearbyPage() {
-    const currentUser = await getCurrentUser();
+    const currentUser = await requireCurrentUser();
     if (!currentUser) redirect("/sign-in");
 
     if (!(await getNearbyAvailability(currentUser.id))) {

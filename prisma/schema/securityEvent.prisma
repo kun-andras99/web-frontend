@@ -1,0 +1,36 @@
+enum SecurityEventType {
+  LOGIN_SUCCESS
+  LOGIN_FAILED
+  LOGOUT
+  PASSWORD_CHANGED
+  PASSWORD_RESET_REQUESTED
+  PASSWORD_RESET_COMPLETED
+  EMAIL_VERIFIED
+  SESSION_CREATED
+  SESSION_REVOKED
+  REFRESH_TOKEN_REUSED
+  ACCOUNT_LOCKED
+  ACCOUNT_UNLOCKED
+  TWO_FACTOR_ENABLED
+  TWO_FACTOR_DISABLED
+  SUSPICIOUS_ACTIVITY
+}
+
+model SecurityEvent {
+  id        String             @id @default(cuid())
+  userId    String?
+  type      SecurityEventType
+
+  ipAddress String?
+  userAgent String?
+  metadata  Json?
+
+  createdAt DateTime           @default(now())
+
+  user Users? @relation( fields: [userId], references: [id], onDelete: SetNull )
+
+  @@index([userId, createdAt])
+  @@index([type, createdAt])
+  @@index([ipAddress, createdAt])
+  @@map("security_events")
+}

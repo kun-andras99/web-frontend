@@ -1,4 +1,4 @@
-import type { Gender, SexualityValue } from "@/lib/_lib/validations/profile";
+import type { Gender, SexualityValue } from "@/lib/validations/profile";
 import { create } from "zustand";
 
 interface ProfileWizardState {

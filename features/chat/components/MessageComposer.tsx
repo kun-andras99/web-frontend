@@ -1,108 +1,81 @@
 "use client";
 
-import { Send } from "lucide-react";
-import { FormEvent, KeyboardEvent, useState } from "react";
-
-import { useSendMessage } from "@/features/chat/hooks/useSendMessage";
+import { useEffect, useRef, type KeyboardEvent } from "react";
+import { MESSAGE_MAX_LENGTH } from "../schemas/chat.schema";
 
 interface MessageComposerProps {
-    conversationId: string;
-    currentUserId: string;
+    draft: string;
+    onDraftChange: (value: string) => void;
+    onSend: (content: string) => void;
+    error: string | null;
 }
 
 export default function MessageComposer({
-    conversationId,
-    currentUserId,
+    draft,
+    onDraftChange,
+    onSend,
+    error,
 }: MessageComposerProps) {
-    const [content, setContent] = useState("");
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const trimmed = draft.trim();
 
-    const sendMessage = useSendMessage(conversationId, currentUserId);
+    // automatikus magasság (legfeljebb 160 px)
+    useEffect(() => {
+        const el = textareaRef.current;
+        if (!el) return;
+        el.style.height = "auto";
+        el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
+    }, [draft]);
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
-        /*
-         * Ha már folyamatban van egy küldés,
-         * ne lehessen újra elküldeni.
-         */
-        if (sendMessage.isPending) {
-            return;
-        }
-
-        const value = content.trim();
-
-        /*
-         * Üres üzenetet nem küldünk.
-         */
-        if (!value) {
-            return;
-        }
-
-        sendMessage.mutate(value, {
-            onSuccess: () => {
-                setContent("");
-            },
-        });
+    function submit() {
+        if (trimmed) onSend(trimmed);
     }
 
     function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-        /*
-         * Shift + Enter:
-         * új sor.
-         */
-        if (event.key === "Enter" && event.shiftKey) {
-            return;
-        }
-
-        /*
-         * Enter:
-         * üzenet küldése.
-         */
-        if (event.key === "Enter") {
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey &&
+            !event.nativeEvent.isComposing
+        ) {
             event.preventDefault();
-
-            /*
-             * Ha éppen küldés alatt van,
-             * az Enter sem indíthat új küldést.
-             */
-            if (sendMessage.isPending) {
-                return;
-            }
-
-            event.currentTarget.form?.requestSubmit();
+            submit();
         }
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="border-t border-white/5 bg-[#101011]/95 p-3 backdrop-blur-xl sm:p-4">
-            <div className="mx-auto flex max-w-3xl items-end gap-2 rounded-3xl border border-white/10 bg-white/[0.04] p-2 transition focus-within:border-[#1eb1eb]/40">
-                <textarea
-                    value={content}
-                    onChange={(event) => {
-                        setContent(event.target.value);
-                    }}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Írj egy üzenetet..."
-                    rows={1}
-                    maxLength={5000}
-                    disabled={sendMessage.isPending}
-                    className="max-h-32 min-h-11 flex-1 resize-none bg-transparent px-3 py-3 text-sm text-white outline-none placeholder:text-white/25 disabled:cursor-not-allowed disabled:opacity-60"
-                />
+        <div className="border-t border-white/10 px-3 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+            {error && (
+                <p role="alert" className="mb-2 text-xs text-red-400">
+                    {error}
+                </p>
+            )}
 
+            <div className="flex items-end gap-2">
+                <textarea
+                    ref={textareaRef}
+                    value={draft}
+                    onChange={(event) => onDraftChange(event.target.value)}
+                    onKeyDown={handleKeyDown}
+                    rows={1}
+                    maxLength={MESSAGE_MAX_LENGTH}
+                    placeholder="Írj üzenetet..."
+                    aria-label="Üzenet"
+                    className="max-h-40 min-h-[40px] flex-1 resize-none rounded-2xl bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                />
                 <button
-                    type="submit"
-                    disabled={!content.trim() || sendMessage.isPending}
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#1eb1eb] text-white transition hover:scale-105 hover:bg-[#159fd6] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:scale-100"
-                    aria-label="Üzenet küldése">
-                    {sendMessage.isPending ? (
-                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                    ) : (
-                        <Send size={17} />
-                    )}
+                    type="button"
+                    onClick={submit}
+                    disabled={!trimmed}
+                    className="h-10 rounded-full bg-indigo-500 px-4 text-sm font-semibold text-white disabled:opacity-40">
+                    Küldés
                 </button>
             </div>
-        </form>
+
+            {draft.length > MESSAGE_MAX_LENGTH - 500 && (
+                <p className="mt-1 text-right text-[10px] text-white/40">
+                    {draft.length} / {MESSAGE_MAX_LENGTH}
+                </p>
+            )}
+        </div>
     );
 }

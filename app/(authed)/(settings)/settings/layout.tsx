@@ -1,16 +1,11 @@
-import DisplayHeaderTitle from "@/features/(app)/(ui)/DisplayHeaderTitle";
-import BaseDrawer from "@/features/(app)/(ui)/drawer/BaseDrawer";
-import { ReactNode } from "react";
+import MainLayout from "@/features/(app)/(ui)/_layout/MainLayout";
+import { requireUser } from "@/features/auth/lib/requireUser";
+import { ChildrenProp } from "@/lib/utils/props";
 
-export default function SettingsLayout({ children }: { children: ReactNode }) {
-    return (
-        <div className="main-layout-body">
-            <header className="header">
-                <DisplayHeaderTitle />
-                <BaseDrawer />
-            </header>
-            {/* <BodySidebar user={user} /> */}
-            <main>{children}</main>
-        </div>
-    );
+export default async function SettingsPagesLayout({ children }: ChildrenProp) {
+    const user = await requireUser();
+
+    if (!user) return null;
+
+    return <MainLayout user={user}>{children}</MainLayout>;
 }

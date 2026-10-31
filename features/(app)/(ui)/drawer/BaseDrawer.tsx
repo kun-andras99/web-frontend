@@ -20,7 +20,7 @@ import {
     AUTHED_ROUTES,
     GUEST_ROUTES,
 } from "@/features/auth/lib/constants";
-import LoveWallFall from "@/features/love-wall";
+import LoveWallBox from "@/features/love-wall/components/LoveWallBox";
 import { useUserHeaderDatas } from "@/features/user/hooks/useUserHeaderDatas";
 import { AccordionVip } from "@/features/vip/components/AccordionVip";
 import Link from "next/link";
@@ -65,7 +65,7 @@ export default function BaseDrawer() {
             <DrawerContent className="my-drawer right-drawer">
                 <div className="quest-drawer">
                     <Link href={GUEST_ROUTES.loveWall} onClick={closeDrawer}>
-                        <LoveWallFall />
+                        <LoveWallBox paused={!open} />
                     </Link>
                     {!user ? (
                         <>

@@ -6,7 +6,7 @@ export const MAX_GROUPS_PAGE_SIZE = 50;
 // igazítsd a Prisma GroupVisibility enumodhoz
 export const groupVisibilitySchema = z.enum(["PUBLIC", "PRIVATE"]);
 export const groupMemberRoleSchema = z.enum(["ADMIN", "MEMBER"]);
- 
+
 /** A bejelentkezett user viszonya a csoporthoz. */
 export const groupViewerStateSchema = z.enum([
     "ADMIN",
@@ -164,7 +164,9 @@ export type GroupMemberDTO = z.infer<typeof groupMemberSchema>;
 export type GroupMembersPageDTO = z.infer<typeof groupMembersPageSchema>;
 export type JoinRequestDTO = z.infer<typeof joinRequestSchema>;
 export type JoinRequestsPageDTO = z.infer<typeof joinRequestsPageSchema>;
-export type JoinRequestAction = z.infer<typeof respondJoinRequestInputSchema>["action"];
+export type JoinRequestAction = z.infer<
+    typeof respondJoinRequestInputSchema
+>["action"];
 export type UpdateGroupInput = z.input<typeof updateGroupInputSchema>; // kliens
 export type UpdateGroupData = z.output<typeof updateGroupInputSchema>; // szerver
 

@@ -1,0 +1,14 @@
+/// *
+///  * egy user tudja like-olni egy másik user blogját. ha a sajátja akkor ne tudja. egy user csak egyszer likeolhat egy blogot, és unlikeolhat.
+model BlogLike {
+  id        String   @id @default(cuid())
+  blogId    String
+  userId    String
+  createdAt DateTime @default(now())
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([blogId, userId])
+  @@index([userId])
+  @@map("blog_likes")
+}

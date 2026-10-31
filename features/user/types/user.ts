@@ -32,6 +32,12 @@ export type UserDTO = {
     country: string;
 };
 
+export interface MainProfileDatasDTO {
+    id: string;
+    nickname: string | null;
+    avatarUrl: string | null;
+}
+
 export interface UserHeaderDatasDTO {
     id: string;
     nickname: string | null;
@@ -46,6 +52,12 @@ export interface UserHeaderDatasDTO {
     countryCode: string | null;
     region: string | null;
     city: string | null;
+}
+
+export interface MainProfileDatasDTO {
+    id: string;
+    nickname: string | null;
+    avatarUrl: string | null;
 }
 
 export interface UserGalleryImage {

@@ -1,0 +1,28 @@
+/// * egy user tud létrehozni galériákat. kiválaszthatja
+///  * hogy a galéria publikus vagy privát legyen.
+///  * ha usernek van egy privát albumja, akkor azt megtudja
+///  * osztani más userrel. alapból egy órára, de választható:
+///  ** három óra
+///  ** egy nap
+///  ** egy hét
+///  * alapból van neki egy Profilképek galériája, ami
+///  * nem tartalmaz képeket.
+model Gallery {
+  id         String            @id @default(cuid())
+  ownerId    String
+  name       String
+  type       GalleryType       @default(USER)
+  visibility GalleryVisibility @default(PRIVATE)
+
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  owner      Users             @relation("GalleryOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  images     GalleryImage[]
+  shares     GalleryShare[]    @relation("GalleryShared")
+
+  @@unique([ownerId, type, name])
+  @@index([ownerId, type])
+  @@index([ownerId, visibility])
+  @@map("galleries")
+}

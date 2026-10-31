@@ -1,0 +1,24 @@
+model UserSession {
+  id           String    @id @default(cuid())
+  userId       String
+
+  refreshTokenId String? @unique
+
+  deviceName   String?
+  userAgent    String?
+  ipAddress    String?
+
+  createdAt    DateTime  @default(now())
+  lastSeenAt   DateTime  @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+
+  user Users @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  refreshToken RefreshToken? @relation(fields: [refreshTokenId],references: [id],onDelete: SetNull)
+
+  @@index([userId, revokedAt])
+  @@index([expiresAt])
+  @@index([lastSeenAt])
+  @@map("user_sessions")
+}

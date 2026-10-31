@@ -1,0 +1,97 @@
+/// * csak a hitelesítéshez és a fiók állapotához szükséges mag-adatok.
+///  * minden más külön modellben van:
+///  ** profil: UserData | keresés: UserFilter / UserPreference
+///  ** hely: UserLocation | beállítások: UserSettings
+///  ** biztonság: UserSecurity, LoginAttempt, AuditLog, RefreshToken
+model Users {
+  id            String            @id @default(cuid())
+  username      String            @unique
+  email         String            @unique
+  passwordHash  String
+  emailVerified DateTime?
+  role          UserRole          @default(USER)
+  status        UserAccountStatus @default(ACTIVE)
+  lastActiveAt  DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  deletedAt     DateTime?
+
+  // 1:1 kapcsolatok
+  userData          UserData?       @relation("UserDataOwner")
+  partnerLinkedFrom UserData?       @relation("UserPartner")
+  userFilter        UserFilter?
+  userPreference    UserPreference?
+  location          UserLocation?
+  settings          UserSettings?
+  security          UserSecurity?
+
+  // blog
+  blogs     Blog[]
+  blogLikes BlogLike[]
+
+  // chat
+  conversationParticipants ConversationParticipant[]
+  messagesSent             Message[]                 @relation("MessageSender")
+  messageReads             MessageRead[]
+
+  // eye candy
+  eyeCandyParticipations EyeCandyParticipant[]
+  eyeCandyVotesGiven     EyeCandyVote[]        @relation("EyeCandyVoter")
+  eyeCandyVotesReceived  EyeCandyVote[]        @relation("EyeCandyCandidate")
+  eyeCandyResults        EyeCandyResult[]
+
+  // barátok, match
+  sentFriendRequests     FriendRequest[] @relation("FriendRequestSender")
+  receivedFriendRequests FriendRequest[] @relation("FriendRequestReceiver")
+  friendshipsAsUser1     Friendship[]    @relation("FriendshipUser1")
+  friendshipsAsUser2     Friendship[]    @relation("FriendshipUser2")
+  matchActionsGiven      MatchAction[]   @relation("MatchActionFrom")
+  matchActionsReceived   MatchAction[]   @relation("MatchActionTo")
+  matchesAsUser1         Match[]         @relation("MatchUser1")
+  matchesAsUser2         Match[]         @relation("MatchUser2")
+  favoritesGiven         UserFavorite[]  @relation("FavoriteFrom")
+  favoritesReceived      UserFavorite[]  @relation("FavoriteTo")
+  blocksGiven            UserBlock[]     @relation("BlockFrom")
+  blocksReceived         UserBlock[]     @relation("BlockTo")
+  profileVisitsMade      ProfileVisit[]  @relation("ProfileVisitor")
+  profileVisitsReceived  ProfileVisit[]  @relation("ProfileVisitedUser")
+  rightNowDisplay        RightNowDisplay[]
+
+  // galéria
+  galleries             Gallery[]      @relation("GalleryOwner")
+  gallerySharesGiven    GalleryShare[] @relation("GalleryShareOwner")
+  gallerySharesReceived GalleryShare[] @relation("GalleryShareRecipient")
+
+  // csoport
+  groupsCreated             Group[]            @relation("GroupCreator")
+  groupMembers              GroupMember[]
+  groupVisits               GroupVisit[]       @relation("GroupVisitor")
+  groupInvitationsSent      GroupInvitation[]  @relation("GroupInvitationSender")
+  groupInvitationsReceived  GroupInvitation[]  @relation("GroupInvitationReceiver")
+  groupJoinRequestsSent     GroupJoinRequest[] @relation("GroupJoinRequester")
+  groupJoinRequestsResponded GroupJoinRequest[] @relation("GroupJoinResponder")
+
+  // értesítés, moderáció
+  notifications              Notification[]       @relation("NotificationRecipient")
+  notificationsTriggered     Notification[]       @relation("NotificationActor")
+  reportsCreated             Report[]             @relation("ReportCreator")
+  reportsAgainst             Report[]             @relation("ReportTargetUser")
+  reportsResolved            Report[]             @relation("ReportResolver")
+  moderationActionsGiven     ModerationAction[]   @relation("Moderator")
+  moderationActionsReceived  ModerationAction[]   @relation("ModerationTarget")
+
+  // fizetés
+  subscriptions UserSubscription[]
+  payments      SubscriptionPayment[]
+
+  // biztonság
+  refreshTokens      RefreshToken[]
+  verificationTokens VerificationToken[]
+  loginAttempts      LoginAttempt[]
+
+  @@index([status])
+  @@index([role])
+  @@index([createdAt])
+  @@index([lastActiveAt])
+  @@map("users")
+}

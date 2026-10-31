@@ -17,7 +17,7 @@ export async function GET() {
     //                 },
     //             );
     //         }
-    //         const currentUser = await getCurrentUser();
+    //         const currentUser = await requireCurrentUser();
     //         if (!currentUser) {
     //             return NextResponse.json(
     //                 {

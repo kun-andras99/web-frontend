@@ -1,0 +1,22 @@
+/// * most van egy user akinek van egy csoportja ami privát.
+///  * ugye oda egy másik user csak úgy tud csatlakozni ha
+///  * jelentkezik ebbe a csoportba, vagy a csoport adminja küld
+///  * neki egy meghívót. ezt a meghívót akár elfogadhatja,
+///  * akár elutasíthatja.
+model GroupInvitation {
+  id          String                @id @default(cuid())
+  groupId     String
+  senderId    String
+  receiverId  String
+  status      GroupInvitationStatus @default(PENDING)
+  createdAt   DateTime              @default(now())
+  respondedAt DateTime?
+  group       Group                 @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  receiver    Users                 @relation("GroupInvitationReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  sender      Users                 @relation("GroupInvitationSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([groupId, receiverId])
+  @@index([senderId, status, createdAt])
+  @@index([receiverId, status, createdAt])
+  @@map("group_invitations")
+}

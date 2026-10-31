@@ -1,0 +1,22 @@
+/// * a user GPS-pozíciója külön modellben (1:1), hogy a Users tábla
+///  * ne hízzon, és a gyakran frissülő koordináták ne írják a Users sort.
+///  * enabled=false esetén lat/lng NULL-ozandó (adatvédelem).
+///  * geohash: gyors "közelben" szűréshez (később PostGIS-re cserélhető).
+model UserLocation {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  enabled           Boolean   @default(false)
+  lat               Float?
+  lng               Float?
+  accuracyMeters    Int?
+  geohash           String?
+  locationUpdatedAt DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  user              Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([enabled, lat, lng])
+  @@index([geohash])
+  @@index([locationUpdatedAt])
+  @@map("user_locations")
+}

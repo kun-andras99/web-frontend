@@ -1,18 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-import { createBlog } from "@/features/blogs/api/createBlog";
+import { createBlogRequest } from "@/features/blogs/api/blogs.api";
 import { blogKeys } from "@/features/blogs/hooks/useBlogs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useCreateBlog() {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: createBlog,
-
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: blogKeys.list(),
-            });
-        },
+        mutationFn: createBlogRequest,
+        onSuccess: () =>
+            queryClient.invalidateQueries({ queryKey: blogKeys.list() }),
     });
 }

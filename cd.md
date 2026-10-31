@@ -1,1 +1,0 @@
-git commit -m "elkészítettem az alap authetikáció oldalait és feature-ját, belépés előtti és utáni védett útvonalak, bejelentkezve drawer a user képre kattintva, "

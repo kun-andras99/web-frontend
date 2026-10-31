@@ -1,13 +1,85 @@
 :root {
-    --background: #ffffff;
-    --foreground: #0d0d0d;
-    --site-bg-rgb: 13, 13, 13;
-    --test-dark: 13, 13, 13;
+    --padding: 10px;
+    --padding-m: 15px;
+    --padding-l: 20px;
+    --padding-xl: 20px;
+    --background: #e0e0e0;
+    --foreground: #171717;
+    --mobile-menu-bg: #e0e0e0ea;
+    --primary-bg: #168cda;
+    --primary-bg-dark: #1b71aa;
+
+    --yellow: #e9db14;
+    --card: #fff;
+    --app-name-color: #c0b515;
+
+    --main-link-disabled: #707070;
+    --main-menu-h2: #202020;
+    --main-menu-span: #e5e5e5;
+
+    --logout-wbg: #f3f3f3;
+    --logout-bbg: #fff;
+
+    --border-color: #202020;
+    --border: 0.015rem solid var(--border-color);
+
+    --bottom-start-color: #838383;
+    --bottom-stop-color: #838383;
+    --bottom-frontStart-color: #838383;
+    --bottom-frontStop-color: #838383;
+
+    --active-bottom-start-color: #040404;
+    --active-bottom-stop-color: #040404;
+    --active-bottom-frontStart-color: #040404;
+    --active-bottom-frontStop-color: #040404;
 }
 
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
+@media (prefers-color-scheme: light) {
+    :root {
+        --background: #e0e0e0;
+        --foreground: #171717;
+        --mobile-menu-bg: #e0e0e0ea;
+        --card: #fff;
+        --card-dark: #fff;
+
+        --main-link-disabled: #b3b3b3;
+        --main-menu-h2: #838383;
+        --main-menu-span: #353535;
+
+        --logout-wbg: #f3f3f3;
+        --logout-bbg: #fff;
+
+        --bottom-start-color: #838383;
+        --bottom-stop-color: #838383;
+        --bottom-frontStart-color: #838383;
+        --bottom-frontStop-color: #838383;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #080808;
+        --foreground: #f5f5f5;
+        --mobile-menu-bg: #080808ea;
+        --card: #242424;
+        --card-dark: #101010;
+        --border-color: #555555;
+
+        --main-link-disabled: #555555;
+        --main-menu-h2: #737373;
+        --main-menu-span: #e5e5e5;
+
+        --logout-wbg: #202020;
+        --logout-bbg: #404040;
+
+        --bottom-start-color: #656565;
+        --bottom-stop-color: #888;
+        --bottom-frontStart-color: #656565;
+        --bottom-frontStop-color: #656565;
+
+        --active-bottom-start-color: #f4f4f4;
+        --active-bottom-stop-color: #f4f4f4;
+        --active-bottom-frontStart-color: #f4f4f4;
+        --active-bottom-frontStop-color: #f4f4f4;
+    }
 }

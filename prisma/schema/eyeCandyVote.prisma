@@ -1,0 +1,25 @@
+/// * jelenlegi user szavaz egy eye candyban résztvevő userre
+///  * ha skippeljük akkor nulla
+///  * egy user csak egyszer szavazhat egy contesten résztvevő userre
+model EyeCandyVote {
+  id                   String          @id @default(cuid())
+  contestId            String
+  voterId              String
+  candidateId          String
+  action               EyeCandyAction
+  rating               Int?
+  candidateCountryCode String?
+  candidateRegion      String?
+  createdAt            DateTime        @default(now())
+  candidate            Users           @relation("EyeCandyCandidate", fields: [candidateId], references: [id], onDelete: Cascade)
+  contest              EyeCandyContest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  voter                Users           @relation("EyeCandyVoter", fields: [voterId], references: [id], onDelete: Cascade)
+
+  @@unique([contestId, voterId, candidateId])
+  @@index([contestId, voterId, action])
+  @@index([candidateId, createdAt])
+  @@index([contestId, candidateId])
+  @@index([contestId, voterId])
+  @@index([createdAt])
+  @@map("eye_candy_votes")
+}

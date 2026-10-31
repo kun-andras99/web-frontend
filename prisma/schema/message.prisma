@@ -1,0 +1,20 @@
+/// * két user közötti beszélgetés üzenete. az olvasottságot
+///  * a MessageRead táblában mentjük soronként (ki, mikor olvasta),
+///  * ebből számolható ki az olvasatlan üzenetek száma is.
+model Message {
+  id             String              @id @default(cuid())
+  conversationId String
+  senderId       String
+  type           MessageType         @default(TEXT)
+  content        String?
+  sentAt         DateTime            @default(now())
+  revokedAt      DateTime?
+  attachments    MessageAttachment[]
+  reads          MessageRead[]
+  conversation   Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         Users               @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, sentAt, id])
+  @@index([senderId, sentAt])
+  @@map("messages")
+}

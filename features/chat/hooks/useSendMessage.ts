@@ -1,291 +1,96 @@
 "use client";
 
 import {
-    InfiniteData,
     useMutation,
     useQueryClient,
+    type InfiniteData,
 } from "@tanstack/react-query";
+import { sendMessage } from "../api/chat.api";
+import type { MessageDTO, MessagesPageDTO } from "../schemas/chat.schema";
+import { chatKeys } from "./chat.keys";
 
-import { sendMessage } from "@/features/chat/api/sendMessage";
-import { chatKeys } from "@/features/chat/hooks/useConversation";
-import { conversationKeys } from "@/features/chat/hooks/useConversations";
-import {
-    ConversationDTO,
-    ConversationMessagesDTO,
-    MessageDTO,
-} from "@/features/chat/repository/chatDTO";
+type MessagesData = InfiniteData<MessagesPageDTO, string | undefined>;
 
-interface SendMessageContext {
-    previousConversation: InfiniteData<ConversationMessagesDTO> | undefined;
+const TEMP_PREFIX = "temp:";
+export const isTempMessage = (message: Pick<MessageDTO, "id">) =>
+    message.id.startsWith(TEMP_PREFIX);
 
-    previousConversations: ConversationDTO[] | undefined;
-
-    temporaryMessageId: string;
+function prepend(
+    data: MessagesData | undefined,
+    message: MessageDTO,
+): MessagesData | undefined {
+    if (!data) return data;
+    return {
+        ...data,
+        pages: data.pages.map((page, index) =>
+            index === 0 ? { ...page, items: [message, ...page.items] } : page,
+        ),
+    };
 }
 
-function createTemporaryMessageId(): string {
-    return `temp-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+function replace(
+    data: MessagesData | undefined,
+    tempId: string,
+    message: MessageDTO,
+): MessagesData | undefined {
+    if (!data) return data;
+    return {
+        ...data,
+        pages: data.pages.map((page) => ({
+            ...page,
+            items: page.items.map((item) =>
+                item.id === tempId ? message : item,
+            ),
+        })),
+    };
 }
 
-export function useSendMessage(conversationId: string, currentUserId: string) {
+export function useSendMessage(conversationId: string, viewerId: string) {
     const queryClient = useQueryClient();
+    const key = chatKeys.messages(conversationId);
 
-    return useMutation<MessageDTO, Error, string, SendMessageContext>({
-        mutationFn: async (content) => {
-            return sendMessage(conversationId, {
-                content,
-            });
-        },
+    return useMutation({
+        mutationFn: (content: string) =>
+            sendMessage(conversationId, { content }),
 
         onMutate: async (content) => {
-            /*
-             * A folyamatban lévő lekérdezéseket leállítjuk,
-             * hogy egy közben érkező régi válasz ne írja
-             * felül az optimistic állapotot.
-             */
-            await Promise.all([
-                queryClient.cancelQueries({
-                    queryKey: chatKeys.conversation(conversationId),
-                }),
+            await queryClient.cancelQueries({ queryKey: key });
+            const snapshot = queryClient.getQueryData<MessagesData>(key);
 
-                queryClient.cancelQueries({
-                    queryKey: conversationKeys.list(),
-                }),
-            ]);
-
-            /*
-             * Elmentjük a jelenlegi cache állapotokat,
-             * hogy hiba esetén vissza tudjuk állítani őket.
-             */
-            const previousConversation = queryClient.getQueryData<
-                InfiniteData<ConversationMessagesDTO>
-            >(chatKeys.conversation(conversationId));
-
-            const previousConversations = queryClient.getQueryData<
-                ConversationDTO[]
-            >(conversationKeys.list());
-
-            const temporaryMessageId = createTemporaryMessageId();
-
-            const optimisticSentAt = new Date().toISOString();
-
-            /*
-             * Ideiglenes üzenet.
-             *
-             * Ezt még nem a szerver generálta, ezért csak addig
-             * használjuk, amíg a POST request vissza nem érkezik.
-             */
-            const optimisticMessage: MessageDTO = {
-                id: temporaryMessageId,
+            const temp: MessageDTO = {
+                id: `${TEMP_PREFIX}${crypto.randomUUID()}`,
                 conversationId,
-                senderId: currentUserId,
+                senderId: viewerId,
                 type: "TEXT",
                 content,
-                sentAt: optimisticSentAt,
+                sentAt: new Date().toISOString(),
                 revokedAt: null,
+                isMine: true,
                 isRead: false,
             };
-
-            /*
-             * ─────────────────────────────────────────────
-             * 1. CHAT CACHE OPTIMISTIC UPDATE
-             * ─────────────────────────────────────────────
-             */
-            queryClient.setQueryData<InfiniteData<ConversationMessagesDTO>>(
-                chatKeys.conversation(conversationId),
-                (current) => {
-                    if (!current || current.pages.length === 0) {
-                        return current;
-                    }
-
-                    const pages = [...current.pages];
-
-                    const firstPage = pages[0];
-
-                    pages[0] = {
-                        ...firstPage,
-                        messages: [...firstPage.messages, optimisticMessage],
-                    };
-
-                    return {
-                        ...current,
-                        pages,
-                    };
-                },
+            queryClient.setQueryData<MessagesData>(key, (data) =>
+                prepend(data, temp),
             );
 
-            /*
-             * ─────────────────────────────────────────────
-             * 2. CONVERSATION LIST OPTIMISTIC UPDATE
-             * ─────────────────────────────────────────────
-             *
-             * Az üzenet elküldésekor:
-             *
-             * - frissítjük az utolsó üzenetet
-             * - frissítjük az időpontot
-             * - a beszélgetést a lista elejére tesszük
-             */
-            queryClient.setQueryData<ConversationDTO[]>(
-                conversationKeys.list(),
-                (current) => {
-                    if (!current) {
-                        return current;
-                    }
-
-                    const conversation = current.find(
-                        (item) => item.id === conversationId,
-                    );
-
-                    /*
-                     * Ha a conversation nincs a cache-ben,
-                     * nem tudunk optimistic módon frissíteni.
-                     */
-                    if (!conversation) {
-                        return current;
-                    }
-
-                    const updatedConversation: ConversationDTO = {
-                        ...conversation,
-                        lastMessage: optimisticMessage,
-                        updatedAt: optimisticSentAt,
-                    };
-
-                    /*
-                     * A régi példányt eltávolítjuk,
-                     * majd az új példányt a lista elejére tesszük.
-                     */
-                    const remainingConversations = current.filter(
-                        (item) => item.id !== conversationId,
-                    );
-
-                    return [updatedConversation, ...remainingConversations];
-                },
-            );
-
-            return {
-                previousConversation,
-                previousConversations,
-                temporaryMessageId,
-            };
+            return { snapshot, tempId: temp.id };
         },
 
-        /*
-         * ─────────────────────────────────────────────
-         * SUCCESS
-         * ─────────────────────────────────────────────
-         */
-        onSuccess: (message, _content, context) => {
-            if (!context) {
-                return;
-            }
-
-            /*
-             * ─────────────────────────────────────────────
-             * 1. TEMPORARY MESSAGE → REAL MESSAGE
-             * ─────────────────────────────────────────────
-             */
-            queryClient.setQueryData<InfiniteData<ConversationMessagesDTO>>(
-                chatKeys.conversation(conversationId),
-                (current) => {
-                    if (!current) {
-                        return current;
-                    }
-
-                    return {
-                        ...current,
-
-                        pages: current.pages.map((page) => ({
-                            ...page,
-
-                            messages: page.messages.map((existingMessage) =>
-                                existingMessage.id ===
-                                context.temporaryMessageId
-                                    ? message
-                                    : existingMessage,
-                            ),
-                        })),
-                    };
-                },
-            );
-
-            /*
-             * ─────────────────────────────────────────────
-             * 2. CONVERSATION LIST
-             * ─────────────────────────────────────────────
-             *
-             * A temporary üzenetet lecseréljük a valódi
-             * szerver oldali üzenetre.
-             *
-             * A conversation továbbra is a lista elején marad.
-             */
-            queryClient.setQueryData<ConversationDTO[]>(
-                conversationKeys.list(),
-                (current) => {
-                    if (!current) {
-                        return current;
-                    }
-
-                    const conversation = current.find(
-                        (item) => item.id === conversationId,
-                    );
-
-                    if (!conversation) {
-                        return current;
-                    }
-
-                    const updatedConversation: ConversationDTO = {
-                        ...conversation,
-                        lastMessage: message,
-                        updatedAt: message.sentAt,
-                    };
-
-                    const remainingConversations = current.filter(
-                        (item) => item.id !== conversationId,
-                    );
-
-                    return [updatedConversation, ...remainingConversations];
-                },
-            );
-
-            /*
-             * ─────────────────────────────────────────────
-             * 3. SERVER SYNC
-             * ─────────────────────────────────────────────
-             *
-             * Az optimistic cache már azonnal frissült.
-             * Itt csak ellenőrizzük, hogy a szerver állapota
-             * és a kliens cache végül teljesen szinkronban legyen.
-             */
-            void queryClient.invalidateQueries({
-                queryKey: conversationKeys.list(),
-            });
-        },
-
-        /*
-         * ─────────────────────────────────────────────
-         * ERROR / ROLLBACK
-         * ─────────────────────────────────────────────
-         */
         onError: (_error, _content, context) => {
-            if (!context) {
-                return;
-            }
+            if (context) queryClient.setQueryData(key, context.snapshot);
+        },
 
-            /*
-             * Chat rollback.
-             */
-            queryClient.setQueryData<InfiniteData<ConversationMessagesDTO>>(
-                chatKeys.conversation(conversationId),
-                context.previousConversation,
-            );
-
-            /*
-             * ConversationList rollback.
-             */
-            queryClient.setQueryData<ConversationDTO[]>(
-                conversationKeys.list(),
-                context.previousConversations,
+        onSuccess: (message, _content, context) => {
+            queryClient.setQueryData<MessagesData>(key, (data) =>
+                replace(data, context.tempId, message),
             );
         },
+
+        onSettled: () =>
+            Promise.all([
+                queryClient.invalidateQueries({ queryKey: key }),
+                queryClient.invalidateQueries({
+                    queryKey: chatKeys.conversations(),
+                }),
+            ]),
     });
 }

@@ -1,0 +1,16 @@
+// üzenetben lehetőség van kép küldésére is, nem csak szöveges üzenet küldésére.
+model MessageAttachment {
+  id         String   @id @default(cuid())
+  messageId  String
+  url        String
+  storageKey String?
+  mimeType   String?
+  fileSize   Int?
+  width      Int?
+  height     Int?
+  createdAt  DateTime @default(now())
+  message    Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@map("message_attachments")
+}

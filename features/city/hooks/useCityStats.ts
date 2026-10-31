@@ -1,6 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-
-import { getCityStats } from "@/features/city/api/getCity";
+import { fetchCityStats } from "@/features/city/api/city.api";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
 export const cityKeys = {
     all: ["city"] as const,
@@ -8,10 +7,13 @@ export const cityKeys = {
     stats: () => [...cityKeys.all, "stats"] as const,
 };
 
-export function useCityStats() {
-    return useQuery({
+export const cityStatsQueryOptions = () =>
+    queryOptions({
         queryKey: cityKeys.stats(),
-        queryFn: getCityStats,
+        queryFn: ({ signal }) => fetchCityStats(signal),
         staleTime: 5 * 60 * 1000,
     });
+
+export function useCityStats() {
+    return useQuery(cityStatsQueryOptions());
 }

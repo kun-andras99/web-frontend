@@ -1,196 +1,36 @@
+import { requireUser } from "@/features/auth/lib/requireUser";
+import {
+    findConversationWithUser,
+    openConversationWithUser,
+} from "@/features/chat/server/chat.service";
+import { withApiHandler } from "@/lib/api/route-handler";
+import { enforceRateLimit } from "@/lib/security/enforce-rate-limit";
 import { NextResponse } from "next/server";
 
-import { getCurrentUser } from "@/features/auth/lib/session";
-import { prisma } from "@/lib/prisma";
+type Params = { userId: string };
+const NO_STORE = { "Cache-Control": "private, no-store" };
 
-interface RouteContext {
-    params: Promise<{
-        userId: string;
-    }>;
-}
+export const GET = withApiHandler<Params>(async (_request, { params }) => {
+    const user = await requireUser();
+    const { userId } = await params;
 
-export async function GET(_request: Request, context: RouteContext) {
-    try {
-        const currentUser = await getCurrentUser();
+    return NextResponse.json(await findConversationWithUser(user.id, userId), {
+        headers: NO_STORE,
+    });
+});
 
-        if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
-        }
+export const POST = withApiHandler<Params>(async (_request, { params }) => {
+    const user = await requireUser();
+    const { userId } = await params;
 
-        const { userId } = await context.params;
+    await enforceRateLimit("chatOpen", `user:${user.id}`);
+    const { conversationId, created } = await openConversationWithUser(
+        user.id,
+        userId,
+    );
 
-        if (userId === currentUser.id) {
-            return NextResponse.json(
-                {
-                    message: "Saját magaddal nem indíthatsz beszélgetést.",
-                },
-                {
-                    status: 400,
-                },
-            );
-        }
-
-        const conversation = await prisma.conversation.findFirst({
-            where: {
-                participants: {
-                    every: {
-                        userId: {
-                            in: [currentUser.id, userId],
-                        },
-                    },
-                },
-            },
-
-            select: {
-                id: true,
-            },
-        });
-
-        if (!conversation) {
-            return NextResponse.json({
-                conversation: null,
-            });
-        }
-
-        return NextResponse.json({
-            conversationId: conversation.id,
-        });
-    } catch (error) {
-        console.error("GET /api/chat/[userId] failed:", error);
-
-        return NextResponse.json(
-            {
-                message: "A beszélgetés betöltése sikertelen.",
-            },
-            {
-                status: 500,
-            },
-        );
-    }
-}
-
-export async function POST(_request: Request, context: RouteContext) {
-    try {
-        const currentUser = await getCurrentUser();
-
-        if (!currentUser) {
-            return NextResponse.json(
-                {
-                    message: "Unauthorized",
-                },
-                {
-                    status: 401,
-                },
-            );
-        }
-
-        const { userId } = await context.params;
-
-        if (userId === currentUser.id) {
-            return NextResponse.json(
-                {
-                    message: "Saját magaddal nem beszélhetsz.",
-                },
-                {
-                    status: 400,
-                },
-            );
-        }
-
-        const targetUser = await prisma.users.findUnique({
-            where: {
-                id: userId,
-            },
-
-            select: {
-                id: true,
-                status: true,
-            },
-        });
-
-        if (!targetUser) {
-            return NextResponse.json(
-                {
-                    message: "A felhasználó nem található.",
-                },
-                {
-                    status: 404,
-                },
-            );
-        }
-
-        const existing = await prisma.conversation.findFirst({
-            where: {
-                participants: {
-                    some: {
-                        userId: currentUser.id,
-                    },
-                },
-
-                AND: {
-                    participants: {
-                        some: {
-                            userId,
-                        },
-                    },
-                },
-            },
-
-            select: {
-                id: true,
-            },
-        });
-
-        if (existing) {
-            return NextResponse.json({
-                conversationId: existing.id,
-            });
-        }
-
-        const conversation = await prisma.conversation.create({
-            data: {
-                participants: {
-                    create: [
-                        {
-                            userId: currentUser.id,
-                        },
-                        {
-                            userId,
-                        },
-                    ],
-                },
-            },
-
-            select: {
-                id: true,
-            },
-        });
-
-        return NextResponse.json(
-            {
-                conversationId: conversation.id,
-            },
-            {
-                status: 201,
-            },
-        );
-    } catch (error) {
-        console.error("POST /api/chat/[userId] failed:", error);
-
-        return NextResponse.json(
-            {
-                message: "A beszélgetés létrehozása sikertelen.",
-            },
-            {
-                status: 500,
-            },
-        );
-    }
-}
+    return NextResponse.json(
+        { conversationId },
+        { status: created ? 201 : 200 },
+    );
+});

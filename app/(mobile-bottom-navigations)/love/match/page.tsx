@@ -1,6 +1,6 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
+import { requireCurrentUser } from "@/features/auth/lib/session";
 import { handleMatchAction } from "@/features/matching/types/matching.types";
-import { prisma } from "@/lib/prisma";
+import { listMatchCandidates } from "@/features/matching/server/matching.service";
 import { Heart, X } from "lucide-react";
 import Form from "next/form";
 import Image from "next/image";
@@ -29,54 +29,15 @@ function calculateAge(birth: Date | null): number | null {
 }
 
 export default async function MatchScreen() {
-    const currentUser = await getCurrentUser();
+    const currentUser = await requireCurrentUser();
 
     if (!currentUser) {
         redirect("/sign-in");
     }
 
-    const actions = await prisma.matchAction.findMany({
-        where: {
-            fromUserId: currentUser.id,
-        },
-        select: {
-            toUserId: true,
-        },
-    });
-
-    const excludedUserIds = actions.map((action) => action.toUserId);
-
-    const users = await prisma.users.findMany({
-        where: {
-            id: {
-                not: currentUser.id,
-                notIn: excludedUserIds,
-            },
-            userData: {
-                isNot: null,
-            },
-        },
-        select: {
-            id: true,
-            username: true,
-
-            userData: {
-                select: {
-                    nickname: true,
-                    avatarUrl: true,
-                    birth: true,
-                    gender: true,
-                    sexuality: true,
-                    description: true,
-                },
-            },
-        },
-        orderBy: {
-            createdAt: "desc",
-        },
-    });
-
-    const user = users[0] ?? null;
+    // csak az első jelöltre van szükség: a szűrést és a lapozást az adatbázis végzi
+    const { items } = await listMatchCandidates(currentUser.id, { limit: 1 });
+    const user = items[0] ?? null;
 
     if (!user) {
         return (
@@ -102,7 +63,7 @@ export default async function MatchScreen() {
         );
     }
 
-    const age = calculateAge(user.userData?.birth ?? null);
+    const age = calculateAge(user.birth ? new Date(user.birth) : null);
 
     return (
         <div className="flex flex-1 items-start p-[15px]">
@@ -110,10 +71,10 @@ export default async function MatchScreen() {
                 {/* PROFILE CARD */}
                 <div className="relative flex flex-1 items-center justify-center">
                     <div className="relative aspect-square w-full overflow-hidden rounded-[28px] bg-neutral-900 shadow-2xl">
-                        {user.userData?.avatarUrl ? (
+                        {user.avatarUrl ? (
                             <Image
-                                src={user.userData.avatarUrl}
-                                alt={user.userData.nickname ?? user.username}
+                                src={user.avatarUrl}
+                                alt={user.nickname ?? user.username}
                                 fill
                                 priority
                                 sizes="(max-width: 768px) 95vw, 420px"
@@ -131,7 +92,7 @@ export default async function MatchScreen() {
                         {/* PROFILE INFO */}
                         <div className="absolute inset-x-0 bottom-0 p-6">
                             <h2 className="truncate text-2xl font-bold text-white">
-                                {user.userData?.nickname ?? user.username}
+                                {user.nickname ?? user.username}
 
                                 {age !== null && (
                                     <span className="ml-2 font-normal text-white/70">
@@ -140,15 +101,15 @@ export default async function MatchScreen() {
                                 )}
                             </h2>
 
-                            {user.userData?.gender && (
+                            {user.gender && (
                                 <p className="mt-1 text-sm text-white/60">
-                                    {user.userData.gender}
+                                    {user.gender}
                                 </p>
                             )}
 
-                            {user.userData?.description && (
+                            {user.description && (
                                 <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/70">
-                                    {user.userData.description}
+                                    {user.description}
                                 </p>
                             )}
                         </div>

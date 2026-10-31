@@ -1,0 +1,22 @@
+// én itt nem a nyers emailt tárolnám, hanem normalizált emailből képzett HMAC/hash értéket.
+model LoginAttempt {
+  id        String   @id @default(cuid())
+
+  emailHash String?
+  userId    String?
+
+  ipAddress String?
+  userAgent String?
+
+  success   Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+
+  user Users? @relation( fields: [userId], references: [id], onDelete: SetNull )
+
+  @@index([emailHash, createdAt])
+  @@index([ipAddress, createdAt])
+  @@index([userId, createdAt])
+  @@index([success, createdAt])
+  @@map("login_attempts")
+}

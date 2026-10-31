@@ -1,6 +1,6 @@
 "use client";
 
-import { basicInfoSchema } from "@/lib/_lib/validations/profile";
+import { basicInfoSchema } from "@/lib/validations/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useProfileWizardStore } from "../store/useProfileWizardStore";

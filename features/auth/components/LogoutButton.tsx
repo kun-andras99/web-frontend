@@ -8,10 +8,12 @@ export default function LogoutButton({
     className?: string;
 }) {
     return (
-        <form action={action}>
-            <button type="submit" className={className}>
-                Log out
-            </button>
-        </form>
+        <div className="logout-container">
+            <form action={action}>
+                <button type="submit" className={className}>
+                    Log out
+                </button>
+            </form>
+        </div>
     );
 }

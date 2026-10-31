@@ -1,0 +1,19 @@
+/// * privát album megosztására,
+model GalleryShare {
+  id          String    @id @default(cuid())
+  galleryId   String
+  ownerId     String
+  recipientId String
+  grantedAt   DateTime  @default(now())
+  expiresAt   DateTime
+  revokedAt   DateTime?
+  purgeAfter  DateTime
+  gallery     Gallery   @relation("GalleryShared", fields: [galleryId], references: [id], onDelete: Cascade)
+  owner       Users     @relation("GalleryShareOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  recipient   Users     @relation("GalleryShareRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([galleryId, recipientId, expiresAt])
+  @@index([recipientId, revokedAt, expiresAt])
+  @@index([purgeAfter])
+  @@map("gallery_shares")
+}

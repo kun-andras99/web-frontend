@@ -5,5 +5,5 @@ import { ChildrenProp } from "@/lib/utils/props";
 export default async function PublicPagesLayout({ children }: ChildrenProp) {
     const user = await getCurrentUser();
 
-    return <MainLayout user={user}>{children}</MainLayout>;
+    return <MainLayout user={user}>{children}</MainLayout>
 }

@@ -1,14 +1,14 @@
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/features/auth/lib/session";
+import { requireCurrentUser } from "@/features/auth/lib/session";
+import GroupsScreen from "@/features/groups/components/GroupsScreen";
 import { groupsInfiniteQueryOptions } from "@/features/groups/hooks/groups.queries";
 import { DEFAULT_GROUPS_PAGE_SIZE } from "@/features/groups/schemas/groups.schema";
 import { listGroups } from "@/features/groups/server/groups.service";
-import GroupsScreen from "@/features/groups/components/GroupsScreen";
 import { getServerQueryClient } from "@/lib/query/server-query-client";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 
 export default async function GroupsPage() {
-    const currentUser = await getCurrentUser();
+    const currentUser = await requireCurrentUser();
     if (!currentUser) redirect("/login"); // igazítsd a login route-odhoz
 
     const queryClient = getServerQueryClient();

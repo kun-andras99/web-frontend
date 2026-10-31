@@ -1,0 +1,17 @@
+///  * a már aktív, mind a két usertől elfogadott barátság.
+model Friendship {
+  id        String           @id @default(cuid())
+  user1Id   String
+  user2Id   String
+  status    FriendshipStatus @default(ACTIVE)
+  createdAt DateTime         @default(now())
+  endedAt   DateTime?
+  pairKey   String           @unique
+  user1     Users            @relation("FriendshipUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2     Users            @relation("FriendshipUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  @@index([user1Id, status])
+  @@index([user2Id, status])
+  @@index([status, createdAt])
+  @@map("friendships")
+}

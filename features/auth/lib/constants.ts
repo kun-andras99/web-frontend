@@ -59,7 +59,6 @@ export const GUEST_ONLY_ROUTES = [
     AUTH_ROUTES.signUp,
     GUEST_ROUTES.forgotPassword,
     GUEST_ROUTES.home,
-    GUEST_ROUTES.cookie,
 ] as const;
 
 export type AuthRoute = (typeof AUTH_ROUTES)[keyof typeof AUTH_ROUTES];

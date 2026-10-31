@@ -1,0 +1,21 @@
+/// * ha a jelenlegi user likeolt valakit, és az nem likeolta, akkor:
+///  ** megy tovább a matchekben, másokait likeolhat
+///  * különben ha likeolta
+///  ** matcheltek, így közös matchük van.
+///  * erről értesítést küldünk mind a 2 usernek.
+model Match {
+  id          String      @id @default(cuid())
+  user1Id     String
+  user2Id     String
+  status      MatchStatus @default(ACTIVE)
+  matchedAt   DateTime    @default(now())
+  unmatchedAt DateTime?
+  pairKey     String      @unique
+  user1       Users       @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2       Users       @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  @@index([user1Id, status])
+  @@index([user2Id, status])
+  @@index([status, matchedAt])
+  @@map("matches")
+}

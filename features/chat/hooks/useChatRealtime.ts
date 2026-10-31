@@ -1,61 +1,32 @@
 "use client";
 
+import { useRealtimeBroadcast } from "@/lib/hooks/useRealtimeBroadcast";
+import {
+    conversationChannelName,
+    REALTIME_EVENTS,
+} from "@/lib/realtime/channel-names";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useCallback } from "react";
+import { chatKeys } from "./chat.keys";
 
-import { chatKeys } from "@/features/chat/hooks/useConversation";
-import { conversationKeys } from "@/features/chat/hooks/useConversations";
-import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-
-interface NewMessageEvent {
-    messageId: string;
-    conversationId: string;
-    senderId: string;
-}
-
-export function useChatRealtime(conversationId: string, currentUserId: string) {
+export function useChatRealtime(conversationId: string) {
     const queryClient = useQueryClient();
 
-    useEffect(() => {
-        if (!conversationId || !currentUserId) {
-            return;
-        }
+    const refresh = useCallback(() => {
+        void queryClient.invalidateQueries({
+            queryKey: chatKeys.messages(conversationId),
+        });
+        void queryClient.invalidateQueries({
+            queryKey: chatKeys.conversations(),
+        });
+    }, [queryClient, conversationId]);
 
-        const supabase = getSupabaseBrowserClient();
-
-        const channel = supabase
-            .channel(`conversation:${conversationId}`)
-            .on(
-                "broadcast",
-                {
-                    event: "message:new",
-                },
-                ({ payload }) => {
-                    const event = payload as NewMessageEvent;
-
-                    if (event.conversationId !== conversationId) {
-                        return;
-                    }
-
-                    // A saját üzenetünket már az optimistic
-                    // update + mutation kezeli.
-                    if (event.senderId === currentUserId) {
-                        return;
-                    }
-
-                    void queryClient.invalidateQueries({
-                        queryKey: chatKeys.conversation(conversationId),
-                    });
-
-                    void queryClient.invalidateQueries({
-                        queryKey: conversationKeys.list(),
-                    });
-                },
-            )
-            .subscribe();
-
-        return () => {
-            void supabase.removeChannel(channel);
-        };
-    }, [conversationId, currentUserId, queryClient]);
+    useRealtimeBroadcast(
+        conversationChannelName(conversationId),
+        {
+            [REALTIME_EVENTS.messageNew]: refresh,
+            [REALTIME_EVENTS.messagesRead]: refresh,
+        },
+        refresh,
+    );
 }

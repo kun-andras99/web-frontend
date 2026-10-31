@@ -1,0 +1,14 @@
+/// * csoport tag - egy csoport és user közötti kapcsolathoz.
+model GroupMember {
+  id       String          @id @default(cuid())
+  groupId  String
+  userId   String
+  role     GroupMemberRole @default(MEMBER)
+  joinedAt DateTime        @default(now())
+  group    Group           @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user     Users           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([userId])
+  @@map("group_members")
+}

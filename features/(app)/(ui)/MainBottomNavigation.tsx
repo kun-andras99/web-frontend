@@ -21,14 +21,7 @@ export default function BottomNavigation() {
                             <Link href={route.url} className={`link`}>
                                 <div
                                     className={`icon ${isActive ? "active" : ""}`}>
-                                    {isActive ? (
-                                        <>
-                                            {route.activeIcon}{" "}
-                                            <span>{route.title}</span>
-                                        </>
-                                    ) : (
-                                        route.icon
-                                    )}
+                                    {isActive ? route.activeIcon : route.icon}
                                 </div>
                             </Link>
                         </React.Fragment>

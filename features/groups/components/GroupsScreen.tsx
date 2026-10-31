@@ -81,36 +81,743 @@ export default function GroupsScreen() {
 
     return (
         <BottomPageWrapper>
-            <h2>Csoportok</h2>
+            <div className="groups-page">
+                <h2>Love & dating</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
 
-            {groups.length === 0 ? (
-                <p>Még nincsenek csoportok.</p>
-            ) : (
-                <div className="gp-lists">
-                    {groups.map((group) => (
-                        <article
-                            key={group.id}
-                            className="group-card"
-                            onClick={() => setSelectedGroupId(group.id)}>
-                            <div className="group-card-image"></div>
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
 
-                            <div className="group-card-content">
-                                <h3>{group.name}</h3>
-                                {group.description && (
-                                    <p>{group.description}</p>
-                                )}
-
-                                <div className="group-card-meta">
-                                    <span>{group.memberCount} tag</span>
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
                                 </div>
-                            </div>
-                        </article>
-                    ))}
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Making friends</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
 
-                    <div ref={sentinelRef} aria-hidden />
-                    {isFetchingNextPage && <p>Több csoport betöltése...</p>}
-                </div>
-            )}
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>LMBTQ+ community</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Trans</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Gender exploration</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Flirt & fun</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Hobby & lifestyle</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Kinky & fetish</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>BDSM</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Leather</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Furry & pet play</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Fantasies & desires</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Couples</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Switch</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+                <h2>Nightlife & party</h2>
+                {groups.length === 0 ? (
+                    <p>Még nincsenek csoportok.</p>
+                ) : (
+                    <>
+                        <div className="scroll-x-box group-list">
+                            {groups.map((group) => (
+                                <article
+                                    key={group.id}
+                                    className="group-card"
+                                    onClick={() =>
+                                        setSelectedGroupId(group.id)
+                                    }>
+                                    <div className="group-card__image-container">
+                                        <div className="image"></div>
+                                        <div className="top">
+                                            <div className="members">
+                                                {group.memberCount}
+                                            </div>
+                                        </div>
+                                        <div className="bottom">
+                                            <h3>{group.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-card__content">
+                                        <div className="tags">
+                                            <span className="tag">#nő</span>
+                                            <span className="tag">#hetero</span>
+                                            <span className="tag">#bi</span>
+                                            <span className="tag">
+                                                #transCis
+                                            </span>
+                                        </div>
+                                        {group.description && (
+                                            <p>{group.description}</p>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+
+                            {isFetchingNextPage && (
+                                <div ref={sentinelRef} aria-hidden>
+                                    <p>Több csoport betöltése...</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+            </div>
 
             <GroupBottomSheet
                 group={selectedGroup}

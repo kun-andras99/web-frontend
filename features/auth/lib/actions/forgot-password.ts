@@ -12,7 +12,13 @@ import type {
     ForgotPasswordFields,
     UserId,
 } from "@/features/auth/types/auth-index";
+import {
+    getIpFromHeaders,
+    hashIdentifier,
+} from "@/features/security/client-ip";
 import { getUserByEmail } from "@/features/user/repositories/user";
+import { checkRateLimits } from "@/lib/security/rate-limit";
+import { headers } from "next/headers";
 
 const GENERIC_SUCCESS_MESSAGE =
     "Ha létezik fiók ezzel az email címmel, elküldtünk rá egy jelszó-visszaállító linket.";
@@ -30,6 +36,18 @@ export async function forgotPasswordAction(
             status: "error",
             message: "Kérjük, adj meg egy érvényes email címet.",
             fieldErrors: parsed.error.flatten().fieldErrors,
+        };
+    }
+
+    const ip = getIpFromHeaders(await headers()) ?? "unknown";
+    const rateLimit = await checkRateLimits([
+        ["passwordReset", await hashIdentifier(parsed.data.email)],
+        ["passwordResetIp", ip],
+    ]);
+    if (!rateLimit.success) {
+        return {
+            status: "error",
+            message: "Túl sok kérés. Kérjük, próbáld újra később.",
         };
     }
 

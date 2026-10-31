@@ -1,0 +1,14 @@
+/// * egy ilyen versenyre 3 képet lehet feltölteni amik alapján
+///  * más user értékelheti a verseny résztvevőjét.
+model EyeCandyImage {
+  id            String              @id @default(cuid())
+  participantId String
+  url           String
+  storageKey    String?
+  sortOrder     Int                 @default(0)
+  uploadedAt    DateTime            @default(now())
+  participant   EyeCandyParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+
+  @@index([participantId, sortOrder])
+  @@map("eye_candy_images")
+}

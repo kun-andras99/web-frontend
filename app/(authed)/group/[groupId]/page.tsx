@@ -1,4 +1,7 @@
-import { getCurrentUser } from "@/features/auth/lib/session";
+import {
+    getCurrentUser,
+    requireCurrentUser,
+} from "@/features/auth/lib/session";
 import GroupDetailScreen from "@/features/groups/components/GroupDetailScreen";
 import { groupDetailQueryOptions } from "@/features/groups/hooks/groups.queries";
 import { loadGroupDetail } from "@/features/groups/server/groups.loaders";
@@ -6,7 +9,7 @@ import { HttpError } from "@/lib/api/route-handler";
 import { getServerQueryClient } from "@/lib/query/server-query-client";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 interface GroupPageProps {
     params: Promise<{ groupId: string }>;
@@ -37,8 +40,7 @@ export async function generateMetadata({
 export default async function GroupPage({ params }: GroupPageProps) {
     const { groupId } = await params;
 
-    const currentUser = await getCurrentUser();
-    if (!currentUser) redirect("/login"); // igazítsd a login route-odhoz
+    const currentUser = await requireCurrentUser();
 
     const queryClient = getServerQueryClient();
 

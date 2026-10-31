@@ -1,53 +1,41 @@
-// import BackButton from "@/features/(app)/(ui)/back-button/BackButton";
-// import BackButtonIconSVG from "@/features/(app)/(ui)/back-button/BackButtonIconSvg";
-import DisplayHeaderTitle from "@/features/(app)/(ui)/DisplayHeaderTitle";
-import BaseDrawer from "@/features/(app)/(ui)/drawer/BaseDrawer";
+"use client";
+
+import { listMessages } from "@/app/api/love-wall/_mock/store";
+
 import BottomNavigation from "@/features/(app)/(ui)/MainBottomNavigation";
-import MobileTopNav from "@/features/(app)/(ui)/mobile-top-nav";
-import { GUEST_TOP_MENU_ROUTES } from "@/features/(app)/navigations/navigation.config";
+// import MobileTopNav from "@/features/(app)/(ui)/mobile-top-nav";
+import LeftSidebar from "@/features/(app)/(ui)/sidebar/LeftSidebar";
+// import { GUEST_TOP_MENU_ROUTES } from "@/features/(app)/navigations/navigation.config";
+import LoveWall from "@/features/love-wall/components/LoveWall";
 import { ChildrenProp, SessionUserProps } from "@/lib/utils/props";
+import { useState } from "react";
 
 export default function MainLayout({
     children,
     user,
 }: ChildrenProp & SessionUserProps) {
+    const [loveWallOpen, setLoveWallOpen] = useState(false);
+    const { items, nextCursor } = listMessages(null);
+
     return (
-        <div className="main-layout-body">
-            <header className="header">
-                {/* leftmenu */}
-                <DisplayHeaderTitle />
-                <BaseDrawer />
-            </header>
-            {user && <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} />}
+        <>
+            {/* <BaseDrawer /> */}
+            {/* {user && <MobileTopNav tabs={GUEST_TOP_MENU_ROUTES} />} */}
             {/* <BodySidebar user={user} /> */}
-            <main>{children}</main>
+            <aside id="left-sidebar">
+                <LeftSidebar user={user} />
+            </aside>
+            <main id="main">{children}</main>
+            <aside id="right-sidebar" className={loveWallOpen ? "is-open" : ""}>
+                <LoveWall
+                    initialMessages={items}
+                    initialCursor={nextCursor}
+                    isOpen={loveWallOpen}
+                    onOpen={() => setLoveWallOpen(true)}
+                    onClose={() => setLoveWallOpen(false)}
+                />
+            </aside>
             {user && <BottomNavigation />}
-            {/* <aside className="right-sidebar">
-                <section className="love-wall-container">
-                    <div className="messages">
-                        {Array.from({ length: 20 }, (_, index) => (
-                            <div className="message" key={index}>
-                                <span>kep</span>
-
-                                <div className="wrapper">
-                                    <div className="data">
-                                        <span>nev</span>
-                                        <span>ido</span>
-                                    </div>
-
-                                    <div className="content">
-                                        itt az üzenet tartalma
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="love-wall-actions">
-                        <input type="text" name="" id="" />
-                        <button type="submit">S</button>
-                    </div>
-                </section>
-            </aside> */}
-        </div>
+        </>
     );
 }

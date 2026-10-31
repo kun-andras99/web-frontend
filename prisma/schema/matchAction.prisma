@@ -1,0 +1,16 @@
+///  * jelenlegi user tud likeolni/match szivezni egy másik usert aki beállította hogy megjelenhet a matchek-ben
+model MatchAction {
+  id         String          @id @default(cuid())
+  fromUserId String
+  toUserId   String
+  type       MatchActionType
+  createdAt  DateTime        @default(now())
+  fromUser   Users           @relation("MatchActionFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser     Users           @relation("MatchActionTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId, type])
+  @@index([fromUserId, type])
+  @@index([createdAt])
+  @@map("match_actions")
+}

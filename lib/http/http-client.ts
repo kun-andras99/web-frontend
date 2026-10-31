@@ -12,6 +12,7 @@ type QueryValue = string | number | boolean | null | undefined;
 export interface RequestOptions<TSchema extends z.ZodType> {
     schema: TSchema;
     query?: Record<string, QueryValue>;
+    /** Sima objektum → JSON; FormData → multipart (a böngésző állítja a Content-Type-ot). */
     body?: unknown;
     headers?: HeadersInit;
     signal?: AbortSignal;
@@ -79,14 +80,33 @@ async function parseBody(response: Response): Promise<unknown> {
     }
 }
 
+/**
+ * A szerver hibaformátuma: { error: { code, message, issues? } }.
+ * A még át nem állított (legacy) route-ok { message } alakját is elfogadja.
+ */
 function extractError(body: unknown): { message?: string; code?: string } {
-    if (typeof body === "object" && body !== null && "error" in body) {
+    if (typeof body !== "object" || body === null) return {};
+
+    if ("error" in body) {
         const { error } = body as {
             error?: { message?: string; code?: string };
         };
         return { message: error?.message, code: error?.code };
     }
+    if ("message" in body && typeof body.message === "string") {
+        return { message: body.message };
+    }
     return {};
+}
+
+function parseRetryAfter(response: Response): number | undefined {
+    const value = Number(response.headers.get("retry-after"));
+    return Number.isFinite(value) && value > 0 ? value : undefined;
+}
+
+function serializeBody(body: unknown): BodyInit | undefined {
+    if (body === undefined) return undefined;
+    return body instanceof FormData ? body : JSON.stringify(body);
 }
 
 async function request<TSchema extends z.ZodType>(
@@ -119,12 +139,13 @@ async function request<TSchema extends z.ZodType>(
             signal: requestSignal,
             headers: {
                 Accept: "application/json",
-                ...(body !== undefined && {
-                    "Content-Type": "application/json",
-                }),
+                ...(body !== undefined &&
+                    !(body instanceof FormData) && {
+                        "Content-Type": "application/json",
+                    }),
                 ...headers,
             },
-            body: body !== undefined ? JSON.stringify(body) : undefined,
+            body: serializeBody(body),
         });
         data = await parseBody(response);
     } catch (error) {
@@ -144,6 +165,7 @@ async function request<TSchema extends z.ZodType>(
             response.status,
             code,
             data,
+            parseRetryAfter(response),
         );
     }
 

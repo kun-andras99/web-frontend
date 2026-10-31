@@ -1,7 +1,9 @@
 import { ApiError, NetworkError, RequestTimeoutError } from "@/lib/http/errors";
 import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 
-const LOGIN_PATH = "/sign-in"; // igazítsd a saját login route-odhoz
+const LOGIN_PATH = "/sign-in";
+/** Ugyanaz a paraméter, amit a proxy is használ az átirányításnál. */
+const CALLBACK_PARAM = "callbackUrl";
 const MAX_RETRIES = 2;
 
 let isRedirectingToLogin = false;
@@ -31,7 +33,15 @@ function handleGlobalError(error: unknown, client: QueryClient) {
     const next = encodeURIComponent(
         window.location.pathname + window.location.search,
     );
-    window.location.assign(`${LOGIN_PATH}?next=${next}`);
+    window.location.assign(`${LOGIN_PATH}?${CALLBACK_PARAM}=${next}`);
+}
+
+/** 429-nél a szerver Retry-After értékét követi (max. 30 mp), egyébként exponenciális visszalépés. */
+export function retryDelay(failureCount: number, error: unknown): number {
+    if (error instanceof ApiError && error.retryAfterSeconds) {
+        return Math.min(error.retryAfterSeconds, 30) * 1000;
+    }
+    return Math.min(1000 * 2 ** failureCount, 10_000);
 }
 
 export function makeQueryClient(): QueryClient {
@@ -46,6 +56,7 @@ export function makeQueryClient(): QueryClient {
             queries: {
                 staleTime: 60 * 1000,
                 retry: shouldRetry,
+                retryDelay,
             },
         },
     });

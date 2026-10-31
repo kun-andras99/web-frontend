@@ -1,0 +1,19 @@
+model RefreshToken {
+  id         String    @id @default(cuid())
+  tokenHash  String    @unique
+  userId     String
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  replacedById String?  @unique
+  userAgent  String?
+  ipAddress  String?
+  createdAt  DateTime  @default(now())
+  user       Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+   replacedBy   RefreshToken? @relation( "RefreshTokenRotation", fields: [replacedById], references: [id], onDelete: SetNull )
+   replacedFrom RefreshToken? @relation("RefreshTokenRotation")
+   session UserSession?
+
+  @@index([userId, revokedAt])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}

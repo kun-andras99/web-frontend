@@ -1,0 +1,25 @@
+/// * egy user tud létrehozni csoportot. itt mint creator
+///  * kapcsolódik a userhez. be tudja állítani a láthatóságát,
+///  * members - csoport tagok tároslása
+///  * joinRequests - ha pricát a user, ide mentjük a csatlakozási
+///  * kérelmeket.
+///  * invitations - amennyiben a csoport adminja küld meghívót
+///  * egy usernek aki nem tagja a csoportnak.
+model Group {
+  id           String             @id @default(cuid())
+  name         String
+  description  String?
+  creatorId    String
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  visibility   GroupVisibility    @default(PUBLIC)
+  invitations  GroupInvitation[]
+  joinRequests GroupJoinRequest[]
+  members      GroupMember[]
+  creator      Users              @relation("GroupCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@index([creatorId])
+  @@index([visibility])
+  @@index([createdAt])
+  @@map("groups")
+}

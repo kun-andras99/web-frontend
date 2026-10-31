@@ -1,0 +1,15 @@
+// profil megtekintéseket mentük amikor egy user
+// megtekinti egy másik user profilját.
+model ProfileVisit {
+  id            String   @id @default(cuid())
+  visitorId     String
+  visitedUserId String
+  visitedAt     DateTime @default(now())
+  visitedUser   Users    @relation("ProfileVisitedUser", fields: [visitedUserId], references: [id], onDelete: Cascade)
+  visitor       Users    @relation("ProfileVisitor", fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([visitedUserId, visitedAt])
+  @@index([visitorId, visitedAt])
+  @@index([visitorId, visitedUserId, visitedAt])
+  @@map("profile_visits")
+}

@@ -1,4 +1,4 @@
-import type { CreateProfileInput } from "@/lib/_lib/validations/profile";
+import type { CreateProfileInput } from "@/lib/validations/profile";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 

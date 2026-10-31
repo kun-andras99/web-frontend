@@ -1,0 +1,35 @@
+enum ReportTargetType {
+  USER
+  BLOG
+  GROUP
+  MESSAGE
+  GALLERY
+  IMAGE
+}
+
+model Report {
+  id           String       @id @default(cuid())
+  reporterId   String
+  targetId     String
+  targetType   ReportTargetType
+
+  targetUserId  String?
+
+  type         ReportType
+  reason       String
+  description  String?
+
+  status       ReportStatus @default(PENDING)
+
+  createdAt    DateTime     @default(now())
+  resolvedAt   DateTime?
+
+  reporter     Users        @relation("ReportCreator", fields: [reporterId], references: [id], onDelete: Cascade)
+  targetUser   Users?       @relation("ReportTargetUser", fields: [targetUserId], references: [id])
+
+  @@index([targetType, targetId, createdAt])
+  @@index([reporterId, createdAt])
+  @@index([status, createdAt])
+  @@index([targetUserId])
+  @@map("reports")
+}

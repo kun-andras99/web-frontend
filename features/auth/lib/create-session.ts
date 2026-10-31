@@ -10,8 +10,8 @@ export async function createSessionTokens(
     const userId = user.id as UserId;
     const { rawToken: refreshToken } = await createRefreshToken({
         userId,
-        userAgent: meta.userAgent,
-        ipAddress: meta.ipAddress,
+        userAgent: meta.userAgent ?? null,
+        ipAddress: meta.ipAddress ?? null,
     });
     const accessToken = await signAccessToken({
         sub: userId,

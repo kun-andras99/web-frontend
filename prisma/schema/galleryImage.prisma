@@ -1,0 +1,20 @@
+/// * galéria képek
+model GalleryImage {
+  id         String   @id @default(cuid())
+  galleryId  String
+  url        String
+  storageKey String?
+  mimeType   String?
+  fileSize   Int?
+  width      Int?
+  height     Int?
+  isAvatar   Boolean  @default(false)
+  sortOrder  Int      @default(0)
+  uploadedAt DateTime @default(now())
+  gallery    Gallery  @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+
+  @@index([galleryId, sortOrder])
+  @@index([galleryId, uploadedAt])
+  @@index([galleryId, isAvatar])
+  @@map("gallery_images")
+}
