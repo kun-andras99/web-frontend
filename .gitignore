@@ -5,6 +5,7 @@ features/visited/
 postcss.config.mjs
 /node_modules
 /.pnp
+.env
 .env*
 .pnp.*
 .yarn/*
