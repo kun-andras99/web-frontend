@@ -6,7 +6,8 @@ postcss.config.mjs
 /node_modules
 /.pnp
 .env
-.env*
+.env.*
+!.env.example
 .pnp.*
 .yarn/*
 # .next/*
