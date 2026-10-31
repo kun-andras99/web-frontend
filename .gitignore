@@ -5,6 +5,8 @@ features/visited/
 postcss.config.mjs
 /node_modules
 /.pnp
+.env.development.local
+.env.local
 .pnp.*
 .yarn/*
 # .next/*
@@ -54,3 +56,4 @@ cd.md
 
 # .vercel
 # .env*
+
