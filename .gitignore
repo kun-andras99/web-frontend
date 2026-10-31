@@ -7,10 +7,10 @@ postcss.config.mjs
 /.pnp
 .pnp.*
 .yarn/*
-.next/*
+# .next/*
 .claude/*
 .claude/*
-.vercel/*
+# .vercel/*
 skills-unlock.json
 package-lock.json
 docker-compose.yml.json
@@ -30,27 +30,27 @@ cd.md
 /out/
 
 # production
-/build
+# /build
 
 # misc
-.DS_Store
-*.pem
+# .DS_Store
+# *.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# npm-debug.log*
+# yarn-debug.log*
+# yarn-error.log*
+# .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+# .env*
 
 # vercel
-.vercel
+# .vercel
 
 # typescript
-*.tsbuildinfo
-next-env.d.ts
+# *.tsbuildinfo
+# next-env.d.ts
 
-.vercel
-.env*
+# .vercel
+# .env*

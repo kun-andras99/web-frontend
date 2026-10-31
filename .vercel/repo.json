@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_ls1s0xwj6LyKpZf8npnQdl8hcEUB",
+      "name": "web-frontend",
+      "directory": ".",
+      "orgId": "team_wmGdN5gadi4TDthPMLAYCUIn"
+    }
+  ]
+}
